@@ -2,13 +2,30 @@ project:
   type: book
 
 book:
-  title: "MathematicalStatistics"
-  author: "Norah Jones"
+  title: "MATH/STAT 455: Mathematical Statistics"
+  author: "Taylor Okonek"
   date: "12/7/2023"
+  search: true
+  repo-url: https://github.com/taylorokonek/MathematicalStatistics/
+  downloads: [pdf]
+  sidebar:
+    style: docked
+    background: light
+  cover-image: cover.png
+  cover-image-alt: |
+    Alternative text describing the book cover
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
+    - probability.qmd
+    - mle.qmd
+    - mom.qmd
+    - properties.qmd
+    - consistency.qmd
+    - asymptotics.qmd
+    - computation.qmd
+    - bayes.qmd
+    - decision.qmd
+    - hypothesis.qmd
     - references.qmd
 
 bibliography: references.bib

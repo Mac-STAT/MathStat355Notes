@@ -1,4 +1,4 @@
-# Probability: A Brief Review
+# Bayesian Inference
 
 Insert text here
 

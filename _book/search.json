@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "MathematicalStatistics",
+    "title": "MATH/STAT 455: Mathematical Statistics",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+    "text": "Welcome to Mathematical Statistics!\nThis book contains the course notes for MATH/STAT 455: Mathematical Statistics at Macalester College, as taught by Prof. Taylor Okonek. These notes draw from course notes created by Prof. Kelsey Grinde, and heavily from the course textbook, An Introduction to Mathematical Statistics and Its Applications by Richard Larsen and Morris Marx (6th Edition).\nI will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!\nIf you find any typos or have other questions, please email tokonek@macalester.edu."
   },
   {
     "objectID": "intro.html",
@@ -26,5 +26,75 @@
     "title": "References",
     "section": "",
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "probability.html",
+    "href": "probability.html",
+    "title": "1  Probability: A Brief Review",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "mle.html",
+    "href": "mle.html",
+    "title": "2  Maximum Likelihood Estimation",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "mom.html",
+    "href": "mom.html",
+    "title": "3  Method of Moments",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "properties.html",
+    "href": "properties.html",
+    "title": "4  Properties of Estimators",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "consistency.html",
+    "href": "consistency.html",
+    "title": "5  Consistency",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "asymptotics.html",
+    "href": "asymptotics.html",
+    "title": "6  Asymptotics & the Central Limit Theorem",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "computation.html",
+    "href": "computation.html",
+    "title": "7  Computational Optimization",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "bayes.html",
+    "href": "bayes.html",
+    "title": "8  Bayesian Inference",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "decision.html",
+    "href": "decision.html",
+    "title": "9  Decision Theory",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "hypothesis.html",
+    "href": "hypothesis.html",
+    "title": "10  Hypothesis Testing",
+    "section": "",
+    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
   }
 ]

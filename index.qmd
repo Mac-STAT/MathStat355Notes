@@ -1,9 +1,10 @@
-# Preface {.unnumbered}
+# Welcome to Mathematical Statistics! {.unnumbered}
 
-This is a Quarto book.
+This book contains the course notes for *MATH/STAT 455:* *Mathematical Statistics* at Macalester College, as taught by Prof. [Taylor Okonek](https://taylorokonek.github.io/). These notes draw from course notes created by Prof. [Kelsey Grinde](https://kegrinde.github.io/), and heavily from the course textbook, *An Introduction to Mathematical Statistics and Its Applications* by Richard Larsen and Morris Marx (6th Edition).
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+**I will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!**
 
-```{r}
-1 + 1
+If you find any typos or have other questions, please email [tokonek\@macalester.edu](mailto:tokonek@macalester.edu).
+
+```{}
 ```
