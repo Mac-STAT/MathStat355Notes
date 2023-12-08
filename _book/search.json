@@ -32,7 +32,7 @@
     "href": "probability.html#theorems",
     "title": "1  Probability: A Brief Review",
     "section": "1.4 Theorems",
-    "text": "1.4 Theorems\n\nLaw of Total Probability\nBayes’ Theorem\nRelationship between pdf and cdf\nExpectation and variance of linear transformations of random variables\nRelationship between mean and variance\nFinding a marginal pdf from a joint pdf\nIndependence of random variables and joint pdfs\nExpected value of a product of independent random variables\nCovariance of independent random variables\nUsing MGFs to find moments\nUsing MGFs to identify pdfs\nCentral Limit Theorem"
+    "text": "1.4 Theorems\n\nLaw of Total Probability\nBayes’ Theorem: \\(p(A \\mid B) = \\frac{p(B \\mid A) p(A)}{p(B)}\\)\nRelationship between pdf and cdf\nExpectation and variance of linear transformations of random variables\nRelationship between mean and variance\nFinding a marginal pdf from a joint pdf\nIndependence of random variables and joint pdfs\nExpected value of a product of independent random variables\nCovariance of independent random variables\nUsing MGFs to find moments\nUsing MGFs to identify pdfs\nCentral Limit Theorem"
   },
   {
     "objectID": "probability.html#worked-examples",
