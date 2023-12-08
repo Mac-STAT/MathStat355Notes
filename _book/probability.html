@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -95,6 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -125,7 +93,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <a href="./">MATH/STAT 455: Mathematical Statistics</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/taylorokonek/MathematicalStatistics/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./MATH-STAT-455--Mathematical-Statistics.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./math-stat-455.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -214,7 +182,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</a></li>
+  <li><a href="#associated-readings" id="toc-associated-readings" class="nav-link" data-scroll-target="#associated-readings"><span class="header-section-number">1.2</span> Associated Readings</a></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">1.3</span> Definitions</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">1.4</span> Theorems</a></li>
+  <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">1.5</span> Worked Examples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -236,15 +214,140 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Insert text here</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<p><em>MATH/STAT 455</em> builds directly on topics covered in <em>MATH/STAT 354: Probability</em>. You’re not expected to perfectly remember everything from <em>Probability</em>, but you will need to have sufficient facility with the following topics covered in this review Chapter in order to grasp the majority of concepts covered in <em>MATH/STAT 455</em>.</p>
+<section id="learning-objectives" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li><p>Distinguish between important probability models (e.g., Normal, Binomial)</p></li>
+<li><p>Derive the expectation and variance of a single random variable or a sum of random variables</p></li>
+<li><p>Define the moment generating function and use it to find moments or identify pdfs</p></li>
+</ul>
+</section>
+<section id="associated-readings" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="associated-readings"><span class="header-section-number">1.2</span> Associated Readings</h2>
+</section>
+<section id="definitions" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">1.3</span> Definitions</h2>
+<p>You are expected to know the following definitions:</p>
+<ul>
+<li><p>Probability density function (discrete, continuous)</p>
+<ul>
+<li>Note: I don’t care if you call a pmf a pdf… I will probably do this continuously throughout the semester. We don’t need to be picky about this in <em>MATH/STAT 455</em>.</li>
+</ul></li>
+<li><p>Cumulative distribution function (discrete, continuous)</p></li>
+<li><p>Joint probability density function</p></li>
+<li><p>Conditional probability density function</p></li>
+<li><p>Independence</p></li>
+<li><p>Random Variable</p></li>
+<li><p>Expected Value / Expectation</p></li>
+<li><p>Variance</p></li>
+<li><p><span class="math inline">\(r^{th}\)</span> moment</p></li>
+<li><p>Covariance</p></li>
+<li><p>Random Sample</p></li>
+<li><p>Moment Generating Function</p></li>
+</ul>
+<p>You are expected to know the following probability distributions:</p>
+<table class="table">
+<caption>Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>PDF/PMF</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Uniform</td>
+<td><span class="math inline">\(\pi(x) = \frac{1}{\beta - \alpha}\)</span></td>
+<td><span class="math inline">\(\alpha \in \mathbb{R}\)</span>, <span class="math inline">\(\beta\in \mathbb{R}\)</span></td>
+</tr>
+<tr class="even">
+<td>Normal</td>
+<td><span class="math inline">\(\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)\)</span></td>
+<td><span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>Multivariate Normal</td>
+<td><span class="math inline">\(\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{X} - \mu)^\top \Sigma^{-1}(\textbf{X} - \mu)))\)</span></td>
+<td><span class="math inline">\(\mu \in \mathbb{R}^k\)</span>, <span class="math inline">\(\Sigma \in \mathbb{R}^{k\times k}\)</span> , positive semi-definite</td>
+</tr>
+<tr class="even">
+<td>Gamma</td>
+<td><span class="math inline">\(\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}\)</span></td>
+<td><span class="math inline">\(\alpha \text{ (shape)}, \beta \text{ (rate)} &gt; 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>Chi-square</td>
+<td><span class="math inline">\(\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2})\)</span></td>
+<td><span class="math inline">\(\nu &gt; 0\)</span></td>
+</tr>
+<tr class="even">
+<td>Exponential</td>
+<td><span class="math inline">\(\pi(x) = \beta e^{-\beta x}\)</span></td>
+<td><span class="math inline">\(\beta &gt; 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>Student-$t$</td>
+<td><span class="math inline">\(\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}\)</span></td>
+<td><span class="math inline">\(\nu &gt; 0\)</span></td>
+</tr>
+<tr class="even">
+<td>Beta</td>
+<td><span class="math inline">\(\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}\)</span></td>
+<td><span class="math inline">\(\alpha, \beta &gt; 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>Poisson</td>
+<td><span class="math inline">\(\pi(x) = \frac{\lambda^k e^{-\lambda}}{k!}\)</span></td>
+<td><span class="math inline">\(\lambda &gt; 0\)</span></td>
+</tr>
+<tr class="even">
+<td>Binomial</td>
+<td><span class="math inline">\(\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}\)</span></td>
+<td><span class="math inline">\(p \in [0,1], n = \{0, 1, 2, \dots\}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Multinomial</td>
+<td><span class="math inline">\(\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}\)</span></td>
+<td><span class="math inline">\(p_i &gt; 0\)</span>, <span class="math inline">\(p_1 + \dots + p_k = 1\)</span>, <span class="math inline">\(n = \{0, 1, 2, \dots \}\)</span></td>
+</tr>
+<tr class="even">
+<td>Negative Binomial</td>
+<td><span class="math inline">\(\pi(x) = \binom{k + r - 1}{k} (1-p)^k p^r\)</span></td>
+<td><span class="math inline">\(r &gt; 0\)</span>, <span class="math inline">\(p \in [0,1]\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="theorems" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">1.4</span> Theorems</h2>
+<ul>
+<li><p>Law of Total Probability</p></li>
+<li><p>Bayes’ Theorem</p></li>
+<li><p>Relationship between pdf and cdf</p></li>
+<li><p>Expectation and variance of linear transformations of random variables</p></li>
+<li><p>Relationship between mean and variance</p></li>
+<li><p>Finding a marginal pdf from a joint pdf</p></li>
+<li><p>Independence of random variables and joint pdfs</p></li>
+<li><p>Expected value of a product of independent random variables</p></li>
+<li><p>Covariance of independent random variables</p></li>
+<li><p>Using MGFs to find moments</p></li>
+<li><p>Using MGFs to identify pdfs</p></li>
+<li><p>Central Limit Theorem</p></li>
+</ul>
+</section>
+<section id="worked-examples" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">1.5</span> Worked Examples</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

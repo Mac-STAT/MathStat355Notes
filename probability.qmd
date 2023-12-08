@@ -1,7 +1,101 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
 # Probability: A Brief Review
 
-Insert text here
+*MATH/STAT 455* builds directly on topics covered in *MATH/STAT 354: Probability*. You're not expected to perfectly remember everything from *Probability*, but you will need to have sufficient facility with the following topics covered in this review Chapter in order to grasp the majority of concepts covered in *MATH/STAT 455*.
+
+## Learning Objectives
 
 ```{r}
-1 + 1
 ```
+
+By the end of this chapter, you should be able to...
+
+-   Distinguish between important probability models (e.g., Normal, Binomial)
+
+-   Derive the expectation and variance of a single random variable or a sum of random variables
+
+-   Define the moment generating function and use it to find moments or identify pdfs
+
+## Associated Readings
+
+## Definitions
+
+You are expected to know the following definitions:
+
+-   Probability density function (discrete, continuous)
+
+    -   Note: I don't care if you call a pmf a pdf... I will probably do this continuously throughout the semester. We don't need to be picky about this in *MATH/STAT 455*.
+
+-   Cumulative distribution function (discrete, continuous)
+
+-   Joint probability density function
+
+-   Conditional probability density function
+
+-   Independence
+
+-   Random Variable
+
+-   Expected Value / Expectation
+
+-   Variance
+
+-   $r^{th}$ moment
+
+-   Covariance
+
+-   Random Sample
+
+-   Moment Generating Function
+
+You are expected to know the following probability distributions:
+
+| Distribution        | PDF/PMF                                                                                                                    | Parameters                                                                           |
+|------------------------|------------------------|------------------------|
+| Uniform             | $\pi(x) = \frac{1}{\beta - \alpha}$                                                                                        | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$                                       |
+| Normal              | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$                                           | $\mu \in \mathbb{R}$, $\sigma > 0$                                                   |
+| Multivariate Normal | $\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{X} - \mu)^\top \Sigma^{-1}(\textbf{X} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite |
+| Gamma               | $\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}$                                                | $\alpha \text{ (shape)}, \beta \text{ (rate)} > 0$                                   |
+| Chi-square          | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2})$                                                         | $\nu > 0$                                                                            |
+| Exponential         | $\pi(x) = \beta e^{-\beta x}$                                                                                              | $\beta > 0$                                                                          |
+| Student-\$t\$       | $\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}$                   | $\nu > 0$                                                                            |
+| Beta                | $\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}$                    | $\alpha, \beta > 0$                                                                  |
+| Poisson             | $\pi(x) = \frac{\lambda^k e^{-\lambda}}{k!}$                                                                               | $\lambda > 0$                                                                        |
+| Binomial            | $\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}$                                                                              | $p \in [0,1], n = \{0, 1, 2, \dots\}$                                                |
+| Multinomial         | $\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}$                                                   | $p_i > 0$, $p_1 + \dots + p_k = 1$, $n = \{0, 1, 2, \dots \}$                        |
+| Negative Binomial   | $\pi(x) = \binom{k + r - 1}{k} (1-p)^k p^r$                                                                                | $r > 0$, $p \in [0,1]$                                                               |
+
+: Table of main probability distributions we will work with for *MATH/STAT 455*.
+
+## Theorems
+
+-   Law of Total Probability
+
+-   Bayes' Theorem
+
+-   Relationship between pdf and cdf
+
+-   Expectation and variance of linear transformations of random variables
+
+-   Relationship between mean and variance
+
+-   Finding a marginal pdf from a joint pdf
+
+-   Independence of random variables and joint pdfs
+
+-   Expected value of a product of independent random variables
+
+-   Covariance of independent random variables
+
+-   Using MGFs to find moments
+
+-   Using MGFs to identify pdfs
+
+-   Central Limit Theorem
+
+## Worked Examples

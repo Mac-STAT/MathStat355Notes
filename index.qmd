@@ -1,6 +1,6 @@
 # Welcome to Mathematical Statistics! {.unnumbered}
 
-This book contains the course notes for *MATH/STAT 455:* *Mathematical Statistics* at Macalester College, as taught by Prof. [Taylor Okonek](https://taylorokonek.github.io/). These notes draw from course notes created by Prof. [Kelsey Grinde](https://kegrinde.github.io/), and heavily from the course textbook, *An Introduction to Mathematical Statistics and Its Applications* by Richard Larsen and Morris Marx (6th Edition).
+This book contains the course notes for *MATH/STAT 455:* *Mathematical Statistics* at Macalester College, as taught by Prof. [Taylor Okonek](https://taylorokonek.github.io/). These notes draw from course notes created by Prof. [Kelsey Grinde](https://kegrinde.github.io/), and heavily from the course textbook, *An Introduction to Mathematical Statistics and Its Applications* by Richard Larsen and Morris Marx (6th Edition). Each chapter will contain (at a minimum): Learning Goals, Associated Readings, Definitions, Theorems, and Worked Examples.
 
 **I will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!**
 

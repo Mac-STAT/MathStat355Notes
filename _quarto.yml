@@ -3,17 +3,16 @@ project:
 
 book:
   title: "MATH/STAT 455: Mathematical Statistics"
+  output-file: "math-stat-455"
   author: "Taylor Okonek"
   date: "12/7/2023"
   search: true
   repo-url: https://github.com/taylorokonek/MathematicalStatistics/
+  site-url: https://math-stat-455.com
   downloads: [pdf]
   sidebar:
     style: docked
     background: light
-  cover-image: cover.png
-  cover-image-alt: |
-    Alternative text describing the book cover
   chapters:
     - index.qmd
     - probability.qmd
@@ -32,7 +31,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
   pdf:
     documentclass: scrreprt
 
