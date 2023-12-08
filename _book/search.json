@@ -4,35 +4,42 @@
     "href": "index.html",
     "title": "MATH/STAT 455: Mathematical Statistics",
     "section": "",
-    "text": "Welcome to Mathematical Statistics!\nThis book contains the course notes for MATH/STAT 455: Mathematical Statistics at Macalester College, as taught by Prof. Taylor Okonek. These notes draw from course notes created by Prof. Kelsey Grinde, and heavily from the course textbook, An Introduction to Mathematical Statistics and Its Applications by Richard Larsen and Morris Marx (6th Edition).\nI will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!\nIf you find any typos or have other questions, please email tokonek@macalester.edu."
+    "text": "Welcome to Mathematical Statistics!\nThis book contains the course notes for MATH/STAT 455: Mathematical Statistics at Macalester College, as taught by Prof. Taylor Okonek. These notes draw from course notes created by Prof. Kelsey Grinde, and heavily from the course textbook, An Introduction to Mathematical Statistics and Its Applications by Richard Larsen and Morris Marx (6th Edition). Each chapter will contain (at a minimum): Learning Goals, Associated Readings, Definitions, Theorems, and Worked Examples.\nI will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!\nIf you find any typos or have other questions, please email tokonek@macalester.edu."
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
-  },
-  {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Summary",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
-  },
-  {
-    "objectID": "probability.html",
-    "href": "probability.html",
+    "objectID": "probability.html#learning-objectives",
+    "href": "probability.html#learning-objectives",
     "title": "1  Probability: A Brief Review",
-    "section": "",
-    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+    "section": "1.1 Learning Objectives",
+    "text": "1.1 Learning Objectives\nBy the end of this chapter, you should be able to…\n\nDistinguish between important probability models (e.g., Normal, Binomial)\nDerive the expectation and variance of a single random variable or a sum of random variables\nDefine the moment generating function and use it to find moments or identify pdfs"
+  },
+  {
+    "objectID": "probability.html#associated-readings",
+    "href": "probability.html#associated-readings",
+    "title": "1  Probability: A Brief Review",
+    "section": "1.2 Associated Readings",
+    "text": "1.2 Associated Readings"
+  },
+  {
+    "objectID": "probability.html#definitions",
+    "href": "probability.html#definitions",
+    "title": "1  Probability: A Brief Review",
+    "section": "1.3 Definitions",
+    "text": "1.3 Definitions\nYou are expected to know the following definitions:\n\nProbability density function (discrete, continuous)\n\nNote: I don’t care if you call a pmf a pdf… I will probably do this continuously throughout the semester. We don’t need to be picky about this in MATH/STAT 455.\n\nCumulative distribution function (discrete, continuous)\nJoint probability density function\nConditional probability density function\nIndependence\nRandom Variable\nExpected Value / Expectation\nVariance\n\\(r^{th}\\) moment\nCovariance\nRandom Sample\nMoment Generating Function\n\nYou are expected to know the following probability distributions:\n\nTable of main probability distributions we will work with for MATH/STAT 455.\n\n\n\n\n\n\n\nDistribution\nPDF/PMF\nParameters\n\n\n\n\nUniform\n\\(\\pi(x) = \\frac{1}{\\beta - \\alpha}\\)\n\\(\\alpha \\in \\mathbb{R}\\), \\(\\beta\\in \\mathbb{R}\\)\n\n\nNormal\n\\(\\pi(x) = \\frac{1}{\\sqrt{2\\pi \\sigma^2}} \\exp(-\\frac{1}{2\\sigma^2} (x - \\mu)^2)\\)\n\\(\\mu \\in \\mathbb{R}\\), \\(\\sigma &gt; 0\\)\n\n\nMultivariate Normal\n\\(\\pi(\\textbf{x}) - (2\\pi)^{-k/2} |\\Sigma|^{-1/2} \\exp(-\\frac{1}{2}(\\textbf{X} - \\mu)^\\top \\Sigma^{-1}(\\textbf{X} - \\mu)))\\)\n\\(\\mu \\in \\mathbb{R}^k\\), \\(\\Sigma \\in \\mathbb{R}^{k\\times k}\\) , positive semi-definite\n\n\nGamma\n\\(\\pi(x) = \\frac{\\beta^{\\alpha}}{\\Gamma(\\alpha)}x^{\\alpha - 1} e^{-\\beta x}\\)\n\\(\\alpha \\text{ (shape)}, \\beta \\text{ (rate)} &gt; 0\\)\n\n\nChi-square\n\\(\\pi(x) = \\frac{2^{-\\nu/2}}{\\Gamma(\\nu/2)} x^{\\nu/2 - 1}e^{-x/2})\\)\n\\(\\nu &gt; 0\\)\n\n\nExponential\n\\(\\pi(x) = \\beta e^{-\\beta x}\\)\n\\(\\beta &gt; 0\\)\n\n\nStudent-$t$\n\\(\\pi(x) = \\frac{\\Gamma((\\nu + 1)/2)}{\\Gamma(\\nu/2) \\sqrt{\\nu \\pi}} (1 + \\frac{x^2}{\\nu})^{-(\\nu + 1)/2}\\)\n\\(\\nu &gt; 0\\)\n\n\nBeta\n\\(\\pi(x) = \\frac{\\Gamma(\\alpha + \\beta)}{\\Gamma(\\alpha)\\Gamma(\\beta)} x^{\\alpha - 1}(1 - x)^{\\beta - 1}\\)\n\\(\\alpha, \\beta &gt; 0\\)\n\n\nPoisson\n\\(\\pi(x) = \\frac{\\lambda^k e^{-\\lambda}}{k!}\\)\n\\(\\lambda &gt; 0\\)\n\n\nBinomial\n\\(\\pi(x) = \\binom{n}{x} p^{x} (1 - p)^{n - x}\\)\n\\(p \\in [0,1], n = \\{0, 1, 2, \\dots\\}\\)\n\n\nMultinomial\n\\(\\pi(\\textbf{x}) = \\frac{n!}{x_1! \\dots x_k!} p_1^{x_1} \\dots p_k^{x_k}\\)\n\\(p_i &gt; 0\\), \\(p_1 + \\dots + p_k = 1\\), \\(n = \\{0, 1, 2, \\dots \\}\\)\n\n\nNegative Binomial\n\\(\\pi(x) = \\binom{k + r - 1}{k} (1-p)^k p^r\\)\n\\(r &gt; 0\\), \\(p \\in [0,1]\\)"
+  },
+  {
+    "objectID": "probability.html#theorems",
+    "href": "probability.html#theorems",
+    "title": "1  Probability: A Brief Review",
+    "section": "1.4 Theorems",
+    "text": "1.4 Theorems\n\nLaw of Total Probability\nBayes’ Theorem\nRelationship between pdf and cdf\nExpectation and variance of linear transformations of random variables\nRelationship between mean and variance\nFinding a marginal pdf from a joint pdf\nIndependence of random variables and joint pdfs\nExpected value of a product of independent random variables\nCovariance of independent random variables\nUsing MGFs to find moments\nUsing MGFs to identify pdfs\nCentral Limit Theorem"
+  },
+  {
+    "objectID": "probability.html#worked-examples",
+    "href": "probability.html#worked-examples",
+    "title": "1  Probability: A Brief Review",
+    "section": "1.5 Worked Examples",
+    "text": "1.5 Worked Examples"
   },
   {
     "objectID": "mle.html",
@@ -96,47 +103,5 @@
     "title": "10  Hypothesis Testing",
     "section": "",
     "text": "Insert text here\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "probability.html#learning-objectives",
-    "href": "probability.html#learning-objectives",
-    "title": "1  Probability: A Brief Review",
-    "section": "1.1 Learning Objectives",
-    "text": "1.1 Learning Objectives\nBy the end of this chapter, you should be able to…\n\nDistinguish between important probability models (e.g., Normal, Binomial)\nDerive the expectation and variance of a single random variable or a sum of random variables\nDefine the moment generating function and use it to find moments or identify pdfs"
-  },
-  {
-    "objectID": "probability.html#associated-readings",
-    "href": "probability.html#associated-readings",
-    "title": "1  Probability: A Brief Review",
-    "section": "1.2 Associated Readings",
-    "text": "1.2 Associated Readings"
-  },
-  {
-    "objectID": "probability.html#definitions",
-    "href": "probability.html#definitions",
-    "title": "1  Probability: A Brief Review",
-    "section": "1.3 Definitions",
-    "text": "1.3 Definitions\nYou are expected to know the following definitions:\n\nProbability density function (discrete, continuous)\n\nNote: I don’t care if you call a pmf a pdf… I will probably do this continuously throughout the semester. We don’t need to be picky about this in MATH/STAT 455.\n\nCumulative distribution function (discrete, continuous)\nJoint probability density function\nConditional probability density function\nIndependence\nRandom Variable\nExpected Value / Expectation\nVariance\n\\(r^{th}\\) moment\nCovariance\nRandom Sample\nMoment Generating Function\n\nYou are expected to know the following probability distributions:\n\nTable of main probability distributions we will work with for MATH/STAT 455.\n\n\n\n\n\n\n\nDistribution\nPDF/PMF\nParameters\n\n\n\n\nUniform\n\\(\\pi(x) = \\frac{1}{\\beta - \\alpha}\\)\n\\(\\alpha \\in \\mathbb{R}\\), \\(\\beta\\in \\mathbb{R}\\)\n\n\nNormal\n\\(\\pi(x) = \\frac{1}{\\sqrt{2\\pi \\sigma^2}} \\exp(-\\frac{1}{2\\sigma^2} (x - \\mu)^2)\\)\n\\(\\mu \\in \\mathbb{R}\\), \\(\\sigma &gt; 0\\)\n\n\nMultivariate Normal\n\\(\\pi(\\textbf{x}) - (2\\pi)^{-k/2} |\\Sigma|^{-1/2} \\exp(-\\frac{1}{2}(\\textbf{X} - \\mu)^\\top \\Sigma^{-1}(\\textbf{X} - \\mu)))\\)\n\\(\\mu \\in \\mathbb{R}^k\\), \\(\\Sigma \\in \\mathbb{R}^{k\\times k}\\) , positive semi-definite\n\n\nGamma\n\\(\\pi(x) = \\frac{\\beta^{\\alpha}}{\\Gamma(\\alpha)}x^{\\alpha - 1} e^{-\\beta x}\\)\n\\(\\alpha \\text{ (shape)}, \\beta \\text{ (rate)} &gt; 0\\)\n\n\nChi-square\n\\(\\pi(x) = \\frac{2^{-\\nu/2}}{\\Gamma(\\nu/2)} x^{\\nu/2 - 1}e^{-x/2})\\)\n\\(\\nu &gt; 0\\)\n\n\nExponential\n\\(\\pi(x) = \\beta e^{-\\beta x}\\)\n\\(\\beta &gt; 0\\)\n\n\nStudent-$t$\n\\(\\pi(x) = \\frac{\\Gamma((\\nu + 1)/2)}{\\Gamma(\\nu/2) \\sqrt{\\nu \\pi}} (1 + \\frac{x^2}{\\nu})^{-(\\nu + 1)/2}\\)\n\\(\\nu &gt; 0\\)\n\n\nBeta\n\\(\\pi(x) = \\frac{\\Gamma(\\alpha + \\beta)}{\\Gamma(\\alpha)\\Gamma(\\beta)} x^{\\alpha - 1}(1 - x)^{\\beta - 1}\\)\n\\(\\alpha, \\beta &gt; 0\\)\n\n\nPoisson\n\\(\\pi(x) = \\frac{\\lambda^k e^{-\\lambda}}{k!}\\)\n\\(\\lambda &gt; 0\\)\n\n\nBinomial\n\\(\\pi(x) = \\binom{n}{x} p^{x} (1 - p)^{n - x}\\)\n\\(p \\in [0,1], n = \\{0, 1, 2, \\dots\\}\\)\n\n\nMultinomial\n\\(\\pi(\\textbf{x}) = \\frac{n!}{x_1! \\dots x_k!} p_1^{x_1} \\dots p_k^{x_k}\\)\n\\(p_i &gt; 0\\), \\(p_1 + \\dots + p_k = 1\\), \\(n = \\{0, 1, 2, \\dots \\}\\)\n\n\nNegative Binomial\n\\(\\pi(x) = \\binom{k + r - 1}{k} (1-p)^k p^r\\)\n\\(r &gt; 0\\), \\(p \\in [0,1]\\)"
-  },
-  {
-    "objectID": "probability.html#theorems",
-    "href": "probability.html#theorems",
-    "title": "1  Probability: A Brief Review",
-    "section": "1.4 Theorems",
-    "text": "1.4 Theorems\n\nLaw of Total Probability\nBayes’ Theorem\nRelationship between pdf and cdf\nExpectation and variance of linear transformations of random variables\nRelationship between mean and variance\nFinding a marginal pdf from a joint pdf\nIndependence of random variables and joint pdfs\nExpected value of a product of independent random variables\nCovariance of independent random variables\nUsing MGFs to find moments\nUsing MGFs to identify pdfs\nCentral Limit Theorem"
-  },
-  {
-    "objectID": "probability.html#worked-exa",
-    "href": "probability.html#worked-exa",
-    "title": "1  Probability: A Brief Review",
-    "section": "1.5 Worked Exa",
-    "text": "1.5 Worked Exa"
-  },
-  {
-    "objectID": "probability.html#worked-examples",
-    "href": "probability.html#worked-examples",
-    "title": "1  Probability: A Brief Review",
-    "section": "1.5 Worked Examples",
-    "text": "1.5 Worked Examples"
   }
 ]
