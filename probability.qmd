@@ -76,7 +76,7 @@ You are expected to know the following probability distributions:
 
 -   Law of Total Probability
 
--   Bayes' Theorem
+-   Bayes' Theorem: $p(A \mid B) = \frac{p(B \mid A) p(A)}{p(B)}$
 
 -   Relationship between pdf and cdf
 
