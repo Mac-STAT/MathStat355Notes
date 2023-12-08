@@ -21,5 +21,14 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+
+        uses: r-lib/actions/setup-r-dependencies@v2
+         with:
+          packages:
+            any::knitr
+            any::rmarkdown
+            any::downlit
+            any::xml2
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
