@@ -1,7 +1,3 @@
 # Maximum Likelihood Estimation
 
-Insert text here
-
-```{r}
-1 + 1
-```
+Under development...

@@ -1,7 +1,3 @@
 # Bayesian Inference
 
-Insert text here
-
-```{r}
-1 + 1
-```
+Under development...

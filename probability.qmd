@@ -23,6 +23,8 @@ By the end of this chapter, you should be able to...
 
 ## Associated Readings
 
+Chapters 2-4 (pages 15-277)
+
 ## Definitions
 
 You are expected to know the following definitions:
@@ -59,7 +61,7 @@ You are expected to know the following probability distributions:
 |------------------------|------------------------|------------------------|
 | Uniform             | $\pi(x) = \frac{1}{\beta - \alpha}$                                                                                        | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$                                       |
 | Normal              | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$                                           | $\mu \in \mathbb{R}$, $\sigma > 0$                                                   |
-| Multivariate Normal | $\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{X} - \mu)^\top \Sigma^{-1}(\textbf{X} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite |
+| Multivariate Normal | $\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite |
 | Gamma               | $\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}$                                                | $\alpha \text{ (shape)}, \beta \text{ (rate)} > 0$                                   |
 | Chi-square          | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2})$                                                         | $\nu > 0$                                                                            |
 | Exponential         | $\pi(x) = \beta e^{-\beta x}$                                                                                              | $\beta > 0$                                                                          |
@@ -76,26 +78,130 @@ You are expected to know the following probability distributions:
 
 -   Law of Total Probability
 
--   Bayes' Theorem: $p(A \mid B) = \frac{p(B \mid A) p(A)}{p(B)}$
+    $$
+    P(A) = \sum_n P(A \cap B_n),
+    $$or
+
+    $$
+    P(A) = \sum_n P(A \mid B_n) P(B_n)
+    $$
+
+-   Bayes' Theorem
+
+    $$
+    \pi(A \mid B) = \frac{\pi(B \mid A) \pi(A)}{\pi(B)}
+    $$
 
 -   Relationship between pdf and cdf
 
+    $$
+    F_Y(y) = \int_{-\infty}^y f_Y(t)dt
+    $$
+
+    $$
+    \frac{\partial}{\partial y}F_Y(y) = f_Y(y)
+    $$
+
+-   Expectation of random variables
+
+    $$
+    E[X] = \int_{-\infty}^\infty x f(x) dx
+    $$
+
+    $$
+    E[X^2] = \int_{-\infty}^\infty x^2 f(x) dx
+    $$
+
 -   Expectation and variance of linear transformations of random variables
+
+    $$
+    E[cX + b] = c E[X] + b
+    $$
+
+    $$
+    Var[cX + b] = c^2 Var[X]
+    $$
 
 -   Relationship between mean and variance
 
+    $$
+    Var[X] = E[(X - E[X])^2] = E[X^2] - E[X]^2
+    $$
+
+    Also, recall that $Cov[X, X] = Var[X]$.
+
 -   Finding a marginal pdf from a joint pdf
+
+    $$
+    f_X(x) = \int_{-\infty}^\infty f_{XY}(x, y) dy
+    $$
 
 -   Independence of random variables and joint pdfs
 
+    If two random variables are independent, their joint pdf will be *separable*. For example, if $X$ and $Y$ are independent, we could write
+
+    $$
+    f_{XY}(x, y) = f_{X}(x)f_Y(y)
+    $$
+
 -   Expected value of a product of independent random variables
+
+    Suppose random variables $X_1, \dots, X_n$ are independent. Then we can write,
+
+    $$
+    E\left[\prod_{i = 1}^n X_i\right] = \prod_{i = 1}^n E[X_i]
+    $$
 
 -   Covariance of independent random variables
 
+    If $X$ and $Y$ are independent, then $Cov(X, Y) = 0$. We can show this by noting that
+
+$$
+\begin{align}
+Cov(X, Y) & = E[(X - E[X])(Y - E[Y])] \\
+& = E[XY - XE[Y] - YE[X] + E[X]E[Y]] \\
+& = E[XY] - E[XE[Y]] - E[YE[X]] + E[X]E[Y] \\
+& =  2E[X]E[Y] - 2E[X]E[Y] \\
+& = 0
+\end{align}
+$$
+
 -   Using MGFs to find moments
+
+    Recall that the moment generating function of a random variable $X$, denoted by $M_X(t)$ is
+
+    $$
+    M_X(t) = E[e^{tX}]
+    $$
+
+    Then the $n$th moment of the probability distribution for $X$ , $E[X^n]$, is given by
+
+    $$
+    \frac{\partial M_X}{\partial t^n} \Bigg|_{t = 0} 
+    $$
+
+    where the above reads as "the $n$th derivative of the moment generating function, evaluated at $t = 0$."
 
 -   Using MGFs to identify pdfs
 
+    MGFs uniquely identify probability density functions. If $X$ and $Y$ are two random variables where for all values of $t$, $M_X(t) = M_Y(t)$, then $F_X(x) = F_Y(y)$.
+
 -   Central Limit Theorem
 
+    The classical CLT states that for independent and identically distributed (iid) random variables $X_1, \dots, X_n$, with expected value $E[X_i] = \mu$ and $Var[X_i] = \sigma^2 < \infty$, the sample average (centered and standardized) converges in distribution to a standard normal distribution at a root-$n$ rate. Notationally, this is written as
+
+    $$
+    \sqrt{n} (\bar{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
+    $$
+
+    ![](images/chilipepper.png){width="20" height="16"} A fun aside: this is only *one* CLT, often referred to as the Levy CLT. There are other CLTs, such as the Lyapunov CLT and Lindeberg-Feller CLT!
+
 ## Worked Examples
+
+**Problem 1:** Suppose $X \sim Exponential(\lambda)$. Calculate $E[X]$ and $Var[X]$.
+
+**Problem 2:** Show that an exponentially distributed random variable is "memoryless", i.e. show that $\Pr(X > s + x \mid X > s) = \Pr(X > x)$, $\forall s, t\geq 0$.
+
+**Problem 3:** Suppose we have two, independent random variables $X, Y \sim Exponential(\lambda).$ Show that $\frac{X}{X + Y} \sim Uniform(0,1)$.
+
+**Problem 4:**

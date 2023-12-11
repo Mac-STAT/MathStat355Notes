@@ -1,7 +1,3 @@
 # Method of Moments
 
-Insert text here
-
-```{r}
-1 + 1
-```
+Under development...

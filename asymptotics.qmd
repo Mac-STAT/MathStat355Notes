@@ -1,4 +1,3 @@
 # Asymptotics & the Central Limit Theorem
 
-Insert text here
-
+Under development...

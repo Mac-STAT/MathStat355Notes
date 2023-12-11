@@ -226,6 +226,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="associated-readings" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="associated-readings"><span class="header-section-number">1.2</span> Associated Readings</h2>
+<p>Chapters 2-4 (pages 15-277)</p>
 </section>
 <section id="definitions" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">1.3</span> Definitions</h2>
@@ -275,7 +276,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td>Multivariate Normal</td>
-<td><span class="math inline">\(\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{X} - \mu)^\top \Sigma^{-1}(\textbf{X} - \mu)))\)</span></td>
+<td><span class="math inline">\(\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))\)</span></td>
 <td><span class="math inline">\(\mu \in \mathbb{R}^k\)</span>, <span class="math inline">\(\Sigma \in \mathbb{R}^{k\times k}\)</span> , positive semi-definite</td>
 </tr>
 <tr class="even">
@@ -329,22 +330,96 @@ ul.task-list li input[type="checkbox"] {
 <section id="theorems" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">1.4</span> Theorems</h2>
 <ul>
-<li><p>Law of Total Probability</p></li>
-<li><p>Bayes’ Theorem: <span class="math inline">\(p(A \mid B) = \frac{p(B \mid A) p(A)}{p(B)}\)</span></p></li>
-<li><p>Relationship between pdf and cdf</p></li>
-<li><p>Expectation and variance of linear transformations of random variables</p></li>
-<li><p>Relationship between mean and variance</p></li>
-<li><p>Finding a marginal pdf from a joint pdf</p></li>
-<li><p>Independence of random variables and joint pdfs</p></li>
-<li><p>Expected value of a product of independent random variables</p></li>
-<li><p>Covariance of independent random variables</p></li>
-<li><p>Using MGFs to find moments</p></li>
-<li><p>Using MGFs to identify pdfs</p></li>
-<li><p>Central Limit Theorem</p></li>
+<li><p>Law of Total Probability</p>
+<p><span class="math display">\[
+P(A) = \sum_n P(A \cap B_n),
+\]</span>or</p>
+<p><span class="math display">\[
+P(A) = \sum_n P(A \mid B_n) P(B_n)
+\]</span></p></li>
+<li><p>Bayes’ Theorem</p>
+<p><span class="math display">\[
+\pi(A \mid B) = \frac{\pi(B \mid A) \pi(A)}{\pi(B)}
+\]</span></p></li>
+<li><p>Relationship between pdf and cdf</p>
+<p><span class="math display">\[
+F_Y(y) = \int_{-\infty}^y f_Y(t)dt
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial y}F_Y(y) = f_Y(y)
+\]</span></p></li>
+<li><p>Expectation of random variables</p>
+<p><span class="math display">\[
+E[X] = \int_{-\infty}^\infty x f(x) dx
+\]</span></p>
+<p><span class="math display">\[
+E[X^2] = \int_{-\infty}^\infty x^2 f(x) dx
+\]</span></p></li>
+<li><p>Expectation and variance of linear transformations of random variables</p>
+<p><span class="math display">\[
+E[cX + b] = c E[X] + b
+\]</span></p>
+<p><span class="math display">\[
+Var[cX + b] = c^2 Var[X]
+\]</span></p></li>
+<li><p>Relationship between mean and variance</p>
+<p><span class="math display">\[
+Var[X] = E[(X - E[X])^2] = E[X^2] - E[X]^2
+\]</span></p>
+<p>Also, recall that <span class="math inline">\(Cov[X, X] = Var[X]\)</span>.</p></li>
+<li><p>Finding a marginal pdf from a joint pdf</p>
+<p><span class="math display">\[
+f_X(x) = \int_{-\infty}^\infty f_{XY}(x, y) dy
+\]</span></p></li>
+<li><p>Independence of random variables and joint pdfs</p>
+<p>If two random variables are independent, their joint pdf will be <em>separable</em>. For example, if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, we could write</p>
+<p><span class="math display">\[
+f_{XY}(x, y) = f_{X}(x)f_Y(y)
+\]</span></p></li>
+<li><p>Expected value of a product of independent random variables</p>
+<p>Suppose random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are independent. Then we can write,</p>
+<p><span class="math display">\[
+E\left[\prod_{i = 1}^n X_i\right] = \prod_{i = 1}^n E[X_i]
+\]</span></p></li>
+<li><p>Covariance of independent random variables</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(Cov(X, Y) = 0\)</span>. We can show this by noting that</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+Cov(X, Y) &amp; = E[(X - E[X])(Y - E[Y])] \\
+&amp; = E[XY - XE[Y] - YE[X] + E[X]E[Y]] \\
+&amp; = E[XY] - E[XE[Y]] - E[YE[X]] + E[X]E[Y] \\
+&amp; =  2E[X]E[Y] - 2E[X]E[Y] \\
+&amp; = 0
+\end{align}
+\]</span></p>
+<ul>
+<li><p>Using MGFs to find moments</p>
+<p>Recall that the moment generating function of a random variable <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(M_X(t)\)</span> is</p>
+<p><span class="math display">\[
+M_X(t) = E[e^{tX}]
+\]</span></p>
+<p>Then the <span class="math inline">\(n\)</span>th moment of the probability distribution for <span class="math inline">\(X\)</span> , <span class="math inline">\(E[X^n]\)</span>, is given by</p>
+<p><span class="math display">\[
+\frac{\partial M_X}{\partial t^n} \Bigg|_{t = 0}
+\]</span></p>
+<p>where the above reads as “the <span class="math inline">\(n\)</span>th derivative of the moment generating function, evaluated at <span class="math inline">\(t = 0\)</span>.”</p></li>
+<li><p>Using MGFs to identify pdfs</p>
+<p>MGFs uniquely identify probability density functions. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are two random variables where for all values of <span class="math inline">\(t\)</span>, <span class="math inline">\(M_X(t) = M_Y(t)\)</span>, then <span class="math inline">\(F_X(x) = F_Y(y)\)</span>.</p></li>
+<li><p>Central Limit Theorem</p>
+<p>The classical CLT states that for independent and identically distributed (iid) random variables <span class="math inline">\(X_1, \dots, X_n\)</span>, with expected value <span class="math inline">\(E[X_i] = \mu\)</span> and <span class="math inline">\(Var[X_i] = \sigma^2 &lt; \infty\)</span>, the sample average (centered and standardized) converges in distribution to a standard normal distribution at a root-<span class="math inline">\(n\)</span> rate. Notationally, this is written as</p>
+<p><span class="math display">\[
+\sqrt{n} (\bar{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
+\]</span></p>
+<p><img src="images/chilipepper.png" width="20" height="16"> A fun aside: this is only <em>one</em> CLT, often referred to as the Levy CLT. There are other CLTs, such as the Lyapunov CLT and Lindeberg-Feller CLT!</p></li>
 </ul>
 </section>
 <section id="worked-examples" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">1.5</span> Worked Examples</h2>
+<p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X \sim Exponential(\lambda)\)</span>. Calculate <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(Var[X]\)</span>.</p>
+<p><strong>Problem 2:</strong> Show that an exponentially distributed random variable is “memoryless”, i.e.&nbsp;show that <span class="math inline">\(\Pr(X &gt; s + x \mid X &gt; s) = \Pr(X &gt; x)\)</span>, <span class="math inline">\(\forall s, t\geq 0\)</span>.</p>
+<p><strong>Problem 3:</strong> Suppose we have two, independent random variables <span class="math inline">\(X, Y \sim Exponential(\lambda).\)</span> Show that <span class="math inline">\(\frac{X}{X + Y} \sim Uniform(0,1)\)</span>.</p>
+<p><strong>Problem 4:</strong></p>
 
 
 </section>
