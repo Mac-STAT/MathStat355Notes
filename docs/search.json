@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "MATH/STAT 455: Mathematical Statistics",
     "section": "",
-    "text": "Welcome to Mathematical Statistics!\nThis book contains the course notes for MATH/STAT 455: Mathematical Statistics at Macalester College, as taught by Prof. Taylor Okonek. These notes draw from course notes created by Prof. Kelsey Grinde, and heavily from the course textbook, An Introduction to Mathematical Statistics and Its Applications by Richard Larsen and Morris Marx (6th Edition). Each chapter will contain (at a minimum):\n\nLearning Goals\nReading Guide\nDefinitions\nTheorems\nWorked Examples\n\nI will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!\nIf you find any typos or have other questions, please email tokonek@macalester.edu."
+    "text": "Welcome to Mathematical Statistics!\nThis book contains the course notes for MATH/STAT 455: Mathematical Statistics at Macalester College, as taught by Prof. Taylor Okonek. These notes draw from course notes created by Prof. Kelsey Grinde, and heavily from the course textbook, An Introduction to Mathematical Statistics and Its Applications by Richard Larsen and Morris Marx (6th Edition). Each chapter will contain (at a minimum):\n\nLearning Objectives\nReading Guide\nDefinitions\nTheorems\nWorked Examples\n\nI will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!\nIf you find any typos or have other questions, please email tokonek@macalester.edu."
   },
   {
     "objectID": "probability.html#learning-objectives",
@@ -74,14 +74,14 @@
     "href": "asymptotics.html",
     "title": "6  Asymptotics & the Central Limit Theorem",
     "section": "",
-    "text": "Insert text here"
+    "text": "Under development…"
   },
   {
     "objectID": "computation.html",
     "href": "computation.html",
     "title": "7  Computational Optimization",
     "section": "",
-    "text": "Insert text here\n\n1 + 1\n\n[1] 2"
+    "text": "Under development…"
   },
   {
     "objectID": "bayes.html",
