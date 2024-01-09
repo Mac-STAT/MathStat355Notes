@@ -187,7 +187,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</a></li>
-  <li><a href="#associated-readings" id="toc-associated-readings" class="nav-link" data-scroll-target="#associated-readings"><span class="header-section-number">1.2</span> Associated Readings</a></li>
+  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">1.2</span> Reading Guide</a>
+  <ul class="collapse">
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">1.2.1</span> Reading Questions</a></li>
+  </ul></li>
   <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">1.3</span> Definitions</a></li>
   <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">1.4</span> Theorems</a></li>
   <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">1.5</span> Worked Examples</a></li>
@@ -224,37 +227,123 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Define the moment generating function and use it to find moments or identify pdfs</p></li>
 </ul>
 </section>
-<section id="associated-readings" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="associated-readings"><span class="header-section-number">1.2</span> Associated Readings</h2>
-<p>Chapters 2-4 (pages 15-277)</p>
+<section id="reading-guide" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">1.2</span> Reading Guide</h2>
+<p>Associated Readings: Chapters 2-4 (pages 15-277)</p>
+<section id="reading-questions" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">1.2.1</span> Reading Questions</h3>
+<ol type="1">
+<li><p>Which probability distributions are appropriate for <em>quantitative</em> (continuous) random variables?</p></li>
+<li><p>Which probability distributions are appropriate for <em>categorical</em> random variables?</p></li>
+<li><p><em>Independently and Identically Distributed (iid)</em> random variables are an incredibly important assumption involved in many statistical methods. Why do you think it might be important/useful for random variables to have this property?</p></li>
+</ol>
+</section>
 </section>
 <section id="definitions" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">1.3</span> Definitions</h2>
 <p>You are expected to know the following definitions:</p>
-<ul>
-<li><p>Probability density function (discrete, continuous)</p>
+<p><strong>Random Variable</strong></p>
+<p>A random variable is a function that takes inputs from a sample space of all possible outcomes, and outputs real values or probabilities. As an example, consider a coin flip. The sample space of all possible outcomes consists of “heads” and “tails”, and each outcome is associated with a probability (50% each, for a fair coin). For our purposes, you should know that random variables have probability density (or mass) functions, and are either discrete or continuous based on the number of possible outcomes a random variable may take. Random variables are often denoted with capital Roman letters, like <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, <span class="math inline">\(Z\)</span>, etc.</p>
+<p><strong>Probability density function</strong> (discrete, continuous)</p>
 <ul>
 <li>Note: I don’t care if you call a pmf a pdf… I will probably do this continuously throughout the semester. We don’t need to be picky about this in <em>MATH/STAT 455</em>.</li>
-</ul></li>
-<li><p>Cumulative distribution function (discrete, continuous)</p></li>
-<li><p>Joint probability density function</p></li>
-<li><p>Conditional probability density function</p></li>
-<li><p>Independence</p></li>
-<li><p>Random Variable</p></li>
-<li><p>Expected Value / Expectation</p></li>
-<li><p>Variance</p></li>
-<li><p><span class="math inline">\(r^{th}\)</span> moment</p></li>
-<li><p>Covariance</p></li>
-<li><p>Random Sample</p></li>
-<li><p>Moment Generating Function</p></li>
 </ul>
-<p>You are expected to know the following probability distributions:</p>
+<p>There are many different accepted ways to write the notation for a pdf of a random variables. Any of the following are perfectly appropriate for this class: <span class="math inline">\(f(x)\)</span>, <span class="math inline">\(\pi(x)\)</span>, <span class="math inline">\(p(x)\)</span>, <span class="math inline">\(f_X(x)\)</span>. I typically use either <span class="math inline">\(\pi\)</span> or <span class="math inline">\(p\)</span>, but might mix it up occasionally.</p>
+<p>Key things I want you to know about probability density functions:</p>
+<ul>
+<li><p><span class="math inline">\(\pi(x) \geq 0\)</span>, everywhere. This should make sense (hopefully) because probabilities cannot be negative!</p></li>
+<li><p><span class="math inline">\(\int_{-\infty}^\infty \pi(x) = 1\)</span>. This should also (hopefully) makes sense. Probabilities can’t be <em>greater</em> than one, and the probability of event occurring <em>at all (ever)</em> should be equal to one, if the event <span class="math inline">\(x\)</span> is a random variable.</p></li>
+</ul>
+<p><strong>Cumulative distribution function</strong> (discrete, continuous)</p>
+<p>Cumulative distribution functions we’ll typically write as <span class="math inline">\(F_X(x)\)</span>. or <span class="math inline">\(F(x)\)</span>, for short. It is important to know that</p>
+<p><span class="math display">\[
+F_X(x) = \Pr(X \leq x),
+\]</span></p>
+<p>or in words, “the cumulative distribution function is the probability that a random variable lies before <span class="math inline">\(x\)</span>.” If you write <span class="math inline">\(\Pr(X &lt; x)\)</span> instead of <span class="math inline">\(\leq\)</span>, you’re fine. The probability that a random variable is exactly one number (for an RV with a continuous pdf) is zero anyway, so these are the same thing. Key things I want you to know about cumulative distribution functions:</p>
+<ul>
+<li><p><span class="math inline">\(F(x)\)</span> is non-decreasing. This is in part where the “cumulative” piece comes in to play. Recall that probabilities are basically integrals or sums. If we’re integrating over something positive, and our upper bound for our integral <em>increases</em>, the area under the curve (cumulative probability) will increase as well.</p></li>
+<li><p><span class="math inline">\(0 \leq F(x) \leq 1\)</span> (since probabilities have to be between zero and one!)</p></li>
+<li><p><span class="math inline">\(\Pr(a &lt; X \leq b) = F(a) - F(b)\)</span> (because algebra)</p></li>
+</ul>
+<p><strong>Joint probability density function</strong></p>
+<p>A joint probability density function is a probability distribution defined for more than one random variable at a time. For two random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, we could write their joint density function as <span class="math inline">\(f_{X,Z}(x, z)\)</span> , or <span class="math inline">\(f(x,z)\)</span> for short. The joint density function encodes all sorts of fun information, including <em>marginal</em> distributions for <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, and conditional distributions (see next <strong>bold</strong> definition). We can think of the joint pdf as listing all possible pairs of outputs from the density function <span class="math inline">\(f(x,z)\)</span>, for varying values of <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span>. Key things I want you to know about joint pdfs:</p>
+<ul>
+<li><p>How to get a marginal pdf from a joint pdf:</p>
+<p>Suppose I want to know <span class="math inline">\(f_X(x)\)</span>, and I know <span class="math inline">\(f_{X,Z}(x,z)\)</span>. Then I can integrate or “average over” <span class="math inline">\(Z\)</span> to get</p>
+<p><span class="math display">\[
+f_X(x) = \int f_{X,Z}(x,z)dz
+\]</span></p></li>
+<li><p>The relationship between conditional pdfs, marginal pdfs, joint pdfs, and Bayes’ theorem/rule</p></li>
+<li><p>How to obtain a joint pdf for <em>independent</em> random variables: just multiply their marginal pdfs together! This is how we will (typically) think about likelihoods!</p></li>
+<li><p>How to obtain a marginal pdf from a joint pdf when random variables are independent <em>without integrating</em> (think, “separability”)</p></li>
+</ul>
+<p><strong>Conditional probability density function</strong></p>
+<p>A conditional pdf denotes the probability distribution for a (set of) random variable(s), <em>given that</em> the value for another (set of) random variable(s) is known. For two random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, we could write the conditional distribution of <span class="math inline">\(X\)</span> “given” <span class="math inline">\(Z\)</span> as <span class="math inline">\(f_{X \mid Z}(x \mid z)\)</span> , where the “conditioning” is denoted by a vertical bar (in LaTeX, this is typeset using “\mid”). Key things I want you to know about condition pdfs:</p>
+<ul>
+<li><p>The relationship between conditional pdfs, marginal pdfs, joint pdfs, and Bayes’ theorem/rule</p></li>
+<li><p>How to obtain a conditional pdf from a joint pdf (again, think Bayes’ rule)</p></li>
+<li><p>Relationship between conditional pdfs and independence (see next <strong>bold</strong> definition)</p></li>
+</ul>
+<p><strong>Independence</strong></p>
+<p>Two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are <em>independent</em> if and only if:</p>
+<ul>
+<li><p><span class="math inline">\(f_{X,Z}(x,z) = f_X(x) f_Z(z)\)</span> (their joint pdf is “separable”)</p></li>
+<li><p><span class="math inline">\(f_{X\mid Z}(x\mid z) = f_X(x)\)</span> (the pdf for <span class="math inline">\(X\)</span> does not depend on <span class="math inline">\(Z\)</span> in any way)</p>
+<p>Note that the “opposite” is also true: <span class="math inline">\(f_{Z\mid X}(z\mid x) = f_Z(z)\)</span></p></li>
+</ul>
+<p>In notation, we denote that two variables are independent as <span class="math inline">\(X \perp\!\!\!\perp Z\)</span>, or <span class="math inline">\(X \perp Z\)</span>. In LaTeX, the <em>latter</em> is typeset as “\perp”, and the former is typeset as “\perp\!\!\!\perp”. As a matter of personal preference, I (Taylor) prefer <span class="math inline">\(\perp\!\!\!\perp\)</span>, but I don’t like typing it out every time. Consider using the “\newcommand” functionality in LaTeX to create a shorthand for this for your documents!</p>
+<p><strong>Expected Value / Expectation</strong></p>
+<p>The expectation (or expected value) of a random variable is defined as:</p>
+<p><span class="math display">\[
+E[X] = \int_{-\infty}^\infty x f(x) dx
+\]</span></p>
+<p>Expected value is a weighted average, where the average is over all possible values a random variable can take, weighted by the probability that those values occur. Key things I want you to know about expectation:</p>
+<ul>
+<li><p>The relationship between expectation, variance, and moments (specifically, that <span class="math inline">\(E[X]\)</span> is the 1st moment!)</p></li>
+<li><p>The “law of the unconscious statistician” (see the Theorems section of this chapter)</p></li>
+<li><p>Expectation of linear transformations of random variables (see <strong>Theorems</strong> section of this chapter)</p></li>
+</ul>
+<p><strong>Variance</strong></p>
+<p>The variance of a random variable is defined as:</p>
+<p><span class="math display">\[
+Var[X] = E[(X - E[X])^2] = E[X^2] - E[X]^2
+\]</span></p>
+<p>In words, we can read this as “the expected value of the squared deviation from the mean” of a random variable <span class="math inline">\(X\)</span>. Key things I want you to know about variance:</p>
+<ul>
+<li><p>The relationship between expectation, variance, and moments (hopefully clear, given the formula for variance)</p></li>
+<li><p>The relationship between variance and standard deviation: <span class="math inline">\(Var(X) = sd(X)^2\)</span></p></li>
+<li><p>The relationship between variance and covariance: <span class="math inline">\(Var(X) = Cov(X, X)\)</span></p></li>
+<li><p><span class="math inline">\(Var(X) \geq 0\)</span>. This should make sense, given that we’re taking the expectation of something “squared” in order to calculate it!</p></li>
+<li><p><span class="math inline">\(Var(c) = 0\)</span> for any constant, <span class="math inline">\(c\)</span>.</p></li>
+<li><p>Variance of linear transformations of random variables (see <strong>Theorems</strong> section of this chapter)</p></li>
+</ul>
+<p><span class="math inline">\(r^{th}\)</span> <strong>moment</strong></p>
+<p>The <span class="math inline">\(r^{th}\)</span> moment of a probability distribution is given by <span class="math inline">\(E[X^r]\)</span>. For example, when <span class="math inline">\(r = 1\)</span>, the <span class="math inline">\(r^{th}\)</span> moment is just the expectation of the random variable <span class="math inline">\(X\)</span>. Key things I want you to know about moments:</p>
+<ul>
+<li><p>The relationship between moments, expectation, and variance</p>
+<ul>
+<li>For example, if you know the first and second moments of a distribution, you should be able to calculate the variance of a random variable with that distribution!</li>
+</ul></li>
+<li><p>The relationship between moments and <em>moment generating functions</em> (see <strong>Theorems</strong> section of this chapter)</p></li>
+</ul>
+<p><strong>Covariance</strong></p>
+<p>The covariance of two random variables is a measure of their <em>joint</em> variability. We denote the covariance of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> as <span class="math inline">\(Cov(X,Z)\)</span>, and</p>
+<p><span class="math display">\[
+Cov(X, Z) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
+\]</span></p>
+<p>Some things I want you to know about covariance:</p>
+<ul>
+<li><p><span class="math inline">\(Cov(X, X) = Var(X)\)</span></p></li>
+<li><p><span class="math inline">\(Cov(X, Y) = Cov(Y, X)\)</span> (order doesn’t matter)</p></li>
+</ul>
+<p><strong>Moment Generating Function</strong></p>
+<p>You are also expected to know the probability distributions contained in Table 1, below. Note that you <em>do not</em> need to memorize the pdfs for these distributions, but you <em>should</em> be familiar with what types of random variables (continuous/quantitative, categorical, integer-valued, etc.) may take on different distributions. The more familiar you are with the forms of the pdfs, the easier/faster it will be to work through problem sets and quizzes.</p>
 <table class="table">
-<caption>Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
+<caption><em>Table 1.</em> Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 9%">
+<col style="width: 53%">
+<col style="width: 37%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -354,7 +443,13 @@ E[X] = \int_{-\infty}^\infty x f(x) dx
 \]</span></p>
 <p><span class="math display">\[
 E[X^2] = \int_{-\infty}^\infty x^2 f(x) dx
+\]</span></p>
+<ul>
+<li><p>“Law of the Unconscious Statistician”</p>
+<p><span class="math display">\[
+E[g(X)] = \int_{-\infty}^\infty g(x)f(x)dx
 \]</span></p></li>
+</ul></li>
 <li><p>Expectation and variance of linear transformations of random variables</p>
 <p><span class="math display">\[
 E[cX + b] = c E[X] + b
@@ -369,12 +464,12 @@ Var[X] = E[(X - E[X])^2] = E[X^2] - E[X]^2
 <p>Also, recall that <span class="math inline">\(Cov[X, X] = Var[X]\)</span>.</p></li>
 <li><p>Finding a marginal pdf from a joint pdf</p>
 <p><span class="math display">\[
-f_X(x) = \int_{-\infty}^\infty f_{XY}(x, y) dy
+f_X(x) = \int_{-\infty}^\infty f_{X,Y}(x, y) dy
 \]</span></p></li>
 <li><p>Independence of random variables and joint pdfs</p>
 <p>If two random variables are independent, their joint pdf will be <em>separable</em>. For example, if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, we could write</p>
 <p><span class="math display">\[
-f_{XY}(x, y) = f_{X}(x)f_Y(y)
+f_{X,Y}(x, y) = f_{X}(x)f_Y(y)
 \]</span></p></li>
 <li><p>Expected value of a product of independent random variables</p>
 <p>Suppose random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are independent. Then we can write,</p>
