@@ -278,7 +278,7 @@ f_X(x) = \int f_{X,Z}(x,z)dz
 <li><p>How to obtain a marginal pdf from a joint pdf when random variables are independent <em>without integrating</em> (think, “separability”)</p></li>
 </ul>
 <p><strong>Conditional probability density function</strong></p>
-<p>A conditional pdf denotes the probability distribution for a (set of) random variable(s), <em>given that</em> the value for another (set of) random variable(s) is known. For two random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, we could write the conditional distribution of <span class="math inline">\(X\)</span> “given” <span class="math inline">\(Z\)</span> as <span class="math inline">\(f_{X \mid Z}(x \mid z)\)</span> , where the “conditioning” is denoted by a vertical bar (in LaTeX, this is typeset using “\mid”). Key things I want you to know about condition pdfs:</p>
+<p>A conditional pdf denotes the probability distribution for a (set of) random variable(s), <em>given that</em> the value for another (set of) random variable(s) is known. For two random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, we could write the conditional distribution of <span class="math inline">\(X\)</span> “given” <span class="math inline">\(Z\)</span> as <span class="math inline">\(f_{X \mid Z}(x \mid z)\)</span> , where the “conditioning” is denoted by a vertical bar (in LaTeX, this is typeset using “\mid”). Key things I want you to know about conditional pdfs:</p>
 <ul>
 <li><p>The relationship between conditional pdfs, marginal pdfs, joint pdfs, and Bayes’ theorem/rule</p></li>
 <li><p>How to obtain a conditional pdf from a joint pdf (again, think Bayes’ rule)</p></li>
@@ -341,9 +341,9 @@ Cov(X, Z) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
 <table class="table">
 <caption><em>Table 1.</em> Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
 <colgroup>
-<col style="width: 9%">
-<col style="width: 53%">
-<col style="width: 37%">
+<col style="width: 23%">
+<col style="width: 45%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -366,7 +366,7 @@ Cov(X, Z) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
 <tr class="odd">
 <td>Multivariate Normal</td>
 <td><span class="math inline">\(\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))\)</span></td>
-<td><span class="math inline">\(\mu \in \mathbb{R}^k\)</span>, <span class="math inline">\(\Sigma \in \mathbb{R}^{k\times k}\)</span> , positive semi-definite</td>
+<td><span class="math inline">\(\mu \in \mathbb{R}^k\)</span>, <span class="math inline">\(\Sigma \in \mathbb{R}^{k\times k}\)</span> , positive semi-definite (in practice, almost always positive definite)</td>
 </tr>
 <tr class="even">
 <td>Gamma</td>
@@ -512,9 +512,89 @@ M_X(t) = E[e^{tX}]
 <section id="worked-examples" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">1.5</span> Worked Examples</h2>
 <p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X \sim Exponential(\lambda)\)</span>. Calculate <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(Var[X]\)</span>.</p>
-<p><strong>Problem 2:</strong> Show that an exponentially distributed random variable is “memoryless”, i.e.&nbsp;show that <span class="math inline">\(\Pr(X &gt; s + x \mid X &gt; s) = \Pr(X &gt; x)\)</span>, <span class="math inline">\(\forall s, t\geq 0\)</span>.</p>
-<p><strong>Problem 3:</strong> Suppose we have two, independent random variables <span class="math inline">\(X, Y \sim Exponential(\lambda).\)</span> Show that <span class="math inline">\(\frac{X}{X + Y} \sim Uniform(0,1)\)</span>.</p>
-<p><strong>Problem 4:</strong></p>
+<p>We know that <span class="math inline">\(f(x) = \lambda e^{-\lambda x}\)</span>. If we can calculate <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(E[X^2]\)</span>, then we’re basically done! We can write</p>
+<p><span class="math display">\[
+\begin{align*}    
+E[X] &amp; = \int_0^\infty x \lambda e^{-\lambda x} dx \\    
+&amp; = \lambda \int_0^\infty x e^{-\lambda x} dx
+\end{align*}
+\]</span></p>
+<p>And now we need integration by parts! Set <span class="math inline">\(u = x\)</span>, <span class="math inline">\(dv = e^{-\lambda x} dx\)</span>. Then <span class="math inline">\(du = 1dx\)</span> and <span class="math inline">\(v = \frac{-1}{\lambda} e^{-\lambda x}\)</span>. Since <span class="math inline">\(\int u dv = uv - \int vdu\)</span>, we can continue</p>
+<p><span class="math display">\[
+\begin{align*}    
+E[X] &amp; = \lambda \int_0^\infty x e^{-\lambda x} dx \\    
+&amp; = \lambda \left( -\frac{x}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
+&amp; = \lambda \left( - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
+&amp; = \lambda \left( \frac{-1}{\lambda^2} e^{-\lambda x}  \bigg|_0^\infty \right) \\    
+&amp; = \frac{-1}{\lambda} e^{-\lambda x}  \bigg|_0^\infty \\    
+&amp; = \frac{1}{\lambda} e^{-0} \\    
+&amp; = \frac{1}{\lambda}
+\end{align*}
+\]</span></p>
+<p>We can follow a similar process to get <span class="math inline">\(E[X^2]\)</span> (using the law of the unconscious statistician!). We can write</p>
+<span class="math display">\[\begin{align*}
+    E[X^2] &amp; = \int_0^\infty x^2 \lambda e^{-\lambda x} dx \\
+    &amp; = \lambda \int_0^\infty x^2 e^{-\lambda x} dx
+\end{align*}\]</span>
+<p>And now we need integration by parts again! Set <span class="math inline">\(u = x^2\)</span>, <span class="math inline">\(dv = e^{-\lambda x} dx\)</span>. Then <span class="math inline">\(du = 2xdx\)</span> and <span class="math inline">\(v = \frac{-1}{\lambda} e^{-\lambda x}\)</span>. Since <span class="math inline">\(\int u dv = uv - \int vdu\)</span>, we can continue</p>
+<span class="math display">\[\begin{align*}
+    E[X] &amp; = \lambda \int_0^\infty x^2 e^{-\lambda x} dx \\
+    &amp; = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-2}{\lambda} xe^{-\lambda x} dx \right) \\
+    &amp; = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  + \frac{2}{\lambda} \int_0^\infty  xe^{-\lambda x} dx \right) \\
+    &amp; = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  + \frac{2}{\lambda^3} \right)\\
+    &amp; = \lambda \left( 0  + \frac{2}{\lambda^3} \right) \\
+    &amp; = \frac{2}{\lambda^2}
+\end{align*}\]</span>
+<p>Now we can calculate <span class="math inline">\(Var[X] = E[X^2] - E[X]^2\)</span> as <span class="math display">\[
+Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
+\]</span> And so we have <span class="math inline">\(E[X] = \frac{1}{\lambda}\)</span> and <span class="math inline">\(Var[X] = \frac{1}{\lambda^2}\)</span>.</p>
+<p><strong>Problem 2:</strong> Show that an exponentially distributed random variable is “memoryless”, i.e.&nbsp;show that <span class="math inline">\(\Pr(X &gt; s + x \mid X &gt; s) = \Pr(X &gt; x)\)</span>, <span class="math inline">\(\forall s\)</span>.</p>
+<p>Recall that the CDF of an exponential distribution is given by <span class="math inline">\(F(x) = 1-e^{-\lambda x}\)</span>. Thanks to Bayes rule, we can write</p>
+<p><span class="math display">\[\begin{align*}
+    \Pr(X &gt; s + x \mid X &gt; s) &amp; = \frac{\Pr(X &gt; s + x , X &gt; s)}{\Pr(X &gt; s)} \\
+    &amp; = \frac{\Pr(X &gt; s + x)}{\Pr(X &gt; s)} \\
+    &amp; = \frac{1 - \Pr(X &lt; s + x)}{1 - \Pr(X &lt; s)} \\
+    &amp; = \frac{1 - F(s + x)}{1 - F(s)}
+\end{align*}\]</span> where the second equality is true because <span class="math inline">\(x &gt; 0\)</span>. Then we can write</p>
+<span class="math display">\[\begin{align*}
+    \Pr(X &gt; s + x \mid X &gt; s) &amp; = \frac{1 - F(s + x)}{1 - F(s)} \\
+    &amp; = \frac{1 - \left(1 - e^{-\lambda(s + x)}\right)}{1 - \left(1 - e^{-\lambda s}\right)} \\
+    &amp; = \frac{e^{-\lambda(s + x)}}{e^{-\lambda s}} \\
+    &amp; = \frac{e^{-\lambda s - \lambda x}}{e^{-\lambda s}} \\
+    &amp; = e^{-\lambda x} \\
+    &amp; = 1 - F(x) \\
+    &amp; = \Pr(X &gt; x)
+\end{align*}\]</span>
+<p>and we’re done!</p>
+<p><strong>Problem 3:</strong> Suppose <span class="math inline">\(X \sim Exponential(1/\lambda)\)</span>, and <span class="math inline">\(Y \mid X \sim Poisson(X)\)</span>. Show that <span class="math inline">\(Y \sim Geometric(1/(1 + \lambda))\)</span>.</p>
+<p>Note that we can write <span class="math inline">\(f(x, y) = f(y \mid x) f(x)\)</span>, and <span class="math inline">\(f(y) = \int f(x, y) dx\)</span>. Then</p>
+<p><span class="math display">\[
+f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
+\]</span> And so, <span class="math display">\[\begin{align*}
+    f(y) &amp; = \int f(x, y) dx \\
+    &amp; = \int \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
+    &amp; = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
+\end{align*}\]</span></p>
+<p>And we can again use integration by parts! Let <span class="math inline">\(u = x^y\)</span> and <span class="math inline">\(dv = e^{-x(1 + \lambda)/\lambda} dx\)</span>. Then we have <span class="math inline">\(du = yx^{y-1} dx\)</span> and <span class="math inline">\(v = \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}\)</span>, and we can write</p>
+<span class="math display">\[\begin{align*}
+    f(y) &amp; = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx \\
+    &amp; = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
+    &amp; = \frac{1}{\lambda y!} \left( - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
+    &amp; = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left( - \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
+\end{align*}\]</span>
+<p>This gross, but it’s actually not so bad. Note that, since <span class="math inline">\(Y\)</span> is Poisson, it can only take integer values beginning at 1! Then we can the process of integration by parts <span class="math inline">\(y\)</span> in order to get rid of <span class="math inline">\(x^{y\dots}\)</span> term on the inside of the integral. Specifically, each time we do this process we will pull out a <span class="math inline">\(\left( \frac{\lambda }{1 + \lambda} \right)\)</span>, and a <span class="math inline">\(y - i\)</span> for the <span class="math inline">\(i\)</span>th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,</p>
+<span class="math display">\[\begin{align*}
+    f(y) &amp; = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right)^y y! \\
+    &amp; = \frac{1}{\lambda} \left(\frac{\lambda}{1 + \lambda}\right)^y
+\end{align*}\]</span>
+<p>Now let <span class="math inline">\(p = \frac{1}{1 + \lambda}\)</span>. If we can show that <span class="math inline">\(f(y) \sim Geometric(p)\)</span> then we’re done. Note that <span class="math inline">\(1 - p = \lambda/(1 + \lambda)\)</span>. We have</p>
+<p><span class="math display">\[\begin{align*}
+    f(y) &amp; = \frac{1}{\lambda} (1 - p)^y \\
+    &amp; = \frac{1}{\lambda} (1 - p)^{y-1} (1-p) \\
+    &amp; = (1 - p)^{y-1} \frac{1}{\lambda} \left( \frac{\lambda}{1 + \lambda} \right) \\
+    &amp; = (1 - p)^{y-1} \left( \frac{1}{1 + \lambda} \right) \\
+    &amp; = (1 - p)^{y-1} p
+\end{align*}\]</span> which is exactly the pdf of a geometric random variable with parameter <span class="math inline">\(p\)</span> and trials that begin at 1 (as opposed to 0), as makes sense with the Poisson distribution.</p>
 
 
 </section>

@@ -89,7 +89,7 @@ A joint probability density function is a probability distribution defined for m
 
 **Conditional probability density function**
 
-A conditional pdf denotes the probability distribution for a (set of) random variable(s), *given that* the value for another (set of) random variable(s) is known. For two random variables, $X$ and $Z$, we could write the conditional distribution of $X$ "given" $Z$ as $f_{X \mid Z}(x \mid z)$ , where the "conditioning" is denoted by a vertical bar (in LaTeX, this is typeset using "\\mid"). Key things I want you to know about condition pdfs:
+A conditional pdf denotes the probability distribution for a (set of) random variable(s), *given that* the value for another (set of) random variable(s) is known. For two random variables, $X$ and $Z$, we could write the conditional distribution of $X$ "given" $Z$ as $f_{X \mid Z}(x \mid z)$ , where the "conditioning" is denoted by a vertical bar (in LaTeX, this is typeset using "\\mid"). Key things I want you to know about conditional pdfs:
 
 -   The relationship between conditional pdfs, marginal pdfs, joint pdfs, and Bayes' theorem/rule
 
@@ -175,20 +175,20 @@ Some things I want you to know about covariance:
 
 You are also expected to know the probability distributions contained in Table 1, below. Note that you *do not* need to memorize the pdfs for these distributions, but you *should* be familiar with what types of random variables (continuous/quantitative, categorical, integer-valued, etc.) may take on different distributions. The more familiar you are with the forms of the pdfs, the easier/faster it will be to work through problem sets and quizzes.
 
-| Distribution        | PDF/PMF                                                                                                                    | Parameters                                                                           |
-|---------------------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| Uniform             | $\pi(x) = \frac{1}{\beta - \alpha}$                                                                                        | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$                                       |
-| Normal              | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$                                           | $\mu \in \mathbb{R}$, $\sigma > 0$                                                   |
-| Multivariate Normal | $\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite |
-| Gamma               | $\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}$                                                | $\alpha \text{ (shape)}, \beta \text{ (rate)} > 0$                                   |
-| Chi-square          | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2})$                                                         | $\nu > 0$                                                                            |
-| Exponential         | $\pi(x) = \beta e^{-\beta x}$                                                                                              | $\beta > 0$                                                                          |
-| Student-\$t\$       | $\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}$                   | $\nu > 0$                                                                            |
-| Beta                | $\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}$                    | $\alpha, \beta > 0$                                                                  |
-| Poisson             | $\pi(x) = \frac{\lambda^k e^{-\lambda}}{k!}$                                                                               | $\lambda > 0$                                                                        |
-| Binomial            | $\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}$                                                                              | $p \in [0,1], n = \{0, 1, 2, \dots\}$                                                |
-| Multinomial         | $\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}$                                                   | $p_i > 0$, $p_1 + \dots + p_k = 1$, $n = \{0, 1, 2, \dots \}$                        |
-| Negative Binomial   | $\pi(x) = \binom{k + r - 1}{k} (1-p)^k p^r$                                                                                | $r > 0$, $p \in [0,1]$                                                               |
+| Distribution        | PDF/PMF                                                                                                                    | Parameters                                                                                                                          |
+|-----------------|---------------------------------|----------------------|
+| Uniform             | $\pi(x) = \frac{1}{\beta - \alpha}$                                                                                        | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$                                                                                      |
+| Normal              | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$                                           | $\mu \in \mathbb{R}$, $\sigma > 0$                                                                                                  |
+| Multivariate Normal | $\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite (in practice, almost always positive definite) |
+| Gamma               | $\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}$                                                | $\alpha \text{ (shape)}, \beta \text{ (rate)} > 0$                                                                                  |
+| Chi-square          | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2})$                                                         | $\nu > 0$                                                                                                                           |
+| Exponential         | $\pi(x) = \beta e^{-\beta x}$                                                                                              | $\beta > 0$                                                                                                                         |
+| Student-\$t\$       | $\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}$                   | $\nu > 0$                                                                                                                           |
+| Beta                | $\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}$                    | $\alpha, \beta > 0$                                                                                                                 |
+| Poisson             | $\pi(x) = \frac{\lambda^k e^{-\lambda}}{k!}$                                                                               | $\lambda > 0$                                                                                                                       |
+| Binomial            | $\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}$                                                                              | $p \in [0,1], n = \{0, 1, 2, \dots\}$                                                                                               |
+| Multinomial         | $\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}$                                                   | $p_i > 0$, $p_1 + \dots + p_k = 1$, $n = \{0, 1, 2, \dots \}$                                                                       |
+| Negative Binomial   | $\pi(x) = \binom{k + r - 1}{k} (1-p)^k p^r$                                                                                | $r > 0$, $p \in [0,1]$                                                                                                              |
 
 : *Table 1.* Table of main probability distributions we will work with for *MATH/STAT 455*.
 
@@ -324,8 +324,113 @@ $$
 
 **Problem 1:** Suppose $X \sim Exponential(\lambda)$. Calculate $E[X]$ and $Var[X]$.
 
-**Problem 2:** Show that an exponentially distributed random variable is "memoryless", i.e. show that $\Pr(X > s + x \mid X > s) = \Pr(X > x)$, $\forall s, t\geq 0$.
+We know that $f(x) = \lambda e^{-\lambda x}$. If we can calculate $E[X]$ and $E[X^2]$, then we're basically done! We can write
 
-**Problem 3:** Suppose we have two, independent random variables $X, Y \sim Exponential(\lambda).$ Show that $\frac{X}{X + Y} \sim Uniform(0,1)$.
+$$
+\begin{align*}    
+E[X] & = \int_0^\infty x \lambda e^{-\lambda x} dx \\    
+& = \lambda \int_0^\infty x e^{-\lambda x} dx 
+\end{align*}
+$$
 
-**Problem 4:**
+And now we need integration by parts! Set $u = x$, $dv = e^{-\lambda x} dx$. Then $du = 1dx$ and $v = \frac{-1}{\lambda} e^{-\lambda x}$. Since $\int u dv = uv - \int vdu$, we can continue
+
+$$
+\begin{align*}    
+E[X] & = \lambda \int_0^\infty x e^{-\lambda x} dx \\    
+& = \lambda \left( -\frac{x}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
+& = \lambda \left( - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
+& = \lambda \left( \frac{-1}{\lambda^2} e^{-\lambda x}  \bigg|_0^\infty \right) \\    
+& = \frac{-1}{\lambda} e^{-\lambda x}  \bigg|_0^\infty \\    
+& = \frac{1}{\lambda} e^{-0} \\    
+& = \frac{1}{\lambda}
+\end{align*}
+$$
+
+We can follow a similar process to get $E[X^2]$ (using the law of the unconscious statistician!). We can write
+
+```{=tex}
+\begin{align*}
+    E[X^2] & = \int_0^\infty x^2 \lambda e^{-\lambda x} dx \\
+    & = \lambda \int_0^\infty x^2 e^{-\lambda x} dx 
+\end{align*}
+```
+And now we need integration by parts again! Set $u = x^2$, $dv = e^{-\lambda x} dx$. Then $du = 2xdx$ and $v = \frac{-1}{\lambda} e^{-\lambda x}$. Since $\int u dv = uv - \int vdu$, we can continue
+
+```{=tex}
+\begin{align*}
+    E[X] & = \lambda \int_0^\infty x^2 e^{-\lambda x} dx \\
+    & = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-2}{\lambda} xe^{-\lambda x} dx \right) \\
+    & = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  + \frac{2}{\lambda} \int_0^\infty  xe^{-\lambda x} dx \right) \\
+    & = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  + \frac{2}{\lambda^3} \right)\\
+    & = \lambda \left( 0  + \frac{2}{\lambda^3} \right) \\
+    & = \frac{2}{\lambda^2}
+\end{align*}
+```
+Now we can calculate $Var[X] = E[X^2] - E[X]^2$ as $$
+Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
+$$ And so we have $E[X] = \frac{1}{\lambda}$ and $Var[X] = \frac{1}{\lambda^2}$.
+
+**Problem 2:** Show that an exponentially distributed random variable is "memoryless", i.e. show that $\Pr(X > s + x \mid X > s) = \Pr(X > x)$, $\forall s$.
+
+Recall that the CDF of an exponential distribution is given by $F(x) = 1-e^{-\lambda x}$. Thanks to Bayes rule, we can write
+
+\begin{align*}
+    \Pr(X > s + x \mid X > s) & = \frac{\Pr(X > s + x , X > s)}{\Pr(X > s)} \\
+    & = \frac{\Pr(X > s + x)}{\Pr(X > s)} \\
+    & = \frac{1 - \Pr(X < s + x)}{1 - \Pr(X < s)} \\
+    & = \frac{1 - F(s + x)}{1 - F(s)}
+\end{align*} where the second equality is true because $x > 0$. Then we can write
+
+```{=tex}
+\begin{align*}
+    \Pr(X > s + x \mid X > s) & = \frac{1 - F(s + x)}{1 - F(s)} \\
+    & = \frac{1 - \left(1 - e^{-\lambda(s + x)}\right)}{1 - \left(1 - e^{-\lambda s}\right)} \\
+    & = \frac{e^{-\lambda(s + x)}}{e^{-\lambda s}} \\
+    & = \frac{e^{-\lambda s - \lambda x}}{e^{-\lambda s}} \\
+    & = e^{-\lambda x} \\
+    & = 1 - F(x) \\
+    & = \Pr(X > x)
+\end{align*}
+```
+and we're done!
+
+**Problem 3:** Suppose $X \sim Exponential(1/\lambda)$, and $Y \mid X \sim Poisson(X)$. Show that $Y \sim Geometric(1/(1 + \lambda))$.
+
+Note that we can write $f(x, y) = f(y \mid x) f(x)$, and $f(y) = \int f(x, y) dx$. Then
+
+$$
+f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
+$$ And so, \begin{align*}
+    f(y) & = \int f(x, y) dx \\
+    & = \int \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
+    & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
+\end{align*}
+
+And we can again use integration by parts! Let $u = x^y$ and $dv = e^{-x(1 + \lambda)/\lambda} dx$. Then we have $du = yx^{y-1} dx$ and $v = \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}$, and we can write
+
+```{=tex}
+\begin{align*}
+    f(y) & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx \\
+    & = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
+    & = \frac{1}{\lambda y!} \left( - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
+    & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left( - \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
+\end{align*}
+```
+This \textit{looks} gross, but it's actually not so bad. Note that, since $Y$ is Poisson, it can only take integer values beginning at 1! Then we can \textit{repeat} the process of integration by parts $y$ \textit{times} in order to get rid of $x^{y\dots}$ term on the inside of the integral. Specifically, each time we do this process we will pull out a $\left( \frac{\lambda }{1 + \lambda} \right)$, and a $y - i$ for the $i$th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,
+
+```{=tex}
+\begin{align*}
+    f(y) & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right)^y y! \\
+    & = \frac{1}{\lambda} \left(\frac{\lambda}{1 + \lambda}\right)^y
+\end{align*}
+```
+Now let $p = \frac{1}{1 + \lambda}$. If we can show that $f(y) \sim Geometric(p)$ then we're done. Note that $1 - p = \lambda/(1 + \lambda)$. We have
+
+\begin{align*}
+    f(y) & = \frac{1}{\lambda} (1 - p)^y \\
+    & = \frac{1}{\lambda} (1 - p)^{y-1} (1-p) \\
+    & = (1 - p)^{y-1} \frac{1}{\lambda} \left( \frac{\lambda}{1 + \lambda} \right) \\
+    & = (1 - p)^{y-1} \left( \frac{1}{1 + \lambda} \right) \\
+    & = (1 - p)^{y-1} p
+\end{align*} which is exactly the pdf of a geometric random variable with parameter $p$ and trials that begin at 1 (as opposed to 0), as makes sense with the Poisson distribution.
