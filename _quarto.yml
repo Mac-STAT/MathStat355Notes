@@ -13,7 +13,9 @@ book:
   downloads: [pdf]
   sidebar:
     style: docked
-    background: light
+    background: "#7b9f9e"
+    fontcolor: "#000000"
+    linkcolor: "#000000"
   chapters:
     - index.qmd
     - probability.qmd
@@ -32,7 +34,10 @@ bibliography: references.bib
 
 format:
   html:
-    theme: flatly
+    theme: lux
+    linkcolor: "#24605e"
+    backgroundcolor: "#faf7e7"
+    fontcolor: "#000000"
   pdf:
     documentclass: scrreprt
 
