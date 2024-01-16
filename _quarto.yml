@@ -34,7 +34,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: lux
+    theme: flatly
     linkcolor: "#24605e"
     backgroundcolor: "#faf7e7"
     fontcolor: "#000000"
