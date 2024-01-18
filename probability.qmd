@@ -320,6 +320,42 @@ $$
 
     ![](images/chilipepper.png){width="20" height="16"} A fun aside: this is only *one* CLT, often referred to as the Levy CLT. There are other CLTs, such as the Lyapunov CLT and Lindeberg-Feller CLT!
 
+### Transforming Continuous Random Variables
+
+We will *often* take at face value previously proven *relationships* between random variables. What I mean by this, as an example, is that it is a nice (convenient) fact that a sum of two independent normal random variables is *still* normally distributed, with a nice form for the mean and variance. In particular, if $X \sim N(\mu, \sigma^2)$ and $Y \sim N(\theta, \nu^2)$, then $X + Y \sim N(\mu + \theta, \sigma^2 + \nu^2)$. Most frequently used examples of these sorts of relationships can be found in the \`\`Related Distributions" section of the Wikipedia page for a given probability distribution. Unless I explicitly ask you to derive/show how certain variables are related to each other, you can just state the known relationship, use it, and move on!
+
+If I *do* ask you to derive/show these things, there a few different ways we can go about this. For this course, I only expect you to know the "CDF method" for *one function* of *one random variable*, as we'll demonstrate below.
+
+**Theorem**. Let $X$ be a continuous random variable with pdf $f_X(x)$. Define a new random variable $Y = g(X)$, for nice\* functions $g$. Then $f_Y(y) = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}$.
+
+![](images/chilipepper.png){width="20" height="16"} \*By *nice* functions we mean functions that are strictly increasing and smooth *on the required range*. As an example, $exp(x)$ is a smooth, strictly increasing function; $|x|$ is not on the *whole real line*, but *is* from $(0, \infty)$ (where a lot of useful pdfs are defined). For the purposes of this class, every function that you will need to do this for will be "nice." Note that there are also considerations that need to be taken regarding the *range* of continuous random variables when considering transforming them. We will mostly ignore these considerations in this class, but a technically complete derivation (or proof) must consider them.
+
+**Proof**. We can write
+
+\begin{align*}
+    f_Y(y) & = \frac{\partial}{\partial y} F_Y(y) \\
+    & = \frac{\partial}{\partial y} \Pr(Y \leq y) \\
+    & = \frac{\partial}{\partial y} \Pr(g(X) \leq y) \\
+    & = \frac{\partial}{\partial y} \Pr(X \leq g^{-1}(y)) \\
+    & = \frac{\partial}{\partial y} F_X(g^{-1}(y)) \\
+    & = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) 
+\end{align*} where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue\dots (note that this method is called the "CDF method" because we go *through* the CDF to derive the distribution for $Y$)
+
+You will \textit{especially} see this in the Bayes chapter of our course notes, but it is often true that our lives are made easier as statisticians if we multiply things by one, or add zero. What exactly do I mean? Rearranging gross looking formulas into things we are familiar with (like pdfs, for example) often makes our lives easier and allows us to avoid dealing with such grossness. Here, the grossness is less obvious, but nonetheless relevant. Note that we can write
+
+\begin{align*}
+    y & = y \\
+    y & = g(g^{-1}(y)) \\
+    \frac{\partial}{\partial y} y & = \frac{\partial}{\partial y} g(g^{-1}(y)) \\
+    1 & = g'(g^{-1}(y)) \frac{\partial}{\partial y} g^{-1}(y) \hspace{1cm} \text{(chain rule again!)} \\
+    \frac{1}{g'(g^{-1}(y))} & = \frac{\partial}{\partial y} g^{-1}(y)
+\end{align*} The right-hand side should look familiar: it is exactly what we needed to "deal with" in our proof! Returning to that proof, we have
+
+\begin{align*}
+    f_Y(y) & = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) \\
+    & = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} 
+\end{align*} as desired.
+
 ## Worked Examples
 
 **Problem 1:** Suppose $X \sim Exponential(\lambda)$. Calculate $E[X]$ and $Var[X]$.
@@ -434,3 +470,24 @@ Now let $p = \frac{1}{1 + \lambda}$. If we can show that $f(y) \sim Geometric(p)
     & = (1 - p)^{y-1} \left( \frac{1}{1 + \lambda} \right) \\
     & = (1 - p)^{y-1} p
 \end{align*} which is exactly the pdf of a geometric random variable with parameter $p$ and trials that begin at 1 (as opposed to 0), as makes sense with the Poisson distribution.
+
+**Problem 4:** Suppose that $X \sim N(\mu, \sigma^2)$, and let $Y = \frac{X - \mu}{\sigma}$. Find the distribution of $Y$ (simplifying all of your math will be useful for this problem).
+
+To solve this problem, we can use the theorem on transforming continuous random variables. We must first define our function $g$ that relates $X$ and $Y$. In this case, we have $g(a) = \frac{a - \mu}{\sigma}$. Now all we need to do is collect the mathematical "pieces" we need to use theorem: $g^{-1}(a)$, and $g'(a)$, and finally, the pdf of a normal random variable. We have
+
+```{=tex}
+\begin{align*}
+    f_X(x) & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2) \\
+    g^{-1}(a) & = \sigma a + \mu \\
+    g'(a) & = \frac{\partial}{\partial a} \left(\frac{a - \mu}{\sigma}\right) = \frac{1}{\sigma}
+\end{align*}
+```
+Putting it all together, we have
+
+\begin{align*}
+    f_Y(y) & = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} \\
+    & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (\sigma y + \mu - \mu)^2) \times \sigma \\
+    & = \frac{1}{\sqrt{2 \pi} \sigma} \exp(-\frac{1}{2\sigma^2} (\sigma y)^2) \times \sigma \\
+    & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2\sigma^2} \sigma^2 y^2) \\
+    & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
+\end{align*} and note that this is the pdf of a normally distributed random variable with mean $0$ and variance $1$! Thus, we have shown that $\frac{X - \mu}{\sigma} \sim N(0,1)$. **Fun Fact:** If this random variable reminds you of a Z-score, *it should*!

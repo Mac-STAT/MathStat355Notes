@@ -192,7 +192,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">1.2.1</span> Reading Questions</a></li>
   </ul></li>
   <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">1.3</span> Definitions</a></li>
-  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">1.4</span> Theorems</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">1.4</span> Theorems</a>
+  <ul class="collapse">
+  <li><a href="#transforming-continuous-random-variables" id="toc-transforming-continuous-random-variables" class="nav-link" data-scroll-target="#transforming-continuous-random-variables"><span class="header-section-number">1.4.1</span> Transforming Continuous Random Variables</a></li>
+  </ul></li>
   <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">1.5</span> Worked Examples</a></li>
   </ul>
 </nav>
@@ -341,9 +344,9 @@ Cov(X, Z) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
 <table class="table">
 <caption><em>Table 1.</em> Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
 <colgroup>
-<col style="width: 25%">
+<col style="width: 7%">
 <col style="width: 44%">
-<col style="width: 30%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -508,6 +511,34 @@ M_X(t) = E[e^{tX}]
 \]</span></p>
 <p><img src="images/chilipepper.png" width="20" height="16"> A fun aside: this is only <em>one</em> CLT, often referred to as the Levy CLT. There are other CLTs, such as the Lyapunov CLT and Lindeberg-Feller CLT!</p></li>
 </ul>
+<section id="transforming-continuous-random-variables" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="transforming-continuous-random-variables"><span class="header-section-number">1.4.1</span> Transforming Continuous Random Variables</h3>
+<p>We will <em>often</em> take at face value previously proven <em>relationships</em> between random variables. What I mean by this, as an example, is that it is a nice (convenient) fact that a sum of two independent normal random variables is <em>still</em> normally distributed, with a nice form for the mean and variance. In particular, if <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> and <span class="math inline">\(Y \sim N(\theta, \nu^2)\)</span>, then <span class="math inline">\(X + Y \sim N(\mu + \theta, \sigma^2 + \nu^2)\)</span>. Most frequently used examples of these sorts of relationships can be found in the ``Related Distributions” section of the Wikipedia page for a given probability distribution. Unless I explicitly ask you to derive/show how certain variables are related to each other, you can just state the known relationship, use it, and move on!</p>
+<p>If I <em>do</em> ask you to derive/show these things, there a few different ways we can go about this. For this course, I only expect you to know the “CDF method” for <em>one function</em> of <em>one random variable</em>, as we’ll demonstrate below.</p>
+<p><strong>Theorem</strong>. Let <span class="math inline">\(X\)</span> be a continuous random variable with pdf <span class="math inline">\(f_X(x)\)</span>. Define a new random variable <span class="math inline">\(Y = g(X)\)</span>, for nice* functions <span class="math inline">\(g\)</span>. Then <span class="math inline">\(f_Y(y) = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}\)</span>.</p>
+<p><img src="images/chilipepper.png" width="20" height="16"> *By <em>nice</em> functions we mean functions that are strictly increasing and smooth <em>on the required range</em>. As an example, <span class="math inline">\(exp(x)\)</span> is a smooth, strictly increasing function; <span class="math inline">\(|x|\)</span> is not on the <em>whole real line</em>, but <em>is</em> from <span class="math inline">\((0, \infty)\)</span> (where a lot of useful pdfs are defined). For the purposes of this class, every function that you will need to do this for will be “nice.” Note that there are also considerations that need to be taken regarding the <em>range</em> of continuous random variables when considering transforming them. We will mostly ignore these considerations in this class, but a technically complete derivation (or proof) must consider them.</p>
+<p><strong>Proof</strong>. We can write</p>
+<p><span class="math display">\[\begin{align*}
+    f_Y(y) &amp; = \frac{\partial}{\partial y} F_Y(y) \\
+    &amp; = \frac{\partial}{\partial y} \Pr(Y \leq y) \\
+    &amp; = \frac{\partial}{\partial y} \Pr(g(X) \leq y) \\
+    &amp; = \frac{\partial}{\partial y} \Pr(X \leq g^{-1}(y)) \\
+    &amp; = \frac{\partial}{\partial y} F_X(g^{-1}(y)) \\
+    &amp; = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y)
+\end{align*}\]</span> where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue(note that this method is called the “CDF method” because we go <em>through</em> the CDF to derive the distribution for <span class="math inline">\(Y\)</span>)</p>
+<p>You will see this in the Bayes chapter of our course notes, but it is often true that our lives are made easier as statisticians if we multiply things by one, or add zero. What exactly do I mean? Rearranging gross looking formulas into things we are familiar with (like pdfs, for example) often makes our lives easier and allows us to avoid dealing with such grossness. Here, the grossness is less obvious, but nonetheless relevant. Note that we can write</p>
+<p><span class="math display">\[\begin{align*}
+    y &amp; = y \\
+    y &amp; = g(g^{-1}(y)) \\
+    \frac{\partial}{\partial y} y &amp; = \frac{\partial}{\partial y} g(g^{-1}(y)) \\
+    1 &amp; = g'(g^{-1}(y)) \frac{\partial}{\partial y} g^{-1}(y) \hspace{1cm} \text{(chain rule again!)} \\
+    \frac{1}{g'(g^{-1}(y))} &amp; = \frac{\partial}{\partial y} g^{-1}(y)
+\end{align*}\]</span> The right-hand side should look familiar: it is exactly what we needed to “deal with” in our proof! Returning to that proof, we have</p>
+<p><span class="math display">\[\begin{align*}
+    f_Y(y) &amp; = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) \\
+    &amp; = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}
+\end{align*}\]</span> as desired.</p>
+</section>
 </section>
 <section id="worked-examples" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">1.5</span> Worked Examples</h2>
@@ -595,6 +626,21 @@ f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}
     &amp; = (1 - p)^{y-1} \left( \frac{1}{1 + \lambda} \right) \\
     &amp; = (1 - p)^{y-1} p
 \end{align*}\]</span> which is exactly the pdf of a geometric random variable with parameter <span class="math inline">\(p\)</span> and trials that begin at 1 (as opposed to 0), as makes sense with the Poisson distribution.</p>
+<p><strong>Problem 4:</strong> Suppose that <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, and let <span class="math inline">\(Y = \frac{X - \mu}{\sigma}\)</span>. Find the distribution of <span class="math inline">\(Y\)</span> (simplifying all of your math will be useful for this problem).</p>
+<p>To solve this problem, we can use the theorem on transforming continuous random variables. We must first define our function <span class="math inline">\(g\)</span> that relates <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. In this case, we have <span class="math inline">\(g(a) = \frac{a - \mu}{\sigma}\)</span>. Now all we need to do is collect the mathematical “pieces” we need to use theorem: <span class="math inline">\(g^{-1}(a)\)</span>, and <span class="math inline">\(g'(a)\)</span>, and finally, the pdf of a normal random variable. We have</p>
+<span class="math display">\[\begin{align*}
+    f_X(x) &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2) \\
+    g^{-1}(a) &amp; = \sigma a + \mu \\
+    g'(a) &amp; = \frac{\partial}{\partial a} \left(\frac{a - \mu}{\sigma}\right) = \frac{1}{\sigma}
+\end{align*}\]</span>
+<p>Putting it all together, we have</p>
+<p><span class="math display">\[\begin{align*}
+    f_Y(y) &amp; = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} \\
+    &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (\sigma y + \mu - \mu)^2) \times \sigma \\
+    &amp; = \frac{1}{\sqrt{2 \pi} \sigma} \exp(-\frac{1}{2\sigma^2} (\sigma y)^2) \times \sigma \\
+    &amp; = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2\sigma^2} \sigma^2 y^2) \\
+    &amp; = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
+\end{align*}\]</span> and note that this is the pdf of a normally distributed random variable with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>! Thus, we have shown that <span class="math inline">\(\frac{X - \mu}{\sigma} \sim N(0,1)\)</span>. If this random variable reminds you of a Z-score, it should!</p>
 
 
 </section>
