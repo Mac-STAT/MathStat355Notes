@@ -505,3 +505,17 @@ Putting it all together, we have
     & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2\sigma^2} \sigma^2 y^2) \\
     & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
 \end{align*} and note that this is the pdf of a normally distributed random variable with mean $0$ and variance $1$! Thus, we have shown that $\frac{X - \mu}{\sigma} \sim N(0,1)$. **Fun Fact:** If this random variable reminds you of a Z-score, *it should*!
+
+**Problem 5:** Suppose the joint pdf of two random variables $X$ and $Y$ is given by $f_{X,Y}(x,y) = \lambda \beta e^{-x\lambda - y\beta}$. Determine if $X$ and $Y$ are independent, showing why or why not.
+
+To determine whether $X$ and $Y$ are independent (or not), we need to determine if their joint pdf is "separable." Doing some algebra, we can see that
+
+$$
+\begin{align*}    f_{X,Y}(x,y) & = \lambda \beta e^{-x \lambda - y\beta} \\    & = \lambda \beta e^{-x \lambda} e^{-y \beta} \\    & = \left( \lambda  e^{-x \lambda} \right) \left( \beta e^{-y \beta} \right) \end{align*}
+$$
+
+and so since we can write the joint distribution as a function of $X$ multiplied by a function of $Y$, $X$ and $Y$ are independent (and in this case, both have exponential distributions).
+
+**Problem 6:** Suppose the joint pdf of two random variables $X$ and $Y$ is given by $f_{X,Y}(x,y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} \binom{n}{y} x^{y + \alpha - 1} (1-x)^{n-y + \beta - 1}$. Determine if $X$ and $Y$ are independent, showing why or why not.
+
+To determine whether $X$ and $Y$ are independent (or not), we need to determine if their joint pdf is "separable." Right away, we should note that a piece of the pdf contains $x^y$, and therefore we are *never* going to be able to fully separate out this joint pdf into a function of $x$ times a function $y$. Therefore, $X$ and $Y$ are *not* independent. In this case, we actually have $X \sim Beta(\alpha, \beta)$, and $Y \mid X \sim Binomial(n, y)$ (we'll return to this example in the Bayes chapter!).
