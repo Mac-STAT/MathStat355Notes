@@ -355,7 +355,7 @@ If I *do* ask you to derive/show these things, there a few different ways we can
     & = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) 
 \end{align*} where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue\dots (note that this method is called the "CDF method" because we go *through* the CDF to derive the distribution for $Y$)
 
-You will \textit{especially} see this in the Bayes chapter of our course notes, but it is often true that our lives are made easier as statisticians if we multiply things by one, or add zero. What exactly do I mean? Rearranging gross looking formulas into things we are familiar with (like pdfs, for example) often makes our lives easier and allows us to avoid dealing with such grossness. Here, the grossness is less obvious, but nonetheless relevant. Note that we can write
+You will *especially* see this in the Bayes chapter of our course notes, but it is often true that our lives are made easier as statisticians if we multiply things by one, or add zero. What exactly do I mean? Rearranging gross looking formulas into things we are familiar with (like pdfs, for example) often makes our lives easier and allows us to avoid dealing with such grossness. Here, the grossness is less obvious, but nonetheless relevant. Note that we can write
 
 \begin{align*}
     y & = y \\
@@ -467,7 +467,7 @@ And we can again use integration by parts! Let $u = x^y$ and $dv = e^{-x(1 + \la
     & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left( - \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
 \end{align*}
 ```
-This \textit{looks} gross, but it's actually not so bad. Note that, since $Y$ is Poisson, it can only take integer values beginning at 1! Then we can \textit{repeat} the process of integration by parts $y$ \textit{times} in order to get rid of $x^{y\dots}$ term on the inside of the integral. Specifically, each time we do this process we will pull out a $\left( \frac{\lambda }{1 + \lambda} \right)$, and a $y - i$ for the $i$th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,
+This *looks* gross, but it's actually not so bad. Note that, since $Y$ is Poisson, it can only take integer values beginning at 1! Then we can *repeat* the process of integration by parts $y$ *times* in order to get rid of $x^{y\dots}$ term on the inside of the integral. Specifically, each time we do this process we will pull out a $\left( \frac{\lambda }{1 + \lambda} \right)$, and a $y - i$ for the $i$th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,
 
 ```{=tex}
 \begin{align*}
