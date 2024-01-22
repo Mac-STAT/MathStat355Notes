@@ -339,14 +339,24 @@ Cov(X, Z) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
 <li><p><span class="math inline">\(Cov(X, X) = Var(X)\)</span></p></li>
 <li><p><span class="math inline">\(Cov(X, Y) = Cov(Y, X)\)</span> (order doesn’t matter)</p></li>
 </ul>
-<p><strong>Moment Generating Function</strong></p>
+<p><strong>Moment Generating Function (MGF)</strong></p>
+<p>The moment generating function of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+M_X(t) = E[e^{tX}]
+\]</span></p>
+<p>A few things to note:</p>
+<ul>
+<li><p><span class="math inline">\(M_X(0) = 1\)</span>, always.</p></li>
+<li><p>If two random variables have the same MGF, they have the same probability distribution!</p></li>
+<li><p>MGFs are sometimes useful for showing how different random variables are related to each other</p></li>
+</ul>
 <p>You are also expected to know the probability distributions contained in Table 1, below. Note that you <em>do not</em> need to memorize the pdfs for these distributions, but you <em>should</em> be familiar with what types of random variables (continuous/quantitative, categorical, integer-valued, etc.) may take on different distributions. The more familiar you are with the forms of the pdfs, the easier/faster it will be to work through problem sets and quizzes.</p>
 <table class="table">
 <caption><em>Table 1.</em> Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
 <colgroup>
-<col style="width: 7%">
+<col style="width: 25%">
 <col style="width: 44%">
-<col style="width: 47%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -368,7 +378,7 @@ Cov(X, Z) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
 </tr>
 <tr class="odd">
 <td>Multivariate Normal</td>
-<td><span class="math inline">\(\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))\)</span></td>
+<td><span class="math inline">\(\pi(\textbf{x}) = (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))\)</span></td>
 <td><span class="math inline">\(\mu \in \mathbb{R}^k\)</span>, <span class="math inline">\(\Sigma \in \mathbb{R}^{k\times k}\)</span> , positive semi-definite (in practice, almost always positive definite)</td>
 </tr>
 <tr class="even">
@@ -640,7 +650,7 @@ f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}
     &amp; = \frac{1}{\sqrt{2 \pi} \sigma} \exp(-\frac{1}{2\sigma^2} (\sigma y)^2) \times \sigma \\
     &amp; = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2\sigma^2} \sigma^2 y^2) \\
     &amp; = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
-\end{align*}\]</span> and note that this is the pdf of a normally distributed random variable with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>! Thus, we have shown that <span class="math inline">\(\frac{X - \mu}{\sigma} \sim N(0,1)\)</span>. If this random variable reminds you of a Z-score, it should!</p>
+\end{align*}\]</span> and note that this is the pdf of a normally distributed random variable with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>! Thus, we have shown that <span class="math inline">\(\frac{X - \mu}{\sigma} \sim N(0,1)\)</span>. <strong>Fun Fact:</strong> If this random variable reminds you of a Z-score, <em>it should</em>!</p>
 
 
 </section>

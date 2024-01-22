@@ -171,7 +171,21 @@ Some things I want you to know about covariance:
 
 -   $Cov(X, Y) = Cov(Y, X)$ (order doesn't matter)
 
-**Moment Generating Function**
+**Moment Generating Function (MGF)**
+
+The moment generating function of a random variable $X$ is defined as
+
+$$
+M_X(t) = E[e^{tX}]
+$$
+
+A few things to note:
+
+-   $M_X(0) = 1$, always.
+
+-   If two random variables have the same MGF, they have the same probability distribution!
+
+-   MGFs are sometimes useful for showing how different random variables are related to each other
 
 You are also expected to know the probability distributions contained in Table 1, below. Note that you *do not* need to memorize the pdfs for these distributions, but you *should* be familiar with what types of random variables (continuous/quantitative, categorical, integer-valued, etc.) may take on different distributions. The more familiar you are with the forms of the pdfs, the easier/faster it will be to work through problem sets and quizzes.
 
@@ -179,7 +193,7 @@ You are also expected to know the probability distributions contained in Table 1
 |------------------|--------------------------------|----------------------|
 | Uniform             | $\pi(x) = \frac{1}{\beta - \alpha}$                                                                                        | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$                                                                                      |
 | Normal              | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$                                           | $\mu \in \mathbb{R}$, $\sigma > 0$                                                                                                  |
-| Multivariate Normal | $\pi(\textbf{x}) - (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite (in practice, almost always positive definite) |
+| Multivariate Normal | $\pi(\textbf{x}) = (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite (in practice, almost always positive definite) |
 | Gamma               | $\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}$                                                | $\alpha \text{ (shape)}, \beta \text{ (rate)} > 0$                                                                                  |
 | Chi-square          | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2})$                                                         | $\nu > 0$                                                                                                                           |
 | Exponential         | $\pi(x) = \beta e^{-\beta x}$                                                                                              | $\beta > 0$                                                                                                                         |
