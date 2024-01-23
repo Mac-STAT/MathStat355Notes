@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -180,7 +182,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-mle" id="toc-introduction-to-mle" class="nav-link active" data-scroll-target="#introduction-to-mle"><span class="header-section-number">2.0.1</span> Introduction to MLE</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</a></li>
+  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">2.2</span> Reading Guide</a>
+  <ul class="collapse">
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">2.2.1</span> Reading Questions</a></li>
+  </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">2.3</span> Definitions</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">2.4</span> Theorems</a></li>
+  <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">2.5</span> Worked Examples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,9 +218,72 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Under development…</p>
+<p>In <em>Probability</em>, you calculated probabilities of events by assuming a probability model for data and then <em>assuming you knew the value of the parameters</em> in that model. In <em>Mathematical Statistics</em>, we will similarly write down a probability model but then we will use observed data to <em>estimate the value of the parameters</em> in that model.</p>
+<p>There is more than one technique that you can use to estimate the value of an unknown parameter. You’re already familiar with one technique—<strong>least squares estimation</strong>—from <em>STAT 155</em>. We’ll review the ideas behind that approach later in the course. To start, we'll explore two other widely used estimation techniques: <strong>maximum likelihood estimation</strong> (this chapter) and the <strong>method of moments</strong> (next chapter).</p>
+<section id="introduction-to-mle" class="level3" data-number="2.0.1">
+<h3 data-number="2.0.1" class="anchored" data-anchor-id="introduction-to-mle"><span class="header-section-number">2.0.1</span> Introduction to MLE</h3>
+<p>To understand maximum likelihood estimation, we can first break down each individual word in that phrase: (1) maximum, (2) likelihood, (3) estimation. We’ll start in reverse order.</p>
+<p>Recall from your introductory statistics course that we are (often) interested in estimating <em>true, unknown <strong>parameters</strong></em> in statistics, using some data. Our best guess at the truth, based on the data we observe / sample that we have, is an <strong><em>estimate</em></strong> of the truth (given some modeling assumptions). This is all the “estimation” piece is getting at here. We’re going to be learning about a method that produces estimates!</p>
+<p>The likelihood piece may be less familiar to you. A likelihood is essentially a fancy form of a function (see the Definitions section for an <em>exact</em> definition), that combines an assumed probability distribution for your data, with some unknown parameters.* The key here is that a likelihood is a <em>function</em>. It may <em>look</em> more complicated than a function like <span class="math inline">\(y = mx + b\)</span>, but we can often manipulate them in a similar fashion, which comes in handy when trying to find the…</p>
+<p>Maximum! We’ve maximized functions before, and we can do it again! There are ways to maximize functions numerically (using certain algorithms, such as Newton-Raphson for example, which we’ll cover in a later chapter), but we will primarily focus on maximizing likelihoods <em>analytically</em> in this course to help us build intuition.</p>
+<p>Recall from calculus: To maximize a function we…</p>
+<ol type="1">
+<li><p>Take the derivative of the function</p></li>
+<li><p>Set the derivative equal to zero</p></li>
+<li><p>Solve!</p></li>
+<li><p>(double check that the second derivative is negative, so that it’s actually a maximum as opposed to a minimum)</p></li>
+<li><p>(also check the endpoints)</p></li>
+</ol>
+<p>The last two steps we’ll often skip in this class, since things have a tendency to work out nicely with most likelihood functions. One final thing to note (before checking out worked examples and making sure you have a grasp on definitions and theorems) is that it is often <em>easier</em></p>
+<p>*<img src="images/chilipepper.png" width="20" height="16"> Note that distributions are only involved in <em>parametric</em> methods, as opposed to non-parametric and semi-parametric methods, the latter of which are for independent study or a graduate course in statistics!</p>
+</section>
+<section id="learning-objectives" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li><p>Derive maximum likelihood estimators for parameters of common probability density functions</p></li>
+<li><p>Calculate maximum likelihood estimators “by hand” for common probability density functions</p></li>
+<li><p>Explain (in plain English) why maximum likelihood estimation is an intuitive approach to estimating unknown parameters using a combination of (1) observed data, and (2) a distributional assumption</p></li>
+</ul>
+</section>
+<section id="reading-guide" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">2.2</span> Reading Guide</h2>
+<p>Associated Readings: Chapter 5 (Introduction through Example 5.2.5)</p>
+<section id="reading-questions" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">2.2.1</span> Reading Questions</h3>
+<ol type="1">
+<li><p>What is the intuition behind the maximum likelihood estimation (MLE) approach?</p></li>
+<li><p>What are the typical steps to find a MLE? (see Ex 5.2.1, 5.2.2, and Case Study 5.2.1; work through at least one of these examples in detail, filling in any steps that the textbook left out)</p></li>
+<li><p>Are there ever situations when the typical steps to finding a MLE don't work? If so, what can we do instead to find the MLE? (see Ex 5.2.3, 5.2.4)</p></li>
+<li><p>How do the steps to finding a MLE change when we have more than one unknown parameter? (see Ex 5.2.5)</p></li>
+</ol>
+</section>
+</section>
+<section id="definitions" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">2.3</span> Definitions</h2>
+<p>You are expected to know the following definitions:</p>
+<p><strong>Parameter</strong></p>
+<p>Explanation</p>
+<p><strong>Statistic/Estimator</strong></p>
+<p>Explanation</p>
+<p><strong>Likelihood Function</strong></p>
+<p>Explanation</p>
+<p><strong>Maximum Likelihood Estimate (MLE)</strong></p>
+<p>Explanation</p>
+<p><strong>Log-likelihood</strong></p>
+<p>Explanation</p>
+<p><strong>Order Statistic</strong></p>
+<p>Explanation</p>
+</section>
+<section id="theorems" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">2.4</span> Theorems</h2>
+</section>
+<section id="worked-examples" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">2.5</span> Worked Examples</h2>
+<p><strong>Problem 1:</strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

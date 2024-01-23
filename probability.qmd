@@ -291,7 +291,7 @@ You are also expected to know the probability distributions contained in Table 1
 
     If $X$ and $Y$ are independent, then $Cov(X, Y) = 0$. We can show this by noting that
 
-$$
+
 \begin{align}
 Cov(X, Y) & = E[(X - E[X])(Y - E[Y])] \\
 & = E[XY - XE[Y] - YE[X] + E[X]E[Y]] \\
@@ -299,7 +299,7 @@ Cov(X, Y) & = E[(X - E[X])(Y - E[Y])] \\
 & =  2E[X]E[Y] - 2E[X]E[Y] \\
 & = 0
 \end{align}
-$$
+
 
 -   Using MGFs to find moments
 
@@ -343,7 +343,7 @@ If I *do* ask you to derive/show these things, there a few different ways we can
 
 **Proof**. We can write
 
-$$
+
 \begin{align*}
     f_Y(y) & = \frac{\partial}{\partial y} F_Y(y) \\
     & = \frac{\partial}{\partial y} \Pr(Y \leq y) \\
@@ -352,11 +352,12 @@ $$
     & = \frac{\partial}{\partial y} F_X(g^{-1}(y)) \\
     & = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) 
 \end{align*} 
-$$where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue\dots (note that this method is called the "CDF method" because we go *through* the CDF to derive the distribution for $Y$)
+
+where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue... (note that this method is called the "CDF method" because we go *through* the CDF to derive the distribution for $Y$)
 
 You will *especially* see this in the Bayes chapter of our course notes, but it is often true that our lives are made easier as statisticians if we multiply things by one, or add zero. What exactly do I mean? Rearranging gross looking formulas into things we are familiar with (like pdfs, for example) often makes our lives easier and allows us to avoid dealing with such grossness. Here, the grossness is less obvious, but nonetheless relevant. Note that we can write
 
-$$
+
 \begin{align*}
     y & = y \\
     y & = g(g^{-1}(y)) \\
@@ -364,16 +365,16 @@ $$
     1 & = g'(g^{-1}(y)) \frac{\partial}{\partial y} g^{-1}(y) \hspace{1cm} \text{(chain rule again!)} \\
     \frac{1}{g'(g^{-1}(y))} & = \frac{\partial}{\partial y} g^{-1}(y)
 \end{align*}
-$$
+
 
 The right-hand side should look familiar: it is exactly what we needed to "deal with" in our proof! Returning to that proof, we have
 
-$$
+
 \begin{align*}
     f_Y(y) & = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) \\
     & = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} 
 \end{align*}
-$$
+
 
 as desired.
 
@@ -383,16 +384,16 @@ as desired.
 
 We know that $f(x) = \lambda e^{-\lambda x}$. If we can calculate $E[X]$ and $E[X^2]$, then we're basically done! We can write
 
-$$
+
 \begin{align*}    
 E[X] & = \int_0^\infty x \lambda e^{-\lambda x} dx \\    
 & = \lambda \int_0^\infty x e^{-\lambda x} dx 
 \end{align*}
-$$
+
 
 And now we need integration by parts! Set $u = x$, $dv = e^{-\lambda x} dx$. Then $du = 1dx$ and $v = \frac{-1}{\lambda} e^{-\lambda x}$. Since $\int u dv = uv - \int vdu$, we can continue
 
-$$
+
 \begin{align*}    
 E[X] & = \lambda \int_0^\infty x e^{-\lambda x} dx \\    
 & = \lambda \left( -\frac{x}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
@@ -402,20 +403,20 @@ E[X] & = \lambda \int_0^\infty x e^{-\lambda x} dx \\
 & = \frac{1}{\lambda} e^{-0} \\    
 & = \frac{1}{\lambda}
 \end{align*}
-$$
+
 
 We can follow a similar process to get $E[X^2]$ (using the law of the unconscious statistician!). We can write
 
-$$
+
 \begin{align*}
     E[X^2] & = \int_0^\infty x^2 \lambda e^{-\lambda x} dx \\
     & = \lambda \int_0^\infty x^2 e^{-\lambda x} dx 
 \end{align*}
-$$
+
 
 And now we need integration by parts again! Set $u = x^2$, $dv = e^{-\lambda x} dx$. Then $du = 2xdx$ and $v = \frac{-1}{\lambda} e^{-\lambda x}$. Since $\int u dv = uv - \int vdu$, we can continue
 
-$$
+
 \begin{align*}
     E[X] & = \lambda \int_0^\infty x^2 e^{-\lambda x} dx \\
     & = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-2}{\lambda} xe^{-\lambda x} dx \right) \\
@@ -424,7 +425,7 @@ $$
     & = \lambda \left( 0  + \frac{2}{\lambda^3} \right) \\
     & = \frac{2}{\lambda^2}
 \end{align*}
-$$
+
 
 Now we can calculate $Var[X] = E[X^2] - E[X]^2$ as $$
 Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
@@ -434,18 +435,18 @@ $$ And so we have $E[X] = \frac{1}{\lambda}$ and $Var[X] = \frac{1}{\lambda^2}$.
 
 Recall that the CDF of an exponential distribution is given by $F(x) = 1-e^{-\lambda x}$. Thanks to Bayes rule, we can write
 
-$$
+
 \begin{align*}
     \Pr(X > s + x \mid X > s) & = \frac{\Pr(X > s + x , X > s)}{\Pr(X > s)} \\
     & = \frac{\Pr(X > s + x)}{\Pr(X > s)} \\
     & = \frac{1 - \Pr(X < s + x)}{1 - \Pr(X < s)} \\
     & = \frac{1 - F(s + x)}{1 - F(s)}
 \end{align*}
-$$
+
 
 where the second equality is true because $x > 0$. Then we can write
 
-$$
+
 \begin{align*}
     \Pr(X > s + x \mid X > s) & = \frac{1 - F(s + x)}{1 - F(s)} \\
     & = \frac{1 - \left(1 - e^{-\lambda(s + x)}\right)}{1 - \left(1 - e^{-\lambda s}\right)} \\
@@ -455,7 +456,7 @@ $$
     & = 1 - F(x) \\
     & = \Pr(X > x)
 \end{align*}
-$$
+
 
 and we're done!
 
@@ -467,37 +468,37 @@ $$
 f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
 $$ And so,
 
-$$
+
 \begin{align*}
     f(y) & = \int f(x, y) dx \\
     & = \int \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
     & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
 \end{align*}
-$$
+
 
 And we can again use integration by parts! Let $u = x^y$ and $dv = e^{-x(1 + \lambda)/\lambda} dx$. Then we have $du = yx^{y-1} dx$ and $v = \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}$, and we can write
 
-$$
+
 \begin{align*}
     f(y) & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx \\
     & = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
     & = \frac{1}{\lambda y!} \left( - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
     & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left( - \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
 \end{align*}
-$$
+
 
 This *looks* gross, but it's actually not so bad. Note that, since $Y$ is Poisson, it can only take integer values beginning at 1! Then we can *repeat* the process of integration by parts $y$ *times* in order to get rid of $x^{y\dots}$ term on the inside of the integral. Specifically, each time we do this process we will pull out a $\left( \frac{\lambda }{1 + \lambda} \right)$, and a $y - i$ for the $i$th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,
 
-$$
+
 \begin{align*}
     f(y) & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right)^y y! \\
     & = \frac{1}{\lambda} \left(\frac{\lambda}{1 + \lambda}\right)^y
 \end{align*}
-$$
+
 
 Now let $p = \frac{1}{1 + \lambda}$. If we can show that $f(y) \sim Geometric(p)$ then we're done. Note that $1 - p = \lambda/(1 + \lambda)$. We have
 
-$$
+
 \begin{align*}
     f(y) & = \frac{1}{\lambda} (1 - p)^y \\
     & = \frac{1}{\lambda} (1 - p)^{y-1} (1-p) \\
@@ -505,7 +506,7 @@ $$
     & = (1 - p)^{y-1} \left( \frac{1}{1 + \lambda} \right) \\
     & = (1 - p)^{y-1} p
 \end{align*}
-$$
+
 
 which is exactly the pdf of a geometric random variable with parameter $p$ and trials that begin at 1 (as opposed to 0), as makes sense with the Poisson distribution.
 
@@ -513,17 +514,17 @@ which is exactly the pdf of a geometric random variable with parameter $p$ and t
 
 To solve this problem, we can use the theorem on transforming continuous random variables. We must first define our function $g$ that relates $X$ and $Y$. In this case, we have $g(a) = \frac{a - \mu}{\sigma}$. Now all we need to do is collect the mathematical "pieces" we need to use theorem: $g^{-1}(a)$, and $g'(a)$, and finally, the pdf of a normal random variable. We have
 
-$$
+
 \begin{align*}
     f_X(x) & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2) \\
     g^{-1}(a) & = \sigma a + \mu \\
     g'(a) & = \frac{\partial}{\partial a} \left(\frac{a - \mu}{\sigma}\right) = \frac{1}{\sigma}
 \end{align*}
-$$
+
 
 Putting it all together, we have
 
-$$
+
 \begin{align*}
     f_Y(y) & = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} \\
     & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (\sigma y + \mu - \mu)^2) \times \sigma \\
@@ -531,7 +532,7 @@ $$
     & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2\sigma^2} \sigma^2 y^2) \\
     & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
 \end{align*}
-$$
+
 
 and note that this is the pdf of a normally distributed random variable with mean $0$ and variance $1$! Thus, we have shown that $\frac{X - \mu}{\sigma} \sim N(0,1)$. **Fun Fact:** If this random variable reminds you of a Z-score, *it should*!
 
@@ -539,9 +540,13 @@ and note that this is the pdf of a normally distributed random variable with mea
 
 To determine whether $X$ and $Y$ are independent (or not), we need to determine if their joint pdf is "separable." Doing some algebra, we can see that
 
-$$
-\begin{align*}    f_{X,Y}(x,y) & = \lambda \beta e^{-x \lambda - y\beta} \\    & = \lambda \beta e^{-x \lambda} e^{-y \beta} \\    & = \left( \lambda  e^{-x \lambda} \right) \left( \beta e^{-y \beta} \right) \end{align*}
-$$
+
+\begin{align*}    
+f_{X,Y}(x,y) & = \lambda \beta e^{-x \lambda - y\beta} \\    
+& = \lambda \beta e^{-x \lambda} e^{-y \beta} \\   
+& = \left( \lambda  e^{-x \lambda} \right) \left( \beta e^{-y \beta} \right) 
+\end{align*}
+
 
 and so since we can write the joint distribution as a function of $X$ multiplied by a function of $Y$, $X$ and $Y$ are independent (and in this case, both have exponential distributions).
 

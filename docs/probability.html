@@ -492,15 +492,13 @@ E\left[\prod_{i = 1}^n X_i\right] = \prod_{i = 1}^n E[X_i]
 <li><p>Covariance of independent random variables</p>
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(Cov(X, Y) = 0\)</span>. We can show this by noting that</p></li>
 </ul>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 Cov(X, Y) &amp; = E[(X - E[X])(Y - E[Y])] \\
 &amp; = E[XY - XE[Y] - YE[X] + E[X]E[Y]] \\
 &amp; = E[XY] - E[XE[Y]] - E[YE[X]] + E[X]E[Y] \\
 &amp; =  2E[X]E[Y] - 2E[X]E[Y] \\
 &amp; = 0
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <ul>
 <li><p>Using MGFs to find moments</p>
 <p>Recall that the moment generating function of a random variable <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(M_X(t)\)</span> is</p>
@@ -528,33 +526,28 @@ M_X(t) = E[e^{tX}]
 <p><strong>Theorem</strong>. Let <span class="math inline">\(X\)</span> be a continuous random variable with pdf <span class="math inline">\(f_X(x)\)</span>. Define a new random variable <span class="math inline">\(Y = g(X)\)</span>, for nice* functions <span class="math inline">\(g\)</span>. Then <span class="math inline">\(f_Y(y) = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}\)</span>.</p>
 <p><img src="images/chilipepper.png" width="20" height="16"> *By <em>nice</em> functions we mean functions that are strictly increasing and smooth <em>on the required range</em>. As an example, <span class="math inline">\(exp(x)\)</span> is a smooth, strictly increasing function; <span class="math inline">\(|x|\)</span> is not on the <em>whole real line</em>, but <em>is</em> from <span class="math inline">\((0, \infty)\)</span> (where a lot of useful pdfs are defined). For the purposes of this class, every function that you will need to do this for will be “nice.” Note that there are also considerations that need to be taken regarding the <em>range</em> of continuous random variables when considering transforming them. We will mostly ignore these considerations in this class, but a technically complete derivation (or proof) must consider them.</p>
 <p><strong>Proof</strong>. We can write</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f_Y(y) &amp; = \frac{\partial}{\partial y} F_Y(y) \\
     &amp; = \frac{\partial}{\partial y} \Pr(Y \leq y) \\
     &amp; = \frac{\partial}{\partial y} \Pr(g(X) \leq y) \\
     &amp; = \frac{\partial}{\partial y} \Pr(X \leq g^{-1}(y)) \\
     &amp; = \frac{\partial}{\partial y} F_X(g^{-1}(y)) \\
     &amp; = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y)
-\end{align*}
-\]</span>where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue(note that this method is called the “CDF method” because we go <em>through</em> the CDF to derive the distribution for <span class="math inline">\(Y\)</span>)</p>
+\end{align*}\]</span></p>
+<p>where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue… (note that this method is called the “CDF method” because we go <em>through</em> the CDF to derive the distribution for <span class="math inline">\(Y\)</span>)</p>
 <p>You will <em>especially</em> see this in the Bayes chapter of our course notes, but it is often true that our lives are made easier as statisticians if we multiply things by one, or add zero. What exactly do I mean? Rearranging gross looking formulas into things we are familiar with (like pdfs, for example) often makes our lives easier and allows us to avoid dealing with such grossness. Here, the grossness is less obvious, but nonetheless relevant. Note that we can write</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     y &amp; = y \\
     y &amp; = g(g^{-1}(y)) \\
     \frac{\partial}{\partial y} y &amp; = \frac{\partial}{\partial y} g(g^{-1}(y)) \\
     1 &amp; = g'(g^{-1}(y)) \frac{\partial}{\partial y} g^{-1}(y) \hspace{1cm} \text{(chain rule again!)} \\
     \frac{1}{g'(g^{-1}(y))} &amp; = \frac{\partial}{\partial y} g^{-1}(y)
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>The right-hand side should look familiar: it is exactly what we needed to “deal with” in our proof! Returning to that proof, we have</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f_Y(y) &amp; = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) \\
     &amp; = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>as desired.</p>
 </section>
 </section>
@@ -562,15 +555,12 @@ M_X(t) = E[e^{tX}]
 <h2 data-number="1.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">1.5</span> Worked Examples</h2>
 <p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X \sim Exponential(\lambda)\)</span>. Calculate <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(Var[X]\)</span>.</p>
 <p>We know that <span class="math inline">\(f(x) = \lambda e^{-\lambda x}\)</span>. If we can calculate <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(E[X^2]\)</span>, then we’re basically done! We can write</p>
-<p><span class="math display">\[
-\begin{align*}    
+<p><span class="math display">\[\begin{align*}    
 E[X] &amp; = \int_0^\infty x \lambda e^{-\lambda x} dx \\    
 &amp; = \lambda \int_0^\infty x e^{-\lambda x} dx
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>And now we need integration by parts! Set <span class="math inline">\(u = x\)</span>, <span class="math inline">\(dv = e^{-\lambda x} dx\)</span>. Then <span class="math inline">\(du = 1dx\)</span> and <span class="math inline">\(v = \frac{-1}{\lambda} e^{-\lambda x}\)</span>. Since <span class="math inline">\(\int u dv = uv - \int vdu\)</span>, we can continue</p>
-<p><span class="math display">\[
-\begin{align*}    
+<p><span class="math display">\[\begin{align*}    
 E[X] &amp; = \lambda \int_0^\infty x e^{-\lambda x} dx \\    
 &amp; = \lambda \left( -\frac{x}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
 &amp; = \lambda \left( - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
@@ -578,42 +568,34 @@ E[X] &amp; = \lambda \int_0^\infty x e^{-\lambda x} dx \\
 &amp; = \frac{-1}{\lambda} e^{-\lambda x}  \bigg|_0^\infty \\    
 &amp; = \frac{1}{\lambda} e^{-0} \\    
 &amp; = \frac{1}{\lambda}
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>We can follow a similar process to get <span class="math inline">\(E[X^2]\)</span> (using the law of the unconscious statistician!). We can write</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E[X^2] &amp; = \int_0^\infty x^2 \lambda e^{-\lambda x} dx \\
     &amp; = \lambda \int_0^\infty x^2 e^{-\lambda x} dx
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>And now we need integration by parts again! Set <span class="math inline">\(u = x^2\)</span>, <span class="math inline">\(dv = e^{-\lambda x} dx\)</span>. Then <span class="math inline">\(du = 2xdx\)</span> and <span class="math inline">\(v = \frac{-1}{\lambda} e^{-\lambda x}\)</span>. Since <span class="math inline">\(\int u dv = uv - \int vdu\)</span>, we can continue</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E[X] &amp; = \lambda \int_0^\infty x^2 e^{-\lambda x} dx \\
     &amp; = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-2}{\lambda} xe^{-\lambda x} dx \right) \\
     &amp; = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  + \frac{2}{\lambda} \int_0^\infty  xe^{-\lambda x} dx \right) \\
     &amp; = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  + \frac{2}{\lambda^3} \right)\\
     &amp; = \lambda \left( 0  + \frac{2}{\lambda^3} \right) \\
     &amp; = \frac{2}{\lambda^2}
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>Now we can calculate <span class="math inline">\(Var[X] = E[X^2] - E[X]^2\)</span> as <span class="math display">\[
 Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
 \]</span> And so we have <span class="math inline">\(E[X] = \frac{1}{\lambda}\)</span> and <span class="math inline">\(Var[X] = \frac{1}{\lambda^2}\)</span>.</p>
 <p><strong>Problem 2:</strong> Show that an exponentially distributed random variable is “memoryless”, i.e.&nbsp;show that <span class="math inline">\(\Pr(X &gt; s + x \mid X &gt; s) = \Pr(X &gt; x)\)</span>, <span class="math inline">\(\forall s\)</span>.</p>
 <p>Recall that the CDF of an exponential distribution is given by <span class="math inline">\(F(x) = 1-e^{-\lambda x}\)</span>. Thanks to Bayes rule, we can write</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     \Pr(X &gt; s + x \mid X &gt; s) &amp; = \frac{\Pr(X &gt; s + x , X &gt; s)}{\Pr(X &gt; s)} \\
     &amp; = \frac{\Pr(X &gt; s + x)}{\Pr(X &gt; s)} \\
     &amp; = \frac{1 - \Pr(X &lt; s + x)}{1 - \Pr(X &lt; s)} \\
     &amp; = \frac{1 - F(s + x)}{1 - F(s)}
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>where the second equality is true because <span class="math inline">\(x &gt; 0\)</span>. Then we can write</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     \Pr(X &gt; s + x \mid X &gt; s) &amp; = \frac{1 - F(s + x)}{1 - F(s)} \\
     &amp; = \frac{1 - \left(1 - e^{-\lambda(s + x)}\right)}{1 - \left(1 - e^{-\lambda s}\right)} \\
     &amp; = \frac{e^{-\lambda(s + x)}}{e^{-\lambda s}} \\
@@ -621,73 +603,62 @@ Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{
     &amp; = e^{-\lambda x} \\
     &amp; = 1 - F(x) \\
     &amp; = \Pr(X &gt; x)
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>and we’re done!</p>
 <p><strong>Problem 3:</strong> Suppose <span class="math inline">\(X \sim Exponential(1/\lambda)\)</span>, and <span class="math inline">\(Y \mid X \sim Poisson(X)\)</span>. Show that <span class="math inline">\(Y \sim Geometric(1/(1 + \lambda))\)</span>.</p>
 <p>Note that we can write <span class="math inline">\(f(x, y) = f(y \mid x) f(x)\)</span>, and <span class="math inline">\(f(y) = \int f(x, y) dx\)</span>. Then</p>
 <p><span class="math display">\[
 f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
 \]</span> And so,</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f(y) &amp; = \int f(x, y) dx \\
     &amp; = \int \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
     &amp; = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>And we can again use integration by parts! Let <span class="math inline">\(u = x^y\)</span> and <span class="math inline">\(dv = e^{-x(1 + \lambda)/\lambda} dx\)</span>. Then we have <span class="math inline">\(du = yx^{y-1} dx\)</span> and <span class="math inline">\(v = \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}\)</span>, and we can write</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f(y) &amp; = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx \\
     &amp; = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
     &amp; = \frac{1}{\lambda y!} \left( - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
     &amp; = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left( - \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>This <em>looks</em> gross, but it’s actually not so bad. Note that, since <span class="math inline">\(Y\)</span> is Poisson, it can only take integer values beginning at 1! Then we can <em>repeat</em> the process of integration by parts <span class="math inline">\(y\)</span> <em>times</em> in order to get rid of <span class="math inline">\(x^{y\dots}\)</span> term on the inside of the integral. Specifically, each time we do this process we will pull out a <span class="math inline">\(\left( \frac{\lambda }{1 + \lambda} \right)\)</span>, and a <span class="math inline">\(y - i\)</span> for the <span class="math inline">\(i\)</span>th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f(y) &amp; = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right)^y y! \\
     &amp; = \frac{1}{\lambda} \left(\frac{\lambda}{1 + \lambda}\right)^y
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>Now let <span class="math inline">\(p = \frac{1}{1 + \lambda}\)</span>. If we can show that <span class="math inline">\(f(y) \sim Geometric(p)\)</span> then we’re done. Note that <span class="math inline">\(1 - p = \lambda/(1 + \lambda)\)</span>. We have</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f(y) &amp; = \frac{1}{\lambda} (1 - p)^y \\
     &amp; = \frac{1}{\lambda} (1 - p)^{y-1} (1-p) \\
     &amp; = (1 - p)^{y-1} \frac{1}{\lambda} \left( \frac{\lambda}{1 + \lambda} \right) \\
     &amp; = (1 - p)^{y-1} \left( \frac{1}{1 + \lambda} \right) \\
     &amp; = (1 - p)^{y-1} p
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>which is exactly the pdf of a geometric random variable with parameter <span class="math inline">\(p\)</span> and trials that begin at 1 (as opposed to 0), as makes sense with the Poisson distribution.</p>
 <p><strong>Problem 4:</strong> Suppose that <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, and let <span class="math inline">\(Y = \frac{X - \mu}{\sigma}\)</span>. Find the distribution of <span class="math inline">\(Y\)</span> (simplifying all of your math will be useful for this problem).</p>
 <p>To solve this problem, we can use the theorem on transforming continuous random variables. We must first define our function <span class="math inline">\(g\)</span> that relates <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. In this case, we have <span class="math inline">\(g(a) = \frac{a - \mu}{\sigma}\)</span>. Now all we need to do is collect the mathematical “pieces” we need to use theorem: <span class="math inline">\(g^{-1}(a)\)</span>, and <span class="math inline">\(g'(a)\)</span>, and finally, the pdf of a normal random variable. We have</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f_X(x) &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2) \\
     g^{-1}(a) &amp; = \sigma a + \mu \\
     g'(a) &amp; = \frac{\partial}{\partial a} \left(\frac{a - \mu}{\sigma}\right) = \frac{1}{\sigma}
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>Putting it all together, we have</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
     f_Y(y) &amp; = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} \\
     &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (\sigma y + \mu - \mu)^2) \times \sigma \\
     &amp; = \frac{1}{\sqrt{2 \pi} \sigma} \exp(-\frac{1}{2\sigma^2} (\sigma y)^2) \times \sigma \\
     &amp; = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2\sigma^2} \sigma^2 y^2) \\
     &amp; = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 <p>and note that this is the pdf of a normally distributed random variable with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>! Thus, we have shown that <span class="math inline">\(\frac{X - \mu}{\sigma} \sim N(0,1)\)</span>. <strong>Fun Fact:</strong> If this random variable reminds you of a Z-score, <em>it should</em>!</p>
 <p><strong>Problem 5:</strong> Suppose the joint pdf of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by <span class="math inline">\(f_{X,Y}(x,y) = \lambda \beta e^{-x\lambda - y\beta}\)</span>. Determine if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, showing why or why not.</p>
 <p>To determine whether <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent (or not), we need to determine if their joint pdf is “separable.” Doing some algebra, we can see that</p>
-<p><span class="math display">\[
-\begin{align*}    f_{X,Y}(x,y) &amp; = \lambda \beta e^{-x \lambda - y\beta} \\    &amp; = \lambda \beta e^{-x \lambda} e^{-y \beta} \\    &amp; = \left( \lambda  e^{-x \lambda} \right) \left( \beta e^{-y \beta} \right) \end{align*}
-\]</span></p>
+<p><span class="math display">\[\begin{align*}    
+f_{X,Y}(x,y) &amp; = \lambda \beta e^{-x \lambda - y\beta} \\    
+&amp; = \lambda \beta e^{-x \lambda} e^{-y \beta} \\   
+&amp; = \left( \lambda  e^{-x \lambda} \right) \left( \beta e^{-y \beta} \right)
+\end{align*}\]</span></p>
 <p>and so since we can write the joint distribution as a function of <span class="math inline">\(X\)</span> multiplied by a function of <span class="math inline">\(Y\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent (and in this case, both have exponential distributions).</p>
 <p><strong>Problem 6:</strong> Suppose the joint pdf of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by <span class="math inline">\(f_{X,Y}(x,y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} \binom{n}{y} x^{y + \alpha - 1} (1-x)^{n-y + \beta - 1}\)</span>. Determine if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, showing why or why not.</p>
 <p>To determine whether <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent (or not), we need to determine if their joint pdf is “separable.” Right away, we should note that a piece of the pdf contains <span class="math inline">\(x^y\)</span>, and therefore we are <em>never</em> going to be able to fully separate out this joint pdf into a function of <span class="math inline">\(x\)</span> times a function <span class="math inline">\(y\)</span>. Therefore, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <em>not</em> independent. In this case, we actually have <span class="math inline">\(X \sim Beta(\alpha, \beta)\)</span>, and <span class="math inline">\(Y \mid X \sim Binomial(n, y)\)</span> (we’ll return to this example in the Bayes chapter!).</p>
