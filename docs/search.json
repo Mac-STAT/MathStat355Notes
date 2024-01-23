@@ -46,7 +46,7 @@
     "href": "mle.html#reading-guide",
     "title": "2  Maximum Likelihood Estimation",
     "section": "2.2 Reading Guide",
-    "text": "2.2 Reading Guide\nAssociated Readings: Chapter 5 (Introduction through Example 5.2.5)\n\n2.2.1 Reading Questions\n\nWhat is the intuition behind the maximum likelihood estimation (MLE) approach?\nWhat are the typical steps to find a MLE? (see Ex 5.2.1, 5.2.2, and Case Study 5.2.1; work through at least one of these examples in detail, filling in any steps that the textbook left out)\nAre there ever situations when the typical steps to finding a MLE don't work? If so, what can we do instead to find the MLE? (see Ex 5.2.3, 5.2.4)\nHow do the steps to finding a MLE change when we have more than one unknown parameter? (see Ex 5.2.5)"
+    "text": "2.2 Reading Guide\nAssociated Readings: Chapter 5 (Introduction through Example 5.2.5)\n\n2.2.1 Reading Questions\n\nWhat is the intuition behind the maximum likelihood estimation (MLE) approach?\nWhat are the typical steps to find a MLE? (see Ex 5.2.1, 5.2.2, and Case Study 5.2.1; work through at least one of these examples in detail, filling in any steps that the textbook left out)\nAre there ever situations when the typical steps to finding a MLE don’t work? If so, what can we do instead to find the MLE? (see Ex 5.2.3, 5.2.4)\nHow do the steps to finding a MLE change when we have more than one unknown parameter? (see Ex 5.2.5)"
   },
   {
     "objectID": "mle.html#definitions",
@@ -124,5 +124,12 @@
     "title": "10  Hypothesis Testing",
     "section": "",
     "text": "Under development…"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MATH/STAT 455: Mathematical Statistics",
+    "section": "",
+    "text": "Welcome to Mathematical Statistics!\nThis book contains the course notes for MATH/STAT 455: Mathematical Statistics at Macalester College, as taught by Prof. Taylor Okonek. These notes draw from course notes created by Prof. Kelsey Grinde, and heavily from the course textbook, An Introduction to Mathematical Statistics and Its Applications by Richard Larsen and Morris Marx (6th Edition). Each chapter will contain (at a minimum):\n\nLearning Objectives\nReading Guide\nDefinitions\nTheorems\nWorked Examples\n\nI will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!\nIf you find any typos or have other questions, please email tokonek@macalester.edu."
   }
 ]

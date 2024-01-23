@@ -186,8 +186,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-to-mle" id="toc-introduction-to-mle" class="nav-link active" data-scroll-target="#introduction-to-mle"><span class="header-section-number">2.0.1</span> Introduction to MLE</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</a></li>
   <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">2.2</span> Reading Guide</a>
   <ul class="collapse">
   <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">2.2.1</span> Reading Questions</a></li>
@@ -219,9 +218,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>In <em>Probability</em>, you calculated probabilities of events by assuming a probability model for data and then <em>assuming you knew the value of the parameters</em> in that model. In <em>Mathematical Statistics</em>, we will similarly write down a probability model but then we will use observed data to <em>estimate the value of the parameters</em> in that model.</p>
-<p>There is more than one technique that you can use to estimate the value of an unknown parameter. You’re already familiar with one technique—<strong>least squares estimation</strong>—from <em>STAT 155</em>. We’ll review the ideas behind that approach later in the course. To start, we'll explore two other widely used estimation techniques: <strong>maximum likelihood estimation</strong> (this chapter) and the <strong>method of moments</strong> (next chapter).</p>
-<section id="introduction-to-mle" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="introduction-to-mle"><span class="header-section-number">2.0.1</span> Introduction to MLE</h3>
+<p>There is more than one technique that you can use to estimate the value of an unknown parameter. You’re already familiar with one technique—<strong>least squares estimation</strong>—from <em>STAT 155</em>. We’ll review the ideas behind that approach later in the course. To start, we’ll explore two other widely used estimation techniques: <strong>maximum likelihood estimation</strong> (this chapter) and the <strong>method of moments</strong> (next chapter).</p>
+<section id="introduction-to-mle" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="introduction-to-mle">Introduction to MLE</h3>
 <p>To understand maximum likelihood estimation, we can first break down each individual word in that phrase: (1) maximum, (2) likelihood, (3) estimation. We’ll start in reverse order.</p>
 <p>Recall from your introductory statistics course that we are (often) interested in estimating <em>true, unknown <strong>parameters</strong></em> in statistics, using some data. Our best guess at the truth, based on the data we observe / sample that we have, is an <strong><em>estimate</em></strong> of the truth (given some modeling assumptions). This is all the “estimation” piece is getting at here. We’re going to be learning about a method that produces estimates!</p>
 <p>The likelihood piece may be less familiar to you. A likelihood is essentially a fancy form of a function (see the Definitions section for an <em>exact</em> definition), that combines an assumed probability distribution for your data, with some unknown parameters.* The key here is that a likelihood is a <em>function</em>. It may <em>look</em> more complicated than a function like <span class="math inline">\(y = mx + b\)</span>, but we can often manipulate them in a similar fashion, which comes in handy when trying to find the…</p>
@@ -234,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>(double check that the second derivative is negative, so that it’s actually a maximum as opposed to a minimum)</p></li>
 <li><p>(also check the endpoints)</p></li>
 </ol>
-<p>The last two steps we’ll often skip in this class, since things have a tendency to work out nicely with most likelihood functions. One final thing to note (before checking out worked examples and making sure you have a grasp on definitions and theorems) is that it is often <em>easier</em></p>
+<p>The last two steps we’ll often skip in this class, since things have a tendency to work out nicely with most likelihood functions. One final thing to note (before checking out worked examples and making sure you have a grasp on definitions and theorems) is that it is often <em>easier</em> to maximize</p>
 <p>*<img src="images/chilipepper.png" width="20" height="16"> Note that distributions are only involved in <em>parametric</em> methods, as opposed to non-parametric and semi-parametric methods, the latter of which are for independent study or a graduate course in statistics!</p>
 </section>
 <section id="learning-objectives" class="level2" data-number="2.1">
@@ -254,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li><p>What is the intuition behind the maximum likelihood estimation (MLE) approach?</p></li>
 <li><p>What are the typical steps to find a MLE? (see Ex 5.2.1, 5.2.2, and Case Study 5.2.1; work through at least one of these examples in detail, filling in any steps that the textbook left out)</p></li>
-<li><p>Are there ever situations when the typical steps to finding a MLE don't work? If so, what can we do instead to find the MLE? (see Ex 5.2.3, 5.2.4)</p></li>
+<li><p>Are there ever situations when the typical steps to finding a MLE don’t work? If so, what can we do instead to find the MLE? (see Ex 5.2.3, 5.2.4)</p></li>
 <li><p>How do the steps to finding a MLE change when we have more than one unknown parameter? (see Ex 5.2.5)</p></li>
 </ol>
 </section>

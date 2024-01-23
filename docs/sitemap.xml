@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://math-stat-455.com/probability.html</loc>
-    <lastmod>2024-01-23T21:23:42.155Z</lastmod>
+    <lastmod>2024-01-23T21:33:30.079Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/mle.html</loc>
-    <lastmod>2024-01-23T21:23:41.146Z</lastmod>
+    <lastmod>2024-01-23T21:33:18.677Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/mom.html</loc>
-    <lastmod>2024-01-23T21:23:41.148Z</lastmod>
+    <lastmod>2024-01-23T21:33:19.309Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/properties.html</loc>
@@ -43,5 +43,9 @@
   <url>
     <loc>https://math-stat-455.com/references.html</loc>
     <lastmod>2024-01-23T21:23:41.162Z</lastmod>
+  </url>
+  <url>
+    <loc>https://math-stat-455.com/index.html</loc>
+    <lastmod>2024-01-23T21:33:22.369Z</lastmod>
   </url>
 </urlset>
