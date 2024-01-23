@@ -2,7 +2,33 @@
 
 In *Probability*, you calculated probabilities of events by assuming a probability model for data and then *assuming you knew the value of the parameters* in that model. In *Mathematical Statistics*, we will similarly write down a probability model but then we will use observed data to *estimate the value of the parameters* in that model.
 
-There is more than one technique that you can use to estimate the value of an unknown parameter. You\'re already familiar with one technique---**least squares estimation**---from *STAT 155*. We\'ll review the ideas behind that approach later in the course. To start, we\'ll explore two other widely used estimation techniques: **maximum likelihood estimation** (this chapter) and the **method of moments** (next chapter).
+There is more than one technique that you can use to estimate the value of an unknown parameter. You're already familiar with one technique---**least squares estimation**---from *STAT 155*. We'll review the ideas behind that approach later in the course. To start, we\'ll explore two other widely used estimation techniques: **maximum likelihood estimation** (this chapter) and the **method of moments** (next chapter).
+
+### Introduction to MLE
+
+To understand maximum likelihood estimation, we can first break down each individual word in that phrase: (1) maximum, (2) likelihood, (3) estimation. We'll start in reverse order.
+
+Recall from your introductory statistics course that we are (often) interested in estimating *true, unknown **parameters*** in statistics, using some data. Our best guess at the truth, based on the data we observe / sample that we have, is an ***estimate*** of the truth (given some modeling assumptions). This is all the "estimation" piece is getting at here. We're going to be learning about a method that produces estimates!
+
+The likelihood piece may be less familiar to you. A likelihood is essentially a fancy form of a function (see the Definitions section for an *exact* definition), that combines an assumed probability distribution for your data, with some unknown parameters.\* The key here is that a likelihood is a *function*. It may *look* more complicated than a function like $y = mx + b$, but we can often manipulate them in a similar fashion, which comes in handy when trying to find the...
+
+Maximum! We've maximized functions before, and we can do it again! There are ways to maximize functions numerically (using certain algorithms, such as Newton-Raphson for example, which we'll cover in a later chapter), but we will primarily focus on maximizing likelihoods *analytically* in this course to help us build intuition.
+
+Recall from calculus: To maximize a function we...
+
+1.  Take the derivative of the function
+
+2.  Set the derivative equal to zero
+
+3.  Solve!
+
+4.  (double check that the second derivative is negative, so that it's actually a maximum as opposed to a minimum)
+
+5.  (also check the endpoints)
+
+The last two steps we'll often skip in this class, since things have a tendency to work out nicely with most likelihood functions. One final thing to note (before checking out worked examples and making sure you have a grasp on definitions and theorems) is that it is often *easier*
+
+\*![](images/chilipepper.png){width="20" height="16"} Note that distributions are only involved in *parametric* methods, as opposed to non-parametric and semi-parametric methods, the latter of which are for independent study or a graduate course in statistics!
 
 ## Learning Objectives
 
@@ -36,13 +62,29 @@ Associated Readings: Chapter 5 (Introduction through Example 5.2.5)
 
 You are expected to know the following definitions:
 
+**Parameter**
+
+Explanation
+
+**Statistic/Estimator**
+
+Explanation
+
 **Likelihood Function**
 
 Explanation
 
 **Maximum Likelihood Estimate (MLE)**
 
+Explanation
+
+**Log-likelihood**
+
+Explanation
+
 **Order Statistic**
+
+Explanation
 
 ## Theorems
 
