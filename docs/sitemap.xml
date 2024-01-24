@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://math-stat-455.com/probability.html</loc>
-    <lastmod>2024-01-23T21:33:30.079Z</lastmod>
+    <loc>https://math-stat-455.com/mle.html</loc>
+    <lastmod>2024-01-24T15:24:56.190Z</lastmod>
   </url>
   <url>
-    <loc>https://math-stat-455.com/mle.html</loc>
-    <lastmod>2024-01-23T21:33:18.677Z</lastmod>
+    <loc>https://math-stat-455.com/probability.html</loc>
+    <lastmod>2024-01-24T15:24:55.462Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/mom.html</loc>
-    <lastmod>2024-01-23T21:33:19.309Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.463Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/properties.html</loc>
-    <lastmod>2024-01-23T21:23:41.149Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.465Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/consistency.html</loc>
-    <lastmod>2024-01-23T21:23:41.151Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.467Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/asymptotics.html</loc>
-    <lastmod>2024-01-23T21:23:41.153Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.469Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/computation.html</loc>
-    <lastmod>2024-01-23T21:23:41.154Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.470Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/bayes.html</loc>
-    <lastmod>2024-01-23T21:23:41.156Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.472Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/decision.html</loc>
-    <lastmod>2024-01-23T21:23:41.159Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.473Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/hypothesis.html</loc>
-    <lastmod>2024-01-23T21:23:41.160Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.475Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/references.html</loc>
-    <lastmod>2024-01-23T21:23:41.162Z</lastmod>
-  </url>
-  <url>
-    <loc>https://math-stat-455.com/index.html</loc>
-    <lastmod>2024-01-23T21:33:22.369Z</lastmod>
+    <lastmod>2024-01-24T15:24:55.476Z</lastmod>
   </url>
 </urlset>

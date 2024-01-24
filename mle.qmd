@@ -26,7 +26,15 @@ Recall from calculus: To maximize a function we...
 
 5.  (also check the endpoints)
 
-The last two steps we'll often skip in this class, since things have a tendency to work out nicely with most likelihood functions. One final thing to note (before checking out worked examples and making sure you have a grasp on definitions and theorems) is that it is often *easier* to maximize
+The last two steps we'll often skip in this class, since things have a tendency to work out nicely with most likelihood functions. If we are trying to maximize a likelihood with *multiple* parameters, there a few different ways we can go about this. One way (which is nice for distributions like the multivariate normal) is to place all of the parameters in a vector, write the distribution in terms of matrices and vectors, and then use matrix algebra to obtain all of the MLEs for each parameter at once! An alternative way is to take *partial* derivatives of the likelihood function with respect to each parameter, and solve a *system* of equations to obtain MLEs for each parameter. We'll see an example of this in Problem Set 1 as well as Worked Example 2!
+
+One final thing to note (before checking out worked examples and making sure you have a grasp on definitions and theorems) is that it is often *easier* to maximize the *log-likelihood* as opposed to the the likelihood... un-logged. This is for a variety of reasons, one of which is that many common probability density functions contain some sort of $e^x$ term, and logging (*natural* logging) simplifies that for us. Another one is that log rules sometimes make taking derivatives easier. The value of a parameter that maximizes the log-likelihood is the same value that maximizes the likelihood, un-logged (since log is a monotone, increasing function). This is truly just a convenience thing!
+
+### Maximum Likelihood: Does it make sense? Is it even "good"? {.unnumbered .unlisted}
+
+Let's think for a minute about why maximum likelihood, as a procedure for producing estimates of parameters, might make sense. Given a distributional assumption\* (a probability density function) for *independent* random variables, we define a "likelihood" as a product of their densities. We can think of this intuitively as just the "likelihood" or "chance" that our data occurs, given a specific distribution. Maximum likelihood estimators then tell us, given that assumed likelihood, **what parameter values make our observed data *most likely*** to have occurred.
+
+So. Does it make sense? I would argue, intuitively, yes! Yes, it does. Is it good? That's perhaps a different question with a more complicated answer. It's a good baseline, certainly, and foundational to *much* of statistical theory. We'll see in a later chapter that maximum likelihood estimates have good properties related to having minimal variance among a larger class of estimators (yay!), but the maximum likelihood estimators we will consider in this course rely on *parametric* assumptions (i.e. we assume that the data follows a specific probability distribution in order to calculate MLEs). There are ways around these assumptions, but they are outside the scope of our course.
 
 \*![](images/chilipepper.png){width="20" height="16"} Note that distributions are only involved in *parametric* methods, as opposed to non-parametric and semi-parametric methods, the latter of which are for independent study or a graduate course in statistics!
 
@@ -60,30 +68,156 @@ You are expected to know the following definitions:
 
 **Parameter**
 
-Explanation
+In a frequentist\* framework, a parameter is a *fixed*, unknown truth (very philosophical). By fixed, I mean "not random". We assume that there is some true unknown value, governing the generation of all possible random observations of all possible people and things *in the whole world*. We sometimes call this unknown governing process the "superpopulation" (think: all who ever have been, all who are, and all who ever will be).
+
+Practically speaking, parameters are things that we want to estimate, and we will estimate them using observed data!
+
+\*Two main schools of thought in statistics are: (1) Frequentist (everything you've ever learned so far in statistics, realistically), and (2) Bayesian. We'll cover the latter, and differences between the two, in a later chapter. There's also technically Fiducial inference as a third school of thought, but that one's never been widely accepted.
 
 **Statistic/Estimator**
 
-Explanation
+A statistic (or "estimator") is a function of your data, used to "estimate" an unknown parameter. Often, statistics/estimators will be functions of *means* or averages, as we'll see in the worked examples for this chapter!
 
 **Likelihood Function**
 
-Explanation
+Let $x_1, \dots, x_n$ be a sample of size $n$ of independent observations from the probability density function $f_X(x \mid \boldsymbol{\theta})$, where $\boldsymbol{\theta}$ is a set of unknown parameters that define the pdf. Then the likelihood function $L(\boldsymbol{\theta})$ is the product of the pdf evaluated at each $x_i$,
+
+$$
+L(\boldsymbol{\theta}) = \prod_{i = 1}^n f_X(x_i \mid \boldsymbol{\theta}).
+$$
+
+Note that this *looks* exactly like the joint pdf for $n$ independent random variables, but it is *interpreted* differently. A likelihood is a function of *parameters*, given a set of observations (random variables). A joint pdf is a function of random variables.
+
+Note: The likelihood function is one of the reasons why we like independent observations so much! If observations aren't independent, we can't simply multiply all of their pdfs together to get a likelihood function.
 
 **Maximum Likelihood Estimate (MLE)**
 
-Explanation
+Let $L(\boldsymbol{\theta}) = \prod_{i = 1}^n f_X(x_i \mid \boldsymbol{\theta})$ be the likelihood function corresponding to a random sample of observations $x_1, \dots, x_n$. If $\boldsymbol{\theta}_e$ is such that $L(\boldsymbol{\theta}_e) \geq L(\boldsymbol{\theta})$ for all possible values $\boldsymbol{\theta}$, then $\boldsymbol{\theta}_e$ is called a *maximum likelihood estimate* for $\boldsymbol{\theta}$.
 
 **Log-likelihood**
 
-Explanation
+In statistics, when we say "log," we essentially always mean "ln" (or, natural log). The log-likelihood is then, hopefully unsurprisingly, given by $\log(L(\boldsymbol{\theta}))$. One thing that's useful to note (and will come in handy when calculating MLEs, is that the log of a product is equal to a sum of logs. For likelihoods, that means
+
+$$
+\log(L(\boldsymbol{\theta})) = \log \left(\prod_{i = 1}^n f_X(x_i \mid \boldsymbol{\theta})\right) = \sum_{i = 1}^n \log(f_X(x_i \mid \boldsymbol{\theta}))
+$$
+
+This will end up making it *much* easier to take derivatives than needing to deal with products!
 
 **Order Statistic**
 
-Explanation
+The $k$th order statistic is equal to a sample's $k$th smallest value. Practically speaking, there are essentially three order statistics we typically care about: the minimum, the median, and the maximum. We denote the minimum (or, first order statistic) in a sample of random variables $X_1, \dots, X_n$ as $X_{(1)}$ , the maximum as $X_{(n)}$, and the median $X_{(m+1)}$ where $n = 2m + 1$ *when* $n$ *is odd*. Note that median is in fact not an order statistic if $n$ is even (since the median is an average of two values, $X_{(m)}$ and $X_{(m+1)}$, in this case.
+
+See Example 5.2.4 in the Textbook for an example of where order statistics occasionally come into play when calculating maximum likelihood estimates.
 
 ## Theorems
 
+None for this chapter!
+
 ## Worked Examples
 
-**Problem 1:**
+**Problem 1:** Suppose we observe $n$ independent observations $X_1, \dots, X_n \sim Bernoulli(p)$, where $f_X(x) = p^x(1-p)^{1-x}$. Find the MLE of $p$.
+
+We can write the likelihood function as
+
+$$
+L(p) = \prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i} 
+$$
+
+Then the log-likelihood is given by
+
+```{=tex}
+\begin{align*} 
+\log(L(p)) & = \log \left[ \prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i} \right] \\ 
+& = \sum_{i = 1}^n \log \left[p^{x_i} (1-p)^{1 - x_i} \right] \\
+& = \sum_{i = 1}^n \left[ \log(p^{x_i}) + \log((1-p)^{1-x_i}) \right] \\
+& = \sum_{i = 1}^n \left[ x_i \log(p) + (1 - x_i) \log(1-p) \right] \\
+& = \log(p)\sum_{i = 1}^n x_i  + \log(1-p) \sum_{i = 1}^n (1 - x_i)  \\
+& = \log(p)\sum_{i = 1}^n x_i  + \log(1-p)  (n - \sum_{i = 1}^n x_i)
+\end{align*}
+```
+We can take the derivative of the log-likelihood with respect to $p$, and set it equal to zero...
+
+```{=tex}
+\begin{align*} 
+\frac{\partial}{\partial p} \log(L(p)) & = \frac{\partial}{\partial p} \left[ \log(p)\sum_{i = 1}^n x_i  + \log(1-p)  (n - \sum_{i = 1}^n x_i) \right] \\
+& = \frac{\sum_{i = 1}^n x_i }{p} - \frac{n - \sum_{i = 1}^n x_i}{1-p} \\
+0 & \equiv \frac{\sum_{i = 1}^n x_i }{p} - \frac{n - \sum_{i = 1}^n x_i}{1-p} \\
+\frac{\sum_{i = 1}^n x_i }{p}  & = \frac{n - \sum_{i = 1}^n x_i}{1-p} \\
+(1-p) \sum_{i = 1}^n x_i & = p (n - \sum_{i = 1}^n x_i) \\
+\sum_{i = 1}^n x_i - p\sum_{i = 1}^n x_i & = pn - p \sum_{i = 1}^n x_i \\
+\sum_{i = 1}^n x_i & = pn \\
+\frac{1}{n} \sum_{i = 1}^n x_i & = p
+\end{align*}
+```
+and by solving for $p$, we get that the MLE of $p$ is equal to $\frac{1}{n}\sum_{i = 1}^n x_i$. We will *often* see that the MLEs of parameters are functions of sample averages (in this case, just the identity function!).
+
+**Problem 2:** Suppose $X_1, X_2, \dots, X_n$ are a random sample from the Normal pdf with parameters $\mu$ and $\sigma^2$:
+
+$$
+f_X(x ; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2},
+$$
+
+for $-\infty < x < \infty, \ -\infty < \mu < \infty,$ and $\sigma^2 > 0$. Find the MLEs of $\mu$ and $\sigma^2$. (Note that this is Question 5 on the MLE section of Problem Set 1! For your HW, try your best to do this problem from scratch, without looking at the course notes!)
+
+Since we are dealing with a likelihood with two parameters, we'll need to solve a *system* of equations to obtain the MLEs for $\mu$ and $\sigma^2$.
+
+```{=tex}
+\begin{align*}
+    \log(L(\mu, \sigma^2)) & = \log( \prod_{i = 1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp(-\frac{1}{2\sigma^2} (x_i - \mu)^2) ) \\
+    & = \sum_{i = 1}^n \left[ \log(\frac{1}{\sqrt{2\pi \sigma^2}})  - \frac{1}{2\sigma^2} (x_i - \mu)^2 \right] \\
+    & = \sum_{i = 1}^n \left[ -\frac{1}{2} \log(2 \pi \sigma^2) - \frac{1}{2\sigma^2} (x_i - \mu)^2 \right] \\
+    & = \frac{-n}{2} \log(2\pi \sigma^2) - \frac{1}{2\sigma^2} \sum_{i = 1}^n (x_i - \mu)^2
+\end{align*}
+```
+Now we need to find $\frac{\partial}{\partial \sigma^2}\log(L(\mu, \sigma^2))$ and $\frac{\partial}{\partial \mu}\log(L(\mu, \sigma^2))$. Let's make our lives a little bit easier by setting $\sigma^2 \equiv \theta$ (so we don't trip ourselves up with the exponent). We get
+
+```{=tex}
+\begin{align*}
+    \frac{\partial}{\partial \theta}\log(L(\mu, \theta)) & = \frac{\partial}{\partial \theta} \left(\frac{-n}{2} \log(2\pi \theta) - \frac{1}{2\theta} \sum_{i = 1}^n (x_i - \mu)^2 \right)\\
+    & = \frac{-2\pi n}{4 \pi \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2} \\
+    & = \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2}
+\end{align*}
+```
+and
+
+```{=tex}
+\begin{align*}
+    \frac{\partial}{\partial \mu}\log(L(\mu, \theta)) & = \frac{\partial}{\partial \mu} \left(\frac{-n}{2} \log(2\pi \theta) - \frac{1}{2\theta} \sum_{i = 1}^n (x_i - \mu)^2 \right)\\
+    & = \frac{\partial}{\partial \mu} \left( -\frac{1}{2\theta} \sum_{i = 1}^n (x_i^2 - 2 \mu x_i + \mu^2)\right) \\
+    & = \frac{\partial}{\partial \mu} \left( -\frac{1}{2\theta} ( \sum_{i = 1}^n x_i^2 - 2 \mu \sum_{i = 1}^n x_i + n\mu^2 )\right) \\
+    & = \frac{\partial}{\partial \mu} \left( -\frac{1}{2\theta} (- 2 \mu \sum_{i = 1}^n x_i + n\mu^2 ) \right) \\
+    & = \frac{\partial}{\partial \mu} \left(   \frac{\sum_{i = 1}^n x_i}{\theta} \mu - \frac{n}{2\theta}\mu^2  \right) \\
+    & = \frac{\sum_{i = 1}^n x_i}{\theta} - \frac{n}{\theta} \mu
+\end{align*}
+```
+We now have the following system of equations to solve:
+
+```{=tex}
+\begin{align*}
+    0 & \equiv \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2} \\
+    0 & \equiv \frac{\sum_{i = 1}^n x_i}{\theta} - \frac{n}{\theta} \mu
+\end{align*}
+```
+Typically, we solve one of the equations for *one* of the parameters, plug that into the other equation, and then go from there. We'll start by solving the second equation for $\mu$.
+
+```{=tex}
+\begin{align*}
+    0 & = \frac{\sum_{i = 1}^n x_i}{\theta} - \frac{n}{\theta} \mu \\
+    \frac{n}{\theta} \mu & = \frac{\sum_{i = 1}^n x_i}{\theta} \\
+    \mu & = \frac{1}{n} \sum_{i = 1}^n x_i
+\end{align*}
+```
+Well that's convenient! We already have the MLE for $\mu$ as being just the sample average. Plugging this into the first equation in our system we obtain
+
+```{=tex}
+\begin{align*}
+    0 & = \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2} \\
+    0 & = \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \frac{1}{n} \sum_{i = 1}^n x_i )^2 }{2 \theta^2} \\
+    \frac{n}{2 \theta} & = \frac{\sum_{i = 1}^n (x_i - \frac{1}{n} \sum_{i = 1}^n x_i )^2 }{2 \theta^2} \\
+    n & = \frac{\sum_{i = 1}^n (x_i - \frac{1}{n} \sum_{i = 1}^n x_i )^2 }{\theta} \\
+    \theta & = \frac{1}{n} \sum_{i = 1}^n (x_i - \frac{1}{n} \sum_{i = 1}^n x_i )^2] \\
+    \theta & = \frac{1}{n} \sum_{i = 1}^n (x_i - \bar{x} )^2
+\end{align*}
+```
+where $\bar{x} = \frac{1}{n} \sum_{i = 1}^n x_i$. And so finally, we have that the MLE for $\sigma^2$ is given by $\frac{1}{n} \sum_{i = 1}^n (x_i - \bar{x} )^2$, and the MLE for $\mu$ is given by $\bar{x}$!
