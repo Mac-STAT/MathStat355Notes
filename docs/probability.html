@@ -354,9 +354,9 @@ M_X(t) = E[e^{tX}]
 <table class="table">
 <caption><em>Table 1.</em> Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
 <colgroup>
-<col style="width: 7%">
+<col style="width: 25%">
 <col style="width: 44%">
-<col style="width: 47%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -408,7 +408,7 @@ M_X(t) = E[e^{tX}]
 </tr>
 <tr class="odd">
 <td>Poisson</td>
-<td><span class="math inline">\(\pi(x) = \frac{\lambda^k e^{-\lambda}}{k!}\)</span></td>
+<td><span class="math inline">\(\pi(x) = \frac{\lambda^x e^{-\lambda}}{x!}\)</span></td>
 <td><span class="math inline">\(\lambda &gt; 0\)</span></td>
 </tr>
 <tr class="even">
@@ -608,11 +608,11 @@ Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{
 <p><strong>Problem 3:</strong> Suppose <span class="math inline">\(X \sim Exponential(1/\lambda)\)</span>, and <span class="math inline">\(Y \mid X \sim Poisson(X)\)</span>. Show that <span class="math inline">\(Y \sim Geometric(1/(1 + \lambda))\)</span>.</p>
 <p>Note that we can write <span class="math inline">\(f(x, y) = f(y \mid x) f(x)\)</span>, and <span class="math inline">\(f(y) = \int f(x, y) dx\)</span>. Then</p>
 <p><span class="math display">\[
-f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
+f(x, y) = \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
 \]</span> And so,</p>
 <span class="math display">\[\begin{align*}
     f(y) &amp; = \int f(x, y) dx \\
-    &amp; = \int \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
+    &amp; = \int \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
     &amp; = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
 \end{align*}\]</span>
 <p>And we can again use integration by parts! Let <span class="math inline">\(u = x^y\)</span> and <span class="math inline">\(dv = e^{-x(1 + \lambda)/\lambda} dx\)</span>. Then we have <span class="math inline">\(du = yx^{y-1} dx\)</span> and <span class="math inline">\(v = \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}\)</span>, and we can write</p>

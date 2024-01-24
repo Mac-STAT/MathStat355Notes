@@ -456,13 +456,13 @@ and we're done!
 Note that we can write $f(x, y) = f(y \mid x) f(x)$, and $f(y) = \int f(x, y) dx$. Then
 
 $$
-f(x, y) = \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
+f(x, y) = \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
 $$ And so,
 
 ```{=tex}
 \begin{align*}
     f(y) & = \int f(x, y) dx \\
-    & = \int \left( \frac{1}{\lambda} e^{-x\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
+    & = \int \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
     & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
 \end{align*}
 ```
