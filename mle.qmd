@@ -30,6 +30,8 @@ The last two steps we'll often skip in this class, since things have a tendency 
 
 One final thing to note (before checking out worked examples and making sure you have a grasp on definitions and theorems) is that it is often *easier* to maximize the *log-likelihood* as opposed to the the likelihood... un-logged. This is for a variety of reasons, one of which is that many common probability density functions contain some sort of $e^x$ term, and logging (*natural* logging) simplifies that for us. Another one is that log rules sometimes make taking derivatives easier. The value of a parameter that maximizes the log-likelihood is the same value that maximizes the likelihood, un-logged (since log is a monotone, increasing function). This is truly just a convenience thing!
 
+### When maximizing the "usual" way doesn't work... {.unnumbered .unlisted}
+
 ### Maximum Likelihood: Does it make sense? Is it even "good"? {.unnumbered .unlisted}
 
 Let's think for a minute about why maximum likelihood, as a procedure for producing estimates of parameters, might make sense. Given a distributional assumption\* (a probability density function) for *independent* random variables, we define a "likelihood" as a product of their densities. We can think of this intuitively as just the "likelihood" or "chance" that our data occurs, given a specific distribution. Maximum likelihood estimators then tell us, given that assumed likelihood, **what parameter values make our observed data *most likely*** to have occurred.
