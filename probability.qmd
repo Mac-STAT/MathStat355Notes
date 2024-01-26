@@ -466,14 +466,14 @@ $$ And so,
     & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
 \end{align*}
 ```
-And we can again use integration by parts! Let $u = x^y$ and $dv = e^{-x(1 + \lambda)/\lambda} dx$. Then we have $du = yx^{y-1} dx$ and $v = \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}$, and we can write
+And we can again use integration by parts! Let $u = x^y$ and $dv = e^{-x(1 + \lambda)/\lambda} dx$. Then we have $du = yx^{y-1} dx$ and $v = -\frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}$, and we can write
 
 ```{=tex}
 \begin{align*}
     f(y) & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx \\
-    & = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
-    & = \frac{1}{\lambda y!} \left( - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
-    & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left( - \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
+    & = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  + \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
+    & = \frac{1}{\lambda y!} \left(  \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
+    & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left(  \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
 \end{align*}
 ```
 This *looks* gross, but it's actually not so bad. Note that, since $Y$ is Poisson, it can only take integer values beginning at 1! Then we can *repeat* the process of integration by parts $y$ *times* in order to get rid of $x^{y\dots}$ term on the inside of the integral. Specifically, each time we do this process we will pull out a $\left( \frac{\lambda }{1 + \lambda} \right)$, and a $y - i$ for the $i$th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,

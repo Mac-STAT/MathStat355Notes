@@ -615,12 +615,12 @@ f(x, y) = \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x
     &amp; = \int \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
     &amp; = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
 \end{align*}\]</span>
-<p>And we can again use integration by parts! Let <span class="math inline">\(u = x^y\)</span> and <span class="math inline">\(dv = e^{-x(1 + \lambda)/\lambda} dx\)</span>. Then we have <span class="math inline">\(du = yx^{y-1} dx\)</span> and <span class="math inline">\(v = \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}\)</span>, and we can write</p>
+<p>And we can again use integration by parts! Let <span class="math inline">\(u = x^y\)</span> and <span class="math inline">\(dv = e^{-x(1 + \lambda)/\lambda} dx\)</span>. Then we have <span class="math inline">\(du = yx^{y-1} dx\)</span> and <span class="math inline">\(v = -\frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}\)</span>, and we can write</p>
 <span class="math display">\[\begin{align*}
     f(y) &amp; = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx \\
-    &amp; = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
-    &amp; = \frac{1}{\lambda y!} \left( - \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
-    &amp; = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left( - \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
+    &amp; = \frac{1}{\lambda y!} \left( x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  + \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
+    &amp; = \frac{1}{\lambda y!} \left(  \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
+    &amp; = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left(  \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
 \end{align*}\]</span>
 <p>This <em>looks</em> gross, but it’s actually not so bad. Note that, since <span class="math inline">\(Y\)</span> is Poisson, it can only take integer values beginning at 1! Then we can <em>repeat</em> the process of integration by parts <span class="math inline">\(y\)</span> <em>times</em> in order to get rid of <span class="math inline">\(x^{y\dots}\)</span> term on the inside of the integral. Specifically, each time we do this process we will pull out a <span class="math inline">\(\left( \frac{\lambda }{1 + \lambda} \right)\)</span>, and a <span class="math inline">\(y - i\)</span> for the <span class="math inline">\(i\)</span>th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,</p>
 <span class="math display">\[\begin{align*}
