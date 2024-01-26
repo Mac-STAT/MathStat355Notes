@@ -34,7 +34,7 @@ One final thing to note (before checking out worked examples and making sure you
 
 To maximize a function what I'm calling the "usual" way involves the five steps listed above. Unfortunately, sometimes this doesn't work. We typically recognize that the process won't work once we get to step 3, and realize that "solving" ends up giving us an MLE that doesn't depend at all on our data. When this happens, it's usually because the MLE is an *order statistic* (see Definitions section of this chapter), and usually because the distribution of our random variable has a range that depends on our unknown parameter. An example of this (that will appear on your homework) occurs when $X_1, \dots, X_n$ $\sim$ Uniform(0, $\theta$). In this case, the range of $X_i$ depends directly on $\theta$, since it cannot be any *greater than* $\theta$.
 
-In these cases, the process of finding the MLE for our unknown parameter usually involves plotting the likelihood as a function of the unknown parameter. We then look at where that function achieves its maximum (usually at one of the endpoints), and determine which observation (again, typically the minimum or maximum) will maximize our likelihood. An example of this can be found in Example 5.3.4 in our course textbook.
+In these cases, the process of finding the MLE for our unknown parameter usually involves plotting the likelihood as a function of the unknown parameter. We then look at where that function achieves its maximum (usually at one of the endpoints), and determine which observation (again, typically the minimum or maximum) will maximize our likelihood. An example of this can be found in Example 5.2.4 in our course textbook.
 
 ### Maximum Likelihood: Does it make sense? Is it even "good"? {.unnumbered .unlisted}
 
