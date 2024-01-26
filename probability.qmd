@@ -495,7 +495,27 @@ Now let $p = \frac{1}{1 + \lambda}$. If we can show that $f(y) \sim Geometric(p)
     & = (1 - p)^{y-1} p
 \end{align*}
 ```
-which is exactly the pdf of a geometric random variable with parameter $p$ and trials that begin at 1 (as opposed to 0), as makes sense with the Poisson distribution.
+which is exactly the pdf of a geometric random variable with parameter $p$ and trials that begin at 1.
+
+An *alternative* solution (which perhaps embodies the phrase "work smarter, not harder") actually doesn't involve integration by parts at all! As statisticians, we typically like to avoid actually integrating anything whenever possible, and this is often achieved by manipulating algebra enough to essentially "create" a pdf out of what we see (since pdfs integrate to $1$!). Massive props to a student for solving this problem in a much "easier" way, answer below:
+
+```{=tex}
+\begin{align*}
+        f(y) &= \int_{0}^{\infty} f(y \mid x) f(x) dx \\
+        &= \int_{0}^{\infty} (\frac{1}{\lambda}e^{-\frac{x}{\lambda}}) (\frac{x^y}{y!} e^{-x}) dx \\
+        &= \frac{1}{\lambda y!} \int_{0}^{\infty} x^y e^{-\frac{x}{\lambda}(1 + \lambda)} dx \\
+        &= \frac{1}{\lambda y!} \int_{0}^{\infty} \frac{(\frac{1+\lambda}{\lambda})^{y+1}}{(\frac{1+\lambda}{\lambda})^{y+1}} \frac{\Gamma(y+1)}{\Gamma(y+1)} x^{(y+1)-1} e^{-\frac{x}{\lambda}(1 + \lambda)} dx\\
+        &= \frac{\Gamma(y+1)}{\lambda y! (\frac{1+\lambda}{\lambda})^{y+1}} \int_{0}^{\infty} \frac{(\frac{1+\lambda}{\lambda})^{y+1}}{\Gamma(y+1)} x^{(y+1)-1} e^{-\frac{x}{\lambda}(1 + \lambda)} dx\\
+        &= \frac{\Gamma(y+1)}{\lambda y! (\frac{1+\lambda}{\lambda})^{y+1}} (1)\\
+        &= \frac{y!}{\lambda y! (\frac{1+\lambda}{\lambda})^{y+1}} \\
+        &= \frac{\lambda^{-1}}{(\frac{1+\lambda}{\lambda})^{y+1}}\\
+        &= \frac{\lambda^y}{(1+\lambda)^{y+1}}\\
+        &= \frac{1}{(1+\lambda)} \frac{\lambda^y}{(1+\lambda)^y}\\
+        &= \frac{1}{(1+\lambda)} (1 - \frac{1}{(1+\lambda)})^y \\
+        &=p(1-p)^y\qquad (\text{where }p=\frac{1}{1+\lambda})
+    \end{align*}
+```
+Note that we arrive at a slightly different answer with this approach. Specifically, we arrive at the pdf of a geometric random variable with parameter $p$ and trials that begin at 0, as opposed to 1. There's some subtlety here that we're going to choose to ignore.
 
 **Problem 4:** Suppose that $X \sim N(\mu, \sigma^2)$, and let $Y = \frac{X - \mu}{\sigma}$. Find the distribution of $Y$ (simplifying all of your math will be useful for this problem).
 
