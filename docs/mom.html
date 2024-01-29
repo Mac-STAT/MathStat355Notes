@@ -276,9 +276,39 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="worked-examples" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">3.5</span> Worked Examples</h2>
+<p>In general (for these worked examples <em>as well as the problem sets</em>), I do not expect you to calculate theoretical moments by hand. We practiced that in the probability review chapter, and now we can use those known theoretical moments to make our lives easier.</p>
 <p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \sim Poisson(\lambda)\)</span>. Find the MLE of <span class="math inline">\(\lambda\)</span> <em>and</em> the MOM estimator of <span class="math inline">\(\lambda\)</span>.</p>
+<p>To obtain the MLE, note that we can write the likelihood as</p>
+<p><span class="math display">\[
+L(\lambda) = \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!}
+\]</span></p>
+<p>and the log-likelihood as</p>
+<p><span class="math display">\[
+\log(L(\lambda)) = \sum_{i = 1}^n \left[ x_i\log(\lambda) - \lambda - \log(x_i!)\right]
+\]</span></p>
+<p>where I’ve used one “log rule” in the above to simplify: <span class="math inline">\(\log(a^b) = b \times log(a)\)</span>. Taking the derivative of the log-likelihood and setting it equal to zero, we obtain</p>
+<span class="math display">\[\begin{align*}
+  \frac{\partial}{\partial \lambda} \log(L(\lambda)) &amp; = \frac{1}{\lambda} \sum_{i = 1}^n x_i - n \\
+  0 &amp; \equiv \frac{1}{\lambda} \sum_{i = 1}^n x_i - n \\
+  n &amp; = \frac{1}{\lambda} \sum_{i = 1}^n x_i \\
+  \lambda &amp; = \frac{1}{n} \sum_{i = 1}^n x_i
+\end{align*}\]</span>
+<p>and so the MLE for <span class="math inline">\(\lambda\)</span> is the sample average. To obtain the MOM estimator for <span class="math inline">\(\lambda\)</span>, first note that the pdf contains only one parameter. Therefore, we only need to set the first theoretical moment equal to the first sample moment, and solve. Note that the first theoretical moment of a Poisson distribution is <span class="math inline">\(E[X] = \lambda\)</span>, and so equating this to the first sample moment, we obtain that the MOM estimator for <span class="math inline">\(\lambda\)</span> is again, just the sample average! Much “easier” to compute than the MLE, in this case.</p>
 <p><strong>Problem 2:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(\theta)\)</span>. Find the MOM estimator for <span class="math inline">\(\theta\)</span>.</p>
+<p>Note that our pdf contains only one parameter. Then we only need to solve a “system” of one equation. We have</p>
+<span class="math display">\[\begin{align*}
+  E[X] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i \\
+  \theta &amp; = \frac{1}{n} \sum_{i = 1}^n x_i
+\end{align*}\]</span>
+<p>and we’re done! The system is pretty easy to “solve” when the theoretical moment is exactly the parameter we’re interested in.</p>
 <p><strong>Problem 3:</strong> Suppose <span class="math inline">\(Y_1, \dots, Y_n \sim Uniform(0, \theta)\)</span>. Find the MOM estimator for <span class="math inline">\(\theta\)</span>.</p>
+<p>Note that our pdf contains only one parameter. Then we only need to solve a “system” of one equation. We have</p>
+<span class="math display">\[\begin{align*}
+  E[Y] &amp; = \frac{1}{n} \sum_{i = 1}^n y_i \\
+  \frac{1}{\theta} &amp; = \frac{1}{n} \sum_{i = 1}^n y_i \\
+  \theta &amp; = \frac{1}{\bar{x}}
+\end{align*}\]</span>
+<p>And so the MOM estimator for <span class="math inline">\(\theta\)</span> is 1 divided by the sample mean. Note that this is an example where the MOM estimator and MLE are not the same (you derived the MLE on your first problem set)!</p>
 
 
 </section>
