@@ -1,3 +1,83 @@
 # Method of Moments
 
-Under development...
+At this point in the course, we've now seen one (hopefully intuitive) way to obtain estimators for unknown parameters in probability distributions: maximum likelihood estimation. An alternative approach to producing a "reasonable" estimator for an unknown parameter is called the "Method of Moments." As the name implies, this method uses moments to derive estimators! Recall from probability theory that the $r$th moment of a probability distribution for $X$ is given by $E[X^r]$. We can make use of relationships that between *theoretical* moments and *sample* moments to derive reasonable estimators!
+
+In general, the steps involved in obtaining a MOM estimator are:
+
+1.  Determine how many equations are in the system we need to solve
+
+2.  Find the theoretical moments
+
+3.  Set theoretical moments equal to sample moments
+
+4.  Solve!
+
+### Why do we need more than one approach to obtain estimators? {.unnumbered .unlisted}
+
+We already have maximum likelihood estimation, and it seems reasonable, so why might we want another approach to obtaining estimates? A few reasons!
+
+One is that estimators vary with regards their theoretical "properties" (as we'll see in the following chapters). These properties are one way to define how "good" an estimator is, and we ideally want our estimators to be the best of the best.
+
+Another reason why we might sometimes want another approach to obtaining estimators, quite frankly, is that maximum likelihood estimators are sometimes a pain to calculate. In some cases, there isn't even a closed form solution for the parameter we're trying to estimate. In these scenarios, we need numerical optimization in order to obtain maximum likelihood estimators. While numerical optimization isn't the end of the world (it's actually often quite easy to implement), it can be *very* computationally intensive for more complex likelihoods. In general, if we can obtain a closed form estimator *analytically* (via calculus/algebra, for example), we'll be better off in the long run.\* With the method of moments approach, it is often much easier to obtain a closed form estimator analytically. An example of this can be found in Example 5.2.7 in the course textbook.
+
+\* This is mostly a function the fact that much statistics research focuses on developing new methods for solving problems and analyzing data (think: linear regression but fancier, linear regression but *new* somehow, etc.). Statistics is inherently practical. You (probably) want any methods that you develop to be practically usable by people who are perhaps not statisticians. No one is going to use your method if it takes an unreasonably long time to compute an estimator. Imagine how irritating it would be if it took your machine two days to compute linear regression coefficients in R, for example.
+
+## Learning Objectives
+
+By the end of this chapter, you should be able to...
+
+-   Derive method of moments estimators for parameters of common probability density functions
+
+-   Explain (in plain English) why method of moments estimation is an intuitive approach to estimating unknown parameters
+
+## Reading Guide
+
+Associated Readings: Chapter 5 ("The Method of Moments" through Example 5.2.7)
+
+### Reading Questions
+
+1.  What is the intuition behind the method of moments (MOM) procedure for estimating unknown parameters?
+
+2.  What are the typical steps to find a MOM estimator? (see Ex 5.2.6, 5.2.7, and Case Study 5.2.2; work through at least one of these examples in detail, filling in any steps that the textbook left out)
+
+3.  What advantages does the MOM approach offer compared to MLE?
+
+4.  Do the MOM and MLE approaches always yield the same estimate? (look through the examples in Section 5.2 and try using the other approach --- do you always get the same answer?)
+
+## Definitions
+
+You are expected to know the following definitions:
+
+**Theoretical Moment**
+
+The $r^{th}$ *theoretical* moment of a probability distribution is given by $E[X^r]$. For example, when $r = 1$, the $r^{th}$ moment is just the expectation of the random variable $X$.
+
+**Sample Moment**
+
+The $r^{th}$ *sample* moment of a probability distribution is given by $\frac{1}{n} \sum_{i = 1}^n x_i^r$, for a random sample of observations $x_1, \dots, x_n$.
+
+**Method of Moments Estimates**
+
+Let $x_1, \dots, x_n$ be a random sample of observations from the pdf $f_X(x \mid \boldsymbol{\theta})$. The method of moments estimates are then the solutions to the set of $s$ equations given by
+
+```{=tex}
+\begin{align*}
+  E[X] & = \frac{1}{n} \sum_{i = 1}^n x_i \\
+  E[X^2] & = \frac{1}{n} \sum_{i = 1}^n x_i^2 \\
+  & \vdots \\
+  E[X^s] & = \frac{1}{n} \sum_{i = 1}^n x_i^s
+\end{align*}
+```
+If our pdf depends on only a single unknown parameter, we only need to solve the first equation. If we have two unknown parameters, we need to solve the system of the first two equations. So on and so forth.
+
+## Theorems
+
+None for this chapter!
+
+## Worked Examples
+
+**Problem 1:** Suppose $X_1, \dots, X_n \sim Poisson(\lambda)$. Find the MLE of $\lambda$ *and* the MOM estimator of $\lambda$.
+
+**Problem 2:** Suppose $X_1, \dots, X_n \sim Bernoulli(\theta)$. Find the MOM estimator for $\theta$.
+
+**Problem 3:** Suppose $Y_1, \dots, Y_n \sim Uniform(0, \theta)$. Find the MOM estimator for $\theta$.

@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -180,7 +182,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">3.1</span> Learning Objectives</a></li>
+  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">3.2</span> Reading Guide</a>
+  <ul class="collapse">
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">3.2.1</span> Reading Questions</a></li>
+  </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">3.3</span> Definitions</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">3.4</span> Theorems</a></li>
+  <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">3.5</span> Worked Examples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,9 +217,71 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Under development…</p>
+<p>At this point in the course, we’ve now seen one (hopefully intuitive) way to obtain estimators for unknown parameters in probability distributions: maximum likelihood estimation. An alternative approach to producing a “reasonable” estimator for an unknown parameter is called the “Method of Moments.” As the name implies, this method uses moments to derive estimators! Recall from probability theory that the <span class="math inline">\(r\)</span>th moment of a probability distribution for <span class="math inline">\(X\)</span> is given by <span class="math inline">\(E[X^r]\)</span>. We can make use of relationships that between <em>theoretical</em> moments and <em>sample</em> moments to derive reasonable estimators!</p>
+<p>In general, the steps involved in obtaining a MOM estimator are:</p>
+<ol type="1">
+<li><p>Determine how many equations are in the system we need to solve</p></li>
+<li><p>Find the theoretical moments</p></li>
+<li><p>Set theoretical moments equal to sample moments</p></li>
+<li><p>Solve!</p></li>
+</ol>
+<section id="why-do-we-need-more-than-one-approach-to-obtain-estimators" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="why-do-we-need-more-than-one-approach-to-obtain-estimators">Why do we need more than one approach to obtain estimators?</h3>
+<p>We already have maximum likelihood estimation, and it seems reasonable, so why might we want another approach to obtaining estimates? A few reasons!</p>
+<p>One is that estimators vary with regards their theoretical “properties” (as we’ll see in the following chapters). These properties are one way to define how “good” an estimator is, and we ideally want our estimators to be the best of the best.</p>
+<p>Another reason why we might sometimes want another approach to obtaining estimators, quite frankly, is that maximum likelihood estimators are sometimes a pain to calculate. In some cases, there isn’t even a closed form solution for the parameter we’re trying to estimate. In these scenarios, we need numerical optimization in order to obtain maximum likelihood estimators. While numerical optimization isn’t the end of the world (it’s actually often quite easy to implement), it can be <em>very</em> computationally intensive for more complex likelihoods. In general, if we can obtain a closed form estimator <em>analytically</em> (via calculus/algebra, for example), we’ll be better off in the long run.* With the method of moments approach, it is often much easier to obtain a closed form estimator analytically. An example of this can be found in Example 5.2.7 in the course textbook.</p>
+<p>* This is mostly a function the fact that much statistics research focuses on developing new methods for solving problems and analyzing data (think: linear regression but fancier, linear regression but <em>new</em> somehow, etc.). Statistics is inherently practical. You (probably) want any methods that you develop to be practically usable by people who are perhaps not statisticians. No one is going to use your method if it takes an unreasonably long time to compute an estimator. Imagine how irritating it would be if it took your machine two days to compute linear regression coefficients in R, for example.</p>
+</section>
+<section id="learning-objectives" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">3.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li><p>Derive method of moments estimators for parameters of common probability density functions</p></li>
+<li><p>Explain (in plain English) why method of moments estimation is an intuitive approach to estimating unknown parameters</p></li>
+</ul>
+</section>
+<section id="reading-guide" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">3.2</span> Reading Guide</h2>
+<p>Associated Readings: Chapter 5 (“The Method of Moments” through Example 5.2.7)</p>
+<section id="reading-questions" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">3.2.1</span> Reading Questions</h3>
+<ol type="1">
+<li><p>What is the intuition behind the method of moments (MOM) procedure for estimating unknown parameters?</p></li>
+<li><p>What are the typical steps to find a MOM estimator? (see Ex 5.2.6, 5.2.7, and Case Study 5.2.2; work through at least one of these examples in detail, filling in any steps that the textbook left out)</p></li>
+<li><p>What advantages does the MOM approach offer compared to MLE?</p></li>
+<li><p>Do the MOM and MLE approaches always yield the same estimate? (look through the examples in Section 5.2 and try using the other approach — do you always get the same answer?)</p></li>
+</ol>
+</section>
+</section>
+<section id="definitions" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">3.3</span> Definitions</h2>
+<p>You are expected to know the following definitions:</p>
+<p><strong>Theoretical Moment</strong></p>
+<p>The <span class="math inline">\(r^{th}\)</span> <em>theoretical</em> moment of a probability distribution is given by <span class="math inline">\(E[X^r]\)</span>. For example, when <span class="math inline">\(r = 1\)</span>, the <span class="math inline">\(r^{th}\)</span> moment is just the expectation of the random variable <span class="math inline">\(X\)</span>.</p>
+<p><strong>Sample Moment</strong></p>
+<p>The <span class="math inline">\(r^{th}\)</span> <em>sample</em> moment of a probability distribution is given by <span class="math inline">\(\frac{1}{n} \sum_{i = 1}^n x_i^r\)</span>, for a random sample of observations <span class="math inline">\(x_1, \dots, x_n\)</span>.</p>
+<p><strong>Method of Moments Estimates</strong></p>
+<p>Let <span class="math inline">\(x_1, \dots, x_n\)</span> be a random sample of observations from the pdf <span class="math inline">\(f_X(x \mid \boldsymbol{\theta})\)</span>. The method of moments estimates are then the solutions to the set of <span class="math inline">\(s\)</span> equations given by</p>
+<span class="math display">\[\begin{align*}
+  E[X] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i \\
+  E[X^2] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i^2 \\
+  &amp; \vdots \\
+  E[X^s] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i^s
+\end{align*}\]</span>
+<p>If our pdf depends on only a single unknown parameter, we only need to solve the first equation. If we have two unknown parameters, we need to solve the system of the first two equations. So on and so forth.</p>
+</section>
+<section id="theorems" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">3.4</span> Theorems</h2>
+<p>None for this chapter!</p>
+</section>
+<section id="worked-examples" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">3.5</span> Worked Examples</h2>
+<p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \sim Poisson(\lambda)\)</span>. Find the MLE of <span class="math inline">\(\lambda\)</span> <em>and</em> the MOM estimator of <span class="math inline">\(\lambda\)</span>.</p>
+<p><strong>Problem 2:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(\theta)\)</span>. Find the MOM estimator for <span class="math inline">\(\theta\)</span>.</p>
+<p><strong>Problem 3:</strong> Suppose <span class="math inline">\(Y_1, \dots, Y_n \sim Uniform(0, \theta)\)</span>. Find the MOM estimator for <span class="math inline">\(\theta\)</span>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
