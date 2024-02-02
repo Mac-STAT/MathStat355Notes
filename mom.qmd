@@ -114,7 +114,6 @@ Note that our pdf contains only one parameter. Then we only need to solve a "sys
   \theta & = \frac{1}{n} \sum_{i = 1}^n x_i
 \end{align*}
 ```
-
 and we're done! The system is pretty easy to "solve" when the theoretical moment is exactly the parameter we're interested in.
 
 **Problem 3:** Suppose $Y_1, \dots, Y_n \sim Uniform(0, \theta)$. Find the MOM estimator for $\theta$.
@@ -124,9 +123,8 @@ Note that our pdf contains only one parameter. Then we only need to solve a "sys
 ```{=tex}
 \begin{align*}
   E[Y] & = \frac{1}{n} \sum_{i = 1}^n y_i \\
-  \frac{1}{\theta} & = \frac{1}{n} \sum_{i = 1}^n y_i \\
-  \theta & = \frac{1}{\bar{x}}
+  \frac{\theta}{2} & = \frac{1}{n} \sum_{i = 1}^n y_i \\
+  \theta & = 2 \bar{y}
 \end{align*}
 ```
-
-And so the MOM estimator for $\theta$ is 1 divided by the sample mean. Note that this is an example where the MOM estimator and MLE are not the same (you derived the MLE on your first problem set)!
+And so the MOM estimator for $\theta$ is 2 times the sample mean. Note that this is an example where the MOM estimator and MLE are not the same (you derived the MLE on your first problem set)!
