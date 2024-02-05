@@ -262,7 +262,7 @@ $$
 and
 
 $$
-Var\left[\hat{\theta}_2\right] = Var[nY_{(1)}] = n^2 Var[Y_{(1)}] = \frac{n^2}{(n/\theta)^2} = \theta^2
+Var\left[\hat{\theta}_3\right] = Var[nY_{(1)}] = n^2 Var[Y_{(1)}] = \frac{n^2}{(n/\theta)^2} = \theta^2
 $$
 
 Thus, the variance of the MLE, $\hat{\theta}_1$, is most efficient, and is $n$ times smaller than the variance of both $\hat{\theta}_2$ and $\hat{\theta}_3$.
