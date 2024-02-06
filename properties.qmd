@@ -93,7 +93,7 @@ $$
 The information matrix\* $I(\theta)$ for a collection of iid random variables $X_1, \dots, X_n$ is the variance of the score, given by
 
 $$
-I(\theta) = E \left[ \left( \frac{\partial}{\partial \theta} \log L(\theta \mid x) \right)^2\right]
+I(\theta) = E \left[ \left( \frac{\partial}{\partial \theta} \log L(\theta \mid x) \right)^2\right] = -E\left[ \frac{\partial^2}{\partial \theta^2} \log L(\theta \mid x)\right]
 $$
 
 Note that the above formula *is* in fact the variance of the score, since we can show that the *expectation* of the score is 0 (under some regularity conditions). This is shown as part of the proof of the C-R lower bound in the Theorems section of this chapter.
@@ -121,7 +121,7 @@ Let $f_Y(y \mid \theta)$ be a pdf with nice\* conditions, and let $Y_1, \dots, Y
 ```{=tex}
 \begin{align*} 
 Var(\hat{\theta}) & \geq \left\{ E\left[ \left( \frac{\partial \log( L(\theta \mid y))}{\partial \theta}\right)^2\right]\right\}^{-1} \\
-& = \left\{ E\left[ \left( \frac{\partial^2 \log( L(\theta \mid y))}{\partial \theta^2}\right)^2\right]\right\}^{-1} \\
+& = -\left\{ E\left[ \frac{\partial^2 \log( L(\theta \mid y))}{\partial \theta^2} \right] \right\}^{-1} \\
 & = \frac{1}{I(\theta)}
 \end{align*}
 ```

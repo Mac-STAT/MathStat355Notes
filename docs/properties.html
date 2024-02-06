@@ -282,7 +282,7 @@ Var(\hat{\theta}^*) \leq Var(\hat{\theta})
 <p><strong>Information Matrix</strong></p>
 <p>The information matrix* <span class="math inline">\(I(\theta)\)</span> for a collection of iid random variables <span class="math inline">\(X_1, \dots, X_n\)</span> is the variance of the score, given by</p>
 <p><span class="math display">\[
-I(\theta) = E \left[ \left( \frac{\partial}{\partial \theta} \log L(\theta \mid x) \right)^2\right]
+I(\theta) = E \left[ \left( \frac{\partial}{\partial \theta} \log L(\theta \mid x) \right)^2\right] = -E\left[ \frac{\partial^2}{\partial \theta^2} \log L(\theta \mid x)\right]
 \]</span></p>
 <p>Note that the above formula <em>is</em> in fact the variance of the score, since we can show that the <em>expectation</em> of the score is 0 (under some regularity conditions). This is shown as part of the proof of the C-R lower bound in the Theorems section of this chapter.</p>
 <p>The information matrix is sometimes written in terms of a pdf for a single random variable as opposed to a likelihood (this is what our textbook does, for example). In this case, we have <span class="math inline">\(I(\theta) = n I_1(\theta)\)</span>, where the <span class="math inline">\(I_1(\theta)\)</span> on the right-hand side is defined as <span class="math inline">\(E \left[ \left( \frac{\partial}{\partial \theta} \log f_X(x \mid \theta) \right)^2\right]\)</span>. Sometimes (as in the textbook) <span class="math inline">\(I_1(\theta)\)</span> is written without the subscript <span class="math inline">\(1\)</span> which is a slight abuse of notation that is endlessly confusing (to me, at least). For this set of course notes, we’ll always specify the information matrix in terms of a pdf for a single random variable with the subscript <span class="math inline">\(1\)</span>, for clarity.</p>
@@ -300,7 +300,7 @@ Var(X) \geq \frac{Cov(X, Y)^2}{Var(Y)}
 <p>Let <span class="math inline">\(f_Y(y \mid \theta)\)</span> be a pdf with nice* conditions, and let <span class="math inline">\(Y_1, \dots, Y_n\)</span> be a random sample from <span class="math inline">\(f_Y(y \mid \theta)\)</span>. Let <span class="math inline">\(\hat{\theta}\)</span> be <em>any</em> unbiased estimator of <span class="math inline">\(\theta\)</span>. Then</p>
 <span class="math display">\[\begin{align*}
 Var(\hat{\theta}) &amp; \geq \left\{ E\left[ \left( \frac{\partial \log( L(\theta \mid y))}{\partial \theta}\right)^2\right]\right\}^{-1} \\
-&amp; = \left\{ E\left[ \left( \frac{\partial^2 \log( L(\theta \mid y))}{\partial \theta^2}\right)^2\right]\right\}^{-1} \\
+&amp; = -\left\{ E\left[ \frac{\partial^2 \log( L(\theta \mid y))}{\partial \theta^2} \right] \right\}^{-1} \\
 &amp; = \frac{1}{I(\theta)}
 \end{align*}\]</span>
 <p>*our nice conditions that we need are that <span class="math inline">\(f_Y(y \mid \theta)\)</span> has continuous first- and second-order derivatives, which would quickly discover we need by looking at the form for the C-R lower bound, and that the set of values <span class="math inline">\(y\)</span> where <span class="math inline">\(f_Y(y \mid \theta) \neq 0\)</span> does not depend on <span class="math inline">\(\theta\)</span>. If you are familiar with the concept of the “support” of a function, that is where this second condition comes from. The key here is that this condition allows to interchange derivatives and integrals, in particular, <span class="math inline">\(\frac{\partial}{\partial \theta} \int f(x) dx = \int \frac{\partial}{\partial \theta} f(x)dx\)</span>, which we’ll need to complete the proof.</p>
