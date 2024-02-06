@@ -77,7 +77,7 @@ The relative efficiency of an estimator $\hat{\theta}_1$ with respect to an esti
 An estimator $\hat{\theta}^*$ is the UMVUE if, for all estimators $\hat{\theta}$ in the class of unbiased estimators $\Theta$,
 
 $$
-Var(\hat{\theta}^*) \leq Var(\theta)
+Var(\hat{\theta}^*) \leq Var(\hat{\theta})
 $$
 
 **Score**
