@@ -247,6 +247,31 @@ ul.task-list li input[type="checkbox"] {
 <p>So. Does it make sense? I would argue, intuitively, yes! Yes, it does. Is it good? That’s perhaps a different question with a more complicated answer. It’s a good baseline, certainly, and foundational to <em>much</em> of statistical theory. We’ll see in a later chapter that maximum likelihood estimates have good properties related to having minimal variance among a larger class of estimators (yay!), but the maximum likelihood estimators we will consider in this course rely on <em>parametric</em> assumptions (i.e.&nbsp;we assume that the data follows a specific probability distribution in order to calculate MLEs). There are ways around these assumptions, but they are outside the scope of our course.</p>
 <p>*<img src="images/chilipepper.png" width="20" height="16"> Note that distributions are only involved in <em>parametric</em> methods, as opposed to non-parametric and semi-parametric methods, the latter of which are for independent study or a graduate course in statistics!</p>
 </section>
+<section id="relation-to-least-squares" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="relation-to-least-squares">Relation to Least-Squares</h3>
+<p>Recall that we typically write a simple linear regression model in one of two ways. For <span class="math inline">\(n\)</span> observations <span class="math inline">\(X_1, \dots, X_n\)</span> with outcomes <span class="math inline">\(Y_1, \dots, Y_n\)</span>, we can write</p>
+<p><span class="math display">\[
+E[Y_i \mid X_i] = \beta_0 + \beta_1 X_i
+\]</span></p>
+<p><em>or</em> we can write</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
+\]</span></p>
+<p>where <span class="math inline">\(E[\epsilon_i] = 0\)</span>. The latter equation makes it more clear where residuals come into play (they are just given by <span class="math inline">\(\epsilon_i\)</span>), and the former perhaps makes it more clear why the word “average” usually finds its way into our interpretations of regression coefficients. The second form, however, allows us to make it more clear how we would write up a “least-squares” equation.</p>
+<p>Recall that the least-squares line (or, line of “best” fit) is the line that minimizes the <em>sum of squared residuals</em>. Parsing these words out, note that our residuals can be written as</p>
+<p><span class="math display">\[
+\epsilon_i = Y_i - \beta_0 - \beta_1 X_i.
+\]</span></p>
+<p><em>Squared</em> residuals are then written as</p>
+<p><span class="math display">\[
+\epsilon_i^2 = (Y_i - \beta_0 - \beta_1 X_i)^2,
+\]</span></p>
+<p>and finally, the <em>sum</em> of squared residuals is given by</p>
+<p><span class="math display">\[
+\sum_{i = 1}^n \epsilon_i^2 = \sum_{i = 1}^n (Y_i - \beta_0 - \beta_1 X_i)^2
+\]</span></p>
+<p>We can find what values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> minimize this sum by taking partial derivatives, setting equations equal to zero, and solving. It turns out that if let <span class="math inline">\(\epsilon_i \overset{iid}{\sim} N(0, \sigma^2)\)</span> where <span class="math inline">\(\sigma^2\)</span> is <em>known</em>, then the MLE for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are equivalent to the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that minimize the sum of squared residuals!</p>
+</section>
 <section id="learning-objectives" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</h2>
 <p>By the end of this chapter, you should be able to…</p>

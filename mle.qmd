@@ -44,6 +44,42 @@ So. Does it make sense? I would argue, intuitively, yes! Yes, it does. Is it goo
 
 \*![](images/chilipepper.png){width="20" height="16"} Note that distributions are only involved in *parametric* methods, as opposed to non-parametric and semi-parametric methods, the latter of which are for independent study or a graduate course in statistics!
 
+### Relation to Least-Squares {.unnumbered .unlisted}
+
+Recall that we typically write a simple linear regression model in one of two ways. For $n$ observations $X_1, \dots, X_n$ with outcomes $Y_1, \dots, Y_n$, we can write
+
+$$
+E[Y_i \mid X_i] = \beta_0 + \beta_1 X_i
+$$
+
+*or* we can write
+
+$$
+Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
+$$
+
+where $E[\epsilon_i] = 0$. The latter equation makes it more clear where residuals come into play (they are just given by $\epsilon_i$), and the former perhaps makes it more clear why the word "average" usually finds its way into our interpretations of regression coefficients. The second form, however, allows us to make it more clear how we would write up a "least-squares" equation.
+
+Recall that the least-squares line (or, line of "best" fit) is the line that minimizes the *sum of squared residuals*. Parsing these words out, note that our residuals can be written as
+
+$$
+\epsilon_i = Y_i - \beta_0 - \beta_1 X_i.
+$$
+
+*Squared* residuals are then written as
+
+$$
+\epsilon_i^2 = (Y_i - \beta_0 - \beta_1 X_i)^2,
+$$
+
+and finally, the *sum* of squared residuals is given by
+
+$$
+\sum_{i = 1}^n \epsilon_i^2 = \sum_{i = 1}^n (Y_i - \beta_0 - \beta_1 X_i)^2
+$$
+
+We can find what values of $\beta_0$ and $\beta_1$ minimize this sum by taking partial derivatives, setting equations equal to zero, and solving. It turns out that if let $\epsilon_i \overset{iid}{\sim} N(0, \sigma^2)$ where $\sigma^2$ is *known*, then the MLE for $\beta_0$ and $\beta_1$ are equivalent to the values of $\beta_0$ and $\beta_1$ that minimize the sum of squared residuals!
+
 ## Learning Objectives
 
 By the end of this chapter, you should be able to...
