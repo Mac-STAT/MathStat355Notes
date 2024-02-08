@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -180,7 +182,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">5.1</span> Learning Objectives</a></li>
+  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">5.2</span> Reading Guide</a>
+  <ul class="collapse">
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">5.2.1</span> Reading Questions</a></li>
+  </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">5.3</span> Definitions</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">5.4</span> Theorems</a></li>
+  <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">5.5</span> Worked Examples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,9 +217,132 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Under development…</p>
+<p>The properties of estimators that we’ve covered thus far (with the exception of asymptotic unbiasedness) have all been what are called <em>finite sample</em> properties. All we mean by this is that our sample size (<span class="math inline">\(n\)</span>) is less than infinity (hence: finite). In practice of course, our sample size will always be less than infinity; however, it is still nice to know what happens to our estimators (in terms of bias, variance, etc.) as our sample size gets <em>really really large</em>. Much of Frequentist statistics relies on asymptotic (read: infinite sample size) theory to quantify our uncertainty via confidence intervals, for example.</p>
+<p>Consistency is one such asymptotic property that we care about. As opposed to asymptotic unbiasedness, consistency tells us something about the <em>entire shape</em> of a distribution, as opposed to just the <em>center</em> of our distribution. Prof.&nbsp;Brianna Heggeseth and Prof.&nbsp;Kelsey Grinde have a great visual for this below:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="consistency_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The idea here is that as our sample size gets large (as we move to the right on the x-axis), consistency tells us something about the entire <em>distribution</em> of our estimator being within some boundary. Asymptotic unbiasedness, on the other hand, only tells us about whether the center of our distribution (a single point!) lies where it “should” (at the truth).</p>
+<p>Why do we care about consistency? Because we care about uncertainty! It would be really unfortunate if, in collecting more and more data, we didn’t get any more certain about the true parameter we’re trying to estimate. Intuitively, we want to be <em>more confident</em> (less uncertain) in our estimators when we have larger sample sizes. This is exactly what consistency is concerned with. How do we prove whether or not an estimator is consistent? (Typically) Chebyshev’s Inequality, which we state and prove below.</p>
+<section id="learning-objectives" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">5.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li>Distinguish between finite sample properties and asymptotic properties of estimators</li>
+<li>Prove (using Chebyshev’s inequality) whether or not an estimator is consistent</li>
+</ul>
+</section>
+<section id="reading-guide" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">5.2</span> Reading Guide</h2>
+<p>Associated Readings: Chapter 5, Section 5.7</p>
+<section id="reading-questions" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">5.2.1</span> Reading Questions</h3>
+<ol type="1">
+<li><p>What is the distinction between a fixed sample property and an asymptotic property of an estimator?</p></li>
+<li><p>Describe, in your own words, what it means for an estimator to be consistent.</p></li>
+<li><p>How can we use Chebyshev’s inequality to show that an estimator is consistent?</p></li>
+<li><p>Which of the estimation techniques we’ve seen so far yield consistent estimators?</p></li>
+</ol>
+</section>
+</section>
+<section id="definitions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">5.3</span> Definitions</h2>
+<p>You are expected to know the following definitions:</p>
+<p><strong>Asymptotically Unbiased</strong></p>
+<p>An estimator <span class="math inline">\(\hat{\theta} = g(X_1, \dots, X_n)\)</span> is an <em>asymptotically</em> unbiased estimator for <span class="math inline">\(\theta\)</span> if <span class="math inline">\(\underset{n \to \infty}{\text{lim}} E[\hat{\theta}] = \theta\)</span>.</p>
+<p><strong>Consistent</strong></p>
+<p>An estimator <span class="math inline">\(\hat{\theta}_n = h(X_1, \dots, X_n)\)</span> is consistent for <span class="math inline">\(\theta\)</span> if it converges in probability to <span class="math inline">\(\theta\)</span>. That is, for all <span class="math inline">\(\epsilon &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\underset{n \to \infty}{\text{lim}} \Pr(| \hat{\theta}_n - \theta | &lt; \epsilon) = 1
+\]</span></p>
+<p>Note that we write our estimator with a subscript <span class="math inline">\(n\)</span> here to clarify that our estimator depends on our sample size. There is an alternative <span class="math inline">\(\epsilon-\delta\)</span> definition of consistency in the textbook, but we won’t focus on it for this course.</p>
+<p><strong>Weak Law of Large Numbers</strong></p>
+<p>For independent and identically distributed random variables <span class="math inline">\(X_1, \dots, X_n\)</span> with finite expectation <span class="math inline">\(\mu &lt; \infty\)</span>,</p>
+<p><span class="math display">\[
+\underset{n \to \infty}{\text{lim}} \Pr(| \overline{X} - \mu | &lt; \epsilon) = 1
+\]</span></p>
+<p>Alternatively, we can write that as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(\overline{X} \overset{p}{\to} \mu\)</span>, where “<span class="math inline">\(\overset{p}{\to}\)</span>” denotes convergence in probability.</p>
+</section>
+<section id="theorems" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">5.4</span> Theorems</h2>
+<p><strong>Chebyshev’s Inequality</strong></p>
+<p>Let <span class="math inline">\(W\)</span> be a random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Then for any <span class="math inline">\(\epsilon &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\Pr(|W - \mu| &lt; \epsilon) \geq 1 - \frac{\sigma^2}{\epsilon^2},
+\]</span></p>
+<p>or, equivalently,</p>
+<p><span class="math display">\[
+\Pr(|W - \mu| \geq \epsilon) \leq \frac{\sigma^2}{\epsilon^2}.
+\]</span></p>
+<p><strong>Proof.</strong></p>
+<p>Let <span class="math inline">\(\epsilon &gt; 0\)</span>. Then</p>
+<span class="math display">\[\begin{align*}
+\sigma^2 &amp; = \text{Var}(W) \\
+&amp; = \int_{-\infty}^\infty (w-\mu)^2 f_W(w)dw \\
+&amp; = \int_{-\infty}^{\mu - \epsilon} (w-\mu)^2 f_W(w)dw + \int_{\mu - \epsilon}^{\mu + \epsilon} (w-\mu)^2 f_W(w)dw + \int_{\mu + \epsilon}^\infty (w-\mu)^2 f_W(w)dw \\
+&amp; \ge \int_{-\infty}^{\mu - \epsilon} (w-\mu)^2 f_W(w)dw + 0  + \int_{\mu + \epsilon}^\infty (w-\mu)^2 f_W(w)dw \\
+&amp;= \int_{|w-\mu|\ge \epsilon} (w-\mu)^2 f_W(w)dw \\
+&amp; \ge \int_{|w-\mu|\ge \epsilon} \epsilon^2 f_W(w)dw \\
+&amp; = \epsilon^2 \int_{|w-\mu|\ge \epsilon} f_W(w)dw\\
+&amp; = \epsilon^2 P(|W-\mu| \ge \epsilon)
+\end{align*}\]</span>
+<p>and rearranging yields</p>
+<span class="math display">\[\begin{align*}
+\sigma^2 &amp; \geq \epsilon^2 P(|W-\mu| \ge \epsilon) \\
+P(|W-\mu| \geq \epsilon) &amp; \leq \frac{\sigma^2}{\epsilon^2}
+\end{align*}\]</span>
+<p>as desired.</p>
+<p><strong>Corollary 1:</strong> If <span class="math inline">\(\hat{\theta}_n\)</span> is an unbiased estimator for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\underset{n \to \infty}{\text{lim}} Var(\hat{\theta}_n) = 0\)</span>, then <span class="math inline">\(\hat{\theta}_n\)</span> is consistent for <span class="math inline">\(\theta\)</span>. (You’ll prove this corollary on a problem set!)</p>
+<p><strong>Corollary 2:</strong> If <span class="math inline">\(\hat{\theta}_n\)</span> is an asymptotically unbiased estimator for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\underset{n \to \infty}{\text{lim}} Var(\hat{\theta}_n) = 0\)</span>, then <span class="math inline">\(\hat{\theta}_n\)</span> is consistent for <span class="math inline">\(\theta\)</span>.</p>
+<p>Note that the second corollary is a bit stronger than the first one, in that the first corollary actually <em>implies</em> the second. If an estimator is unbiased, then it is certainly asymptotically unbiased as well.</p>
+</section>
+<section id="worked-examples" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">5.5</span> Worked Examples</h2>
+<p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>. Show that the MLE for <span class="math inline">\(\sigma^2\)</span> is <em>asymptotically</em> unbiased.</p>
+<p>The MLE for <span class="math inline">\(\sigma^2\)</span> is given by <span class="math inline">\(\frac{1}{n} \sum_{i = 1}^n (X_i - \overline{X})^2\)</span> (see the MLE section of the course notes, worked example problem 2), and has expectation <span class="math inline">\(\left( \frac{n-1}{n} \right)\sigma^2\)</span> (see the Properties section of the course notes, worked example problem 6). To show that this estimator is asymptotically unbiased, note that we have</p>
+<span class="math display">\[\begin{align*}
+    \underset{n\to \infty}{\text{lim}} E[\hat{\sigma^2}_{MLE}] &amp; = \underset{n\to \infty}{\text{lim}} \left( \frac{n-1}{n} \right) \sigma^2 \\
+    &amp; = \left( 1 \right) \sigma^2 \\
+    &amp; = \sigma^2
+\end{align*}\]</span>
+<p>and therefore, the MLE for <span class="math inline">\(\sigma^2\)</span> is asymptotically unbiased.</p>
+<p><strong>Problem 2:</strong> Suppose <span class="math inline">\(Y_1, \dots, Y_n \overset{iid}{\sim} Uniform(0, \theta)\)</span>, and recall that <span class="math inline">\(\hat{\theta}_{MLE} = Y_{(n)}\)</span> with <span class="math inline">\(f_{Y_{(n)}}(y \mid \theta) = \frac{n}{\theta^n} y^{n-1}\)</span>, <span class="math inline">\(0 \leq y \leq \theta\)</span>. Prove that <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>.</p>
+<p>To prove that <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is consistent, we must first show that <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is (either) unbiased or asymptotically unbiased, and then we must show that the variance of <span class="math inline">\(\hat{\theta}_{MLE}\)</span> tends to zero as <span class="math inline">\(n \to \infty\)</span>. To begin, note that</p>
+<span class="math display">\[\begin{align*}
+    E\left[\hat{\theta}_{MLE}\right] &amp; = \int_{0}^\theta y f_{Y_{(n)}} (y \mid \theta) dy \\
+    &amp; = \int_{0}^\theta y \left( \frac{n}{\theta^n} y^{n-1} \right) dy \\
+    &amp; = \frac{n}{\theta^n} \int_0^\theta y^n dy \\
+    &amp; = \frac{n}{\theta^n} \left( \frac{y^{n + 1}}{n + 1} \bigg|_0^\theta \right) \\
+    &amp; = \frac{n}{\theta^n} \left( \frac{\theta^{n + 1}}{n + 1} \right) \\
+    &amp; = \left( \frac{n}{n + 1} \right) \theta
+\end{align*}\]</span>
+<p>and so <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is biased. It is, however, asymptotically <em>unbiased</em>. Note that <span class="math inline">\(\left( \frac{n}{n + 1} \right) \overset{n \to \infty}{\to} 1\)</span>, and therefore <span class="math inline">\(E\left[\hat{\theta}_{MLE}\right] \overset{n \to \infty}{\to} \theta\)</span>.</p>
+<p>All that’s left is to show that <span class="math inline">\(Var\left[\hat{\theta}_{MLE}\right] \overset{n \to \infty}{\to} 0\)</span>. We can write</p>
+<span class="math display">\[\begin{align*}
+        E\left[Y_{(n)}^2\right] &amp; = \int_0^\theta y^2 \frac{ny^{n-1}}{\theta^n} dy \\
+        &amp; = \frac{n}{\theta^n} \int_0^\theta y^{n + 1} dy \\
+        &amp; = \frac{n}{\theta^n} \left( \frac{y^{n + 2}}{n + 2} \bigg|_0^\theta \right) \\
+        &amp; = \frac{n}{\theta^n} \left( \frac{\theta^{n + 2}}{n + 2}\right) \\
+        &amp; = \left( \frac{n}{n + 2} \right) \theta^2
+    \end{align*}\]</span>
+<p>and therefore</p>
+<span class="math display">\[\begin{align*}
+    \underset{n \to \infty}{\text{lim}} Var\left[\hat{\theta}_{MLE}\right] &amp; = \underset{n \to \infty}{\text{lim}} \left[ E\left[Y_{(n)}^2\right] - E\left[Y_{(n)}\right]^2 \right]\\
+    &amp; = \underset{n \to \infty}{\text{lim}} \left[ \left( \frac{n}{n + 2} \right) \theta^2 - \left( \frac{n}{n + 1} \right)^2 \theta^2 \right] \\
+    &amp; = \theta^2 \underset{n \to \infty}{\text{lim}} \left[ \left( \frac{n}{n + 2} \right)  - \left( \frac{n}{n + 1} \right)^2\right] \\
+    &amp; = \theta^2 \underset{n \to \infty}{\text{lim}} \left[  \frac{n}{n + 2}   - \frac{n^2}{(n + 1)^2} \right] \\
+    &amp; = \theta^2 \underset{n \to \infty}{\text{lim}} \left[  \frac{n(n + 1)^2 - n^2 (n + 2)}{(n + 2)(n + 1)^2} \right] \\
+    &amp; = \theta^2 \underset{n \to \infty}{\text{lim}} \left[  \frac{n(n^2 + 2n + 1) - n^3 -2n^2}{(n + 2)(n^2 + 2n + 1)} \right] \\
+    &amp; = \theta^2 \underset{n \to \infty}{\text{lim}} \left[  \frac{n^3 + 2n^2 + n - n^3 -2n^2}{n^3 + 2n^2 + 2n^2 + 4n + 2} \right] \\
+    &amp; = \theta^2 \underset{n \to \infty}{\text{lim}} \left[  \frac{n}{n^3 + 4n^2  + 4n + 2} \right] \\
+    &amp; = 0
+\end{align*}\]</span>
+<p>where the last term goes to zero because <span class="math inline">\(\frac{n}{n^3} \to 0\)</span> as <span class="math inline">\(n \to \infty\)</span>. Therefore, <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,3 +1,31 @@
 # Asymptotics & the Central Limit Theorem
 
-Under development...
+Coming soon...
+
+### Asymptotic Properties of MLEs {.unnumbered .unlisted}
+
+Coming soon...
+
+## Learning Objectives
+
+Coming soon...
+
+## Reading Guide
+
+Coming soon...
+
+### Reading Questions
+
+Coming soon...
+
+## Definitions
+
+Coming soon...
+
+## Theorems
+
+**Coming soon...**
+
+## Worked Examples
+
+**Coming soon...**
