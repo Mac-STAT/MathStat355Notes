@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://math-stat-455.com/consistency.html</loc>
-    <lastmod>2024-02-08T20:49:20.115Z</lastmod>
+    <lastmod>2024-02-08T20:50:57.791Z</lastmod>
   </url>
   <url>
     <loc>https://math-stat-455.com/probability.html</loc>
@@ -43,5 +43,9 @@
   <url>
     <loc>https://math-stat-455.com/references.html</loc>
     <lastmod>2024-02-08T20:49:19.452Z</lastmod>
+  </url>
+  <url>
+    <loc>https://math-stat-455.com/index.html</loc>
+    <lastmod>2024-02-08T20:50:35.076Z</lastmod>
   </url>
 </urlset>
