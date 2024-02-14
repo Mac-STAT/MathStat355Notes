@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -215,34 +217,225 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Coming soon…</p>
+<p>Asymptotic unbiasedness and consistency allow us to assess the behavior of estimators when sample sizes get large. Thus far, however, we’ve only discussed what happens to <em>point estimates</em> as <span class="math inline">\(n\)</span> goes to infinity. Point estimates are great, but they don’t tell the whole story. In order to truly quantify uncertainty (which is arguably one of the main goals of statistics, if not <em>the</em> main goal), we need to be able to estimate a range of plausible values for our estimators: we need to be able to construct confidence intervals. This is made possible primarily by asymptotic normality, the Central Limit Theorem, and properties of the normal distribution.</p>
+<section id="confidence-intervals" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h3>
+<p>Confidence intervals are one of the most difficult concepts for a budding statistician to grasp, because they don’t have the intuitive, probabilistic definition we often want them to have (aka the probability that the truth lies within the interval). As with Frequentist statistics more generally, the definition of a confidence interval relies on the concept of <em>repeated sampling</em> from a population.</p>
+<p>A confidence interval either contains the true parameter, or it does not. There is no probability involved in that statement. Probability comes into play when considering that, under repeated sampling, if we construct confidence intervals each time we take a new sample and construct an estimator, a given percentage <em>of those intervals</em> will contain the true parameter. A visual representation of the confidence interval construction process is given in Figure 5.3.2 in the course textbook.</p>
+<section id="confidence-intervals---the-clt" class="level4 unnumbered unlisted">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="confidence-intervals---the-clt">Confidence Intervals - The CLT</h4>
+<p>The primary way that we construct confidence intervals is by “rearranging” the CLT so that a quantity’s asymptotic distribution does not depend on the data nor the parameter of interest. This process is sometimes called establishing an <em>approximate pivotal quantity</em>.</p>
+<p>As an example, consider an iid random sample <span class="math inline">\(X_1, \dots, X_n\)</span> where <span class="math inline">\(E[X_i] = \mu\)</span> and <span class="math inline">\(Var[X_i] = \sigma^2\)</span>, where <span class="math inline">\(\sigma^2\)</span> is known. The CLT tells us that</p>
+<p><span class="math display">\[
+\sqrt{n}(\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2).
+\]</span></p>
+<p>We can use this to construct a confidence interval for <span class="math inline">\(\mu\)</span>. By Slutsky’s theorem we can write</p>
+<p><span class="math display">\[
+\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \overset{d}{\to} N(0, 1).
+\]</span></p>
+<p>and note now that we <em>know</em> the asymptotic distribution for the (pivotal) quantity on the left, and can therefore use the <em>quantiles</em> of this distribution to construct confidence intervals. For a standard normal distribution (as is the case here) we can note that 95% of the distribution is contained within 1.96 standard deviations of the mean, and therefore</p>
+<p><span class="math display">\[
+\Pr\left(-1.96 \leq \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \leq 1.96\right) = 0.95
+\]</span></p>
+<p>We can rearrange the probability statement on the left hand side to get</p>
+<p><span class="math display">\[
+\Pr\left(\overline{X}-1.96 \sigma/\sqrt{n} \leq \mu \leq \overline{X} + 1.96\sigma/\sqrt{n}\right) = 0.95
+\]</span></p>
+<p>and therefore, our 95% confidence interval for <span class="math inline">\(\mu\)</span> is given by <span class="math inline">\(\left( \overline{X}-1.96 \sigma/\sqrt{n}, \overline{X}+1.96 \sigma/\sqrt{n} \right)\)</span>.</p>
+</section>
+<section id="confidence-intervals---exact" class="level4 unnumbered unlisted">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="confidence-intervals---exact">Confidence Intervals - “Exact”</h4>
+<p>A second way that we construct confidence intervals is through a concrete distributional assumption, and known quantiles of those distributions. Note that the confidence interval constructed above involves the Central Limit Theorem, and <em>no</em> <em>finite sample</em> distributional assumption. All we assume are that the data are iid observations with finite means and variances. The “distribution” only comes into play as our sample size gets large.</p>
+<p>When sample sizes <em>aren’t</em> large, applying the CLT might not make a whole lot of sense. In these scenarios, it can be useful to use an alternative confidence interval construction, aided by assuming a specific distribution for our random variables. In some scenarios these assumptions may make more sense than others: in short, we’re <em>always</em> making some sort of assumption, regardless of what we do. It’s part of our job as statisticians to ensure that the assumptions we make, make sense for the application we’re working with!</p>
+<p>One example of a commonly used “exact” confidence interval is the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper%E2%80%93Pearson_interval">Clopper-Pearson</a> interval for a binomial proportion. Consider an iid random sample <span class="math inline">\(X_1, \dots, X_n\)</span>, where <span class="math inline">\(\sum_{i = 1}^n X_i \sim Binomial(n, p)\)</span>. Intuitively, the interval is constructed by the following steps:</p>
+<ol type="1">
+<li><p>Find the <em>largest</em> p such that <span class="math inline">\(\Pr(X \leq k) \geq \alpha/2\)</span>, where <span class="math inline">\(k\)</span> is the observed number of successes. Call this largest value <span class="math inline">\(p_U\)</span>.</p></li>
+<li><p>Find the <em>smallest</em> p such that <span class="math inline">\(\Pr(X \geq k) \geq \alpha/2\)</span>, where <span class="math inline">\(k\)</span> is again the observed number of successes. Call this smallest value <span class="math inline">\(p_L\)</span>.</p></li>
+<li><p>Define the <span class="math inline">\(100(1 -\alpha)\)</span>% confidence interval for <span class="math inline">\(p\)</span> to be <span class="math inline">\((p_U, p_L)\)</span>.</p></li>
+</ol>
+<p>This construction process allows us to determine all possible values of <span class="math inline">\(p\)</span> that are compatible with our observed number of successes (which is exactly what a confidence interval should do).</p>
+<p>In more math-y terms, We can show that if <span class="math inline">\(\sum_{i = 1}^n X_i \sim Binomial(n, p)\)</span>, then <span class="math inline">\(\Pr(\sum_{i = 1}^n X_i \geq x) = \Pr(Y \leq p)\)</span>, where <span class="math inline">\(Y \sim Beta(\sum_{i = 1}^n x_i, n - \sum_{i = 1}^n x_i + 1)\)</span>. The point of doing this is that we can rewrite our probability statements (involved in our confidence interval construction) in terms of a random variable that <em>does not depend</em> on <span class="math inline">\(p\)</span>. We can then compute the Clopper-Pearson interval for <span class="math inline">\(p\)</span> as</p>
+<p><span class="math display">\[
+\Phi_{\frac{\alpha}{2}; x, n - x + 1} &lt; p &lt; \Phi_{1 - \frac{\alpha}{2}; x + 1, n - x}
+\]</span></p>
+<p>where <span class="math inline">\(\Phi_{a; v, w}\)</span> is the <span class="math inline">\(a\)</span>th quantile from a Beta distribution with shape parameters <span class="math inline">\(v\)</span> and <span class="math inline">\(w\)</span>. Alternatively, you can even write the Clopper-Pearson in terms of quantiles of the <span class="math inline">\(F\)</span>-distribution, but the Beta format is enough to emphasize the main point: If we can determine the distribution of some function of our data and unknown parameter, and manipulate that distribution enough so that it depends on neither the data nor unknown parameter, we can use quantiles and probability statements to construct confidence intervals.</p>
+</section>
+</section>
+<section id="convergence" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="convergence">Convergence</h3>
+<p>If an estimator <span class="math inline">\(\hat{\theta}_n\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>, we also say that <span class="math inline">\(\hat{\theta}_n\)</span> converges in probability to <span class="math inline">\(\theta\)</span> (i.e., <span class="math inline">\(\hat{\theta}_n \overset{p}{\to} \theta\)</span>). There are three different types of convergence: almost sure convergence, convergence in probability, and convergence in distribution (in order from “strongest” to “weakest”). The main two that we’ll care about for this course are convergence in probability and convergence in distribution. Mathematical details about convergence are for a more advanced statistical theory course (or perhaps a more advanced course in analysis). For our purposes, it will suffice to know that (1) convergence in probability <em>implies</em> convergence in distribution, and (2) the Central Limit Theorem, delta-method, and Slutsky’s Theorem are tools we can use to determine (and manipulate) asymptotic distributions of random variables.</p>
+</section>
 <section id="asymptotic-properties-of-mles" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="asymptotic-properties-of-mles">Asymptotic Properties of MLEs</h3>
-<p>Coming soon…</p>
+<p>In addition to the nice intuition behind maximum likelihood estimation (finding the parameters that make our data the most likely to have occurred), MLEs also have incredibly convenient asymptotic properties, including:</p>
+<ul>
+<li><p>Asymptotic unbiasedness</p></li>
+<li><p>Consistency</p></li>
+<li><p>Asymptotic normality</p></li>
+<li><p>Asymptotic efficiency</p></li>
+</ul>
+<p>The definitions of the latter two properties are included below (and the former in the previous chapters).</p>
 </section>
 <section id="learning-objectives" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">6.1</span> Learning Objectives</h2>
-<p>Coming soon…</p>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li><p>Explain the usefulness of the Central Limit Theorem for Frequentist statistical theory</p></li>
+<li><p>Manipulate asymptotic distributions to remove their dependence on unknown parameters using the delta-method and Slutsky’s theorem</p>
+<ul>
+<li>…and explain why such manipulation is important for confidence interval construction</li>
+</ul></li>
+<li><p>Derive confidence intervals for unknown parameters based on asymptotic or exact distributions</p></li>
+</ul>
 </section>
 <section id="reading-guide" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">6.2</span> Reading Guide</h2>
-<p>Coming soon…</p>
+<p>Associated Readings: Chapter 4, Section 5.3</p>
 <section id="reading-questions" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">6.2.1</span> Reading Questions</h3>
-<p>Coming soon…</p>
+<ol type="1">
+<li><p>What feature of a confidence interval tells us about the precision of our estimator?</p></li>
+<li><p>Why is “removing” unknown parameters from the asymptotic distribution of our estimators important when constructing confidence intervals?</p></li>
+</ol>
 </section>
 </section>
 <section id="definitions" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">6.3</span> Definitions</h2>
-<p>Coming soon…</p>
+<p><strong>Asymptotic Normality</strong></p>
+<p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is asymptotically normal if <span class="math inline">\(\hat{\theta}_n\)</span> converges in distribution to a normally distributed random variable.</p>
+<p><strong>Asymptotic Efficiency</strong></p>
+<p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is asymptotically efficient if it’s asymptotic variance attains the C-R Lower Bound.</p>
+<p><strong>Confidence Interval</strong></p>
+<p>A 100(1 - <span class="math inline">\(\alpha\)</span>)% confidence interval for a parameter <span class="math inline">\(\theta\)</span> is given by <span class="math inline">\((a, b)\)</span>, where <span class="math inline">\(\Pr(a \leq \theta \leq b) = 1 - \alpha\)</span>.</p>
 </section>
 <section id="theorems" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">6.4</span> Theorems</h2>
-<p><strong>Coming soon…</strong></p>
+<p><strong>Central Limit Theorem (CLT)</strong></p>
+<p>For iid random variables <span class="math inline">\(X_1, \dots, X_n\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>,</p>
+<p><span class="math display">\[
+\sqrt{n} (\overline{X}_n - \mu) \overset{d}{\to} N(0, \sigma^2)
+\]</span></p>
+<p>where “<span class="math inline">\(\overset{d}{\to}\)</span>” denotes convergence in distribution.</p>
+<p><strong>Proof.</strong></p>
+<p>Note that this proof is not completely rigorous, in that we will use the following theorem (without proof) in order to prove the CLT:</p>
+<p>Theorem: Let <span class="math inline">\(W_1, \dots, W_n\)</span> be a sequence of random variables with MGF of the sequence <span class="math inline">\(W_n\)</span> given by <span class="math inline">\(M_{W_n}(t)\)</span>. Also, let <span class="math inline">\(V\)</span> denote another random variables with MGF <span class="math inline">\(M_V(t)\)</span>. Then if <span class="math inline">\(\underset{n \to \infty}{\text{lim}} M_{W_n}(t) = M_V(t)\)</span>, for all values of <span class="math inline">\(t\)</span> in some interval around <span class="math inline">\(t = 0\)</span>, then the sequence <span class="math inline">\(W_1, \dots, W_n\)</span> converges in distribution to <span class="math inline">\(V\)</span>.</p>
+<p>Suppose <span class="math inline">\(X_1, \dots, X_n\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, and let <span class="math inline">\(Y_i = (X_i - \mu)/\sigma\)</span>. Then <span class="math inline">\(E[Y_i] = 0\)</span>, and <span class="math inline">\(Var[Y_i] = 1\)</span> since</p>
+<p><span class="math display">\[
+E[Y_i] = E \left[ (X_i - \mu)/\sigma\right] = \frac{1}{\sigma^2} (E[X_i] - \mu) = \frac{1}{\sigma^2} (\mu - \mu) = 0
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+Var[Y_i] = Var\left[ (X_i - \mu)/\sigma\right] = \frac{1}{\sigma^2} Var[X_i - \mu] = \frac{1}{\sigma^2} Var[X_i] = \frac{\sigma^2}{\sigma^2} = 1
+\]</span></p>
+<p>Further, let</p>
+<p><span class="math display">\[
+Z_n = \frac{\sqrt{n}(\overline{X} - \mu)}{\sigma} = \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i
+\]</span></p>
+<p>where the last two terms are equal since</p>
+<span class="math display">\[\begin{align*}
+    \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i &amp; = \frac{1}{\sqrt{n}} \sum_{i = 1}^n \left( \frac{X_i - \mu}{\sigma}\right)\\
+    &amp; = \frac{1}{\sigma\sqrt{n}} \sum_{i = 1}^n (X_i - \mu) \\
+    &amp; = \frac{1}{\sigma\sqrt{n}}  (n\overline{X} - n\mu) \\
+    &amp; = \frac{\sqrt{n}(\overline{X} - \mu)}{\sigma}
+\end{align*}\]</span>
+<p>We’ll show that <span class="math inline">\(Z_n \overset{d}{\to} N(0,1)\)</span> by showing that the MGF of <span class="math inline">\(Z_n\)</span> converges to the MGF of a standard normal distribution. Let <span class="math inline">\(M_Y(t)\)</span> denote the MGF of each <span class="math inline">\(Y_i\)</span>. Then the MGF of <span class="math inline">\(\sum_{i = 1}^n Y_i\)</span> is given by</p>
+<p><span class="math display">\[
+E[e^{t\sum_{i = 1}^n Y_i}] = E[e^{tY_1}e^{tY_2} \dots e^{tY_n}] = E[e^{tY_1}]E[e^{tY_2}] \dots E[e^{tY_n}] = M_Y(t)^n
+\]</span></p>
+<p>and the MGF of <span class="math inline">\(Z_n\)</span> is</p>
+<p><span class="math display">\[
+M_{Z_n}(t) = E[e^{tZ_n}] = E[e^{t\frac{1}{\sqrt{n}}\sum_{i = 1}^n Y_i}] = M_Y\left(\frac{t}{\sqrt{n}}\right)^n
+\]</span></p>
+<p>Now note that the Taylor expansion of the function <span class="math inline">\(e^{tY}\)</span> about <span class="math inline">\(0\)</span> is given by</p>
+<p><span class="math display">\[
+e^{tY} = 1 + tY + \frac{t^2Y^2}{2!} + \frac{t^3Y^3}{3!} + \dots
+\]</span></p>
+<p>Taking the expectation of both sides, we obtain</p>
+<p><span class="math display">\[
+E[e^{tY}] = 1 + tE[Y] + \frac{t^2E[Y^2]}{2!} + \frac{t^3E[Y^3]}{3!} + \dots
+\]</span></p>
+<p>and note now that the left hand side is the MGF for <span class="math inline">\(Y\)</span>. Recalling that <span class="math inline">\(E[Y] = 0\)</span> and <span class="math inline">\(Var[Y] = 1\)</span>, we have</p>
+<p><span class="math display">\[
+E[e^{tY}] = 1  + \frac{t^2}{2!} + \frac{t^3E[Y^3]}{3!} + \dots
+\]</span></p>
+<p>And therefore</p>
+<p><span class="math display">\[
+E[e^{tZ_n}] = \left[1  + \frac{t^2}{2n} + \frac{t^3E[Y^3]}{3!n^{3/2}} + \dots \right]^n
+\]</span></p>
+<p>We’ll now make use of a theorem regarding sequences of real numbers (without proof): Let <span class="math inline">\(a_n\)</span> and <span class="math inline">\(c_n\)</span> be sequences or real numbers such that <span class="math inline">\(a_n \overset{n \to \infty}{\to} 0\)</span> and <span class="math inline">\(c_na_n^2 \overset{n \to \infty}{\to} 0\)</span>. Then if <span class="math inline">\(a_nc_n \overset{n \to \infty}{\to} b\)</span>, <span class="math inline">\((1 + a_n)^{c_n} \overset{n \to \infty}{\to} e^b\)</span>.</p>
+<p>Let <span class="math inline">\(a_n = \frac{t^2}{2n} + \frac{t^3E[Y^3]}{3!n^{3/2}} + \dots\)</span> and <span class="math inline">\(c_n = n\)</span>. Note that both <span class="math inline">\(a_n \overset{n \to \infty}{\to} 0\)</span> and <span class="math inline">\(c_na_n^2 \overset{n \to \infty}{\to} 0\)</span>. Then</p>
+<p><span class="math display">\[
+\underset{n \to \infty}{\text{lim}} a_n c_n = \underset{n \to \infty}{\text{lim}} \left[ \frac{t^2}{2} + \frac{t^3E[Y^3]}{3!n^{1/2}} + \dots\right] = \frac{t^2}{2}
+\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[
+M_{Z_n}(t) = (1 + a_n)^{c_n} \overset{n \to \infty}{\to} e^{t^2/2}
+\]</span></p>
+<p>where we note that the right hand side is the MGF of a standard normal distribution. Then finally, we have proved that</p>
+<p><span class="math display">\[
+\sqrt{n}(\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
+\]</span></p>
+<p>as desired.</p>
+<p><strong>Slutsky’s Theorem</strong></p>
+<p>If <span class="math inline">\(g(X, Y)\)</span> is a jointly continuous function at every point <span class="math inline">\((X, a)\)</span> for some fixed <span class="math inline">\(a\)</span>, and if <span class="math inline">\(X_n \overset{d}{\to} X\)</span> and <span class="math inline">\(Y_n \overset{p}{\to} a\)</span>, then <span class="math inline">\(g(X_n, Y_n) \overset{d}{\to} g(X, a)\)</span>.</p>
+<p><strong>Proof.</strong> Beyond the scope of the course, unfortunately, but here’s a <a href="https://en.wikipedia.org/wiki/Slutsky%27s_theorem#Proof">link</a> to the Wikipedia page if you want to go down that rabbit hole in your spare time.</p>
+<p><strong>Delta-method</strong></p>
+<p>Let <span class="math inline">\(\sqrt{n} (Y - \mu) \overset{d}{\to} N(0, \sigma^2)\)</span>. If <span class="math inline">\(g(Y)\)</span> is differentiable at <span class="math inline">\(\mu\)</span> and <span class="math inline">\(g'(\mu) \neq 0\)</span>, then</p>
+<p><span class="math display">\[
+\sqrt{n} \left( g(Y) - g(\mu)\right) \overset{d}{\to} N(0, [g'(\mu)]^2 \sigma^2)
+\]</span></p>
+<p><strong>Proof.</strong></p>
+<p>Since <span class="math inline">\(g\)</span> is differentiable at <span class="math inline">\(\mu\)</span>, it’s first-order Taylor expansion is given by</p>
+<p><span class="math display">\[
+g(Y) = g(\mu) + (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
+\]</span></p>
+<p>where <span class="math inline">\(O(f(x))\)</span>, referred to as “Big O,” describes the limiting behavior of the function <span class="math inline">\(f(x)\)</span>. In this case, we use it to note that every term in the Taylor expansion after the first derivative evaluated at <span class="math inline">\(\mu\)</span> is growing no faster than <span class="math inline">\(|Y - \mu|^2\)</span> as <span class="math inline">\(n \to \infty\)</span>.</p>
+<p>Rearranging, note that</p>
+<p><span class="math display">\[
+g(Y) - g(\mu) =  (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
+\]</span></p>
+<p>and so</p>
+<span class="math display">\[\begin{align*}
+    \sqrt{n}\left( g(Y) - g(\mu) \right) = \sqrt{n}(Y - \mu) g'(\mu) + O(\sqrt{n} |Y - \mu|^2)
+\end{align*}\]</span>
+<p>Then note that <span class="math inline">\(\sqrt{n}(Y - \mu) \overset{d}{\to} N(0, \sigma^2)\)</span>, <span class="math inline">\(g'(\mu) \overset{p}{\to} g'(\mu)\)</span> since it’s just a constant, and <span class="math inline">\(O(\sqrt{n} |Y - \mu|^2) \overset{p}{\to} 0\)</span> (due to the <span class="math inline">\(\sqrt{n}\)</span> term). Then using two applications of Slutsky’s theorem, we can write that</p>
+<p><span class="math display">\[
+\sqrt{n}(Y - \mu)g'(\mu) \overset{d}{\to} N(0, \sigma^2)g'(\mu) = \overset{d}{\to} N(0, [g'(\mu)]^2\sigma^2)
+\]</span> and</p>
+<span class="math display">\[\begin{align*}
+    \sqrt{n}(Y - \mu)g'(\mu) + O(\sqrt{n} |Y - \mu|^2) &amp; \overset{d}{\to} N(0, \sigma^2)g'(\mu) + 0\\
+    &amp; \overset{d}{=} N(0, [g'(\mu)]^2\sigma^2)
+\end{align*}\]</span>
+<p>and so finally we have shown that <span class="math display">\[
+\sqrt{n}\left( g(Y) - g(\mu) \right) \overset{d}{\to}  N(0, [g'(\mu)]^2\sigma^2)
+\]</span> as desired.</p>
 </section>
 <section id="worked-examples" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">6.5</span> Worked Examples</h2>
-<p><strong>Coming soon…</strong></p>
+<p><strong>Problem 1:</strong> Suppose <span class="math inline">\(\sqrt{n}(Y_n - \mu) \overset{d}{\to} N(0, \sigma^2)\)</span>. Find the asymptotic distribution of <span class="math inline">\(\sqrt{n}(Y_n^2 - \mu^2)\)</span> when <span class="math inline">\(\mu \neq 0\)</span>.</p>
+<p>We can apply the delta-method with the function <span class="math inline">\(g(x) = x^2\)</span>. Note that <span class="math inline">\(g'(x) = 2x\)</span>, and therefore we can write</p>
+<span class="math display">\[\begin{align*}
+    \sqrt{n}(Y_n - \mu) &amp; \overset{d}{\to} N(0, \sigma^2) \\
+    \sqrt{n}(g(Y_n) - g(\mu)) &amp; \overset{d}{\to} N(0, [g'(\mu)]^2\sigma^2) \\
+    \sqrt{n}(Y_n^2 - \mu^2) &amp; \overset{d}{\to} N(0, [2\mu]^2\sigma^2) \\
+    \sqrt{n}(Y_n^2 - \mu^2) &amp; \overset{d}{\to} N(0, 4 \mu^2\sigma^2)
+\end{align*}\]</span>
+<p><strong>Problem 2:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(n, p)\)</span>, and recall that the MLE for <span class="math inline">\(p\)</span> is given by <span class="math inline">\(\hat{p}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Find the asymptotic distribution of <span class="math inline">\(\hat{p}_{MLE}\)</span> using the CLT and known properties of the Bernoulli distribution (expectation and variance, for example), and construct a 95% confidence interval for <span class="math inline">\(p\)</span> based on this asymptotic distribution.</p>
+<p>We know that <span class="math inline">\(E[X_i] = p\)</span> and <span class="math inline">\(Var[X_i] = p(1-p)\)</span>. Then the CLT tell us that</p>
+<p><span class="math display">\[
+\sqrt{n}(\hat{p}_{MLE} - p) \overset{d}{\to} N(0, p(1-p))
+\]</span></p>
+<p>Applying Slutsky’s theorem, noting that <span class="math inline">\(\frac{1}{\hat{p}_{MLE}(1-\hat{p}_{MLE})} \overset{p}{\to} \frac{1}{p(1 - p)}\)</span>, we then have</p>
+<p><span class="math display">\[
+\sqrt{n}\left(\frac{\hat{p}_{MLE} - p}{\hat{p}_{MLE}(1-\hat{p}_{MLE})}\right) \overset{d}{\to} N(0, 1)
+\]</span></p>
+<p>and finally, (letting <span class="math inline">\(\hat{p} = \hat{p}_{MLE}\)</span> for ease of notation)</p>
+<span class="math display">\[\begin{align*}
+    0.95 &amp; = \Pr(-1.96 &lt; \frac{\hat{p} - p}{\hat{p}(1-\hat{p})}  &lt; 1.96)  \\
+    &amp; = \Pr(-1.96\hat{p}(1-\hat{p}) &lt; \hat{p} - p  &lt; 1.96\hat{p}(1-\hat{p})) \\
+    &amp; = \Pr(\hat{p} -1.96\hat{p}(1-\hat{p}) &lt;  p  &lt; \hat{p} + 1.96\hat{p}(1-\hat{p}))
+\end{align*}\]</span>
+<p><strong>Problem 3:</strong> Let <span class="math inline">\(F_{m,n}\)</span> denote a RV having the <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span> degrees of freedom. Suppose <span class="math inline">\(m = n\)</span>, and show that <span class="math inline">\(\sqrt{n}(F_{n,n} - 1) \overset{d}{\to} N(0,4)\)</span>. Use the fact that if <span class="math inline">\(X_n \overset{d}{\to} X\)</span> and <span class="math inline">\(h\)</span> is a continuous function, then <span class="math inline">\(h(X_n) \overset{d}{\to} h(X)\)</span>.</p>
 
 
 </section>
