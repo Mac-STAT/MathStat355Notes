@@ -310,4 +310,3 @@ and finally, (letting $\hat{p} = \hat{p}_{MLE}$ for ease of notation)
     & = \Pr(\hat{p} -1.96\hat{p}(1-\hat{p}) <  p  < \hat{p} + 1.96\hat{p}(1-\hat{p}))
 \end{align*}
 ```
-**Problem 3:** Let $F_{m,n}$ denote a RV having the $F$-distribution with $m$ and $n$ degrees of freedom. Suppose $m = n$, and show that $\sqrt{n}(F_{n,n} - 1) \overset{d}{\to} N(0,4)$. Use the fact that if $X_n \overset{d}{\to} X$ and $h$ is a continuous function, then $h(X_n) \overset{d}{\to} h(X)$.

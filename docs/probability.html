@@ -359,10 +359,10 @@ M_X(t) = E[e^{tX}]
 <table class="table">
 <caption><em>Table 1.</em> Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
 <colgroup>
-<col style="width: 5%">
-<col style="width: 34%">
-<col style="width: 36%">
-<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 28%">
+<col style="width: 31%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -404,42 +404,48 @@ M_X(t) = E[e^{tX}]
 <td><span class="math inline">\(x \in [0, \infty)\)</span></td>
 </tr>
 <tr class="even">
+<td><span class="math inline">\(F\)</span></td>
+<td><span class="math inline">\(\pi(x) = \frac{\Gamma(\frac{\nu_1 + \nu_2}{2})}{\Gamma(\frac{\nu_1}{2}) \Gamma(\frac{\nu_2}{2})} \left( \frac{\nu_1}{\nu_2}\right)^{\nu_1/2} \left( \frac{x^{(\nu_1 - 2)/2}}{\left( 1 + \left( \frac{\nu_1}{\nu_2}\right)x\right)^{(\nu_1 + \nu_2)/2}}\right)\)</span></td>
+<td><span class="math inline">\(\nu_1, \nu_2 &gt; 0\)</span></td>
+<td><span class="math inline">\(x \in [0, \infty)\)</span></td>
+</tr>
+<tr class="odd">
 <td>Exponential</td>
 <td><span class="math inline">\(\pi(x) = \beta e^{-\beta x}\)</span></td>
 <td><span class="math inline">\(\beta &gt; 0\)</span></td>
 <td><span class="math inline">\(x \in [0, \infty)\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Student-<span class="math inline">\(t\)</span></td>
 <td><span class="math inline">\(\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}\)</span></td>
 <td><span class="math inline">\(\nu &gt; 0\)</span></td>
 <td><span class="math inline">\(x \in \mathbb{R}\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Beta</td>
 <td><span class="math inline">\(\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}\)</span></td>
 <td><span class="math inline">\(\alpha, \beta &gt; 0\)</span></td>
 <td><span class="math inline">\(x \in [0,1]\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Poisson</td>
 <td><span class="math inline">\(\pi(x) = \frac{\lambda^x e^{-\lambda}}{x!}\)</span></td>
 <td><span class="math inline">\(\lambda &gt; 0\)</span></td>
 <td><span class="math inline">\(x \in \mathbb{N}\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Binomial</td>
 <td><span class="math inline">\(\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}\)</span></td>
 <td><span class="math inline">\(p \in [0,1], n = \{0, 1, 2, \dots\}\)</span></td>
 <td><span class="math inline">\(x \in \{0, 1, \dots, n\}\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Multinomial</td>
 <td><span class="math inline">\(\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}\)</span></td>
 <td><span class="math inline">\(p_i &gt; 0\)</span>, <span class="math inline">\(p_1 + \dots + p_k = 1\)</span>, <span class="math inline">\(n = \{0, 1, 2, \dots \}\)</span></td>
 <td><span class="math inline">\(\{ x_1, \dots, x_k \mid \sum_{i = 1}^k x_i = n, x_i \geq 0 (i = 1, \dots, k)\}\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Negative Binomial</td>
 <td><span class="math inline">\(\pi(x) = \binom{x + r - 1}{x} (1-p)^x p^r\)</span></td>
 <td><span class="math inline">\(r &gt; 0\)</span>, <span class="math inline">\(p \in [0,1]\)</span></td>
