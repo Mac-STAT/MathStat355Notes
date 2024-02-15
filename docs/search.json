@@ -210,9 +210,9 @@
     "text": "5.5 Worked Examples\nProblem 1: Suppose \\(X_1, \\dots, X_n \\overset{iid}{\\sim} N(\\mu, \\sigma^2)\\). Show that the MLE for \\(\\sigma^2\\) is asymptotically unbiased.\nThe MLE for \\(\\sigma^2\\) is given by \\(\\frac{1}{n} \\sum_{i = 1}^n (X_i - \\overline{X})^2\\) (see the MLE section of the course notes, worked example problem 2), and has expectation \\(\\left( \\frac{n-1}{n} \\right)\\sigma^2\\) (see the Properties section of the course notes, worked example problem 6). To show that this estimator is asymptotically unbiased, note that we have\n\\[\\begin{align*}\n    \\underset{n\\to \\infty}{\\text{lim}} E[\\hat{\\sigma^2}_{MLE}] & = \\underset{n\\to \\infty}{\\text{lim}} \\left( \\frac{n-1}{n} \\right) \\sigma^2 \\\\\n    & = \\left( 1 \\right) \\sigma^2 \\\\\n    & = \\sigma^2\n\\end{align*}\\]\nand therefore, the MLE for \\(\\sigma^2\\) is asymptotically unbiased.\nProblem 2: Suppose \\(Y_1, \\dots, Y_n \\overset{iid}{\\sim} Uniform(0, \\theta)\\), and recall that \\(\\hat{\\theta}_{MLE} = Y_{(n)}\\) with \\(f_{Y_{(n)}}(y \\mid \\theta) = \\frac{n}{\\theta^n} y^{n-1}\\), \\(0 \\leq y \\leq \\theta\\). Prove that \\(\\hat{\\theta}_{MLE}\\) is a consistent estimator for \\(\\theta\\).\nTo prove that \\(\\hat{\\theta}_{MLE}\\) is consistent, we must first show that \\(\\hat{\\theta}_{MLE}\\) is (either) unbiased or asymptotically unbiased, and then we must show that the variance of \\(\\hat{\\theta}_{MLE}\\) tends to zero as \\(n \\to \\infty\\). To begin, note that\n\\[\\begin{align*}\n    E\\left[\\hat{\\theta}_{MLE}\\right] & = \\int_{0}^\\theta y f_{Y_{(n)}} (y \\mid \\theta) dy \\\\\n    & = \\int_{0}^\\theta y \\left( \\frac{n}{\\theta^n} y^{n-1} \\right) dy \\\\\n    & = \\frac{n}{\\theta^n} \\int_0^\\theta y^n dy \\\\\n    & = \\frac{n}{\\theta^n} \\left( \\frac{y^{n + 1}}{n + 1} \\bigg|_0^\\theta \\right) \\\\\n    & = \\frac{n}{\\theta^n} \\left( \\frac{\\theta^{n + 1}}{n + 1} \\right) \\\\\n    & = \\left( \\frac{n}{n + 1} \\right) \\theta\n\\end{align*}\\]\nand so \\(\\hat{\\theta}_{MLE}\\) is biased. It is, however, asymptotically unbiased. Note that \\(\\left( \\frac{n}{n + 1} \\right) \\overset{n \\to \\infty}{\\to} 1\\), and therefore \\(E\\left[\\hat{\\theta}_{MLE}\\right] \\overset{n \\to \\infty}{\\to} \\theta\\).\nAll that’s left is to show that \\(Var\\left[\\hat{\\theta}_{MLE}\\right] \\overset{n \\to \\infty}{\\to} 0\\). We can write\n\\[\\begin{align*}\n        E\\left[Y_{(n)}^2\\right] & = \\int_0^\\theta y^2 \\frac{ny^{n-1}}{\\theta^n} dy \\\\\n        & = \\frac{n}{\\theta^n} \\int_0^\\theta y^{n + 1} dy \\\\\n        & = \\frac{n}{\\theta^n} \\left( \\frac{y^{n + 2}}{n + 2} \\bigg|_0^\\theta \\right) \\\\\n        & = \\frac{n}{\\theta^n} \\left( \\frac{\\theta^{n + 2}}{n + 2}\\right) \\\\\n        & = \\left( \\frac{n}{n + 2} \\right) \\theta^2\n    \\end{align*}\\]\nand therefore\n\\[\\begin{align*}\n    \\underset{n \\to \\infty}{\\text{lim}} Var\\left[\\hat{\\theta}_{MLE}\\right] & = \\underset{n \\to \\infty}{\\text{lim}} \\left[ E\\left[Y_{(n)}^2\\right] - E\\left[Y_{(n)}\\right]^2 \\right]\\\\\n    & = \\underset{n \\to \\infty}{\\text{lim}} \\left[ \\left( \\frac{n}{n + 2} \\right) \\theta^2 - \\left( \\frac{n}{n + 1} \\right)^2 \\theta^2 \\right] \\\\\n    & = \\theta^2 \\underset{n \\to \\infty}{\\text{lim}} \\left[ \\left( \\frac{n}{n + 2} \\right)  - \\left( \\frac{n}{n + 1} \\right)^2\\right] \\\\\n    & = \\theta^2 \\underset{n \\to \\infty}{\\text{lim}} \\left[  \\frac{n}{n + 2}   - \\frac{n^2}{(n + 1)^2} \\right] \\\\\n    & = \\theta^2 \\underset{n \\to \\infty}{\\text{lim}} \\left[  \\frac{n(n + 1)^2 - n^2 (n + 2)}{(n + 2)(n + 1)^2} \\right] \\\\\n    & = \\theta^2 \\underset{n \\to \\infty}{\\text{lim}} \\left[  \\frac{n(n^2 + 2n + 1) - n^3 -2n^2}{(n + 2)(n^2 + 2n + 1)} \\right] \\\\\n    & = \\theta^2 \\underset{n \\to \\infty}{\\text{lim}} \\left[  \\frac{n^3 + 2n^2 + n - n^3 -2n^2}{n^3 + 2n^2 + 2n^2 + 4n + 2} \\right] \\\\\n    & = \\theta^2 \\underset{n \\to \\infty}{\\text{lim}} \\left[  \\frac{n}{n^3 + 4n^2  + 4n + 2} \\right] \\\\\n    & = 0\n\\end{align*}\\]\nwhere the last term goes to zero because \\(\\frac{n}{n^3} \\to 0\\) as \\(n \\to \\infty\\). Therefore, \\(\\hat{\\theta}_{MLE}\\) is a consistent estimator for \\(\\theta\\)."
   },
   {
-    "objectID": "computation.html",
-    "href": "computation.html",
-    "title": "7  Computational Optimization",
+    "objectID": "hypothesis.html",
+    "href": "hypothesis.html",
+    "title": "7  Hypothesis Testing",
     "section": "",
     "text": "Under development…"
   },
@@ -231,9 +231,9 @@
     "text": "Under development…"
   },
   {
-    "objectID": "hypothesis.html",
-    "href": "hypothesis.html",
-    "title": "10  Hypothesis Testing",
+    "objectID": "computation.html",
+    "href": "computation.html",
+    "title": "10  Computational Optimization",
     "section": "",
     "text": "Under development…"
   },

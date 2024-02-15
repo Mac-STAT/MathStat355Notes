@@ -24,10 +24,10 @@ book:
     - properties.qmd
     - consistency.qmd
     - asymptotics.qmd
-    - computation.qmd
+    - hypothesis.qmd
     - bayes.qmd
     - decision.qmd
-    - hypothesis.qmd
+    - computation.qmd
     - references.qmd
 
 bibliography: references.bib
