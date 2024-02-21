@@ -68,7 +68,7 @@ If an estimator $\hat{\theta}_n$ is a consistent estimator for $\theta$, we also
 
 ### Asymptotic Properties of MLEs {.unnumbered .unlisted}
 
-In addition to the nice intuition behind maximum likelihood estimation (finding the parameters that make our data the most likely to have occurred), MLEs also have incredibly convenient asymptotic properties, including:
+In addition to the nice intuition behind maximum likelihood estimation (finding the parameters that make our data the most likely to have occurred), most\* MLEs also have incredibly convenient asymptotic properties, including:
 
 -   Asymptotic unbiasedness
 
@@ -79,6 +79,8 @@ In addition to the nice intuition behind maximum likelihood estimation (finding 
 -   Asymptotic efficiency
 
 The definitions of the latter two properties are included below (and the former in the previous chapters).
+
+\*the MLEs that do not have all of these properties are the ones that don't have certain "regularity conditions." For the MLEs we consider in this class, these are the MLEs that are on the boundary of the support of the pdf (such as the maximum or minimum order statistic).
 
 ## Learning Objectives
 
