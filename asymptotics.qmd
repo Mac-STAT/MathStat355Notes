@@ -64,7 +64,7 @@ where $\Phi_{a; v, w}$ is the $a$th quantile from a Beta distribution with shape
 
 ### Convergence {.unnumbered .unlisted}
 
-If an estimator $\hat{\theta}_n$ is a consistent estimator for $\theta$, we also say that $\hat{\theta}_n$ converges in probability to $\theta$ (i.e., $\hat{\theta}_n \overset{p}{\to} \theta$). There are three different types of convergence: almost sure convergence, convergence in probability, and convergence in distribution (in order from "strongest" to "weakest"). The main two that we'll care about for this course are convergence in probability and convergence in distribution. Mathematical details about convergence are for a more advanced statistical theory course (or perhaps a more advanced course in analysis). For our purposes, it will suffice to know that (1) convergence in probability *implies* convergence in distribution, and (2) the Central Limit Theorem, delta-method, and Slutsky's Theorem are tools we can use to determine (and manipulate) asymptotic distributions of random variables.
+If an estimator $\hat{\theta}_n$ is a consistent estimator for $\theta$, we also say that $\hat{\theta}_n$ converges in probability to $\theta$ (i.e., $\hat{\theta}_n \overset{p}{\to} \theta$). There are three different types of convergence: almost sure convergence, convergence in probability, and convergence in distribution (in order from "strongest" to "weakest"). The main two that we'll care about for this course are convergence in probability and convergence in distribution. Mathematical details about convergence are for a more advanced statistical theory course (or perhaps a more advanced course in analysis). For our purposes, it will suffice to know that (1) convergence in probability *implies* convergence in distribution, (2) the Central Limit Theorem, delta-method, and Slutsky's Theorem are tools we can use to determine (and manipulate) asymptotic distributions of random variables, and (3) the Continuous Mapping Theorem (defined below).
 
 ### Asymptotic Properties of MLEs {.unnumbered .unlisted}
 
@@ -132,7 +132,7 @@ where "$\overset{d}{\to}$" denotes convergence in distribution.
 
 Note that this proof is not completely rigorous, in that we will use the following theorem (without proof) in order to prove the CLT:
 
-Theorem: Let $W_1, \dots, W_n$ be a sequence of random variables with MGF of the sequence $W_n$ given by $M_{W_n}(t)$. Also, let $V$ denote another random variables with MGF $M_V(t)$. Then if $\underset{n \to \infty}{\text{lim}} M_{W_n}(t) = M_V(t)$, for all values of $t$ in some interval around $t = 0$, then the sequence $W_1, \dots, W_n$ converges in distribution to $V$.
+Theorem: Let $W_1, \dots, W_n$ be a sequence of random variables with MGF of the sequence $W_n$ given by $M_{W_n}(t)$. Also, let $V$ denote another random variable with MGF $M_V(t)$. Then if $\underset{n \to \infty}{\text{lim}} M_{W_n}(t) = M_V(t)$, for all values of $t$ in some interval around $t = 0$, then the sequence $W_1, \dots, W_n$ converges in distribution to $V$.
 
 Suppose $X_1, \dots, X_n$ with mean $\mu$ and variance $\sigma^2$, and let $Y_i = (X_i - \mu)/\sigma$. Then $E[Y_i] = 0$, and $Var[Y_i] = 1$ since
 
@@ -198,7 +198,7 @@ $$
 E[e^{tZ_n}] = \left[1  + \frac{t^2}{2n} + \frac{t^3E[Y^3]}{3!n^{3/2}} + \dots \right]^n
 $$
 
-We'll now make use of a theorem regarding sequences of real numbers (without proof): Let $a_n$ and $c_n$ be sequences or real numbers such that $a_n \overset{n \to \infty}{\to} 0$ and $c_na_n^2 \overset{n \to \infty}{\to} 0$. Then if $a_nc_n \overset{n \to \infty}{\to} b$, $(1 + a_n)^{c_n} \overset{n \to \infty}{\to} e^b$.
+We'll now make use of a theorem regarding sequences of real numbers (without proof): Let $a_n$ and $c_n$ be sequences of real numbers such that $a_n \overset{n \to \infty}{\to} 0$ and $c_na_n^2 \overset{n \to \infty}{\to} 0$. Then if $a_nc_n \overset{n \to \infty}{\to} b$, $(1 + a_n)^{c_n} \overset{n \to \infty}{\to} e^b$.
 
 Let $a_n = \frac{t^2}{2n} + \frac{t^3E[Y^3]}{3!n^{3/2}} + \dots$ and $c_n = n$. Note that both $a_n \overset{n \to \infty}{\to} 0$ and $c_na_n^2 \overset{n \to \infty}{\to} 0$. Then
 
@@ -219,6 +219,12 @@ $$
 $$
 
 as desired.
+
+**Continuous Mapping Theorem**
+
+If $X_n \overset{p}{\to} X$, and $g$ is a continuous function, then $g(X_n) \overset{p}{\to} g(X)$. Similarly for convergence almost surely and convergence in distribution.
+
+**Proof.** Left to the reader, but also on [Wikipedia](https://en.wikipedia.org/wiki/Continuous_mapping_theorem#Proof).
 
 **Slutsky's Theorem**
 
