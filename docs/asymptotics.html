@@ -60,13 +60,14 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+</head><body class="nav-sidebar docked">\usepackage{mathtools}
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-</head>
 
-<body class="nav-sidebar docked">
+
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,21 +228,21 @@ ul.task-list li input[type="checkbox"] {
 <p>The primary way that we construct confidence intervals is by “rearranging” the CLT so that a quantity’s asymptotic distribution does not depend on the data nor the parameter of interest. This process is sometimes called establishing an <em>approximate pivotal quantity</em>.</p>
 <p>As an example, consider an iid random sample <span class="math inline">\(X_1, \dots, X_n\)</span> where <span class="math inline">\(E[X_i] = \mu\)</span> and <span class="math inline">\(Var[X_i] = \sigma^2\)</span>, where <span class="math inline">\(\sigma^2\)</span> is known. The CLT tells us that</p>
 <p><span class="math display">\[
-\sqrt{n}(\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2).
+\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu) \overset{d}{\to} N(0, \sigma^2).
 \]</span></p>
 <p>We can use this to construct a confidence interval for <span class="math inline">\(\mu\)</span>. By Slutsky’s theorem we can write</p>
 <p><span class="math display">\[
-\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \overset{d}{\to} N(0, 1).
+\frac{\overbracket[0.65pt][-1]{X} - \mu}{\sigma/\sqrt{n}} \overset{d}{\to} N(0, 1).
 \]</span></p>
 <p>and note now that we <em>know</em> the asymptotic distribution for the (pivotal) quantity on the left, and can therefore use the <em>quantiles</em> of this distribution to construct confidence intervals. For a standard normal distribution (as is the case here) we can note that 95% of the distribution is contained within 1.96 standard deviations of the mean, and therefore</p>
 <p><span class="math display">\[
-\Pr\left(-1.96 \leq \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \leq 1.96\right) = 0.95
+\Pr\left(-1.96 \leq \frac{\overbracket[0.65pt][-1]{X} - \mu}{\sigma/\sqrt{n}} \leq 1.96\right) = 0.95
 \]</span></p>
 <p>We can rearrange the probability statement on the left hand side to get</p>
 <p><span class="math display">\[
-\Pr\left(\overline{X}-1.96 \sigma/\sqrt{n} \leq \mu \leq \overline{X} + 1.96\sigma/\sqrt{n}\right) = 0.95
+\Pr\left(\overbracket[0.65pt][-1]{X}-1.96 \sigma/\sqrt{n} \leq \mu \leq \overbracket[0.65pt][-1]{X} + 1.96\sigma/\sqrt{n}\right) = 0.95
 \]</span></p>
-<p>and therefore, our 95% confidence interval for <span class="math inline">\(\mu\)</span> is given by <span class="math inline">\(\left( \overline{X}-1.96 \sigma/\sqrt{n}, \overline{X}+1.96 \sigma/\sqrt{n} \right)\)</span>.</p>
+<p>and therefore, our 95% confidence interval for <span class="math inline">\(\mu\)</span> is given by <span class="math inline">\(\left( \overbracket[0.65pt][-1]{X}-1.96 \sigma/\sqrt{n}, \overbracket[0.65pt][-1]{X}+1.96 \sigma/\sqrt{n} \right)\)</span>.</p>
 </section>
 <section id="confidence-intervals---exact" class="level4 unnumbered unlisted">
 <h4 class="unnumbered unlisted anchored" data-anchor-id="confidence-intervals---exact">Confidence Intervals - “Exact”</h4>
@@ -314,7 +315,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Central Limit Theorem (CLT)</strong></p>
 <p>For iid random variables <span class="math inline">\(X_1, \dots, X_n\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>,</p>
 <p><span class="math display">\[
-\sqrt{n} (\overline{X}_n - \mu) \overset{d}{\to} N(0, \sigma^2)
+\sqrt{n} (\overbracket[0.65pt][-1]{X}_n - \mu) \overset{d}{\to} N(0, \sigma^2)
 \]</span></p>
 <p>where “<span class="math inline">\(\overset{d}{\to}\)</span>” denotes convergence in distribution.</p>
 <p><strong>Proof.</strong></p>
@@ -330,14 +331,14 @@ Var[Y_i] = Var\left[ (X_i - \mu)/\sigma\right] = \frac{1}{\sigma^2} Var[X_i - \m
 \]</span></p>
 <p>Further, let</p>
 <p><span class="math display">\[
-Z_n = \frac{\sqrt{n}(\overline{X} - \mu)}{\sigma} = \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i
+Z_n = \frac{\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu)}{\sigma} = \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i
 \]</span></p>
 <p>where the last two terms are equal since</p>
 <span class="math display">\[\begin{align*}
     \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i &amp; = \frac{1}{\sqrt{n}} \sum_{i = 1}^n \left( \frac{X_i - \mu}{\sigma}\right)\\
     &amp; = \frac{1}{\sigma\sqrt{n}} \sum_{i = 1}^n (X_i - \mu) \\
-    &amp; = \frac{1}{\sigma\sqrt{n}}  (n\overline{X} - n\mu) \\
-    &amp; = \frac{\sqrt{n}(\overline{X} - \mu)}{\sigma}
+    &amp; = \frac{1}{\sigma\sqrt{n}}  (n\overbracket[0.65pt][-1]{X} - n\mu) \\
+    &amp; = \frac{\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu)}{\sigma}
 \end{align*}\]</span>
 <p>We’ll show that <span class="math inline">\(Z_n \overset{d}{\to} N(0,1)\)</span> by showing that the MGF of <span class="math inline">\(Z_n\)</span> converges to the MGF of a standard normal distribution. Let <span class="math inline">\(M_Y(t)\)</span> denote the MGF of each <span class="math inline">\(Y_i\)</span>. Then the MGF of <span class="math inline">\(\sum_{i = 1}^n Y_i\)</span> is given by</p>
 <p><span class="math display">\[
@@ -374,7 +375,7 @@ M_{Z_n}(t) = (1 + a_n)^{c_n} \overset{n \to \infty}{\to} e^{t^2/2}
 \]</span></p>
 <p>where we note that the right hand side is the MGF of a standard normal distribution. Then finally, we have proved that</p>
 <p><span class="math display">\[
-\sqrt{n}(\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
+\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
 \]</span></p>
 <p>as desired.</p>
 <p><strong>Continuous Mapping Theorem</strong></p>

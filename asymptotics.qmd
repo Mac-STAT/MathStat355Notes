@@ -15,28 +15,28 @@ The primary way that we construct confidence intervals is by "rearranging" the C
 As an example, consider an iid random sample $X_1, \dots, X_n$ where $E[X_i] = \mu$ and $Var[X_i] = \sigma^2$, where $\sigma^2$ is known. The CLT tells us that
 
 $$
-\sqrt{n}(\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2).
+\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu) \overset{d}{\to} N(0, \sigma^2).
 $$
 
 We can use this to construct a confidence interval for $\mu$. By Slutsky's theorem we can write
 
 $$
-\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \overset{d}{\to} N(0, 1).
+\frac{\overbracket[0.65pt][-1]{X} - \mu}{\sigma/\sqrt{n}} \overset{d}{\to} N(0, 1).
 $$
 
 and note now that we *know* the asymptotic distribution for the (pivotal) quantity on the left, and can therefore use the *quantiles* of this distribution to construct confidence intervals. For a standard normal distribution (as is the case here) we can note that 95% of the distribution is contained within 1.96 standard deviations of the mean, and therefore
 
 $$
-\Pr\left(-1.96 \leq \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \leq 1.96\right) = 0.95
+\Pr\left(-1.96 \leq \frac{\overbracket[0.65pt][-1]{X} - \mu}{\sigma/\sqrt{n}} \leq 1.96\right) = 0.95
 $$
 
 We can rearrange the probability statement on the left hand side to get
 
 $$
-\Pr\left(\overline{X}-1.96 \sigma/\sqrt{n} \leq \mu \leq \overline{X} + 1.96\sigma/\sqrt{n}\right) = 0.95
+\Pr\left(\overbracket[0.65pt][-1]{X}-1.96 \sigma/\sqrt{n} \leq \mu \leq \overbracket[0.65pt][-1]{X} + 1.96\sigma/\sqrt{n}\right) = 0.95
 $$
 
-and therefore, our 95% confidence interval for $\mu$ is given by $\left( \overline{X}-1.96 \sigma/\sqrt{n}, \overline{X}+1.96 \sigma/\sqrt{n} \right)$.
+and therefore, our 95% confidence interval for $\mu$ is given by $\left( \overbracket[0.65pt][-1]{X}-1.96 \sigma/\sqrt{n}, \overbracket[0.65pt][-1]{X}+1.96 \sigma/\sqrt{n} \right)$.
 
 #### Confidence Intervals - "Exact" {.unnumbered .unlisted}
 
@@ -125,7 +125,7 @@ A 100(1 - $\alpha$)% confidence interval for a parameter $\theta$ is given by $(
 For iid random variables $X_1, \dots, X_n$ with mean $\mu$ and variance $\sigma^2$,
 
 $$
-\sqrt{n} (\overline{X}_n - \mu) \overset{d}{\to} N(0, \sigma^2)
+\sqrt{n} (\overbracket[0.65pt][-1]{X}_n - \mu) \overset{d}{\to} N(0, \sigma^2)
 $$
 
 where "$\overset{d}{\to}$" denotes convergence in distribution.
@@ -151,7 +151,7 @@ $$
 Further, let
 
 $$
-Z_n = \frac{\sqrt{n}(\overline{X} - \mu)}{\sigma} = \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i
+Z_n = \frac{\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu)}{\sigma} = \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i
 $$
 
 where the last two terms are equal since
@@ -160,8 +160,8 @@ where the last two terms are equal since
 \begin{align*}
     \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i & = \frac{1}{\sqrt{n}} \sum_{i = 1}^n \left( \frac{X_i - \mu}{\sigma}\right)\\
     & = \frac{1}{\sigma\sqrt{n}} \sum_{i = 1}^n (X_i - \mu) \\
-    & = \frac{1}{\sigma\sqrt{n}}  (n\overline{X} - n\mu) \\
-    & = \frac{\sqrt{n}(\overline{X} - \mu)}{\sigma}
+    & = \frac{1}{\sigma\sqrt{n}}  (n\overbracket[0.65pt][-1]{X} - n\mu) \\
+    & = \frac{\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu)}{\sigma}
 \end{align*}
 ```
 We'll show that $Z_n \overset{d}{\to} N(0,1)$ by showing that the MGF of $Z_n$ converges to the MGF of a standard normal distribution. Let $M_Y(t)$ denote the MGF of each $Y_i$. Then the MGF of $\sum_{i = 1}^n Y_i$ is given by
@@ -217,7 +217,7 @@ $$
 where we note that the right hand side is the MGF of a standard normal distribution. Then finally, we have proved that
 
 $$
-\sqrt{n}(\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
+\sqrt{n}(\overbracket[0.65pt][-1]{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
 $$
 
 as desired.
