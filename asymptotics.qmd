@@ -137,7 +137,7 @@ Theorem: Let $W_1, \dots, W_n$ be a sequence of random variables with MGF of the
 Suppose $X_1, \dots, X_n$ with mean $\mu$ and variance $\sigma^2$, and let $Y_i = (X_i - \mu)/\sigma$. Then $E[Y_i] = 0$, and $Var[Y_i] = 1$ since
 
 $$
-E[Y_i] = E \left[ (X_i - \mu)/\sigma\right] = \frac{1}{\sigma^2} (E[X_i] - \mu) = \frac{1}{\sigma^2} (\mu - \mu) = 0
+E[Y_i] = E \left[ (X_i - \mu)/\sigma\right] = \frac{1}{\sigma} (E[X_i] - \mu) = \frac{1}{\sigma} (\mu - \mu) = 0
 $$
 
 and
