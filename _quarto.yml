@@ -39,13 +39,10 @@ format:
     backgroundcolor: "#faf7e7"
     fontcolor: "#000000"
     keep-tex: true
-    include-in-header: 
-      text: \usepackage{mathtools}
+
   pdf:
     documentclass: scrreprt
     keep-tex: true
-    include-in-header: 
-      text: \usepackage{mathtools}
 
 editor: visual
 

@@ -125,7 +125,7 @@ A 100(1 - $\alpha$)% confidence interval for a parameter $\theta$ is given by $(
 For iid random variables $X_1, \dots, X_n$ with mean $\mu$ and variance $\sigma^2$,
 
 $$
-\sqrt{n} (\overbracket[0.65pt][-1]{X}_n - \mu) \overset{d}{\to} N(0, \sigma^2)
+\sqrt{n} (\overbracket[0.65pt][-1]{X_n} - \mu) \overset{d}{\to} N(0, \sigma^2)
 $$
 
 where "$\overset{d}{\to}$" denotes convergence in distribution.
