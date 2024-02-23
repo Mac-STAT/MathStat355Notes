@@ -295,7 +295,7 @@ We can apply the delta-method with the function $g(x) = x^2$. Note that $g'(x) =
     \sqrt{n}(Y_n^2 - \mu^2) & \overset{d}{\to} N(0, 4 \mu^2\sigma^2)
 \end{align*}
 ```
-**Problem 2:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(n, p)$, and recall that the MLE for $p$ is given by $\hat{p}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i$. Find the asymptotic distribution of $\hat{p}_{MLE}$ using the CLT and known properties of the Bernoulli distribution (expectation and variance, for example), and construct a 95% confidence interval for $p$ based on this asymptotic distribution.
+**Problem 2:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(p)$, and recall that the MLE for $p$ is given by $\hat{p}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i$. Find the asymptotic distribution of $\hat{p}_{MLE}$ using the CLT and known properties of the Bernoulli distribution (expectation and variance, for example), and construct a 95% confidence interval for $p$ based on this asymptotic distribution.
 
 We know that $E[X_i] = p$ and $Var[X_i] = p(1-p)$. Then the CLT tell us that
 

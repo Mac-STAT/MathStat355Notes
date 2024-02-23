@@ -424,7 +424,7 @@ g(Y) - g(\mu) =  (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
     \sqrt{n}(Y_n^2 - \mu^2) &amp; \overset{d}{\to} N(0, [2\mu]^2\sigma^2) \\
     \sqrt{n}(Y_n^2 - \mu^2) &amp; \overset{d}{\to} N(0, 4 \mu^2\sigma^2)
 \end{align*}\]</span>
-<p><strong>Problem 2:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(n, p)\)</span>, and recall that the MLE for <span class="math inline">\(p\)</span> is given by <span class="math inline">\(\hat{p}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Find the asymptotic distribution of <span class="math inline">\(\hat{p}_{MLE}\)</span> using the CLT and known properties of the Bernoulli distribution (expectation and variance, for example), and construct a 95% confidence interval for <span class="math inline">\(p\)</span> based on this asymptotic distribution.</p>
+<p><strong>Problem 2:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(p)\)</span>, and recall that the MLE for <span class="math inline">\(p\)</span> is given by <span class="math inline">\(\hat{p}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Find the asymptotic distribution of <span class="math inline">\(\hat{p}_{MLE}\)</span> using the CLT and known properties of the Bernoulli distribution (expectation and variance, for example), and construct a 95% confidence interval for <span class="math inline">\(p\)</span> based on this asymptotic distribution.</p>
 <p>We know that <span class="math inline">\(E[X_i] = p\)</span> and <span class="math inline">\(Var[X_i] = p(1-p)\)</span>. Then the CLT tell us that</p>
 <p><span class="math display">\[
 \sqrt{n}(\hat{p}_{MLE} - p) \overset{d}{\to} N(0, p(1-p))
