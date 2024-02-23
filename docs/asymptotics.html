@@ -429,15 +429,15 @@ g(Y) - g(\mu) =  (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
 <p><span class="math display">\[
 \sqrt{n}(\hat{p}_{MLE} - p) \overset{d}{\to} N(0, p(1-p))
 \]</span></p>
-<p>Applying Slutsky’s theorem, noting that <span class="math inline">\(\frac{1}{\hat{p}_{MLE}(1-\hat{p}_{MLE})} \overset{p}{\to} \frac{1}{p(1 - p)}\)</span>, we then have</p>
+<p>Applying Slutsky’s theorem, noting that <span class="math inline">\(\frac{1}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}} \overset{p}{\to} \frac{1}{\sqrt{p(1 - p)}}\)</span>, we then have</p>
 <p><span class="math display">\[
-\sqrt{n}\left(\frac{\hat{p}_{MLE} - p}{\hat{p}_{MLE}(1-\hat{p}_{MLE})}\right) \overset{d}{\to} N(0, 1)
+\sqrt{n}\left(\frac{\hat{p}_{MLE} - p}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}}\right) \overset{d}{\to} N(0, 1)
 \]</span></p>
 <p>and finally, (letting <span class="math inline">\(\hat{p} = \hat{p}_{MLE}\)</span> for ease of notation)</p>
 <span class="math display">\[\begin{align*}
-    0.95 &amp; = \Pr(-1.96 &lt; \frac{\hat{p} - p}{\hat{p}(1-\hat{p})}  &lt; 1.96)  \\
-    &amp; = \Pr(-1.96\hat{p}(1-\hat{p}) &lt; \hat{p} - p  &lt; 1.96\hat{p}(1-\hat{p})) \\
-    &amp; = \Pr(\hat{p} -1.96\hat{p}(1-\hat{p}) &lt;  p  &lt; \hat{p} + 1.96\hat{p}(1-\hat{p}))
+    0.95 &amp; = \Pr(-1.96 &lt; \frac{\hat{p} - p}{\sqrt{\hat{p}(1-\hat{p})}}  &lt; 1.96)  \\
+    &amp; = \Pr(-1.96\sqrt{\hat{p}(1-\hat{p})} &lt; \hat{p} - p  &lt; 1.96\sqrt{\hat{p}(1-\hat{p})}) \\
+    &amp; = \Pr(\hat{p} -1.96\sqrt{\hat{p}(1-\hat{p})} &lt;  p  &lt; \hat{p} + 1.96\sqrt{\hat{p}(1-\hat{p})})
 \end{align*}\]</span>
 
 
