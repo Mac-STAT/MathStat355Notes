@@ -435,9 +435,9 @@ g(Y) - g(\mu) =  (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
 \]</span></p>
 <p>and finally, (letting <span class="math inline">\(\hat{p} = \hat{p}_{MLE}\)</span> for ease of notation)</p>
 <span class="math display">\[\begin{align*}
-    0.95 &amp; = \Pr(-1.96 &lt; \frac{\hat{p} - p}{\sqrt{n\hat{p}(1-\hat{p})}}  &lt; 1.96)  \\
-    &amp; = \Pr(-1.96\sqrt{n\hat{p}(1-\hat{p})} &lt; \hat{p} - p  &lt; 1.96\sqrt{n\hat{p}(1-\hat{p})}) \\
-    &amp; = \Pr(\hat{p} -1.96\sqrt{n\hat{p}(1-\hat{p})} &lt;  p  &lt; \hat{p} + 1.96\sqrt{n\hat{p}(1-\hat{p})})
+    0.95 &amp; = \Pr\left(-1.96 &lt; \frac{\hat{p} - p}{\sqrt{\hat{p}(1-\hat{p})/n}}  &lt; 1.96\right)  \\
+    &amp; = \Pr\left(-1.96\sqrt{\hat{p}(1-\hat{p})/n} &lt; \hat{p} - p  &lt; 1.96\sqrt{\hat{p}(1-\hat{p})/n}\right) \\
+    &amp; = \Pr\left(\hat{p} -1.96\sqrt{\hat{p}(1-\hat{p})/n} &lt;  p  &lt; \hat{p} + 1.96\sqrt{\hat{p}(1-\hat{p})/n}\right)
 \end{align*}\]</span>
 
 

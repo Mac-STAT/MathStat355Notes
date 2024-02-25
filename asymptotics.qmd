@@ -313,8 +313,8 @@ and finally, (letting $\hat{p} = \hat{p}_{MLE}$ for ease of notation)
 
 ```{=tex}
 \begin{align*}
-    0.95 & = \Pr(-1.96 < \frac{\hat{p} - p}{\sqrt{n\hat{p}(1-\hat{p})}}  < 1.96)  \\
-    & = \Pr(-1.96\sqrt{n\hat{p}(1-\hat{p})} < \hat{p} - p  < 1.96\sqrt{n\hat{p}(1-\hat{p})}) \\
-    & = \Pr(\hat{p} -1.96\sqrt{n\hat{p}(1-\hat{p})} <  p  < \hat{p} + 1.96\sqrt{n\hat{p}(1-\hat{p})})
+    0.95 & = \Pr\left(-1.96 < \frac{\hat{p} - p}{\sqrt{\hat{p}(1-\hat{p})/n}}  < 1.96\right)  \\
+    & = \Pr\left(-1.96\sqrt{\hat{p}(1-\hat{p})/n} < \hat{p} - p  < 1.96\sqrt{\hat{p}(1-\hat{p})/n}\right) \\
+    & = \Pr\left(\hat{p} -1.96\sqrt{\hat{p}(1-\hat{p})/n} <  p  < \hat{p} + 1.96\sqrt{\hat{p}(1-\hat{p})/n}\right)
 \end{align*}
 ```
