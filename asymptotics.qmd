@@ -303,7 +303,7 @@ $$
 \sqrt{n}(\hat{p}_{MLE} - p) \overset{d}{\to} N(0, p(1-p))
 $$
 
-Applying Slutsky's theorem, noting that $\frac{1}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}} \overset{p}{\to} \frac{1}{\sqrt{p(1 - p)}}$, we then have
+The WLLN gives us that $\hat{p}_{MLE} \overset{p}{\to} p$, since $\hat{p}_{MLE}$ is a sample mean. We can then use the continuous mapping theorem to show that $\frac{1}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}} \overset{p}{\to} \frac{1}{\sqrt{p(1 - p)}}$. Applying Slutsky's theorem, we then have
 
 $$
 \sqrt{n}\left(\frac{\hat{p}_{MLE} - p}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}}\right) \overset{d}{\to} N(0, 1)

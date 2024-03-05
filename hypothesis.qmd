@@ -1,3 +1,250 @@
 # Hypothesis Testing
 
-Under development...
+The goal of hypothesis testing is to make a decision between two conflicting theories, or "hypotheses." The process of hypothesis testing involves the following steps:
+
+1.  State the hypotheses: $H_0$ (null hypothesis) vs $H_1$ (alternative hypothesis)
+
+2.  Investigate: are data compatible with $H_0$? assuming $H_0$ were true, are data extreme?
+
+3.  Make a decision: reject $H_0$ or fail to reject $H_0$
+
+The first step is relatively straightforward. For the purposes of this course, our null hypothesis will always be that some unknown parameter we are interested in $(\theta)$ is equal to a fixed point $(\theta_0)$. We'll consider two possible alternatives hypothesis:
+
+-   $H_1: \theta = \theta_1$ ("simple" alternative)
+
+-   $H_1: \theta \neq \theta_0$ (two-sided alternative)
+
+The former is the simplest, non-trivial alternative hypothesis we can consider, and we can prove some nice things in this setting (and hence build intuition for hypothesis testing broadly). The latter is perhaps more relevant, particularly in linear regression.
+
+If you recall from introductory statistics, the latter alternative provides the set-up we have when testing if the linear relationship between a predictor $X$ and outcome $Y$ are "statistically significantly" associated; we test the null hypothesis $H_0: \beta_1 = 0$ against the alternative, $H_1: \beta_1 \neq 0$, where $E[Y \mid X] = \beta_0 + \beta_1 X$. In this example, we'd have the unknown parameter $\beta_1$, and the fixed point of our null hypothesis as $\theta_0 = 0$.
+
+The second step of hypothesis testing is the investigation. In determining whether the data are compatible with the null hypothesis, we must first derive a *test statistic*. Test statistics are typically functions of (1) our estimators and (2) the distribution of our estimator *under the null hypothesis*. Intuitively, if we can determine the distribution of our estimator under the null hypothesis, we can then observe whether or not the data we actually have is "extreme" or not, given a certain threshold, $\alpha$, for our hypothesis test. This threshold $\alpha$ is directly related to a $100(1 - \alpha)\%$ confidence interval, where anything observed outside the confidence interval bounds is considered to lie in the "rejection region" (where you would thus reject the null hypothesis).
+
+There are three classical forms of test statistics that have varying finite-sample properties, and can be shown to be asymptotically equivalent: the Wald test, the likelihood ratio test (LRT), and the score test (also sometimes called the Lagrange multiplier test). Each of these is explained in further detail below.
+
+### Wald Tests {.unnumbered .unlisted}
+
+Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The Wald test is the hypothesis test that uses the Wald test statistic $\lambda_{W}$, where
+
+$$
+\lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta})}\right)^2.
+$$
+
+Intuitively, the Wald test measures the difference between the estimated value for $\theta$ and the null value for $\theta$, standardized by the variation of your estimator. If this reminds you (once again) of a z-score, it should! In linear regression, with normally distributed standard errors, it turns out that $\sqrt{W}$ follows a $t$ distribution (we'll show this on your problem set!).
+
+Note that there is also a multivariate version of the Wald test, used to jointly test *multiple* hypotheses on multiple parameters. In this case, we can write our null and alternative hypotheses using matrices and vectors.
+
+As a simple example, consider a linear regression model where we have a single, categorical predictor with three categories. Our regression model looks something like this:
+
+$$
+E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
+$$
+
+If we want to test if there is a significant association between $Y$ and $X$, we can't look at $\hat{\beta_1}$ and $\hat{\beta}_2$ separately. Rather, we need to test the joint null hypothesis $\beta_1 = \beta_2 = 0$, vs. the alternative where *at least one* of our coefficients is equal to zero. In introductory statistics, we did this using the `anova` function in R. In matrix form, we can write our null and alternative hypotheses as:
+
+-   $H_0: R \boldsymbol{\beta} = \textbf{r}$
+
+-   $H_1: R \boldsymbol{\beta} \neq \textbf{r}$
+
+where $R$ in this case is the identity matrix, $\boldsymbol{\beta} = (\beta_0, \beta_1)^\top$, and $\textbf{r} = (0,0)^\top$. The Wald test statistic in this multi-hypothesis, multi-parameter case can then be written as
+
+$$
+(R\hat{\boldsymbol{\theta}} - \textbf{r})^\top [R (\hat{V}/n) R^\top]^{-1} (R\hat{\boldsymbol{\theta}} - \textbf{r})
+$$
+
+where $\hat{V}$ is an estimator of the covariance matrix for $\hat{\boldsymbol{\theta}}$. We won't focus on multi-hypothesis, multi-parameter tests in this course, but I *do* want you to be able to draw connections between statistical theory and things you learned way back in your introductory statistics course, hence why this is included in the notes.
+
+### Likelihood Ratio Tests {.unnumbered .unlisted}
+
+Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The likelihood ratio test is the hypothesis test that uses the likelihood ratio test statistic $\lambda_{LRT}$, where
+
+$$
+\lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)} \right).
+$$
+
+When $\lambda_{LRT}$ is close to $1$, it suggests that the data are compatible with $H_0$, and values of $\lambda_{LRT}$ close to $0$ suggest the data are *not* compatible with $H_0$. Therefore, we'll reject $H_0$ for small values of $\lambda_{LRT}$ and fail to reject $H_0$ if $\lambda_{LRT}$ is large. The likelihood ratio test is the most "powerful" of all level $\alpha$ tests, and we can prove this using the Neyman-Pearson Lemma.
+
+### Score Tests {.unnumbered .unlisted}
+
+Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The score test is the hypothesis test that uses the score test statistic $\lambda_S$,
+
+$$
+\lambda_S = \frac{\left( \frac{\partial}{\partial \theta_0} \log L(\theta_0 \mid x) \right)^2}{I(\theta_0)}
+$$
+
+as its test statistic. Note that the score test statistic depends *only* on the distribution of the estimator under the null hypothesis, rather than the maximum likelihood estimator. This is sometimes referred to as a test that requires only computation of a *restricted* estimator (where $\theta_0$ is "restricted" by the null distribution).
+
+## Learning Objectives
+
+By the end of this chapter, you should be able to...
+
+-   Derive and implement a hypothesis test using each of the three classical test statistics to distinguish between two conflicting hypotheses
+-   Describe the differences and relationships between Type I Error, Type II Error, and power, as well as the factors that influence each of them
+-   Calculate the power or Type II error for a given hypothesis test
+
+## Reading Guide
+
+Associated Readings: Chapter 6, Sections 6.1-6.5\*
+
+\*Note: I (Taylor) don't love the way that the textbook discusses hypothesis testing. This reading will not be required, but is included in the course notes as a reference if you'd like to read about hypothesis testing from a different perspective.
+
+### Reading Questions
+
+1.  What is the goal of hypothesis testing?
+2.  What are the typical steps to deriving a hypothesis test?
+3.  What is the difference between a one-sided and a two-sided alternative hypothesis? How does this impact our hypothesis testing procedure? How does this impact our p-value?
+4.  How are test statistics and p-values related?
+5.  How is type I error related to the choice of significance level?
+6.  What are the typical steps to calculating the probability of a type II error?
+7.  How is type II error related to the power of a hypothesis test?
+8.  What factors influence the power of a test? In practice, which of these factors can we control?
+
+## Definitions
+
+**Wald Test Statistic**
+
+The Wald test statistic $\lambda_W$ for testing the hypothesis $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$ is given by
+
+$$
+\lambda_W = \left(\frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta}_{MLE})}\right)^2,
+$$
+
+where $\hat{\theta}_{MLE}$ is a maximum likelihood estimator.
+
+**Likelihood Ratio Test (LRT) Statistic**
+
+The likelihood ratio test statistic $\lambda_{LRT}$ for testing the hypothesis $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$ is given by
+
+$$
+\lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)}\right),
+$$
+
+where we note that the denominator, $\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)$, is the likelihood evaluated at the maximum likelihood estimator.
+
+**Score Test Statistic**
+
+The score test statistic $\lambda_S$ for testing the hypothesis $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$ is given by
+
+$$
+\lambda_S = \frac{\left( \frac{\partial}{\partial \theta_0} \log L(\theta_0 \mid x) \right)^2}{I(\theta_0)}.
+$$
+
+**Power**
+
+Power is the probability that we *correctly* reject the null hypothesis; aka, the probability that we reject the null hypothesis, when the null hypothesis is actually false. As a conditional probability statement: $\Pr(\text{Reject }H_0 \mid H_0 \text{ False})$. Note that
+
+$$
+\text{Power} = 1 - \text{Type II Error}
+$$
+
+**Type I Error ("False positive")**
+
+Type I Error is the probability that the null hypothesis is rejected, when the null hypothesis is actually true. As a conditional probability statement: $\Pr(\text{Reject }H_0 \mid H_0 \text{ True})$
+
+**Type II Error ("False negative")**
+
+Type II Error is the probability that we fail to reject the null hypothesis, given that the null hypothesis is actually false. As a conditional probability statement: $\Pr(\text{Fail to reject }H_0 \mid H_0 \text{ False})$
+
+**Critical Region / Rejection Region**
+
+The critical/rejection region is defined as the set of values for which the null hypothesis would be rejected. This set is often denoted with a capital $R$.
+
+**Critical Value**
+
+The critical value is the point that separates the rejection region from the "acceptance" region (i.e., the value at which the decision for your hypothesis test would change). Acceptance is in quotes because we should never "accept" the null hypothesis... but we still call the "fail-to-reject" region the acceptance region for short.
+
+**Significance Level**
+
+The significance level, denoted $\alpha$, is the probability that, under the null hypothesis, the test statistic lies in the critical/rejection region.
+
+**P-value**
+
+The p-value associated with a test statistic is the probability of obtaining a value *as or more extreme* than the observed test statistic, under the null hypothesis.
+
+**Uniformly Most Powerful (UMP) Test**
+
+A UMP test is a hypothesis test that has the *greatest* power among all possibly tests of a given significance threshold $\alpha$.
+
+More formally, let the set $R$ denote the rejection region of a hypothesis test. Let
+
+$$
+\phi(x) = \begin{cases} 1 & \quad \text{if } x \in R \\ 0 & \quad \text{if } x \in R^c \end{cases}
+$$
+
+Then $\phi(x)$ is an indicator function. Recalling that expectations of indicator functions are probabilities, note that $E[\phi(x)] = \Pr(\text{Reject } H_0)$. $\phi(x)$ then represents our hypothesis test. A hypothesis test $\phi(x)$ is UMP of size $\alpha$ if, for any other hypothesis test $\phi'(x)$ of size $\alpha$ we have,
+
+$$
+\underset{\theta \in \Theta_0}{\text{sup}} E[\phi'(X) \mid \theta] \leq \underset{\theta \in \Theta_0}{\text{sup}} E[\phi(X) \mid \theta]
+$$
+
+and $\forall \theta \in \Theta_1$,
+
+$$
+E[\phi'(X) \mid \theta] \leq E[\phi(X) \mid \theta],
+$$
+
+where $\Theta_0$ is the set of all values for $\theta$ that align with the null hypothesis (sometimes just a single point, sometimes a region), and $\Theta_1$ is the set of all values for $\theta$ that align with the alternative hypothesis (sometimes just a single point, sometimes a region). **Note:** In general, UMP tests *do not exist* for two-sided alternative hypotheses. The Neyman-Pearson lemma tells us about UMP tests for simple null and alternative hypotheses, and the [Karlin-Rubin theorem](https://en.wikipedia.org/wiki/Uniformly_most_powerful_test) extends this to one-sided null and alternative hypotheses.
+
+## Theorems
+
+**Neyman-Pearson Lemma**
+
+Consider a hypothesis test with $H_0: \theta = \theta_0$ and $H_1: \theta = \theta_1$. Let $\phi$ be a *likelihood ratio test* of level $\alpha$, where $\alpha = E[\phi(X) \mid \theta_0]$. Then $\phi$ is a UMP level $\alpha$ test for thee hypotheses $H_0: \theta = \theta_0$ and $H_1: \theta = \theta_1$.
+
+**Proof.**
+
+Let $\alpha = E[\phi(X) \mid \theta_0]$. Note that the LRT statistic is simplified in the case of these simple hypotheses, and can be written just as $\frac{f(x \mid \theta_1)}{f(x \mid \theta_0)}$. If the likelihood under the alternative is greater than some constant $c$ (which depends on $\alpha$), then we reject the null in favor of the alternative, and vice versa. Then the hypothesis testing function $\phi$ can be written as
+
+$$
+\phi(x) = \begin{cases} 0 & \quad \text{if } \lambda_{LRT} = \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} < c\\
+1 & \quad \text{if } \lambda_{LRT} = \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} > c\\
+\text{Flip a coin} & \quad \text{if } \lambda_{LRT} = \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} = c
+\end{cases}
+$$Suppose $\phi'$ is any other test such that $E[\phi'(X) \mid \theta_0] \leq \alpha$ (another level $\alpha$ test). Then we must show that $E[\phi'(X) \mid \theta_1] \leq E[\phi(X) \mid \theta_1]$.
+
+By assumption, we have
+
+```{=tex}
+\begin{align*}
+    E[\phi(X) \mid \theta_0] &= \int \phi(x) f_X(x \mid \theta_0) dx = \alpha \\
+    E[\phi'(X) \mid \theta_0] &= \int \phi'(x) f_X(x \mid \theta_0) dx \leq \alpha
+\end{align*}
+```
+Therefore we can write
+
+```{=tex}
+\begin{align*}
+    E[\phi(X) & \mid \theta_1] - E[\phi'(X) \mid \theta_1] \\
+    & = \int \phi(x) f_X(x \mid \theta_1) dx - \int \phi'(x) f_X(x \mid \theta_1) dx \\
+    & = \int [\phi(x) - \phi'(x)] f_X(x \mid \theta_1) dx \\
+    & = \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} > c \right\}} \underbrace{[\phi(x) - \phi'(x)]}_{\geq 0} f_X(x \mid \theta_1) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} < c \right\}} \underbrace{[\phi(x) - \phi'(x)]}_{\leq 0} f_X(x \mid \theta_1) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} = c \right\}} [\phi(x) - \phi'(x)] f_X(x \mid \theta_1) dx \\
+    & \geq \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} > c \right\}} [\phi(x) - \phi'(x)] cf_X(x \mid \theta_0) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} < c \right\}} [\phi(x) - \phi'(x)] cf_X(x \mid \theta_0) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} = c \right\}} [\phi(x) - \phi'(x)] cf_X(x \mid \theta_0) dx \\
+    & = c \int [\phi(x) - \phi'(x)] f_X(x \mid \theta_0) dx \\
+    & = c \int \phi(x) f_X(x \mid \theta_0) dx - c \int \phi'(x) f_X(x \mid \theta_0) dx \\
+    & \geq c(\alpha - \alpha) \\
+    & = 0
+\end{align*}
+```
+And rearranging yields
+
+```{=tex}
+\begin{align*}
+E[\phi(X)  \mid \theta_1] - E[\phi'(X) \mid \theta_1] & \geq 0 \\
+E[\phi(X) \mid \theta_1] & \geq E[\phi'(X) \mid \theta_1]
+\end{align*}
+```
+as desired.
+
+## Worked Examples
+
+**Problem 1:** Let $Y_i \overset{iid}{\sim} N(\mu, \sigma^2)$, where $\sigma^2 = 25$ is *known*. Suppose we want to test the hypotheses $H_0: \mu = 8$ vs. $H_1: \mu > 8$ and we observe $\overline{Y} = 10$ across $n = 64$ observations. Can we reject $H_0$, with a significance threshold of $\alpha = 0.05$?
+
+**Problem 2:** Suppose we wanted to use a different significance level $\alpha$. How would the procedure in Problem 1 change if we let $\alpha = 0.01$? How would the procedure in Problem 1 change if we let $\alpha = 0.1$?
+
+**Problem 3:** Suppose we have a random sample $X_1, \dots, X_n \sim Bernoulli(p)$, and we want to test the hypotheses $H_0:p = 0.5$, $H_1:p \neq 0.5$. Suppose we calculate an estimator for $p$ as $\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i$. Derive a Wald test statistic for this hypothesis testing scenario.
+
+**Problem 4:** Derive a LRT statistic for the hypothesis testing scenario described in Problem 3.
+
+**Problem 5:** Derive a score test statistic for the hypothesis testing scenario described in Problem 3.
+
+**Problem 6:** For each of Problems 3, 4, and 5, calculate the p-values from each test when $\hat{p} = 0.4$.

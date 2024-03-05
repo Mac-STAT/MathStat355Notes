@@ -429,7 +429,7 @@ g(Y) - g(\mu) =  (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
 <p><span class="math display">\[
 \sqrt{n}(\hat{p}_{MLE} - p) \overset{d}{\to} N(0, p(1-p))
 \]</span></p>
-<p>Applying Slutsky’s theorem, noting that <span class="math inline">\(\frac{1}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}} \overset{p}{\to} \frac{1}{\sqrt{p(1 - p)}}\)</span>, we then have</p>
+<p>The WLLN gives us that <span class="math inline">\(\hat{p}_{MLE} \overset{p}{\to} p\)</span>, since <span class="math inline">\(\hat{p}_{MLE}\)</span> is a sample mean. We can then use the continuous mapping theorem to show that <span class="math inline">\(\frac{1}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}} \overset{p}{\to} \frac{1}{\sqrt{p(1 - p)}}\)</span>. Applying Slutsky’s theorem, we then have</p>
 <p><span class="math display">\[
 \sqrt{n}\left(\frac{\hat{p}_{MLE} - p}{\sqrt{\hat{p}_{MLE}(1-\hat{p}_{MLE})}}\right) \overset{d}{\to} N(0, 1)
 \]</span></p>

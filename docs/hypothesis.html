@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -180,7 +182,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
+  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">7.2</span> Reading Guide</a>
+  <ul class="collapse">
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">7.2.1</span> Reading Questions</a></li>
+  </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">7.3</span> Definitions</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">7.4</span> Theorems</a></li>
+  <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">7.5</span> Worked Examples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,9 +217,186 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Under development…</p>
+<p>The goal of hypothesis testing is to make a decision between two conflicting theories, or “hypotheses.” The process of hypothesis testing involves the following steps:</p>
+<ol type="1">
+<li><p>State the hypotheses: <span class="math inline">\(H_0\)</span> (null hypothesis) vs <span class="math inline">\(H_1\)</span> (alternative hypothesis)</p></li>
+<li><p>Investigate: are data compatible with <span class="math inline">\(H_0\)</span>? assuming <span class="math inline">\(H_0\)</span> were true, are data extreme?</p></li>
+<li><p>Make a decision: reject <span class="math inline">\(H_0\)</span> or fail to reject <span class="math inline">\(H_0\)</span></p></li>
+</ol>
+<p>The first step is relatively straightforward. For the purposes of this course, our null hypothesis will always be that some unknown parameter we are interested in <span class="math inline">\((\theta)\)</span> is equal to a fixed point <span class="math inline">\((\theta_0)\)</span>. We’ll consider two possible alternatives hypothesis:</p>
+<ul>
+<li><p><span class="math inline">\(H_1: \theta = \theta_1\)</span> (“simple” alternative)</p></li>
+<li><p><span class="math inline">\(H_1: \theta \neq \theta_0\)</span> (two-sided alternative)</p></li>
+</ul>
+<p>The former is the simplest, non-trivial alternative hypothesis we can consider, and we can prove some nice things in this setting (and hence build intuition for hypothesis testing broadly). The latter is perhaps more relevant, particularly in linear regression.</p>
+<p>If you recall from introductory statistics, the latter alternative provides the set-up we have when testing if the linear relationship between a predictor <span class="math inline">\(X\)</span> and outcome <span class="math inline">\(Y\)</span> are “statistically significantly” associated; we test the null hypothesis <span class="math inline">\(H_0: \beta_1 = 0\)</span> against the alternative, <span class="math inline">\(H_1: \beta_1 \neq 0\)</span>, where <span class="math inline">\(E[Y \mid X] = \beta_0 + \beta_1 X\)</span>. In this example, we’d have the unknown parameter <span class="math inline">\(\beta_1\)</span>, and the fixed point of our null hypothesis as <span class="math inline">\(\theta_0 = 0\)</span>.</p>
+<p>The second step of hypothesis testing is the investigation. In determining whether the data are compatible with the null hypothesis, we must first derive a <em>test statistic</em>. Test statistics are typically functions of (1) our estimators and (2) the distribution of our estimator <em>under the null hypothesis</em>. Intuitively, if we can determine the distribution of our estimator under the null hypothesis, we can then observe whether or not the data we actually have is “extreme” or not, given a certain threshold, <span class="math inline">\(\alpha\)</span>, for our hypothesis test. This threshold <span class="math inline">\(\alpha\)</span> is directly related to a <span class="math inline">\(100(1 - \alpha)\%\)</span> confidence interval, where anything observed outside the confidence interval bounds is considered to lie in the “rejection region” (where you would thus reject the null hypothesis).</p>
+<p>There are three classical forms of test statistics that have varying finite-sample properties, and can be shown to be asymptotically equivalent: the Wald test, the likelihood ratio test (LRT), and the score test (also sometimes called the Lagrange multiplier test). Each of these is explained in further detail below.</p>
+<section id="wald-tests" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="wald-tests">Wald Tests</h3>
+<p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The Wald test is the hypothesis test that uses the Wald test statistic <span class="math inline">\(\lambda_{W}\)</span>, where</p>
+<p><span class="math display">\[
+\lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta})}\right)^2.
+\]</span></p>
+<p>Intuitively, the Wald test measures the difference between the estimated value for <span class="math inline">\(\theta\)</span> and the null value for <span class="math inline">\(\theta\)</span>, standardized by the variation of your estimator. If this reminds you (once again) of a z-score, it should! In linear regression, with normally distributed standard errors, it turns out that <span class="math inline">\(\sqrt{W}\)</span> follows a <span class="math inline">\(t\)</span> distribution (we’ll show this on your problem set!).</p>
+<p>Note that there is also a multivariate version of the Wald test, used to jointly test <em>multiple</em> hypotheses on multiple parameters. In this case, we can write our null and alternative hypotheses using matrices and vectors.</p>
+<p>As a simple example, consider a linear regression model where we have a single, categorical predictor with three categories. Our regression model looks something like this:</p>
+<p><span class="math display">\[
+E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
+\]</span></p>
+<p>If we want to test if there is a significant association between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>, we can’t look at <span class="math inline">\(\hat{\beta_1}\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> separately. Rather, we need to test the joint null hypothesis <span class="math inline">\(\beta_1 = \beta_2 = 0\)</span>, vs.&nbsp;the alternative where <em>at least one</em> of our coefficients is equal to zero. In introductory statistics, we did this using the <code>anova</code> function in R. In matrix form, we can write our null and alternative hypotheses as:</p>
+<ul>
+<li><p><span class="math inline">\(H_0: R \boldsymbol{\beta} = \textbf{r}\)</span></p></li>
+<li><p><span class="math inline">\(H_1: R \boldsymbol{\beta} \neq \textbf{r}\)</span></p></li>
+</ul>
+<p>where <span class="math inline">\(R\)</span> in this case is the identity matrix, <span class="math inline">\(\boldsymbol{\beta} = (\beta_0, \beta_1)^\top\)</span>, and <span class="math inline">\(\textbf{r} = (0,0)^\top\)</span>. The Wald test statistic in this multi-hypothesis, multi-parameter case can then be written as</p>
+<p><span class="math display">\[
+(R\hat{\boldsymbol{\theta}} - \textbf{r})^\top [R (\hat{V}/n) R^\top]^{-1} (R\hat{\boldsymbol{\theta}} - \textbf{r})
+\]</span></p>
+<p>where <span class="math inline">\(\hat{V}\)</span> is an estimator of the covariance matrix for <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span>. We won’t focus on multi-hypothesis, multi-parameter tests in this course, but I <em>do</em> want you to be able to draw connections between statistical theory and things you learned way back in your introductory statistics course, hence why this is included in the notes.</p>
+</section>
+<section id="likelihood-ratio-tests" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="likelihood-ratio-tests">Likelihood Ratio Tests</h3>
+<p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The likelihood ratio test is the hypothesis test that uses the likelihood ratio test statistic <span class="math inline">\(\lambda_{LRT}\)</span>, where</p>
+<p><span class="math display">\[
+\lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)} \right).
+\]</span></p>
+<p>When <span class="math inline">\(\lambda_{LRT}\)</span> is close to <span class="math inline">\(1\)</span>, it suggests that the data are compatible with <span class="math inline">\(H_0\)</span>, and values of <span class="math inline">\(\lambda_{LRT}\)</span> close to <span class="math inline">\(0\)</span> suggest the data are <em>not</em> compatible with <span class="math inline">\(H_0\)</span>. Therefore, we’ll reject <span class="math inline">\(H_0\)</span> for small values of <span class="math inline">\(\lambda_{LRT}\)</span> and fail to reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(\lambda_{LRT}\)</span> is large. The likelihood ratio test is the most “powerful” of all level <span class="math inline">\(\alpha\)</span> tests, and we can prove this using the Neyman-Pearson Lemma.</p>
+</section>
+<section id="score-tests" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="score-tests">Score Tests</h3>
+<p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The score test is the hypothesis test that uses the score test statistic <span class="math inline">\(\lambda_S\)</span>,</p>
+<p><span class="math display">\[
+\lambda_S = \frac{\left( \frac{\partial}{\partial \theta_0} \log L(\theta_0 \mid x) \right)^2}{I(\theta_0)}
+\]</span></p>
+<p>as its test statistic. Note that the score test statistic depends <em>only</em> on the distribution of the estimator under the null hypothesis, rather than the maximum likelihood estimator. This is sometimes referred to as a test that requires only computation of a <em>restricted</em> estimator (where <span class="math inline">\(\theta_0\)</span> is “restricted” by the null distribution).</p>
+</section>
+<section id="learning-objectives" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li>Derive and implement a hypothesis test using each of the three classical test statistics to distinguish between two conflicting hypotheses</li>
+<li>Describe the differences and relationships between Type I Error, Type II Error, and power, as well as the factors that influence each of them</li>
+<li>Calculate the power or Type II error for a given hypothesis test</li>
+</ul>
+</section>
+<section id="reading-guide" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">7.2</span> Reading Guide</h2>
+<p>Associated Readings: Chapter 6, Sections 6.1-6.5*</p>
+<p>*Note: I (Taylor) don’t love the way that the textbook discusses hypothesis testing. This reading will not be required, but is included in the course notes as a reference if you’d like to read about hypothesis testing from a different perspective.</p>
+<section id="reading-questions" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">7.2.1</span> Reading Questions</h3>
+<ol type="1">
+<li>What is the goal of hypothesis testing?</li>
+<li>What are the typical steps to deriving a hypothesis test?</li>
+<li>What is the difference between a one-sided and a two-sided alternative hypothesis? How does this impact our hypothesis testing procedure? How does this impact our p-value?</li>
+<li>How are test statistics and p-values related?</li>
+<li>How is type I error related to the choice of significance level?</li>
+<li>What are the typical steps to calculating the probability of a type II error?</li>
+<li>How is type II error related to the power of a hypothesis test?</li>
+<li>What factors influence the power of a test? In practice, which of these factors can we control?</li>
+</ol>
+</section>
+</section>
+<section id="definitions" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">7.3</span> Definitions</h2>
+<p><strong>Wald Test Statistic</strong></p>
+<p>The Wald test statistic <span class="math inline">\(\lambda_W\)</span> for testing the hypothesis <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span> is given by</p>
+<p><span class="math display">\[
+\lambda_W = \left(\frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta}_{MLE})}\right)^2,
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is a maximum likelihood estimator.</p>
+<p><strong>Likelihood Ratio Test (LRT) Statistic</strong></p>
+<p>The likelihood ratio test statistic <span class="math inline">\(\lambda_{LRT}\)</span> for testing the hypothesis <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span> is given by</p>
+<p><span class="math display">\[
+\lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)}\right),
+\]</span></p>
+<p>where we note that the denominator, <span class="math inline">\(\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)\)</span>, is the likelihood evaluated at the maximum likelihood estimator.</p>
+<p><strong>Score Test Statistic</strong></p>
+<p>The score test statistic <span class="math inline">\(\lambda_S\)</span> for testing the hypothesis <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span> is given by</p>
+<p><span class="math display">\[
+\lambda_S = \frac{\left( \frac{\partial}{\partial \theta_0} \log L(\theta_0 \mid x) \right)^2}{I(\theta_0)}.
+\]</span></p>
+<p><strong>Power</strong></p>
+<p>Power is the probability that we <em>correctly</em> reject the null hypothesis; aka, the probability that we reject the null hypothesis, when the null hypothesis is actually false. As a conditional probability statement: <span class="math inline">\(\Pr(\text{Reject }H_0 \mid H_0 \text{ False})\)</span>. Note that</p>
+<p><span class="math display">\[
+\text{Power} = 1 - \text{Type II Error}
+\]</span></p>
+<p><strong>Type I Error (“False positive”)</strong></p>
+<p>Type I Error is the probability that the null hypothesis is rejected, when the null hypothesis is actually true. As a conditional probability statement: <span class="math inline">\(\Pr(\text{Reject }H_0 \mid H_0 \text{ True})\)</span></p>
+<p><strong>Type II Error (“False negative”)</strong></p>
+<p>Type II Error is the probability that we fail to reject the null hypothesis, given that the null hypothesis is actually false. As a conditional probability statement: <span class="math inline">\(\Pr(\text{Fail to reject }H_0 \mid H_0 \text{ False})\)</span></p>
+<p><strong>Critical Region / Rejection Region</strong></p>
+<p>The critical/rejection region is defined as the set of values for which the null hypothesis would be rejected. This set is often denoted with a capital <span class="math inline">\(R\)</span>.</p>
+<p><strong>Critical Value</strong></p>
+<p>The critical value is the point that separates the rejection region from the “acceptance” region (i.e., the value at which the decision for your hypothesis test would change). Acceptance is in quotes because we should never “accept” the null hypothesis… but we still call the “fail-to-reject” region the acceptance region for short.</p>
+<p><strong>Significance Level</strong></p>
+<p>The significance level, denoted <span class="math inline">\(\alpha\)</span>, is the probability that, under the null hypothesis, the test statistic lies in the critical/rejection region.</p>
+<p><strong>P-value</strong></p>
+<p>The p-value associated with a test statistic is the probability of obtaining a value <em>as or more extreme</em> than the observed test statistic, under the null hypothesis.</p>
+<p><strong>Uniformly Most Powerful (UMP) Test</strong></p>
+<p>A UMP test is a hypothesis test that has the <em>greatest</em> power among all possibly tests of a given significance threshold <span class="math inline">\(\alpha\)</span>.</p>
+<p>More formally, let the set <span class="math inline">\(R\)</span> denote the rejection region of a hypothesis test. Let</p>
+<p><span class="math display">\[
+\phi(x) = \begin{cases} 1 &amp; \quad \text{if } x \in R \\ 0 &amp; \quad \text{if } x \in R^c \end{cases}
+\]</span></p>
+<p>Then <span class="math inline">\(\phi(x)\)</span> is an indicator function. Recalling that expectations of indicator functions are probabilities, note that <span class="math inline">\(E[\phi(x)] = \Pr(\text{Reject } H_0)\)</span>. <span class="math inline">\(\phi(x)\)</span> then represents our hypothesis test. A hypothesis test <span class="math inline">\(\phi(x)\)</span> is UMP of size <span class="math inline">\(\alpha\)</span> if, for any other hypothesis test <span class="math inline">\(\phi'(x)\)</span> of size <span class="math inline">\(\alpha\)</span> we have,</p>
+<p><span class="math display">\[
+\underset{\theta \in \Theta_0}{\text{sup}} E[\phi'(X) \mid \theta] \leq \underset{\theta \in \Theta_0}{\text{sup}} E[\phi(X) \mid \theta]
+\]</span></p>
+<p>and <span class="math inline">\(\forall \theta \in \Theta_1\)</span>,</p>
+<p><span class="math display">\[
+E[\phi'(X) \mid \theta] \leq E[\phi(X) \mid \theta],
+\]</span></p>
+<p>where <span class="math inline">\(\Theta_0\)</span> is the set of all values for <span class="math inline">\(\theta\)</span> that align with the null hypothesis (sometimes just a single point, sometimes a region), and <span class="math inline">\(\Theta_1\)</span> is the set of all values for <span class="math inline">\(\theta\)</span> that align with the alternative hypothesis (sometimes just a single point, sometimes a region). <strong>Note:</strong> In general, UMP tests <em>do not exist</em> for two-sided alternative hypotheses. The Neyman-Pearson lemma tells us about UMP tests for simple null and alternative hypotheses, and the <a href="https://en.wikipedia.org/wiki/Uniformly_most_powerful_test">Karlin-Rubin theorem</a> extends this to one-sided null and alternative hypotheses.</p>
+</section>
+<section id="theorems" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">7.4</span> Theorems</h2>
+<p><strong>Neyman-Pearson Lemma</strong></p>
+<p>Consider a hypothesis test with <span class="math inline">\(H_0: \theta = \theta_0\)</span> and <span class="math inline">\(H_1: \theta = \theta_1\)</span>. Let <span class="math inline">\(\phi\)</span> be a <em>likelihood ratio test</em> of level <span class="math inline">\(\alpha\)</span>, where <span class="math inline">\(\alpha = E[\phi(X) \mid \theta_0]\)</span>. Then <span class="math inline">\(\phi\)</span> is a UMP level <span class="math inline">\(\alpha\)</span> test for thee hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> and <span class="math inline">\(H_1: \theta = \theta_1\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>Let <span class="math inline">\(\alpha = E[\phi(X) \mid \theta_0]\)</span>. Note that the LRT statistic is simplified in the case of these simple hypotheses, and can be written just as <span class="math inline">\(\frac{f(x \mid \theta_1)}{f(x \mid \theta_0)}\)</span>. If the likelihood under the alternative is greater than some constant <span class="math inline">\(c\)</span> (which depends on <span class="math inline">\(\alpha\)</span>), then we reject the null in favor of the alternative, and vice versa. Then the hypothesis testing function <span class="math inline">\(\phi\)</span> can be written as</p>
+<p><span class="math display">\[
+\phi(x) = \begin{cases} 0 &amp; \quad \text{if } \lambda_{LRT} = \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} &lt; c\\
+1 &amp; \quad \text{if } \lambda_{LRT} = \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} &gt; c\\
+\text{Flip a coin} &amp; \quad \text{if } \lambda_{LRT} = \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} = c
+\end{cases}
+\]</span>Suppose <span class="math inline">\(\phi'\)</span> is any other test such that <span class="math inline">\(E[\phi'(X) \mid \theta_0] \leq \alpha\)</span> (another level <span class="math inline">\(\alpha\)</span> test). Then we must show that <span class="math inline">\(E[\phi'(X) \mid \theta_1] \leq E[\phi(X) \mid \theta_1]\)</span>.</p>
+<p>By assumption, we have</p>
+<span class="math display">\[\begin{align*}
+    E[\phi(X) \mid \theta_0] &amp;= \int \phi(x) f_X(x \mid \theta_0) dx = \alpha \\
+    E[\phi'(X) \mid \theta_0] &amp;= \int \phi'(x) f_X(x \mid \theta_0) dx \leq \alpha
+\end{align*}\]</span>
+<p>Therefore we can write</p>
+<span class="math display">\[\begin{align*}
+    E[\phi(X) &amp; \mid \theta_1] - E[\phi'(X) \mid \theta_1] \\
+    &amp; = \int \phi(x) f_X(x \mid \theta_1) dx - \int \phi'(x) f_X(x \mid \theta_1) dx \\
+    &amp; = \int [\phi(x) - \phi'(x)] f_X(x \mid \theta_1) dx \\
+    &amp; = \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} &gt; c \right\}} \underbrace{[\phi(x) - \phi'(x)]}_{\geq 0} f_X(x \mid \theta_1) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} &lt; c \right\}} \underbrace{[\phi(x) - \phi'(x)]}_{\leq 0} f_X(x \mid \theta_1) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} = c \right\}} [\phi(x) - \phi'(x)] f_X(x \mid \theta_1) dx \\
+    &amp; \geq \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} &gt; c \right\}} [\phi(x) - \phi'(x)] cf_X(x \mid \theta_0) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} &lt; c \right\}} [\phi(x) - \phi'(x)] cf_X(x \mid \theta_0) dx + \int_{\left\{ \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} = c \right\}} [\phi(x) - \phi'(x)] cf_X(x \mid \theta_0) dx \\
+    &amp; = c \int [\phi(x) - \phi'(x)] f_X(x \mid \theta_0) dx \\
+    &amp; = c \int \phi(x) f_X(x \mid \theta_0) dx - c \int \phi'(x) f_X(x \mid \theta_0) dx \\
+    &amp; \geq c(\alpha - \alpha) \\
+    &amp; = 0
+\end{align*}\]</span>
+<p>And rearranging yields</p>
+<span class="math display">\[\begin{align*}
+E[\phi(X)  \mid \theta_1] - E[\phi'(X) \mid \theta_1] &amp; \geq 0 \\
+E[\phi(X) \mid \theta_1] &amp; \geq E[\phi'(X) \mid \theta_1]
+\end{align*}\]</span>
+<p>as desired.</p>
+</section>
+<section id="worked-examples" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">7.5</span> Worked Examples</h2>
+<p><strong>Problem 1:</strong> Let <span class="math inline">\(Y_i \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\sigma^2 = 25\)</span> is <em>known</em>. Suppose we want to test the hypotheses <span class="math inline">\(H_0: \mu = 8\)</span> vs.&nbsp;<span class="math inline">\(H_1: \mu &gt; 8\)</span> and we observe <span class="math inline">\(\overline{Y} = 10\)</span> across <span class="math inline">\(n = 64\)</span> observations. Can we reject <span class="math inline">\(H_0\)</span>, with a significance threshold of <span class="math inline">\(\alpha = 0.05\)</span>?</p>
+<p><strong>Problem 2:</strong> Suppose we wanted to use a different significance level <span class="math inline">\(\alpha\)</span>. How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.01\)</span>? How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.1\)</span>?</p>
+<p><strong>Problem 3:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(p)\)</span>, and we want to test the hypotheses <span class="math inline">\(H_0:p = 0.5\)</span>, <span class="math inline">\(H_1:p \neq 0.5\)</span>. Suppose we calculate an estimator for <span class="math inline">\(p\)</span> as <span class="math inline">\(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Derive a Wald test statistic for this hypothesis testing scenario.</p>
+<p><strong>Problem 4:</strong> Derive a LRT statistic for the hypothesis testing scenario described in Problem 3.</p>
+<p><strong>Problem 5:</strong> Derive a score test statistic for the hypothesis testing scenario described in Problem 3.</p>
+<p><strong>Problem 6:</strong> For each of Problems 3, 4, and 5, calculate the p-values from each test when <span class="math inline">\(\hat{p} = 0.4\)</span>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
