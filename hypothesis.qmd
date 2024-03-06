@@ -78,7 +78,7 @@ $$
 \lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)} \right).
 $$
 
-Since the ratio of the likelihoods is bounded between 0 and 1 (since the denominator will always be at least as large as the numerator), the LRT statistic is always positive. When $\lambda_{LRT}$ is large, it suggests that the data are not compatible with $H_0$, and values of $\lambda_{LRT}$ close to $0$ suggest the data *are* compatible with $H_0$. Therefore, we'll reject $H_0$ for large values of $\lambda_{LRT}$ and fail to reject $H_0$ if $\lambda_{LRT}$ is small. The likelihood ratio test is the most "powerful" of all level $\alpha$ tests, and we can prove this using the Neyman-Pearson Lemma.
+Since the ratio of the likelihoods is bounded between 0 and 1 (since the denominator will always be at least as large as the numerator), the LRT statistic is always positive. When $\lambda_{LRT}$ is large, it suggests that the data are not compatible with $H_0$, and values of $\lambda_{LRT}$ close to $0$ suggest the data *are* compatible with $H_0$. Therefore, we'll reject $H_0$ for large values of $\lambda_{LRT}$ and fail to reject $H_0$ if $\lambda_{LRT}$ is small. The likelihood ratio test is the most "powerful" of all level $\alpha$ tests when we have a simple alternative hypothesis, and we can prove this using the Neyman-Pearson Lemma.
 
 ### Score Tests {.unnumbered}
 
