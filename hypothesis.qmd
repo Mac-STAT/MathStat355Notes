@@ -27,7 +27,7 @@ There are three classical forms of test statistics that have varying finite-samp
 Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The Wald test is the hypothesis test that uses the Wald test statistic $\lambda_{W}$, where
 
 $$
-\lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta})}\right)^2.
+\lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta}_{MLE})}\right)^2.
 $$
 
 Intuitively, the Wald test measures the difference between the estimated value for $\theta$ and the null value for $\theta$, standardized by the variation of your estimator. If this reminds you (once again) of a z-score, it should! In linear regression, with normally distributed standard errors, it turns out that $\sqrt{W}$ follows a $t$ distribution (we'll show this on your problem set!).

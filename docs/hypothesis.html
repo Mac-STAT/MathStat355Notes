@@ -239,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="unnumbered anchored" data-anchor-id="wald-tests">Wald Tests</h3>
 <p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The Wald test is the hypothesis test that uses the Wald test statistic <span class="math inline">\(\lambda_{W}\)</span>, where</p>
 <p><span class="math display">\[
-\lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta})}\right)^2.
+\lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta}_{MLE})}\right)^2.
 \]</span></p>
 <p>Intuitively, the Wald test measures the difference between the estimated value for <span class="math inline">\(\theta\)</span> and the null value for <span class="math inline">\(\theta\)</span>, standardized by the variation of your estimator. If this reminds you (once again) of a z-score, it should! In linear regression, with normally distributed standard errors, it turns out that <span class="math inline">\(\sqrt{W}\)</span> follows a <span class="math inline">\(t\)</span> distribution (we’ll show this on your problem set!).</p>
 <p>Wald tests statistics are extremely straightforward to compute from the Central Limit Theorem. The CLT states that, for iid <span class="math inline">\(X_1, \dots, X_n\)</span> with expectation <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma\)</span>,</p>
