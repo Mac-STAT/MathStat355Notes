@@ -186,7 +186,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
+  <li><a href="#wald-tests" id="toc-wald-tests" class="nav-link active" data-scroll-target="#wald-tests">Wald Tests</a></li>
+  <li><a href="#likelihood-ratio-tests" id="toc-likelihood-ratio-tests" class="nav-link" data-scroll-target="#likelihood-ratio-tests">Likelihood Ratio Tests</a></li>
+  <li><a href="#score-tests" id="toc-score-tests" class="nav-link" data-scroll-target="#score-tests">Score Tests</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
   <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">7.2</span> Reading Guide</a>
   <ul class="collapse">
   <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">7.2.1</span> Reading Questions</a></li>
@@ -232,13 +235,24 @@ ul.task-list li input[type="checkbox"] {
 <p>If you recall from introductory statistics, the latter alternative provides the set-up we have when testing if the linear relationship between a predictor <span class="math inline">\(X\)</span> and outcome <span class="math inline">\(Y\)</span> are “statistically significantly” associated; we test the null hypothesis <span class="math inline">\(H_0: \beta_1 = 0\)</span> against the alternative, <span class="math inline">\(H_1: \beta_1 \neq 0\)</span>, where <span class="math inline">\(E[Y \mid X] = \beta_0 + \beta_1 X\)</span>. In this example, we’d have the unknown parameter <span class="math inline">\(\beta_1\)</span>, and the fixed point of our null hypothesis as <span class="math inline">\(\theta_0 = 0\)</span>.</p>
 <p>The second step of hypothesis testing is the investigation. In determining whether the data are compatible with the null hypothesis, we must first derive a <em>test statistic</em>. Test statistics are typically functions of (1) our estimators and (2) the distribution of our estimator <em>under the null hypothesis</em>. Intuitively, if we can determine the distribution of our estimator under the null hypothesis, we can then observe whether or not the data we actually have is “extreme” or not, given a certain threshold, <span class="math inline">\(\alpha\)</span>, for our hypothesis test. This threshold <span class="math inline">\(\alpha\)</span> is directly related to a <span class="math inline">\(100(1 - \alpha)\%\)</span> confidence interval, where anything observed outside the confidence interval bounds is considered to lie in the “rejection region” (where you would thus reject the null hypothesis).</p>
 <p>There are three classical forms of test statistics that have varying finite-sample properties, and can be shown to be asymptotically equivalent: the Wald test, the likelihood ratio test (LRT), and the score test (also sometimes called the Lagrange multiplier test). Each of these is explained in further detail below.</p>
-<section id="wald-tests" class="level3 unnumbered unlisted">
-<h3 class="unnumbered unlisted anchored" data-anchor-id="wald-tests">Wald Tests</h3>
+<section id="wald-tests" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="wald-tests">Wald Tests</h3>
 <p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The Wald test is the hypothesis test that uses the Wald test statistic <span class="math inline">\(\lambda_{W}\)</span>, where</p>
 <p><span class="math display">\[
 \lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta})}\right)^2.
 \]</span></p>
 <p>Intuitively, the Wald test measures the difference between the estimated value for <span class="math inline">\(\theta\)</span> and the null value for <span class="math inline">\(\theta\)</span>, standardized by the variation of your estimator. If this reminds you (once again) of a z-score, it should! In linear regression, with normally distributed standard errors, it turns out that <span class="math inline">\(\sqrt{W}\)</span> follows a <span class="math inline">\(t\)</span> distribution (we’ll show this on your problem set!).</p>
+<p>Wald tests statistics are extremely straightforward to compute from the Central Limit Theorem. The CLT states that, for iid <span class="math inline">\(X_1, \dots, X_n\)</span> with expectation <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma\)</span>,</p>
+<p><span class="math display">\[
+\sqrt{n} (\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2).
+\]</span></p>
+<p>Slutsky’s theorem allows us to write</p>
+<p><span class="math display">\[
+\left( \frac{\overline{X} - \mu}{\sigma / \sqrt{n}}\right) \overset{d}{\to} N(0,1),
+\]</span></p>
+<p>and note that the left-hand side is an estimator minus it’s expectation, divided by it’s standard error. When <span class="math inline">\(\overline{X}\)</span> is the MLE for <span class="math inline">\(\mu\)</span>, this is the square root of the Wald test statistic! The final thing to note is that the right-hand side tells us this quantity converges in distribution to a standard normal distribution. Think about what we’ve previously shown about standard normals “squared” to intuit the asymptotic distribution of a Wald test statistic.</p>
+<section id="wald-tests-for-multiple-hypotheses" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="wald-tests-for-multiple-hypotheses">Wald Tests for Multiple Hypotheses</h4>
 <p>Note that there is also a multivariate version of the Wald test, used to jointly test <em>multiple</em> hypotheses on multiple parameters. In this case, we can write our null and alternative hypotheses using matrices and vectors.</p>
 <p>As a simple example, consider a linear regression model where we have a single, categorical predictor with three categories. Our regression model looks something like this:</p>
 <p><span class="math display">\[
@@ -255,16 +269,17 @@ E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
 \]</span></p>
 <p>where <span class="math inline">\(\hat{V}\)</span> is an estimator of the covariance matrix for <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span>. We won’t focus on multi-hypothesis, multi-parameter tests in this course, but I <em>do</em> want you to be able to draw connections between statistical theory and things you learned way back in your introductory statistics course, hence why this is included in the notes.</p>
 </section>
-<section id="likelihood-ratio-tests" class="level3 unnumbered unlisted">
-<h3 class="unnumbered unlisted anchored" data-anchor-id="likelihood-ratio-tests">Likelihood Ratio Tests</h3>
+</section>
+<section id="likelihood-ratio-tests" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="likelihood-ratio-tests">Likelihood Ratio Tests</h3>
 <p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The likelihood ratio test is the hypothesis test that uses the likelihood ratio test statistic <span class="math inline">\(\lambda_{LRT}\)</span>, where</p>
 <p><span class="math display">\[
 \lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)} \right).
 \]</span></p>
 <p>When <span class="math inline">\(\lambda_{LRT}\)</span> is close to <span class="math inline">\(1\)</span>, it suggests that the data are compatible with <span class="math inline">\(H_0\)</span>, and values of <span class="math inline">\(\lambda_{LRT}\)</span> close to <span class="math inline">\(0\)</span> suggest the data are <em>not</em> compatible with <span class="math inline">\(H_0\)</span>. Therefore, we’ll reject <span class="math inline">\(H_0\)</span> for small values of <span class="math inline">\(\lambda_{LRT}\)</span> and fail to reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(\lambda_{LRT}\)</span> is large. The likelihood ratio test is the most “powerful” of all level <span class="math inline">\(\alpha\)</span> tests, and we can prove this using the Neyman-Pearson Lemma.</p>
 </section>
-<section id="score-tests" class="level3 unnumbered unlisted">
-<h3 class="unnumbered unlisted anchored" data-anchor-id="score-tests">Score Tests</h3>
+<section id="score-tests" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="score-tests">Score Tests</h3>
 <p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The score test is the hypothesis test that uses the score test statistic <span class="math inline">\(\lambda_S\)</span>,</p>
 <p><span class="math display">\[
 \lambda_S = \frac{\left( \frac{\partial}{\partial \theta_0} \log L(\theta_0 \mid x) \right)^2}{I(\theta_0)}
@@ -389,6 +404,7 @@ E[\phi(X) \mid \theta_1] &amp; \geq E[\phi'(X) \mid \theta_1]
 <section id="worked-examples" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">7.5</span> Worked Examples</h2>
 <p><strong>Problem 1:</strong> Let <span class="math inline">\(Y_i \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\sigma^2 = 25\)</span> is <em>known</em>. Suppose we want to test the hypotheses <span class="math inline">\(H_0: \mu = 8\)</span> vs.&nbsp;<span class="math inline">\(H_1: \mu &gt; 8\)</span> and we observe <span class="math inline">\(\overline{Y} = 10\)</span> across <span class="math inline">\(n = 64\)</span> observations. Can we reject <span class="math inline">\(H_0\)</span>, with a significance threshold of <span class="math inline">\(\alpha = 0.05\)</span>?</p>
+<p>Our hypotheses are already stated in the problem set-up. The next thing we should do is find a test statistic.</p>
 <p><strong>Problem 2:</strong> Suppose we wanted to use a different significance level <span class="math inline">\(\alpha\)</span>. How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.01\)</span>? How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.1\)</span>?</p>
 <p><strong>Problem 3:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(p)\)</span>, and we want to test the hypotheses <span class="math inline">\(H_0:p = 0.5\)</span>, <span class="math inline">\(H_1:p \neq 0.5\)</span>. Suppose we calculate an estimator for <span class="math inline">\(p\)</span> as <span class="math inline">\(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Derive a Wald test statistic for this hypothesis testing scenario.</p>
 <p><strong>Problem 4:</strong> Derive a LRT statistic for the hypothesis testing scenario described in Problem 3.</p>

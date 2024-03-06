@@ -22,7 +22,7 @@ The second step of hypothesis testing is the investigation. In determining wheth
 
 There are three classical forms of test statistics that have varying finite-sample properties, and can be shown to be asymptotically equivalent: the Wald test, the likelihood ratio test (LRT), and the score test (also sometimes called the Lagrange multiplier test). Each of these is explained in further detail below.
 
-### Wald Tests {.unnumbered .unlisted}
+### Wald Tests {.unnumbered}
 
 Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The Wald test is the hypothesis test that uses the Wald test statistic $\lambda_{W}$, where
 
@@ -31,6 +31,22 @@ $$
 $$
 
 Intuitively, the Wald test measures the difference between the estimated value for $\theta$ and the null value for $\theta$, standardized by the variation of your estimator. If this reminds you (once again) of a z-score, it should! In linear regression, with normally distributed standard errors, it turns out that $\sqrt{W}$ follows a $t$ distribution (we'll show this on your problem set!).
+
+Wald tests statistics are extremely straightforward to compute from the Central Limit Theorem. The CLT states that, for iid $X_1, \dots, X_n$ with expectation $\mu$ and variance $\sigma$,
+
+$$
+\sqrt{n} (\overline{X} - \mu) \overset{d}{\to} N(0, \sigma^2).
+$$
+
+Slutsky's theorem allows us to write
+
+$$
+\left( \frac{\overline{X} - \mu}{\sigma / \sqrt{n}}\right) \overset{d}{\to} N(0,1),
+$$
+
+and note that the left-hand side is an estimator minus it's expectation, divided by it's standard error. When $\overline{X}$ is the MLE for $\mu$, this is the square root of the Wald test statistic! The final thing to note is that the right-hand side tells us this quantity converges in distribution to a standard normal distribution. Think about what we've previously shown about standard normals "squared" to intuit the asymptotic distribution of a Wald test statistic.
+
+#### Wald Tests for Multiple Hypotheses {.unnumbered}
 
 Note that there is also a multivariate version of the Wald test, used to jointly test *multiple* hypotheses on multiple parameters. In this case, we can write our null and alternative hypotheses using matrices and vectors.
 
@@ -54,7 +70,7 @@ $$
 
 where $\hat{V}$ is an estimator of the covariance matrix for $\hat{\boldsymbol{\theta}}$. We won't focus on multi-hypothesis, multi-parameter tests in this course, but I *do* want you to be able to draw connections between statistical theory and things you learned way back in your introductory statistics course, hence why this is included in the notes.
 
-### Likelihood Ratio Tests {.unnumbered .unlisted}
+### Likelihood Ratio Tests {.unnumbered}
 
 Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The likelihood ratio test is the hypothesis test that uses the likelihood ratio test statistic $\lambda_{LRT}$, where
 
@@ -64,7 +80,7 @@ $$
 
 When $\lambda_{LRT}$ is close to $1$, it suggests that the data are compatible with $H_0$, and values of $\lambda_{LRT}$ close to $0$ suggest the data are *not* compatible with $H_0$. Therefore, we'll reject $H_0$ for small values of $\lambda_{LRT}$ and fail to reject $H_0$ if $\lambda_{LRT}$ is large. The likelihood ratio test is the most "powerful" of all level $\alpha$ tests, and we can prove this using the Neyman-Pearson Lemma.
 
-### Score Tests {.unnumbered .unlisted}
+### Score Tests {.unnumbered}
 
 Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The score test is the hypothesis test that uses the score test statistic $\lambda_S$,
 
@@ -238,6 +254,8 @@ as desired.
 ## Worked Examples
 
 **Problem 1:** Let $Y_i \overset{iid}{\sim} N(\mu, \sigma^2)$, where $\sigma^2 = 25$ is *known*. Suppose we want to test the hypotheses $H_0: \mu = 8$ vs. $H_1: \mu > 8$ and we observe $\overline{Y} = 10$ across $n = 64$ observations. Can we reject $H_0$, with a significance threshold of $\alpha = 0.05$?
+
+Our hypotheses are already stated in the problem set-up. The next thing we should do is find a test statistic.
 
 **Problem 2:** Suppose we wanted to use a different significance level $\alpha$. How would the procedure in Problem 1 change if we let $\alpha = 0.01$? How would the procedure in Problem 1 change if we let $\alpha = 0.1$?
 
