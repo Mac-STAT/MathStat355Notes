@@ -44,7 +44,7 @@ $$
 \left( \frac{\overline{X} - \mu}{\sigma / \sqrt{n}}\right) \overset{d}{\to} N(0,1),
 $$
 
-and note that the left-hand side is an estimator minus it's expectation, divided by it's standard error. When $\overline{X}$ is the MLE for $\mu$, this is the square root of the Wald test statistic! The final thing to note is that the right-hand side tells us this quantity converges in distribution to a standard normal distribution. Think about what we've previously shown about standard normals "squared" to intuit the asymptotic distribution of a Wald test statistic.
+and note that the left-hand side is an estimator minus it's expectation, divided by it's standard error. When $\overline{X}$ is the MLE for $\mu$, this is the square root of the Wald test statistic! The final thing to note is that the right-hand side tells us this quantity converges in distribution to a standard normal distribution. Think about what we've previously shown about standard normals "squared" to intuit the asymptotic distribution of a Wald test statistic: a $\chi^2_\nu$ random variable, where the degrees of freedom $\nu$ in this case is one! For a single parameter restriction (i.e. one hypothesis for one unknown parameter), the asymptotic distribution of a Wald test statistic will always be $\chi^2_1$.
 
 #### Wald Tests for Multiple Hypotheses {.unnumbered .unlisted}
 
@@ -78,7 +78,7 @@ $$
 \lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)} \right).
 $$
 
-Since the ratio of the likelihoods is bounded between 0 and 1 (since the denominator will always be at least as large as the numerator), the LRT statistic is always positive. When $\lambda_{LRT}$ is large, it suggests that the data are not compatible with $H_0$, and values of $\lambda_{LRT}$ close to $0$ suggest the data *are* compatible with $H_0$. Therefore, we'll reject $H_0$ for large values of $\lambda_{LRT}$ and fail to reject $H_0$ if $\lambda_{LRT}$ is small. The likelihood ratio test is the most "powerful" of all level $\alpha$ tests when we have a simple alternative hypothesis, and we can prove this using the Neyman-Pearson Lemma.
+Since the ratio of the likelihoods is bounded between 0 and 1 (since the denominator will always be at least as large as the numerator), the LRT statistic is always positive. When $\lambda_{LRT}$ is large, it suggests that the data are not compatible with $H_0$, and values of $\lambda_{LRT}$ close to $0$ suggest the data *are* compatible with $H_0$. Therefore, we'll reject $H_0$ for large values of $\lambda_{LRT}$ and fail to reject $H_0$ if $\lambda_{LRT}$ is small. The likelihood ratio test is the most "powerful" of all level $\alpha$ tests when we have a simple alternative hypothesis, and we can prove this using the Neyman-Pearson Lemma. For the simple null hypothesis on a single parameter that we consider, it can be shown that $\lambda_{LRT} \overset{d}{\to} \chi^2_1$, just as with the Wald test statistic.
 
 ### Score Tests {.unnumbered .unlisted}
 
@@ -90,7 +90,7 @@ $$
 
 as its test statistic. Note that the score test statistic depends *only* on the distribution of the estimator under the null hypothesis, rather than the maximum likelihood estimator. This is sometimes referred to as a test that requires only computation of a *restricted* estimator (where $\theta_0$ is "restricted" by the null distribution). The score test statistic is particularly useful when the MLE is on the boundary of the parameter space (think: order statistics).
 
-Intuitively, if $\theta_0$ is near the estimator that maximizes the log likelihood function, the derivative of the log likelihood function should be close to $0$. The score statistic "standardizes" this derivative by a measure of the variation of the estimator, contained in the information matrix. Values of $\lambda_S$ that are closer to zero are then more compatible with $H_0$, since because it suggests $\theta_0$ is close to the estimator that maximizes the log likelihood function. We'll reject $H_0$ for large values of $\lambda_S$.
+Intuitively, if $\theta_0$ is near the estimator that maximizes the log likelihood function, the derivative of the log likelihood function should be close to $0$. The score statistic "standardizes" this derivative by a measure of the variation of the estimator, contained in the information matrix. Values of $\lambda_S$ that are closer to zero are then more compatible with $H_0$, since because it suggests $\theta_0$ is close to the estimator that maximizes the log likelihood function. We'll reject $H_0$ for large values of $\lambda_S$. For the simple null hypothesis on a single parameter that we consider, it can be shown that $\lambda_{S} \overset{d}{\to} \chi^2_1$, just as with the Wald test statistic and LRT statistic.
 
 ## Learning Objectives
 
