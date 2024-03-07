@@ -22,7 +22,7 @@ The second step of hypothesis testing is the investigation. In determining wheth
 
 There are three classical forms of test statistics that have varying finite-sample properties, and can be shown to be asymptotically equivalent: the Wald test, the likelihood ratio test (LRT), and the score test (also sometimes called the Lagrange multiplier test). Each of these is explained in further detail below.
 
-### Wald Tests {.unnumbered}
+### Wald Tests {.unnumbered .unlisted}
 
 Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The Wald test is the hypothesis test that uses the Wald test statistic $\lambda_{W}$, where
 
@@ -46,7 +46,7 @@ $$
 
 and note that the left-hand side is an estimator minus it's expectation, divided by it's standard error. When $\overline{X}$ is the MLE for $\mu$, this is the square root of the Wald test statistic! The final thing to note is that the right-hand side tells us this quantity converges in distribution to a standard normal distribution. Think about what we've previously shown about standard normals "squared" to intuit the asymptotic distribution of a Wald test statistic.
 
-#### Wald Tests for Multiple Hypotheses {.unnumbered}
+#### Wald Tests for Multiple Hypotheses {.unnumbered .unlisted}
 
 Note that there is also a multivariate version of the Wald test, used to jointly test *multiple* hypotheses on multiple parameters. In this case, we can write our null and alternative hypotheses using matrices and vectors.
 
@@ -70,7 +70,7 @@ $$
 
 where $\hat{V}$ is an estimator of the covariance matrix for $\hat{\boldsymbol{\theta}}$. We won't focus on multi-hypothesis, multi-parameter tests in this course, but I *do* want you to be able to draw connections between statistical theory and things you learned way back in your introductory statistics course, hence why this is included in the notes.
 
-### Likelihood Ratio Tests {.unnumbered}
+### Likelihood Ratio Tests {.unnumbered .unlisted}
 
 Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The likelihood ratio test is the hypothesis test that uses the likelihood ratio test statistic $\lambda_{LRT}$, where
 
@@ -80,7 +80,7 @@ $$
 
 Since the ratio of the likelihoods is bounded between 0 and 1 (since the denominator will always be at least as large as the numerator), the LRT statistic is always positive. When $\lambda_{LRT}$ is large, it suggests that the data are not compatible with $H_0$, and values of $\lambda_{LRT}$ close to $0$ suggest the data *are* compatible with $H_0$. Therefore, we'll reject $H_0$ for large values of $\lambda_{LRT}$ and fail to reject $H_0$ if $\lambda_{LRT}$ is small. The likelihood ratio test is the most "powerful" of all level $\alpha$ tests when we have a simple alternative hypothesis, and we can prove this using the Neyman-Pearson Lemma.
 
-### Score Tests {.unnumbered}
+### Score Tests {.unnumbered .unlisted}
 
 Suppose we are interested in testing the hypotheses $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$. The score test is the hypothesis test that uses the score test statistic $\lambda_S$,
 
@@ -255,16 +255,222 @@ as desired.
 
 ## Worked Examples
 
-**Problem 1:** Let $Y_i \overset{iid}{\sim} N(\mu, \sigma^2)$, where $\sigma^2 = 25$ is *known*. Suppose we want to test the hypotheses $H_0: \mu = 8$ vs. $H_1: \mu > 8$ and we observe $\overline{Y} = 10$ across $n = 64$ observations. Can we reject $H_0$, with a significance threshold of $\alpha = 0.05$?
+**Problem 1:** Let $Y_i \overset{iid}{\sim} N(\mu, \sigma^2)$, where $\sigma^2 = 25$ is *known*. Suppose we want to test the hypotheses $H_0: \mu = 8$ vs. $H_1: \mu > 8$ and we observe $\overline{Y} = 10$ across $n = 64$ observations. Can we reject $H_0$, with a significance threshold of $\alpha = 0.05$? (Use a Wald test statistic)
 
-Our hypotheses are already stated in the problem set-up. The next thing we should do is find a test statistic.
+Our hypotheses are already stated in the problem set-up. The next thing we should do is derive a Wald test statistic. We know that the MLE for $\mu$ is given by $\hat{\mu}_{MLE} = \overline{Y}$ (we have shown this is previous problem sets/worked examples). Then the Wald test statistic can be written as
+
+$$
+\lambda_W = \left( \frac{\hat{\mu}_{MLE} - \mu_0}{\sigma^2/\sqrt{n}}\right)^2 = \left( \frac{10 - 8}{25/\sqrt{64}}\right)^2 = 6.5536
+$$
+
+We can compare this test statistic to the critical value from a $\chi^2_1$ distribution since, by properties of normal distributions and recalling that standard normal distributions squared are $\chi^2_1$,
+
+```{=tex}
+\begin{align*}
+    \overline{Y} & \sim N(\mu, \sigma^2/n) \\
+    \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}} & \sim N(0,1) \\
+    \left( \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}  \right)^2 & \sim \chi^2_1 
+\end{align*}
+```
+To calculate the critical value when $\alpha = 0.05$, we turn to R.
+
+```{r}
+# The quantile function for a given distribution gives us the value at which
+# a given percentage of the distributions lies ahead of that value, which
+# is exactly what we want in this case!
+
+qchisq(1 - 0.05, df = 1)
+```
+
+Finally, noting that our test statistic is greater than the critical value, we reject $H_0$.
 
 **Problem 2:** Suppose we wanted to use a different significance level $\alpha$. How would the procedure in Problem 1 change if we let $\alpha = 0.01$? How would the procedure in Problem 1 change if we let $\alpha = 0.1$?
 
-**Problem 3:** Suppose we have a random sample $X_1, \dots, X_n \sim Bernoulli(p)$, and we want to test the hypotheses $H_0:p = 0.5$, $H_1:p \neq 0.5$. Suppose we calculate an estimator for $p$ as $\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i$. Derive a Wald test statistic for this hypothesis testing scenario.
+Changing the significance level changes the *critical value*, and may change whether or not we reject $H_0$, depending on the difference between our critical value and the test statistic. We can calculate what the critical value would be if we let $\alpha = 0.01$ and $\alpha = 0.1$ again in R:
 
-**Problem 4:** Derive a LRT statistic for the hypothesis testing scenario described in Problem 3.
+```{r}
+# alpha = 0.01
+qchisq(1 - 0.01, df = 1)
 
-**Problem 5:** Derive a score test statistic for the hypothesis testing scenario described in Problem 3.
+# alpha = 0.1
+qchisq(1 - 0.1, df = 1)
+```
 
-**Problem 6:** For each of Problems 3, 4, and 5, calculate the p-values from each test when $\hat{p} = 0.4$.
+Note that when $\alpha = 0.1$, we still reject $H_0$. This should make intuitive sense, since increasing $\alpha$ only can only increase our rejection region. However, when $\alpha = 0.01$, we would *fail to reject* $H_0$, as our test statistic is not "more extreme" (greater) than the critical value.
+
+**Problem 3:** Suppose we have a random sample $X_1, \dots, X_n \sim Bernoulli(p)$, and we want to test the hypotheses $H_0:p = 0.5$, $H_1:p \neq 0.5$. Suppose we calculate an estimator for $p$ as $\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i$. Derive a Wald test statistic for this hypothesis testing scenario (simplifying as much as you can).
+
+Recall that $\hat{p}$ as defined in the problem set-up is the MLE for $p$. Then the Wald test statistic can be written as
+
+$$
+\lambda_W = \left( \frac{\hat{p} - p_0}{se(\hat{p})}\right)^2.
+$$
+
+We can simplify a little further by calculating $se(\hat{p})$ and plugging in $p_0$. Recall from the CLT (and Slutsky) that we have
+
+$$
+\left( \frac{\hat{p} - p_0}{\sqrt{\hat{p}(1 - \hat{p})/n}} \right) \overset{d}{\to} N(0,1)
+$$
+
+Then the standard error of $\hat{p}$ is given by $\sqrt{\hat{p}(1 - \hat{p})/n}$, and our Walt test statistic simplifies to
+
+$$
+\lambda_W = \left( \frac{\hat{p} - 0.5}{\sqrt{\hat{p}(1 - \hat{p})/n}}\right)^2.
+$$
+
+(Note that this is as "simplified" as we can get without knowing $\hat{p}$ or $n$)
+
+**Problem 4:** Derive a LRT statistic for the hypothesis testing scenario described in Problem 3 (simplifying as much as you can).
+
+The LRT statistic is given by
+
+$$
+\lambda_{LRT} = -2 \log\left(\frac{\underset{p = p_0}{\text{sup}} \hspace{1mm} L(p)}{\underset{p \in \Theta}{\text{sup}} \hspace{1mm} L(p)} \right)= -2 \log\left(\frac{ L(0.5)} {L(\hat{p}_{MLE})} \right)
+$$
+
+The likelihood for our observations can be written as
+
+$$
+L(p) = \prod_{i = 1}^n p^{x_i} (1 - p)^{(1 - x_i)}
+$$
+
+And so our LRT statistic simplifies to
+
+```{=tex}
+\begin{align*}
+\lambda_{LRT} & = -2 \log\left(\frac{ L(0.5)} {L(\hat{p})} \right) \\
+& = -2 \left[\log L(0.5) - \log L(\hat{p}) \right] \\
+& = -2 \left[ \log(0.5) \sum_{i = 1}^n X_i + \log(1 - 0.5)\sum_{i = 1}^n(1 - X_i) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
+& = -2 \left[ \log(0.5) \left( \sum_{i = 1}^n X_i + \sum_{i = 1}^n(1 - X_i)\right) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
+& = -2 \left[ n\log(0.5) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
+& = -2 \left[ n\log(0.5) - \log(\hat{p}) n \overline{X} - \log(1 - \hat{p}) (n - n \overline{X})\right] \\
+& = -2 n \left[ \log(0.5) - \log(\hat{p}) \hat{p} - \log(1 - \hat{p}) (1 -  \hat{p})\right]
+\end{align*}
+```
+(Note that this is as "simplified" as we can get without knowing $\hat{p}$ or $n$)
+
+**Problem 5:** Derive a score test statistic for the hypothesis testing scenario described in Problem 3 (simplifying as much as you can).
+
+The score test statistic is given by
+
+$$
+\lambda_S = \frac{\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2}{I(p_0)}.
+$$
+
+We can simplify by deriving the score and information matrix, and then plugging in $p_0 = 0.5$. We have,
+
+```{=tex}
+\begin{align*}
+\frac{\partial}{\partial p_0} \log L(p_0 \mid x) & = \frac{\partial}{\partial p_0} \left[ \log(p_0) \sum_{i = 1}^n X_i + \log(1 - p_0) \sum_{i = 1}^n (1 - X_i) \right] \\
+& = \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \\
+\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2 & = \left(\frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right)^2
+\end{align*}
+```
+and plugging in $p_0 = 0.5$, we have,
+
+$$
+\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x)\right)^2 = \left(\frac{\sum_{i = 1}^n X_i}{0.5} - \frac{n - \sum_{i = 1}^n  X_i}{1 - 0.5} \right)^2 = \left( \frac{-n + 2\sum_{i = 1}^n X_i}{0.5}\right)^2 = \left( -2n + 4\sum_{i = 1}^n X_i\right)^2.
+$$
+
+The information matrix is given by $-E\left[ \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)\right]$. Piecing this together,
+
+```{=tex}
+\begin{align*}
+ \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x) 
+& =  \frac{\partial^2}{\partial p_0^2} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
+& = \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2} 
+\end{align*}
+```
+And to get $I(p_0)$, we take the negative expectation of the above quantity under the null hypothesis (that is, where $E[X] = p_0$) to obtain
+
+```{=tex}
+\begin{align*}
+    I(p_0) & = -E \left[ \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2} \right] \\
+    & = \frac{1}{p_0^2} \sum_{i = 1}^n E[X_i] + \frac{1}{(1 - p_0)^2} \left( n - \sum_{i = 1}^n E[X_i]\right) \\
+    & = \frac{1}{p_0^2} \sum_{i = 1}^n p_0 + \frac{1}{(1 - p_0)^2} \left( n - \sum_{i = 1}^n p_0\right) \\
+    & = \frac{n}{p_0}  + \frac{n}{(1 - p_0)^2} \left( 1 - p_0\right) \\
+    & = \frac{n}{p_0}  + \frac{n}{(1 - p_0)}
+\end{align*}
+```
+And plugging in $p_0 = 0.5$ we have
+
+$$
+I(0.5) = \frac{n}{0.5}  + \frac{n}{(1 - 0.5)} = 2n + 2n = 4n.
+$$
+
+Then, finally, the score test statistic (simplified as much as possible) is given by
+
+```{=tex}
+\begin{align*}
+    \lambda_S & = \frac{\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2}{I(p_0)} \\
+    & = \frac{\left( -2n + 4\sum_{i = 1}^n X_i\right)^2}{4n} \\
+    & = \frac{\left( -2n + 4n \hat{p}\right)^2}{4n} \\
+    & = \frac{4n^2\left( -1 + 2 \hat{p}\right)^2}{4n} \\
+    & = n\left( -1 + 2 \hat{p}\right)^2
+\end{align*}
+```
+**Problem 6:** For each of Problems 3, 4, and 5, calculate the p-values from each test when $\hat{p} = 0.4$ and $n = 300$.
+
+We'll again use R to obtain the critical values for these hypothesis tests, noting that in each case, the test statistic follows a $\chi^2_1$ distribution asymptotically:
+
+```{r}
+p_hat <- 0.4
+n <- 300
+
+# Wald test statistic
+lambda_w <- ((p_hat - 0.5)/(sqrt(p_hat * (1 - p_hat) / n)))^2
+
+# LRT statistic
+lambda_lrt <- -2 * n * (log(0.5) - log(p_hat) * p_hat - log(1 - p_hat) * (1 - p_hat))
+
+# Score test statistic
+lambda_s <- n * (-1 + 2 * p_hat)^2
+
+# Compare statistics
+lambda_w
+lambda_lrt
+lambda_s
+
+# Calculate p-values
+# Recall: probability that we observe something *as or more extreme*
+1 - pchisq(lambda_w, df = 1)
+1 - pchisq(lambda_lrt, df = 1)
+1 - pchisq(lambda_s, df = 1)
+```
+
+Things to note:
+
+-   When $n$ is large (300, in this case), each of the three classical test statistics are approximately equal! This makes sense, as they all converge in distribution to the same random variable, asymptotically.
+
+-   P-values are the probability that we would observe something *as or more extreme* than what we actually did observe, under the null hypothesis. In R, we can use the `p` function (for a given pdf) to calculate this.
+
+**Problem 7:** Repeat Problem 6 but with $\hat{p} = 0.4$ and $n = 95$. If your significance threshold were $\alpha = 0.05$, would your conclusion to the hypothesis test be the same regardless of which test statistic you chose?
+
+To answer this question, we can again calculate p-values, and compare them to 0.05 (note that we could have also calculated a critical value, and compared our test statistics to the critical value, as these are equivalent).
+
+```{r}
+p_hat <- 0.4
+n <- 95
+
+# Wald test statistic
+lambda_w <- ((p_hat - 0.5)/(sqrt(p_hat * (1 - p_hat) / n)))^2
+
+# LRT statistic
+lambda_lrt <- -2 * n * (log(0.5) - log(p_hat) * p_hat - log(1 - p_hat) * (1 - p_hat))
+
+# Score test statistic
+lambda_s <- n * (-1 + 2 * p_hat)^2
+
+# Compare statistics
+lambda_w
+lambda_lrt
+lambda_s
+
+# Calculate p-values
+# Recall: probability that we observe something *as or more extreme*
+1 - pchisq(lambda_w, df = 1)
+1 - pchisq(lambda_lrt, df = 1)
+1 - pchisq(lambda_s, df = 1)
+```
+
+In this case, we would reject $H_0$ using the Wald test statistic, but *fail to reject* using the LRT statistic and score test statistic, since the only p-value that was below our significance threshold was the one calculated from the Wald test statistic. Finite-sample distributions of the three classical test statistics are generally unknown; only asymptotically have they been shown to be equivalent, and therefore, can provide *different* answers to hypothesis tests when sample sizes are relatively small.

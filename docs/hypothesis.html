@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -186,10 +220,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#wald-tests" id="toc-wald-tests" class="nav-link active" data-scroll-target="#wald-tests">Wald Tests</a></li>
-  <li><a href="#likelihood-ratio-tests" id="toc-likelihood-ratio-tests" class="nav-link" data-scroll-target="#likelihood-ratio-tests">Likelihood Ratio Tests</a></li>
-  <li><a href="#score-tests" id="toc-score-tests" class="nav-link" data-scroll-target="#score-tests">Score Tests</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
   <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">7.2</span> Reading Guide</a>
   <ul class="collapse">
   <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">7.2.1</span> Reading Questions</a></li>
@@ -235,8 +266,8 @@ ul.task-list li input[type="checkbox"] {
 <p>If you recall from introductory statistics, the latter alternative provides the set-up we have when testing if the linear relationship between a predictor <span class="math inline">\(X\)</span> and outcome <span class="math inline">\(Y\)</span> are “statistically significantly” associated; we test the null hypothesis <span class="math inline">\(H_0: \beta_1 = 0\)</span> against the alternative, <span class="math inline">\(H_1: \beta_1 \neq 0\)</span>, where <span class="math inline">\(E[Y \mid X] = \beta_0 + \beta_1 X\)</span>. In this example, we’d have the unknown parameter <span class="math inline">\(\beta_1\)</span>, and the fixed point of our null hypothesis as <span class="math inline">\(\theta_0 = 0\)</span>.</p>
 <p>The second step of hypothesis testing is the investigation. In determining whether the data are compatible with the null hypothesis, we must first derive a <em>test statistic</em>. Test statistics are typically functions of (1) our estimators and (2) the distribution of our estimator <em>under the null hypothesis</em>. Intuitively, if we can determine the distribution of our estimator under the null hypothesis, we can then observe whether or not the data we actually have is “extreme” or not, given a certain threshold, <span class="math inline">\(\alpha\)</span>, for our hypothesis test. This threshold <span class="math inline">\(\alpha\)</span> is directly related to a <span class="math inline">\(100(1 - \alpha)\%\)</span> confidence interval, where anything observed outside the confidence interval bounds is considered to lie in the “rejection region” (where you would thus reject the null hypothesis).</p>
 <p>There are three classical forms of test statistics that have varying finite-sample properties, and can be shown to be asymptotically equivalent: the Wald test, the likelihood ratio test (LRT), and the score test (also sometimes called the Lagrange multiplier test). Each of these is explained in further detail below.</p>
-<section id="wald-tests" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="wald-tests">Wald Tests</h3>
+<section id="wald-tests" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="wald-tests">Wald Tests</h3>
 <p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The Wald test is the hypothesis test that uses the Wald test statistic <span class="math inline">\(\lambda_{W}\)</span>, where</p>
 <p><span class="math display">\[
 \lambda_W = \left( \frac{\hat{\theta}_{MLE} - \theta_0}{se(\hat{\theta}_{MLE})}\right)^2.
@@ -251,8 +282,8 @@ ul.task-list li input[type="checkbox"] {
 \left( \frac{\overline{X} - \mu}{\sigma / \sqrt{n}}\right) \overset{d}{\to} N(0,1),
 \]</span></p>
 <p>and note that the left-hand side is an estimator minus it’s expectation, divided by it’s standard error. When <span class="math inline">\(\overline{X}\)</span> is the MLE for <span class="math inline">\(\mu\)</span>, this is the square root of the Wald test statistic! The final thing to note is that the right-hand side tells us this quantity converges in distribution to a standard normal distribution. Think about what we’ve previously shown about standard normals “squared” to intuit the asymptotic distribution of a Wald test statistic.</p>
-<section id="wald-tests-for-multiple-hypotheses" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="wald-tests-for-multiple-hypotheses">Wald Tests for Multiple Hypotheses</h4>
+<section id="wald-tests-for-multiple-hypotheses" class="level4 unnumbered unlisted">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="wald-tests-for-multiple-hypotheses">Wald Tests for Multiple Hypotheses</h4>
 <p>Note that there is also a multivariate version of the Wald test, used to jointly test <em>multiple</em> hypotheses on multiple parameters. In this case, we can write our null and alternative hypotheses using matrices and vectors.</p>
 <p>As a simple example, consider a linear regression model where we have a single, categorical predictor with three categories. Our regression model looks something like this:</p>
 <p><span class="math display">\[
@@ -270,16 +301,16 @@ E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
 <p>where <span class="math inline">\(\hat{V}\)</span> is an estimator of the covariance matrix for <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span>. We won’t focus on multi-hypothesis, multi-parameter tests in this course, but I <em>do</em> want you to be able to draw connections between statistical theory and things you learned way back in your introductory statistics course, hence why this is included in the notes.</p>
 </section>
 </section>
-<section id="likelihood-ratio-tests" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="likelihood-ratio-tests">Likelihood Ratio Tests</h3>
+<section id="likelihood-ratio-tests" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="likelihood-ratio-tests">Likelihood Ratio Tests</h3>
 <p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The likelihood ratio test is the hypothesis test that uses the likelihood ratio test statistic <span class="math inline">\(\lambda_{LRT}\)</span>, where</p>
 <p><span class="math display">\[
 \lambda_{LRT} = -2 \log\left(\frac{\underset{\theta = \theta_0}{\text{sup}} \hspace{1mm} L(\theta)}{\underset{\theta \in \Theta}{\text{sup}} \hspace{1mm} L(\theta)} \right).
 \]</span></p>
 <p>Since the ratio of the likelihoods is bounded between 0 and 1 (since the denominator will always be at least as large as the numerator), the LRT statistic is always positive. When <span class="math inline">\(\lambda_{LRT}\)</span> is large, it suggests that the data are not compatible with <span class="math inline">\(H_0\)</span>, and values of <span class="math inline">\(\lambda_{LRT}\)</span> close to <span class="math inline">\(0\)</span> suggest the data <em>are</em> compatible with <span class="math inline">\(H_0\)</span>. Therefore, we’ll reject <span class="math inline">\(H_0\)</span> for large values of <span class="math inline">\(\lambda_{LRT}\)</span> and fail to reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(\lambda_{LRT}\)</span> is small. The likelihood ratio test is the most “powerful” of all level <span class="math inline">\(\alpha\)</span> tests when we have a simple alternative hypothesis, and we can prove this using the Neyman-Pearson Lemma.</p>
 </section>
-<section id="score-tests" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="score-tests">Score Tests</h3>
+<section id="score-tests" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="score-tests">Score Tests</h3>
 <p>Suppose we are interested in testing the hypotheses <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. The score test is the hypothesis test that uses the score test statistic <span class="math inline">\(\lambda_S\)</span>,</p>
 <p><span class="math display">\[
 \lambda_S = \frac{\left( \frac{\partial}{\partial \theta_0} \log L(\theta_0 \mid x) \right)^2}{I(\theta_0)}
@@ -404,13 +435,211 @@ E[\phi(X) \mid \theta_1] &amp; \geq E[\phi'(X) \mid \theta_1]
 </section>
 <section id="worked-examples" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">7.5</span> Worked Examples</h2>
-<p><strong>Problem 1:</strong> Let <span class="math inline">\(Y_i \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\sigma^2 = 25\)</span> is <em>known</em>. Suppose we want to test the hypotheses <span class="math inline">\(H_0: \mu = 8\)</span> vs.&nbsp;<span class="math inline">\(H_1: \mu &gt; 8\)</span> and we observe <span class="math inline">\(\overline{Y} = 10\)</span> across <span class="math inline">\(n = 64\)</span> observations. Can we reject <span class="math inline">\(H_0\)</span>, with a significance threshold of <span class="math inline">\(\alpha = 0.05\)</span>?</p>
-<p>Our hypotheses are already stated in the problem set-up. The next thing we should do is find a test statistic.</p>
+<p><strong>Problem 1:</strong> Let <span class="math inline">\(Y_i \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\sigma^2 = 25\)</span> is <em>known</em>. Suppose we want to test the hypotheses <span class="math inline">\(H_0: \mu = 8\)</span> vs.&nbsp;<span class="math inline">\(H_1: \mu &gt; 8\)</span> and we observe <span class="math inline">\(\overline{Y} = 10\)</span> across <span class="math inline">\(n = 64\)</span> observations. Can we reject <span class="math inline">\(H_0\)</span>, with a significance threshold of <span class="math inline">\(\alpha = 0.05\)</span>? (Use a Wald test statistic)</p>
+<p>Our hypotheses are already stated in the problem set-up. The next thing we should do is derive a Wald test statistic. We know that the MLE for <span class="math inline">\(\mu\)</span> is given by <span class="math inline">\(\hat{\mu}_{MLE} = \overline{Y}\)</span> (we have shown this is previous problem sets/worked examples). Then the Wald test statistic can be written as</p>
+<p><span class="math display">\[
+\lambda_W = \left( \frac{\hat{\mu}_{MLE} - \mu_0}{\sigma^2/\sqrt{n}}\right)^2 = \left( \frac{10 - 8}{25/\sqrt{64}}\right)^2 = 6.5536
+\]</span></p>
+<p>We can compare this test statistic to the critical value from a <span class="math inline">\(\chi^2_1\)</span> distribution since, by properties of normal distributions and recalling that standard normal distributions squared are <span class="math inline">\(\chi^2_1\)</span>,</p>
+<span class="math display">\[\begin{align*}
+    \overline{Y} &amp; \sim N(\mu, \sigma^2/n) \\
+    \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}} &amp; \sim N(0,1) \\
+    \left( \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}  \right)^2 &amp; \sim \chi^2_1
+\end{align*}\]</span>
+<p>To calculate the critical value when <span class="math inline">\(\alpha = 0.05\)</span>, we turn to R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The quantile function for a given distribution gives us the value at which</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a given percentage of the distributions lies ahead of that value, which</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># is exactly what we want in this case!</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.841459</code></pre>
+</div>
+</div>
+<p>Finally, noting that our test statistic is greater than the critical value, we reject <span class="math inline">\(H_0\)</span>.</p>
 <p><strong>Problem 2:</strong> Suppose we wanted to use a different significance level <span class="math inline">\(\alpha\)</span>. How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.01\)</span>? How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.1\)</span>?</p>
-<p><strong>Problem 3:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(p)\)</span>, and we want to test the hypotheses <span class="math inline">\(H_0:p = 0.5\)</span>, <span class="math inline">\(H_1:p \neq 0.5\)</span>. Suppose we calculate an estimator for <span class="math inline">\(p\)</span> as <span class="math inline">\(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Derive a Wald test statistic for this hypothesis testing scenario.</p>
-<p><strong>Problem 4:</strong> Derive a LRT statistic for the hypothesis testing scenario described in Problem 3.</p>
-<p><strong>Problem 5:</strong> Derive a score test statistic for the hypothesis testing scenario described in Problem 3.</p>
-<p><strong>Problem 6:</strong> For each of Problems 3, 4, and 5, calculate the p-values from each test when <span class="math inline">\(\hat{p} = 0.4\)</span>.</p>
+<p>Changing the significance level changes the <em>critical value</em>, and may change whether or not we reject <span class="math inline">\(H_0\)</span>, depending on the difference between our critical value and the test statistic. We can calculate what the critical value would be if we let <span class="math inline">\(\alpha = 0.01\)</span> and <span class="math inline">\(\alpha = 0.1\)</span> again in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = 0.01</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.634897</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = 0.1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.1</span>, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.705543</code></pre>
+</div>
+</div>
+<p>Note that when <span class="math inline">\(\alpha = 0.1\)</span>, we still reject <span class="math inline">\(H_0\)</span>. This should make intuitive sense, since increasing <span class="math inline">\(\alpha\)</span> only can only increase our rejection region. However, when <span class="math inline">\(\alpha = 0.01\)</span>, we would <em>fail to reject</em> <span class="math inline">\(H_0\)</span>, as our test statistic is not “more extreme” (greater) than the critical value.</p>
+<p><strong>Problem 3:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(p)\)</span>, and we want to test the hypotheses <span class="math inline">\(H_0:p = 0.5\)</span>, <span class="math inline">\(H_1:p \neq 0.5\)</span>. Suppose we calculate an estimator for <span class="math inline">\(p\)</span> as <span class="math inline">\(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Derive a Wald test statistic for this hypothesis testing scenario (simplifying as much as you can).</p>
+<p>Recall that <span class="math inline">\(\hat{p}\)</span> as defined in the problem set-up is the MLE for <span class="math inline">\(p\)</span>. Then the Wald test statistic can be written as</p>
+<p><span class="math display">\[
+\lambda_W = \left( \frac{\hat{p} - p_0}{se(\hat{p})}\right)^2.
+\]</span></p>
+<p>We can simplify a little further by calculating <span class="math inline">\(se(\hat{p})\)</span> and plugging in <span class="math inline">\(p_0\)</span>. Recall from the CLT (and Slutsky) that we have</p>
+<p><span class="math display">\[
+\left( \frac{\hat{p} - p_0}{\sqrt{\hat{p}(1 - \hat{p})/n}} \right) \overset{d}{\to} N(0,1)
+\]</span></p>
+<p>Then the standard error of <span class="math inline">\(\hat{p}\)</span> is given by <span class="math inline">\(\sqrt{\hat{p}(1 - \hat{p})/n}\)</span>, and our Walt test statistic simplifies to</p>
+<p><span class="math display">\[
+\lambda_W = \left( \frac{\hat{p} - 0.5}{\sqrt{\hat{p}(1 - \hat{p})/n}}\right)^2.
+\]</span></p>
+<p>(Note that this is as “simplified” as we can get without knowing <span class="math inline">\(\hat{p}\)</span> or <span class="math inline">\(n\)</span>)</p>
+<p><strong>Problem 4:</strong> Derive a LRT statistic for the hypothesis testing scenario described in Problem 3 (simplifying as much as you can).</p>
+<p>The LRT statistic is given by</p>
+<p><span class="math display">\[
+\lambda_{LRT} = -2 \log\left(\frac{\underset{p = p_0}{\text{sup}} \hspace{1mm} L(p)}{\underset{p \in \Theta}{\text{sup}} \hspace{1mm} L(p)} \right)= -2 \log\left(\frac{ L(0.5)} {L(\hat{p}_{MLE})} \right)
+\]</span></p>
+<p>The likelihood for our observations can be written as</p>
+<p><span class="math display">\[
+L(p) = \prod_{i = 1}^n p^{x_i} (1 - p)^{(1 - x_i)}
+\]</span></p>
+<p>And so our LRT statistic simplifies to</p>
+<span class="math display">\[\begin{align*}
+\lambda_{LRT} &amp; = -2 \log\left(\frac{ L(0.5)} {L(\hat{p})} \right) \\
+&amp; = -2 \left[\log L(0.5) - \log L(\hat{p}) \right] \\
+&amp; = -2 \left[ \log(0.5) \sum_{i = 1}^n X_i + \log(1 - 0.5)\sum_{i = 1}^n(1 - X_i) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
+&amp; = -2 \left[ \log(0.5) \left( \sum_{i = 1}^n X_i + \sum_{i = 1}^n(1 - X_i)\right) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
+&amp; = -2 \left[ n\log(0.5) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
+&amp; = -2 \left[ n\log(0.5) - \log(\hat{p}) n \overline{X} - \log(1 - \hat{p}) (n - n \overline{X})\right] \\
+&amp; = -2 n \left[ \log(0.5) - \log(\hat{p}) \hat{p} - \log(1 - \hat{p}) (1 -  \hat{p})\right]
+\end{align*}\]</span>
+<p>(Note that this is as “simplified” as we can get without knowing <span class="math inline">\(\hat{p}\)</span> or <span class="math inline">\(n\)</span>)</p>
+<p><strong>Problem 5:</strong> Derive a score test statistic for the hypothesis testing scenario described in Problem 3 (simplifying as much as you can).</p>
+<p>The score test statistic is given by</p>
+<p><span class="math display">\[
+\lambda_S = \frac{\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2}{I(p_0)}.
+\]</span></p>
+<p>We can simplify by deriving the score and information matrix, and then plugging in <span class="math inline">\(p_0 = 0.5\)</span>. We have,</p>
+<span class="math display">\[\begin{align*}
+\frac{\partial}{\partial p_0} \log L(p_0 \mid x) &amp; = \frac{\partial}{\partial p_0} \left[ \log(p_0) \sum_{i = 1}^n X_i + \log(1 - p_0) \sum_{i = 1}^n (1 - X_i) \right] \\
+&amp; = \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \\
+\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2 &amp; = \left(\frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right)^2
+\end{align*}\]</span>
+<p>and plugging in <span class="math inline">\(p_0 = 0.5\)</span>, we have,</p>
+<p><span class="math display">\[
+\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x)\right)^2 = \left(\frac{\sum_{i = 1}^n X_i}{0.5} - \frac{n - \sum_{i = 1}^n  X_i}{1 - 0.5} \right)^2 = \left( \frac{-n + 2\sum_{i = 1}^n X_i}{0.5}\right)^2 = \left( -2n + 4\sum_{i = 1}^n X_i\right)^2.
+\]</span></p>
+<p>The information matrix is given by <span class="math inline">\(-E\left[ \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)\right]\)</span>. Piecing this together,</p>
+<span class="math display">\[\begin{align*}
+\frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)
+&amp; =  \frac{\partial^2}{\partial p_0^2} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
+&amp; = \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2}
+\end{align*}\]</span>
+<p>And to get <span class="math inline">\(I(p_0)\)</span>, we take the negative expectation of the above quantity under the null hypothesis (that is, where <span class="math inline">\(E[X] = p_0\)</span>) to obtain</p>
+<span class="math display">\[\begin{align*}
+    I(p_0) &amp; = -E \left[ \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2} \right] \\
+    &amp; = \frac{1}{p_0^2} \sum_{i = 1}^n E[X_i] + \frac{1}{(1 - p_0)^2} \left( n - \sum_{i = 1}^n E[X_i]\right) \\
+    &amp; = \frac{1}{p_0^2} \sum_{i = 1}^n p_0 + \frac{1}{(1 - p_0)^2} \left( n - \sum_{i = 1}^n p_0\right) \\
+    &amp; = \frac{n}{p_0}  + \frac{n}{(1 - p_0)^2} \left( 1 - p_0\right) \\
+    &amp; = \frac{n}{p_0}  + \frac{n}{(1 - p_0)}
+\end{align*}\]</span>
+<p>And plugging in <span class="math inline">\(p_0 = 0.5\)</span> we have</p>
+<p><span class="math display">\[
+I(0.5) = \frac{n}{0.5}  + \frac{n}{(1 - 0.5)} = 2n + 2n = 4n.
+\]</span></p>
+<p>Then, finally, the score test statistic (simplified as much as possible) is given by</p>
+<span class="math display">\[\begin{align*}
+    \lambda_S &amp; = \frac{\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2}{I(p_0)} \\
+    &amp; = \frac{\left( -2n + 4\sum_{i = 1}^n X_i\right)^2}{4n} \\
+    &amp; = \frac{\left( -2n + 4n \hat{p}\right)^2}{4n} \\
+    &amp; = \frac{4n^2\left( -1 + 2 \hat{p}\right)^2}{4n} \\
+    &amp; = n\left( -1 + 2 \hat{p}\right)^2
+\end{align*}\]</span>
+<p><strong>Problem 6:</strong> For each of Problems 3, 4, and 5, calculate the p-values from each test when <span class="math inline">\(\hat{p} = 0.4\)</span> and <span class="math inline">\(n = 300\)</span>.</p>
+<p>We’ll again use R to obtain the critical values for these hypothesis tests, noting that in each case, the test statistic follows a <span class="math inline">\(\chi^2_1\)</span> distribution asymptotically:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Wald test statistic</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>lambda_w <span class="ot">&lt;-</span> ((p_hat <span class="sc">-</span> <span class="fl">0.5</span>)<span class="sc">/</span>(<span class="fu">sqrt</span>(p_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">/</span> n)))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LRT statistic</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>lambda_lrt <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> n <span class="sc">*</span> (<span class="fu">log</span>(<span class="fl">0.5</span>) <span class="sc">-</span> <span class="fu">log</span>(p_hat) <span class="sc">*</span> p_hat <span class="sc">-</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Score test statistic</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>lambda_s <span class="ot">&lt;-</span> n <span class="sc">*</span> (<span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> p_hat)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare statistics</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>lambda_w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lambda_lrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.08131</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lambda_s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate p-values</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall: probability that we observe something *as or more extreme*</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(lambda_w, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.000406952</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(lambda_lrt, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0005092985</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(lambda_s, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0005320055</code></pre>
+</div>
+</div>
+<p>Things to note:</p>
+<ul>
+<li><p>When <span class="math inline">\(n\)</span> is large (300, in this case), each of the three classical test statistics are approximately equal! This makes sense, as they all converge in distribution to the same random variable, asymptotically.</p></li>
+<li><p>P-values are the probability that we would observe something <em>as or more extreme</em> than what we actually did observe, under the null hypothesis. In R, we can use the <code>p</code> function (for a given pdf) to calculate this.</p></li>
+</ul>
+<p><strong>Problem 7:</strong> Repeat Problem 6 but with <span class="math inline">\(\hat{p} = 0.4\)</span> and <span class="math inline">\(n = 95\)</span>. If your significance threshold were <span class="math inline">\(\alpha = 0.05\)</span>, would your conclusion to the hypothesis test be the same regardless of which test statistic you chose?</p>
+<p>To answer this question, we can again calculate p-values, and compare them to 0.05 (note that we could have also calculated a critical value, and compared our test statistics to the critical value, as these are equivalent).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">95</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Wald test statistic</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>lambda_w <span class="ot">&lt;-</span> ((p_hat <span class="sc">-</span> <span class="fl">0.5</span>)<span class="sc">/</span>(<span class="fu">sqrt</span>(p_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">/</span> n)))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LRT statistic</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>lambda_lrt <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> n <span class="sc">*</span> (<span class="fu">log</span>(<span class="fl">0.5</span>) <span class="sc">-</span> <span class="fu">log</span>(p_hat) <span class="sc">*</span> p_hat <span class="sc">-</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat))</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Score test statistic</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>lambda_s <span class="ot">&lt;-</span> n <span class="sc">*</span> (<span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> p_hat)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare statistics</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>lambda_w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.958333</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lambda_lrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.825748</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lambda_s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate p-values</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall: probability that we observe something *as or more extreme*</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(lambda_w, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04663986</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(lambda_lrt, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05047083</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(lambda_s, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05125258</code></pre>
+</div>
+</div>
+<p>In this case, we would reject <span class="math inline">\(H_0\)</span> using the Wald test statistic, but <em>fail to reject</em> using the LRT statistic and score test statistic, since the only p-value that was below our significance threshold was the one calculated from the Wald test statistic. Finite-sample distributions of the three classical test statistics are generally unknown; only asymptotically have they been shown to be equivalent, and therefore, can provide <em>different</em> answers to hypothesis tests when sample sizes are relatively small.</p>
 
 
 </section>
