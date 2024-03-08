@@ -181,7 +181,7 @@ The p-value associated with a test statistic is the probability of obtaining a v
 
 **Uniformly Most Powerful (UMP) Test**
 
-A UMP test is a hypothesis test that has the *greatest* power among all possibly tests of a given significance threshold $\alpha$.
+A "most powerful" test is a hypothesis test that has the *greatest* power among all possible tests of a given significance threshold $\alpha$. A *uniformly* most powerful (UMP) test is a test that is most powerful for all possible values of parameters in the restricted parameter space, $\Theta_0$.
 
 More formally, let the set $R$ denote the rejection region of a hypothesis test. Let
 
