@@ -439,7 +439,7 @@ E[\phi(X) \mid \theta_1] &amp; \geq E[\phi'(X) \mid \theta_1]
 <p><strong>Problem 1:</strong> Let <span class="math inline">\(Y_i \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\sigma^2 = 25\)</span> is <em>known</em>. Suppose we want to test the hypotheses <span class="math inline">\(H_0: \mu = 8\)</span> vs.&nbsp;<span class="math inline">\(H_1: \mu &gt; 8\)</span> and we observe <span class="math inline">\(\overline{Y} = 10\)</span> across <span class="math inline">\(n = 64\)</span> observations. Can we reject <span class="math inline">\(H_0\)</span>, with a significance threshold of <span class="math inline">\(\alpha = 0.05\)</span>? (Use a Wald test statistic)</p>
 <p>Our hypotheses are already stated in the problem set-up. The next thing we should do is derive a Wald test statistic. We know that the MLE for <span class="math inline">\(\mu\)</span> is given by <span class="math inline">\(\hat{\mu}_{MLE} = \overline{Y}\)</span> (we have shown this is previous problem sets/worked examples). Then the Wald test statistic can be written as</p>
 <p><span class="math display">\[
-\lambda_W = \left( \frac{\hat{\mu}_{MLE} - \mu_0}{\sigma^2/\sqrt{n}}\right)^2 = \left( \frac{10 - 8}{25/\sqrt{64}}\right)^2 = 6.5536
+\lambda_W = \left( \frac{\hat{\mu}_{MLE} - \mu_0}{\sigma/\sqrt{n}}\right)^2 = \left( \frac{10 - 8}{5/\sqrt{64}}\right)^2 = 10.24
 \]</span></p>
 <p>We can compare this test statistic to the critical value from a <span class="math inline">\(\chi^2_1\)</span> distribution since, by properties of normal distributions and recalling that standard normal distributions squared are <span class="math inline">\(\chi^2_1\)</span>,</p>
 <span class="math display">\[\begin{align*}

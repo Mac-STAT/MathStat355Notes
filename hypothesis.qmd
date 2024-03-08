@@ -262,7 +262,7 @@ as desired.
 Our hypotheses are already stated in the problem set-up. The next thing we should do is derive a Wald test statistic. We know that the MLE for $\mu$ is given by $\hat{\mu}_{MLE} = \overline{Y}$ (we have shown this is previous problem sets/worked examples). Then the Wald test statistic can be written as
 
 $$
-\lambda_W = \left( \frac{\hat{\mu}_{MLE} - \mu_0}{\sigma^2/\sqrt{n}}\right)^2 = \left( \frac{10 - 8}{25/\sqrt{64}}\right)^2 = 6.5536
+\lambda_W = \left( \frac{\hat{\mu}_{MLE} - \mu_0}{\sigma/\sqrt{n}}\right)^2 = \left( \frac{10 - 8}{5/\sqrt{64}}\right)^2 = 10.24
 $$
 
 We can compare this test statistic to the critical value from a $\chi^2_1$ distribution since, by properties of normal distributions and recalling that standard normal distributions squared are $\chi^2_1$,
