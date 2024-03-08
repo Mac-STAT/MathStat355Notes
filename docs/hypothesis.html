@@ -387,11 +387,11 @@ E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
 <p><span class="math display">\[
 \phi(x) = \begin{cases} 1 &amp; \quad \text{if } x \in R \\ 0 &amp; \quad \text{if } x \in R^c \end{cases}
 \]</span></p>
-<p>Then <span class="math inline">\(\phi(x)\)</span> is an indicator function. Recalling that expectations of indicator functions are probabilities, note that <span class="math inline">\(E[\phi(x)] = \Pr(\text{Reject } H_0)\)</span>. <span class="math inline">\(\phi(x)\)</span> then represents our hypothesis test. A hypothesis test <span class="math inline">\(\phi(x)\)</span> is UMP of size <span class="math inline">\(\alpha\)</span> if, for any other hypothesis test <span class="math inline">\(\phi'(x)\)</span> of size <span class="math inline">\(\alpha\)</span> we have,</p>
+<p>Then <span class="math inline">\(\phi(x)\)</span> is an indicator function. Recalling that expectations of indicator functions are probabilities, note that <span class="math inline">\(E[\phi(x)] = \Pr(\text{Reject } H_0)\)</span>. <span class="math inline">\(\phi(x)\)</span> then represents our hypothesis test. A hypothesis test <span class="math inline">\(\phi(x)\)</span> is UMP of size <span class="math inline">\(\alpha\)</span> if, for any other hypothesis test <span class="math inline">\(\phi'(x)\)</span> of size (<em>at most</em>) <span class="math inline">\(\alpha\)</span>,</p>
 <p><span class="math display">\[
 \underset{\theta \in \Theta_0}{\text{sup}} E[\phi'(X) \mid \theta] \leq \underset{\theta \in \Theta_0}{\text{sup}} E[\phi(X) \mid \theta]
 \]</span></p>
-<p>and <span class="math inline">\(\forall \theta \in \Theta_1\)</span>,</p>
+<p>we have that <span class="math inline">\(\forall \theta \in \Theta_1\)</span>,</p>
 <p><span class="math display">\[
 E[\phi'(X) \mid \theta] \leq E[\phi(X) \mid \theta],
 \]</span></p>

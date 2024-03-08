@@ -189,13 +189,13 @@ $$
 \phi(x) = \begin{cases} 1 & \quad \text{if } x \in R \\ 0 & \quad \text{if } x \in R^c \end{cases}
 $$
 
-Then $\phi(x)$ is an indicator function. Recalling that expectations of indicator functions are probabilities, note that $E[\phi(x)] = \Pr(\text{Reject } H_0)$. $\phi(x)$ then represents our hypothesis test. A hypothesis test $\phi(x)$ is UMP of size $\alpha$ if, for any other hypothesis test $\phi'(x)$ of size $\alpha$ we have,
+Then $\phi(x)$ is an indicator function. Recalling that expectations of indicator functions are probabilities, note that $E[\phi(x)] = \Pr(\text{Reject } H_0)$. $\phi(x)$ then represents our hypothesis test. A hypothesis test $\phi(x)$ is UMP of size $\alpha$ if, for any other hypothesis test $\phi'(x)$ of size (*at most*) $\alpha$,
 
 $$
 \underset{\theta \in \Theta_0}{\text{sup}} E[\phi'(X) \mid \theta] \leq \underset{\theta \in \Theta_0}{\text{sup}} E[\phi(X) \mid \theta]
 $$
 
-and $\forall \theta \in \Theta_1$,
+we have that $\forall \theta \in \Theta_1$,
 
 $$
 E[\phi'(X) \mid \theta] \leq E[\phi(X) \mid \theta],
