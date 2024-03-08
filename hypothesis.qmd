@@ -211,7 +211,7 @@ Consider a hypothesis test with $H_0: \theta = \theta_0$ and $H_1: \theta = \the
 
 **Proof.**
 
-Let $\alpha = E[\phi(X) \mid \theta_0]$. Note that the LRT statistic is simplified in the case of these simple hypotheses, and can be written just as $\frac{f(x \mid \theta_1)}{f(x \mid \theta_0)}$. If the likelihood under the alternative is greater than some constant $c$ (which depends on $\alpha$), then we reject the null in favor of the alternative, and vice versa. Then the hypothesis testing function $\phi$ can be written as
+Let $\alpha = E[\phi(X) \mid \theta_0]$. Note that the LRT statistic is simplified in the case of these simple hypotheses, and can be written just as $\frac{f(x \mid \theta_1)}{f(x \mid \theta_0)}$.\* If the likelihood under the alternative is greater than some constant $c$ (which depends on $\alpha$), then we reject the null in favor of the alternative, and vice versa. Then the hypothesis testing function $\phi$ can be written as
 
 $$
 \phi(x) = \begin{cases} 0 & \quad \text{if } \lambda_{LRT} = \frac{f(x \mid \theta_1)}{f(x \mid \theta_0)} < c\\
@@ -252,6 +252,8 @@ E[\phi(X) \mid \theta_1] & \geq E[\phi'(X) \mid \theta_1]
 \end{align*}
 ```
 as desired.
+
+\*Note: The $-2\log(\dots)$ piece comes into play for the LRT statistic to ensure that the test statistic converges in distribution to a $\chi^2$ random variable. When we're just comparing the LRT statistic to another LRT test statistic, we can (more simply) just compare the ratio of likelihoods. Think: comparing $X$ vs. $Y$ is equivalent to comparing $\log(X)$ vs. $\log(Y)$ if we are only interested in the direction of the difference between them, since $\log$ is a monotone function.
 
 ## Worked Examples
 
