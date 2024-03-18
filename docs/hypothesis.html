@@ -459,13 +459,13 @@ E[\phi(X) \mid \theta_1] &amp; \geq E[\phi'(X) \mid \theta_1]
 </div>
 </div>
 <p>Finally, noting that our test statistic is greater than the critical value, we reject <span class="math inline">\(H_0\)</span>.</p>
-<p><strong>Problem 2:</strong> Suppose we wanted to use a different significance level <span class="math inline">\(\alpha\)</span>. How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.01\)</span>? How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.1\)</span>?</p>
+<p><strong>Problem 2:</strong> Suppose we wanted to use a different significance level <span class="math inline">\(\alpha\)</span>. How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.001\)</span>? How would the procedure in Problem 1 change if we let <span class="math inline">\(\alpha = 0.1\)</span>?</p>
 <p>Changing the significance level changes the <em>critical value</em>, and may change whether or not we reject <span class="math inline">\(H_0\)</span>, depending on the difference between our critical value and the test statistic. We can calculate what the critical value would be if we let <span class="math inline">\(\alpha = 0.01\)</span> and <span class="math inline">\(\alpha = 0.1\)</span> again in R:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = 0.01</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span>, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6.634897</code></pre>
+<pre><code>[1] 10.82757</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = 0.1</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.1</span>, <span class="at">df =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -473,7 +473,7 @@ E[\phi(X) \mid \theta_1] &amp; \geq E[\phi'(X) \mid \theta_1]
 <pre><code>[1] 2.705543</code></pre>
 </div>
 </div>
-<p>Note that when <span class="math inline">\(\alpha = 0.1\)</span>, we still reject <span class="math inline">\(H_0\)</span>. This should make intuitive sense, since increasing <span class="math inline">\(\alpha\)</span> only can only increase our rejection region. However, when <span class="math inline">\(\alpha = 0.01\)</span>, we would <em>fail to reject</em> <span class="math inline">\(H_0\)</span>, as our test statistic is not “more extreme” (greater) than the critical value.</p>
+<p>Note that when <span class="math inline">\(\alpha = 0.1\)</span>, we still reject <span class="math inline">\(H_0\)</span>. This should make intuitive sense, since increasing <span class="math inline">\(\alpha\)</span> only can only increase our rejection region. However, when <span class="math inline">\(\alpha = 0.001\)</span>, we would <em>fail to reject</em> <span class="math inline">\(H_0\)</span>, as our test statistic is not “more extreme” (greater) than the critical value.</p>
 <p><strong>Problem 3:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(p)\)</span>, and we want to test the hypotheses <span class="math inline">\(H_0:p = 0.5\)</span>, <span class="math inline">\(H_1:p \neq 0.5\)</span>. Suppose we calculate an estimator for <span class="math inline">\(p\)</span> as <span class="math inline">\(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\)</span>. Derive a Wald test statistic for this hypothesis testing scenario (simplifying as much as you can).</p>
 <p>Recall that <span class="math inline">\(\hat{p}\)</span> as defined in the problem set-up is the MLE for <span class="math inline">\(p\)</span>. Then the Wald test statistic can be written as</p>
 <p><span class="math display">\[

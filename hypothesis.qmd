@@ -286,19 +286,19 @@ qchisq(1 - 0.05, df = 1)
 
 Finally, noting that our test statistic is greater than the critical value, we reject $H_0$.
 
-**Problem 2:** Suppose we wanted to use a different significance level $\alpha$. How would the procedure in Problem 1 change if we let $\alpha = 0.01$? How would the procedure in Problem 1 change if we let $\alpha = 0.1$?
+**Problem 2:** Suppose we wanted to use a different significance level $\alpha$. How would the procedure in Problem 1 change if we let $\alpha = 0.001$? How would the procedure in Problem 1 change if we let $\alpha = 0.1$?
 
 Changing the significance level changes the *critical value*, and may change whether or not we reject $H_0$, depending on the difference between our critical value and the test statistic. We can calculate what the critical value would be if we let $\alpha = 0.01$ and $\alpha = 0.1$ again in R:
 
 ```{r}
 # alpha = 0.01
-qchisq(1 - 0.01, df = 1)
+qchisq(1 - 0.001, df = 1)
 
 # alpha = 0.1
 qchisq(1 - 0.1, df = 1)
 ```
 
-Note that when $\alpha = 0.1$, we still reject $H_0$. This should make intuitive sense, since increasing $\alpha$ only can only increase our rejection region. However, when $\alpha = 0.01$, we would *fail to reject* $H_0$, as our test statistic is not "more extreme" (greater) than the critical value.
+Note that when $\alpha = 0.1$, we still reject $H_0$. This should make intuitive sense, since increasing $\alpha$ only can only increase our rejection region. However, when $\alpha = 0.001$, we would *fail to reject* $H_0$, as our test statistic is not "more extreme" (greater) than the critical value.
 
 **Problem 3:** Suppose we have a random sample $X_1, \dots, X_n \sim Bernoulli(p)$, and we want to test the hypotheses $H_0:p = 0.5$, $H_1:p \neq 0.5$. Suppose we calculate an estimator for $p$ as $\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i$. Derive a Wald test statistic for this hypothesis testing scenario (simplifying as much as you can).
 
