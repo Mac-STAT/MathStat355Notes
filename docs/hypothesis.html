@@ -526,7 +526,7 @@ L(p) = \prod_{i = 1}^n p^{x_i} (1 - p)^{(1 - x_i)}
 <p>The information matrix is given by <span class="math inline">\(-E\left[ \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)\right]\)</span>. Piecing this together,</p>
 <span class="math display">\[\begin{align*}
 \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)
-&amp; =  \frac{\partial^2}{\partial p_0^2} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
+&amp; =  \frac{\partial}{\partial p_0} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
 &amp; = \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2}
 \end{align*}\]</span>
 <p>And to get <span class="math inline">\(I(p_0)\)</span>, we take the negative expectation of the above quantity under the null hypothesis (that is, where <span class="math inline">\(E[X] = p_0\)</span>) to obtain</p>

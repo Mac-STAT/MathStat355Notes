@@ -379,7 +379,7 @@ The information matrix is given by $-E\left[ \frac{\partial^2}{\partial p_0^2} \
 ```{=tex}
 \begin{align*}
  \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x) 
-& =  \frac{\partial^2}{\partial p_0^2} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
+& =  \frac{\partial}{\partial p_0} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
 & = \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2} 
 \end{align*}
 ```
