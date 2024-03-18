@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -289,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[
 E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
 \]</span></p>
-<p>If we want to test if there is a significant association between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>, we can’t look at <span class="math inline">\(\hat{\beta_1}\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> separately. Rather, we need to test the joint null hypothesis <span class="math inline">\(\beta_1 = \beta_2 = 0\)</span>, vs.&nbsp;the alternative where <em>at least one</em> of our coefficients is equal to zero. In introductory statistics, we did this using the <code>anova</code> function in R. In matrix form, we can write our null and alternative hypotheses as:</p>
+<p>If we want to test if there is a significant association between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>, we can’t look at <span class="math inline">\(\hat{\beta_1}\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> separately. Rather, we need to test the joint null hypothesis <span class="math inline">\(\beta_1 = \beta_2 = 0\)</span>, vs.&nbsp;the alternative where <em>at least one</em> of our coefficients is <em>not</em> equal to zero. In introductory statistics, we did this using the <code>anova</code> function in R. In matrix form, we can write our null and alternative hypotheses as:</p>
 <ul>
 <li><p><span class="math inline">\(H_0: R \boldsymbol{\beta} = \textbf{r}\)</span></p></li>
 <li><p><span class="math inline">\(H_1: R \boldsymbol{\beta} \neq \textbf{r}\)</span></p></li>
@@ -887,7 +887,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./bayes.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

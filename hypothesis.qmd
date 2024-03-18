@@ -56,7 +56,7 @@ $$
 E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
 $$
 
-If we want to test if there is a significant association between $Y$ and $X$, we can't look at $\hat{\beta_1}$ and $\hat{\beta}_2$ separately. Rather, we need to test the joint null hypothesis $\beta_1 = \beta_2 = 0$, vs. the alternative where *at least one* of our coefficients is equal to zero. In introductory statistics, we did this using the `anova` function in R. In matrix form, we can write our null and alternative hypotheses as:
+If we want to test if there is a significant association between $Y$ and $X$, we can't look at $\hat{\beta_1}$ and $\hat{\beta}_2$ separately. Rather, we need to test the joint null hypothesis $\beta_1 = \beta_2 = 0$, vs. the alternative where *at least one* of our coefficients is *not* equal to zero. In introductory statistics, we did this using the `anova` function in R. In matrix form, we can write our null and alternative hypotheses as:
 
 -   $H_0: R \boldsymbol{\beta} = \textbf{r}$
 
