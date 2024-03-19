@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MATH/STAT 455: Mathematical Statistics - 8&nbsp; Bayesian Inference</title>
+<title>MATH/STAT 455: Mathematical Statistics - 8&nbsp; Bayesian Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -73,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bayes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -180,14 +182,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">8.1</span> Learning Objectives</a></li>
+  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">8.2</span> Reading Guide</a>
+  <ul class="collapse">
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">8.2.1</span> Reading Questions</a></li>
+  </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">8.3</span> Definitions</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">8.4</span> Theorems</a></li>
+  <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">8.5</span> Worked Examples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></h1>
 </div>
 
 
@@ -202,9 +217,160 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Under development…</p>
+<p>Everything that we have covered so far in this course (and likely what you have covered in your entire statistics education thus far) has been from a <em>Frequentist</em> perspective. Frequentist statistics relies on the underlying belief that, in reality, there is some <em>fixed, unknown</em> truth (parameter) that we attempt to estimate by sampling from a population, computing an estimate, and quantifying our uncertainty. Uncertainty quantification typically takes the form of a confidence interval, and relies on the idea of repeated sampling from a population. The term “Frequentist” comes from the idea of a probability being related to the “frequency” at which an event occurs.</p>
+<p><em>Bayesian</em> statistics is named for Thomas Bayes, who coined <strong>Bayes’ Theorem</strong> in 1763. At around a similar time, Pierre-Simon Laplace worked on very similar ideas, though all credit to Bayesian statistics is typically given to Thomas Bayes. While Bayes’ Theorem itself is not inherently Bayesian (it is quite literally just a probability rule), it provides us with a mathematical foundation for Bayesian philosophy.</p>
+<section id="philosophy" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="philosophy">Philosophy</h3>
+<p>While Frequentists treat parameters as unknown, fixed constants, Bayesians instead treat parameters as random variables, such that parameters follow probability distributions. This distinction may seem subtle, but has large consequences on the interpretation of uncertainty in each paradigm, as well as the properties of Frequentist and Bayesian estimators (particularly in finite samples).</p>
+<p>Rather than think of probability as being related to the frequency at which events occur, Bayesians instead think of probabilities in the more colloquial way: the <em>plausibility</em> that an event were to occur. In order to calculate the latter, we incorporate prior information or beliefs about the event <em>and</em> the data we observe to <em>update</em> our beliefs.</p>
+<p>Note that this is inherently subjective, as prior information / beliefs are involved in our estimation framework. This subjectivity is one of the main reasons why Bayesian statistics was historically rejected and frowned upon in the statistics community, in addition to computational challenges that have really only been alleviated with computational advances made in the last 50 or so years. From a purely philosophical standpoint, Frequentist and Bayesian inference provide an interesting case study of the Enlightenment period, and modern thinking more broadly, compared with <em>post</em>-modern thinking. Back in the day, Frequentists and Bayesians were distinct. Nowadays, most reasonable statisticians will agree that both Frequentist and Bayesian methods have a place in statistics, are subjective in their own ways, and are both useful in different circumstances.</p>
+</section>
+<section id="prior-and-posterior-distributions" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="prior-and-posterior-distributions">Prior and Posterior Distributions</h3>
+<p>Suppose we collect data <span class="math inline">\(\textbf{X}\)</span> (a random vector), and are interested in estimating some parameter <span class="math inline">\(\theta\)</span>. If we treat <span class="math inline">\(\theta\)</span> as a random variable, like Bayesians do, Bayes’ theorem (again, really more of a probability rule than a theorem) states that,</p>
+<p><span class="math display">\[
+\pi(\theta \mid \textbf{X}) = \frac{\pi(\textbf{X} \mid \theta)\pi(\theta)}{\pi(\textbf{X})}.
+\]</span></p>
+<p>The <em>marginal</em> distribution <span class="math inline">\(\pi(\theta)\)</span> is called the prior distribution for our parameter, and represents our initial beliefs. The <em>conditional</em> distribution <span class="math inline">\(\pi(\textbf{X} \mid \theta)\)</span> is called the <em>likelihood</em>, and is exactly the same as the likelihoods we’ve been considering all throughout the semester thus far! Finally, <span class="math inline">\(\pi(\theta \mid \textbf{X})\)</span> is called the <em>posterior</em> distribution for our parameter (our updated beliefs based on our prior beliefs and the data we observe), and <span class="math inline">\(\pi(\textbf{X})\)</span> is called a normalizing constant (since it is constant in terms of <span class="math inline">\(\theta\)</span>, and is the term needed to ensure that the posterior distribution is a valid pdf, i.e., integrates to one).</p>
+<p>In words, Bayesian statistics revolves around the following construct:</p>
+<p><span class="math display">\[
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Normalizing Constant}}
+\]</span></p>
+<p>Prior distributions can be more or less informative, depending on context and modeling choice. Bayesian philosophy can be categorized roughly into two groups: “subjective” Bayes, and “objective” Bayes. Subjective Bayesians believe that prior information should be based on real-world, prior knowledge, and should typically be informative. Objective Bayesians use Bayesian inference as a tool to obtain reasonable estimates, but do not always incorporate <em>actual</em> prior knowledge into their prior distributions. Just as with the Frequentist vs.&nbsp;Bayesian debate, nowadaws, both subjective and objective Bayesian philosophies are generally accepted to have their time and place.</p>
+<p>When choosing a prior distribution without actual prior knowledge of the unknown parameter, people sometimes opt for less informative priors (often called “uninformative” priors, though this is a misnomer). An example of a less informative prior would be something like a Uniform distribution on a large, non-infinite parameter space. People also sometimes choose to use <em>improper</em> priors, such as a Uniform distribution on an <em>infinite</em> parameter space. Such priors are called “improper” because they do not integrate to one, as pdfs must in order to be, by definition, pdfs. The use of improper priors can still, in many cases, lead to proper posterior distributions, but their use is still much less accepted in the broader statistical community.</p>
+</section>
+<section id="uncertainty" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="uncertainty">Uncertainty</h3>
+<p>In Frequentist statistics, our estimate of an unknown parameter is a single point, and we quantify uncertainty with confidence intervals (based on the concept of repeated sampling). In Bayesian statistics, rather than a single point, we instead obtain an <em>entire</em> <em>distribution</em> for our unknown parameter. We can calculate single points from this distribution if we choose to (the mean of the posterior distribution, median, etc.), and some of these points have nice interpretations with regards to decision theory as we’ll see in the next chapter. We can also make direct probability statements about the unknown parameter using this distribution, <em>without</em> the need for repeated sampling!</p>
+<p>Rather than confidence intervals, we instead construct <em>credible</em> intervals using the quantiles of the posterior distribution. The interpretation of a credible interval is exactly the probability that the parameter lies between two values, given our prior beliefs and the data that we observe. Note that this is the interpretation that every student in introductory statistics wants <em>confidence</em> intervals to have! This is an exceedingly natural interpretation of a measure of uncertainty, and is much more easily understood by non-statisticians than the interpretation of a confidence interval.</p>
+</section>
+<section id="computation" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="computation">Computation</h3>
+<p>While Bayesian computation is not the focus of this course, it should be noted that in most practical applications of Bayesian statistics, the computational “lift” of a Bayesian analysis is generally higher than that of a Frequentist analysis. In some cases, such as when we have conjugate priors (as defined below), computation is not a significant issue when doing a Bayesian analysis. However, conjugate priors are relatively rare in the “real world,” and so more advanced computational techniques are required to estimate posterior distributions. There are two primary modes of estimating posterior distributions, with various computation programmes that have been developed to assist with model-fitting:</p>
+<ol type="1">
+<li><p>Markov-chain Monte Carlo methods (MCMC)</p></li>
+<li><p>Laplace approximations</p></li>
+</ol>
+<p>MCMC methods are more classical, and include Gibbs samplers, Hamiltonian Monte Carlo methods such as <a href="https://mc-stan.org/">Stan</a>, and more. These methods provide exact posterior distributions, but rely on tuning parameters and convergence diagnostics that can potentially be difficult to work with correctly. Laplace approximation techniques are newer, and include programmes such as Integrated Nested Laplace Approximations (<a href="https://www.r-inla.org/">INLA</a>) and Template Model Builder (<a href="https://kaskr.github.io/adcomp/Introduction.html">TMB</a>). These methods provide <em>approximate</em> posterior distributions, but do not rely on tuning parameters nor do they require convergence diagnostics. They are often <em>significantly</em> faster than MCMC methods to run, but do not provide accurate approximations to posterior distributions in all cases.</p>
+<p>To learn more, take a look at <a href="https://www.bayesrulesbook.com/">Bayes Rules!</a> (co-authored by Mac’s very own Alicia Johnson), or take STAT 454.</p>
+</section>
+<section id="learning-objectives" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li>Articulate the differences in Frequentist and Bayesian philosophy</li>
+<li>Derive the posterior distribution for an unknown parameter based on a specified prior and likelihood</li>
+<li>Evaluate the properties of posterior means, medians, etc.</li>
+<li>Articulate the impact of the choice of prior distribution on Bayesian estimation</li>
+</ul>
+</section>
+<section id="reading-guide" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">8.2</span> Reading Guide</h2>
+<p>Associated Readings: Chapter 5, Section 5.8 (through Example 5.8.4)</p>
+<section id="reading-questions" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">8.2.1</span> Reading Questions</h3>
+<ol type="1">
+<li>What is the difference between the Bayesian and Frequentist philosophies?</li>
+<li>What are the typical steps to deriving a posterior distribution?</li>
+<li>How is the posterior distribution impacted by the observed data and our choice of prior? What sorts of considerations should we keep in mind in choosing a prior?</li>
+<li>How are Bayes and maximum likelihood estimators typically related?</li>
+<li>What are typical Frequentist properties (e.g., bias, asymptotic bias, consistency) of Bayesian estimators (posterior means, for example)?</li>
+</ol>
+</section>
+</section>
+<section id="definitions" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">8.3</span> Definitions</h2>
+<p><strong>Bayes’ Theorem, Prior distribution, Posterior distribution</strong></p>
+<p>For two random variables <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\textbf{X}\)</span>, Bayes’ theorem states that,</p>
+<p><span class="math display">\[
+\pi(\theta \mid \textbf{X}) = \frac{\pi(\textbf{X} \mid \theta)\pi(\theta)}{\pi(\textbf{X})},
+\]</span></p>
+<p>where <span class="math inline">\(\pi(\theta)\)</span> denotes the <strong>prior distribution</strong> of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\pi(\textbf{X} \mid \theta)\)</span> denotes the likelihood, <span class="math inline">\(\pi(\theta \mid \textbf{X})\)</span> denotes the <strong>posterior distribution</strong> of <span class="math inline">\(\theta\)</span>, and <span class="math inline">\(\pi(\textbf{X})\)</span> denotes the normalizing constant.</p>
+<p><strong>Improper prior</strong></p>
+<p>An improper prior is a prior distribution that <em>does not integrate to 1</em>. This means that the prior is not a probability density function, since all pdfs must integrate to 1. In practice, some improper priors can still lead to proper posterior distributions, and as such, they are occasionally used as one type of non-informative prior. The most commonly used improper proper is the uniform distribution from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>.</p>
+<p><strong>Conjugate prior</strong></p>
+<p>A conjugate prior is a prior distribution that is in the same probability density family as the posterior distribution. Conjugate priors primarily used for computational convenience (as the posterior distributions then have closed form solutions), or when conjugacy makes sense in the context of the modeling problem. For examples of conjugate priors, the Wikipedia page linked <a href="https://en.wikipedia.org/wiki/Conjugate_prior">here</a> is quite complete.</p>
+<p><strong>Posterior mode</strong></p>
+<p>The posterior mode is, as the name implies, the mode of the posterior distribution. In math, the posterior mode is the estimate <span class="math inline">\(\hat{\theta}\)</span> that satisfies,</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial \theta}\pi(\theta \mid \textbf{X}) = 0.
+\]</span></p>
+<p><strong>Posterior median</strong></p>
+<p>The posterior median is, as the name implies, the median of the posterior distribution. In math, the posterior median is the estimate <span class="math inline">\(\hat{\theta}\)</span> that satisfies,</p>
+<p><span class="math display">\[
+\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) dx = 0.5
+\]</span></p>
+<p><strong>Posterior mean</strong></p>
+<p>The posterior mean is, as the name implies, the mean of the posterior distribution. In math, the posterior mean is the estimate</p>
+<p><span class="math display">\[
+\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) dx
+\]</span></p>
+<p><strong>Credible interval</strong></p>
+<p>A 100(1 - <span class="math inline">\(\alpha\)</span>)% credible interval is an interval <span class="math inline">\((\Phi_{\alpha/2}, \Phi_{1 - \alpha/2})\)</span> for a parameter <span class="math inline">\(\theta\)</span> is given by</p>
+<p><span class="math display">\[
+\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) dx = 1 - \alpha,
+\]</span></p>
+<p>where <span class="math inline">\(\Phi_p\)</span> denotes the <span class="math inline">\(p\)</span>th quantile of the posterior distribution.</p>
+</section>
+<section id="theorems" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">8.4</span> Theorems</h2>
+<p>None for this chapter, other than Bayes’ theorem, which doesn’t really count as a theorem cause it’s just a probability rule!</p>
+</section>
+<section id="worked-examples" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">8.5</span> Worked Examples</h2>
+<p><strong>Problem 1:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(\theta)\)</span>, and choose a <span class="math inline">\(Beta(\alpha, \beta)\)</span> prior for <span class="math inline">\(\theta\)</span>. Derive the posterior distribution, <span class="math inline">\(\pi(\theta \mid X_1, \dots, X_n)\)</span>.</p>
+<p>We can write,</p>
+<span class="math display">\[\begin{align*}
+    \pi(\theta \mid X_1, \dots, X_n) &amp; \propto \left( \prod_{i = 1}^n f(x_i) \right) \pi(\theta) \\
+    &amp; = \left( \prod_{i = 1}^n \theta^{x_i} (1 - \theta)^{1 - x_i} \right) \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
+    &amp; = \theta^{\sum_{i = 1}^n x_i} (1 - \theta)^{n - \sum_{i = 1}^n x_i}  \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
+    &amp; \propto \theta^{\sum_{i = 1}^n x_i + \alpha - 1} (1 - \theta)^{n - \sum_{i = 1}^n x_i + \beta - 1}
+\end{align*}\]</span>
+<p>where we recognize the kernel of a <span class="math inline">\(Beta(\sum_{i = 1}^n X_i + \alpha, n - \sum_{i = 1}^n X_i + \beta)\)</span> distribution, and therefore this is the posterior distribution for <span class="math inline">\(\theta\)</span>.</p>
+<p><strong>Problem 2:</strong> Derive the posterior mean for <span class="math inline">\(\theta\)</span> in Problem 1.</p>
+<p>We know that the expectation of a <span class="math inline">\(Beta(a, b)\)</span> distribution is given by <span class="math inline">\(\frac{a}{a + b}\)</span>, and so we have</p>
+<p><span class="math display">\[
+\hat{\theta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\sum_{i = 1}^n X_i + \alpha + n - \sum_{i = 1}^n X_i + \beta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n}
+\]</span></p>
+<p><strong>Problem 3:</strong> Write the posterior mean from Problem 2 as a function of the MLE, <span class="math inline">\(\hat{\theta}_{MLE} = \overline{X}\)</span>, and the <em>prior</em> mean for <span class="math inline">\(\theta\)</span>. What do you notice?</p>
+<p>We can write,</p>
+<span class="math display">\[\begin{align*}
+    \hat{\theta} &amp; = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n} \\
+    &amp; = \frac{\sum_{i = 1}^n X_i }{\alpha + \beta + n} + \frac{\alpha}{\alpha + \beta + n} \\
+    &amp; = \frac{\frac{n}{n} \sum_{i = 1}^n X_i}{\alpha + \beta + n} + \frac{\frac{\alpha (\alpha + \beta)}{\alpha + \beta}}{\alpha + \beta + n} \\
+    &amp; = \left( \frac{n}{\alpha + \beta + n} \right) \overline{X} + \left( \frac{\alpha + \beta}{\alpha + \beta + n}\right) \left( \frac{\alpha}{\alpha + \beta}\right)
+\end{align*}\]</span>
+<p>and so we can see that the posterior mean is a <em>weighted average</em> of the prior mean and the MLE (in this case, the sample mean)!</p>
+<p><strong>Problem 4:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)\)</span>, and choose a <span class="math inline">\(Gamma(\alpha, \beta)\)</span> prior for <span class="math inline">\(\lambda\)</span>. Derive the posterior distribution, <span class="math inline">\(\pi(\lambda \mid X_1, \dots, X_n)\)</span>.</p>
+<p>We can write,</p>
+<span class="math display">\[\begin{align*}
+    \pi(\lambda \mid X_1, \dots, X_n) \\
+    &amp; \propto \left( \prod_{i = 1}^n f(x_i) \right) \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda} \\
+    &amp; = \left( \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!} \right) \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda} \\
+    &amp; = \frac{\lambda^{\sum_{i = 1}^n x_i}e^{-n\lambda}}{\prod_{i = 1}^n x_i!} \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda} \\
+    &amp; \propto \lambda^{\sum_{i = 1}^n x_i + \alpha - 1} e^{-n\lambda - \beta \lambda} \\
+    &amp; = \lambda^{\sum_{i = 1}^n x_i + \alpha - 1} e^{-(n + \beta)\lambda}
+\end{align*}\]</span>
+<p>where we recognize the kernel of a <span class="math inline">\(Gamma(\sum_{i = 1}^n X_i + \alpha, n + \beta)\)</span> distribution, and therefore this is the posterior distribution for <span class="math inline">\(\lambda\)</span>.</p>
+<p><strong>Problem 5:</strong> Derive the posterior mean for <span class="math inline">\(\lambda\)</span> in Problem 4.</p>
+<p>We know that the expectation of a <span class="math inline">\(Gamma(a, b)\)</span> distribution is given by <span class="math inline">\(\frac{a}{b}\)</span>, and so we have</p>
+<span class="math display">\[\begin{align*}
+    \hat{\lambda} = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta}
+\end{align*}\]</span>
+<p><strong>Problem 6:</strong> Write the posterior mean from Problem 5 as a function of the MLE, <span class="math inline">\(\hat{\lambda}_{MLE} = \overline{X}\)</span>, and the <em>prior</em> mean for <span class="math inline">\(\lambda\)</span>. What do you notice?</p>
+<p>We can write,</p>
+<span class="math display">\[\begin{align*}
+    \hat{\lambda} &amp; = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta} \\
+    &amp; = \frac{\sum_{i = 1}^n X_i}{n + \beta} + \frac{\alpha}{n + \beta} \\
+    &amp; = \frac{n \overline{X}}{n + \beta} + \frac{\frac{\beta\alpha}{\beta}}{n + \beta} \\
+    &amp; = \left( \frac{n}{n + \beta}  \right) \overline{X} + \left( \frac{\beta}{n + \beta} \right) \frac{\alpha}{\beta}
+\end{align*}\]</span>
+<p>and so we can see (again) that the posterior mean is a <em>weighted average</em> of the prior mean and the MLE (in this case, the sample mean)!</p>
+<p><strong>Problem 7:</strong> What is the asymptotic behavior of the posterior means calculated in Problems 2 and 5?</p>
+<p>In both cases, as <span class="math inline">\(n \to \infty\)</span>, the posterior mean will approach the MLE! This is easiest to note after we observe that the posterior mean is a weighted average of the MLE and the prior mean. The weight on the prior mean will approach zero, as the weight on the MLE will approach 1, as <span class="math inline">\(n\)</span> goes to infinity.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,3 +1,211 @@
-# Bayesian Inference
+# Bayesian Statistics
 
-Under development...
+Everything that we have covered so far in this course (and likely what you have covered in your entire statistics education thus far) has been from a *Frequentist* perspective. Frequentist statistics relies on the underlying belief that, in reality, there is some *fixed, unknown* truth (parameter) that we attempt to estimate by sampling from a population, computing an estimate, and quantifying our uncertainty. Uncertainty quantification typically takes the form of a confidence interval, and relies on the idea of repeated sampling from a population. The term "Frequentist" comes from the idea of a probability being related to the "frequency" at which an event occurs.
+
+*Bayesian* statistics is named for Thomas Bayes, who coined **Bayes' Theorem** in 1763. At around a similar time, Pierre-Simon Laplace worked on very similar ideas, though all credit to Bayesian statistics is typically given to Thomas Bayes. While Bayes' Theorem itself is not inherently Bayesian (it is quite literally just a probability rule), it provides us with a mathematical foundation for Bayesian philosophy.
+
+### Philosophy {.unnumbered .unlisted}
+
+While Frequentists treat parameters as unknown, fixed constants, Bayesians instead treat parameters as random variables, such that parameters follow probability distributions. This distinction may seem subtle, but has large consequences on the interpretation of uncertainty in each paradigm, as well as the properties of Frequentist and Bayesian estimators (particularly in finite samples).
+
+Rather than think of probability as being related to the frequency at which events occur, Bayesians instead think of probabilities in the more colloquial way: the *plausibility* that an event were to occur. In order to calculate the latter, we incorporate prior information or beliefs about the event *and* the data we observe to *update* our beliefs.
+
+Note that this is inherently subjective, as prior information / beliefs are involved in our estimation framework. This subjectivity is one of the main reasons why Bayesian statistics was historically rejected and frowned upon in the statistics community, in addition to computational challenges that have really only been alleviated with computational advances made in the last 50 or so years. From a purely philosophical standpoint, Frequentist and Bayesian inference provide an interesting case study of the Enlightenment period, and modern thinking more broadly, compared with *post*-modern thinking. Back in the day, Frequentists and Bayesians were distinct. Nowadays, most reasonable statisticians will agree that both Frequentist and Bayesian methods have a place in statistics, are subjective in their own ways, and are both useful in different circumstances.
+
+### Prior and Posterior Distributions {.unnumbered .unlisted}
+
+Suppose we collect data $\textbf{X}$ (a random vector), and are interested in estimating some parameter $\theta$. If we treat $\theta$ as a random variable, like Bayesians do, Bayes' theorem (again, really more of a probability rule than a theorem) states that,
+
+$$
+\pi(\theta \mid \textbf{X}) = \frac{\pi(\textbf{X} \mid \theta)\pi(\theta)}{\pi(\textbf{X})}.
+$$
+
+The *marginal* distribution $\pi(\theta)$ is called the prior distribution for our parameter, and represents our initial beliefs. The *conditional* distribution $\pi(\textbf{X} \mid \theta)$ is called the *likelihood*, and is exactly the same as the likelihoods we've been considering all throughout the semester thus far! Finally, $\pi(\theta \mid \textbf{X})$ is called the *posterior* distribution for our parameter (our updated beliefs based on our prior beliefs and the data we observe), and $\pi(\textbf{X})$ is called a normalizing constant (since it is constant in terms of $\theta$, and is the term needed to ensure that the posterior distribution is a valid pdf, i.e., integrates to one).
+
+In words, Bayesian statistics revolves around the following construct:
+
+$$
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Normalizing Constant}}
+$$
+
+Prior distributions can be more or less informative, depending on context and modeling choice. Bayesian philosophy can be categorized roughly into two groups: "subjective" Bayes, and "objective" Bayes. Subjective Bayesians believe that prior information should be based on real-world, prior knowledge, and should typically be informative. Objective Bayesians use Bayesian inference as a tool to obtain reasonable estimates, but do not always incorporate *actual* prior knowledge into their prior distributions. Just as with the Frequentist vs. Bayesian debate, nowadaws, both subjective and objective Bayesian philosophies are generally accepted to have their time and place.
+
+When choosing a prior distribution without actual prior knowledge of the unknown parameter, people sometimes opt for less informative priors (often called "uninformative" priors, though this is a misnomer). An example of a less informative prior would be something like a Uniform distribution on a large, non-infinite parameter space. People also sometimes choose to use *improper* priors, such as a Uniform distribution on an *infinite* parameter space. Such priors are called "improper" because they do not integrate to one, as pdfs must in order to be, by definition, pdfs. The use of improper priors can still, in many cases, lead to proper posterior distributions, but their use is still much less accepted in the broader statistical community.
+
+### Uncertainty {.unnumbered .unlisted}
+
+In Frequentist statistics, our estimate of an unknown parameter is a single point, and we quantify uncertainty with confidence intervals (based on the concept of repeated sampling). In Bayesian statistics, rather than a single point, we instead obtain an *entire* *distribution* for our unknown parameter. We can calculate single points from this distribution if we choose to (the mean of the posterior distribution, median, etc.), and some of these points have nice interpretations with regards to decision theory as we'll see in the next chapter. We can also make direct probability statements about the unknown parameter using this distribution, *without* the need for repeated sampling!
+
+Rather than confidence intervals, we instead construct *credible* intervals using the quantiles of the posterior distribution. The interpretation of a credible interval is exactly the probability that the parameter lies between two values, given our prior beliefs and the data that we observe. Note that this is the interpretation that every student in introductory statistics wants *confidence* intervals to have! This is an exceedingly natural interpretation of a measure of uncertainty, and is much more easily understood by non-statisticians than the interpretation of a confidence interval.
+
+### Computation {.unnumbered .unlisted}
+
+While Bayesian computation is not the focus of this course, it should be noted that in most practical applications of Bayesian statistics, the computational "lift" of a Bayesian analysis is generally higher than that of a Frequentist analysis. In some cases, such as when we have conjugate priors (as defined below), computation is not a significant issue when doing a Bayesian analysis. However, conjugate priors are relatively rare in the "real world," and so more advanced computational techniques are required to estimate posterior distributions. There are two primary modes of estimating posterior distributions, with various computation programmes that have been developed to assist with model-fitting:
+
+1.  Markov-chain Monte Carlo methods (MCMC)
+
+2.  Laplace approximations
+
+MCMC methods are more classical, and include Gibbs samplers, Hamiltonian Monte Carlo methods such as [Stan](https://mc-stan.org/), and more. These methods provide exact posterior distributions, but rely on tuning parameters and convergence diagnostics that can potentially be difficult to work with correctly. Laplace approximation techniques are newer, and include programmes such as Integrated Nested Laplace Approximations ([INLA](https://www.r-inla.org/)) and Template Model Builder ([TMB](https://kaskr.github.io/adcomp/Introduction.html)). These methods provide *approximate* posterior distributions, but do not rely on tuning parameters nor do they require convergence diagnostics. They are often *significantly* faster than MCMC methods to run, but do not provide accurate approximations to posterior distributions in all cases.
+
+To learn more, take a look at [Bayes Rules!](https://www.bayesrulesbook.com/) (co-authored by Mac's very own Alicia Johnson), or take STAT 454.
+
+## Learning Objectives
+
+By the end of this chapter, you should be able to...
+
+-   Articulate the differences in Frequentist and Bayesian philosophy
+-   Derive the posterior distribution for an unknown parameter based on a specified prior and likelihood
+-   Evaluate the properties of posterior means, medians, etc.
+-   Articulate the impact of the choice of prior distribution on Bayesian estimation
+
+## Reading Guide
+
+Associated Readings: Chapter 5, Section 5.8 (through Example 5.8.4)
+
+### Reading Questions
+
+1.  What is the difference between the Bayesian and Frequentist philosophies?
+2.  What are the typical steps to deriving a posterior distribution?
+3.  How is the posterior distribution impacted by the observed data and our choice of prior? What sorts of considerations should we keep in mind in choosing a prior?
+4.  How are Bayes and maximum likelihood estimators typically related?
+5.  What are typical Frequentist properties (e.g., bias, asymptotic bias, consistency) of Bayesian estimators (posterior means, for example)?
+
+## Definitions
+
+**Bayes' Theorem, Prior distribution, Posterior distribution**
+
+For two random variables $\theta$ and $\textbf{X}$, Bayes' theorem states that,
+
+$$
+\pi(\theta \mid \textbf{X}) = \frac{\pi(\textbf{X} \mid \theta)\pi(\theta)}{\pi(\textbf{X})},
+$$
+
+where $\pi(\theta)$ denotes the **prior distribution** of $\theta$, $\pi(\textbf{X} \mid \theta)$ denotes the likelihood, $\pi(\theta \mid \textbf{X})$ denotes the **posterior distribution** of $\theta$, and $\pi(\textbf{X})$ denotes the normalizing constant.
+
+**Improper prior**
+
+An improper prior is a prior distribution that *does not integrate to 1*. This means that the prior is not a probability density function, since all pdfs must integrate to 1. In practice, some improper priors can still lead to proper posterior distributions, and as such, they are occasionally used as one type of non-informative prior. The most commonly used improper proper is the uniform distribution from $-\infty$ to $\infty$.
+
+**Conjugate prior**
+
+A conjugate prior is a prior distribution that is in the same probability density family as the posterior distribution. Conjugate priors primarily used for computational convenience (as the posterior distributions then have closed form solutions), or when conjugacy makes sense in the context of the modeling problem. For examples of conjugate priors, the Wikipedia page linked [here](https://en.wikipedia.org/wiki/Conjugate_prior) is quite complete.
+
+**Posterior mode**
+
+The posterior mode is, as the name implies, the mode of the posterior distribution. In math, the posterior mode is the estimate $\hat{\theta}$ that satisfies,
+
+$$
+\frac{\partial}{\partial \theta}\pi(\theta \mid \textbf{X}) = 0.
+$$
+
+**Posterior median**
+
+The posterior median is, as the name implies, the median of the posterior distribution. In math, the posterior median is the estimate $\hat{\theta}$ that satisfies,
+
+$$
+\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) dx = 0.5
+$$
+
+**Posterior mean**
+
+The posterior mean is, as the name implies, the mean of the posterior distribution. In math, the posterior mean is the estimate
+
+$$
+\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) dx
+$$
+
+**Credible interval**
+
+A 100(1 - $\alpha$)% credible interval is an interval $(\Phi_{\alpha/2}, \Phi_{1 - \alpha/2})$ for a parameter $\theta$ is given by
+
+$$
+\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) dx = 1 - \alpha, 
+$$
+
+where $\Phi_p$ denotes the $p$th quantile of the posterior distribution.
+
+## Theorems
+
+None for this chapter, other than Bayes' theorem, which doesn't really count as a theorem cause it's just a probability rule!
+
+## Worked Examples
+
+**Problem 1:** Suppose we have a random sample $X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(\theta)$, and choose a $Beta(\alpha, \beta)$ prior for $\theta$. Derive the posterior distribution, $\pi(\theta \mid X_1, \dots, X_n)$.
+
+We can write,
+
+```{=tex}
+\begin{align*}
+    \pi(\theta \mid X_1, \dots, X_n) & \propto \left( \prod_{i = 1}^n f(x_i) \right) \pi(\theta) \\
+    & = \left( \prod_{i = 1}^n \theta^{x_i} (1 - \theta)^{1 - x_i} \right) \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
+    & = \theta^{\sum_{i = 1}^n x_i} (1 - \theta)^{n - \sum_{i = 1}^n x_i}  \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
+    & \propto \theta^{\sum_{i = 1}^n x_i + \alpha - 1} (1 - \theta)^{n - \sum_{i = 1}^n x_i + \beta - 1}
+\end{align*}
+```
+where we recognize the kernel of a $Beta(\sum_{i = 1}^n X_i + \alpha, n - \sum_{i = 1}^n X_i + \beta)$ distribution, and therefore this is the posterior distribution for $\theta$.
+
+**Problem 2:** Derive the posterior mean for $\theta$ in Problem 1.
+
+We know that the expectation of a $Beta(a, b)$ distribution is given by $\frac{a}{a + b}$, and so we have
+
+$$
+\hat{\theta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\sum_{i = 1}^n X_i + \alpha + n - \sum_{i = 1}^n X_i + \beta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n}
+$$
+
+**Problem 3:** Write the posterior mean from Problem 2 as a function of the MLE, $\hat{\theta}_{MLE} = \overline{X}$, and the *prior* mean for $\theta$. What do you notice?
+
+We can write,
+
+```{=tex}
+\begin{align*}
+    \hat{\theta} & = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n} \\
+    & = \frac{\sum_{i = 1}^n X_i }{\alpha + \beta + n} + \frac{\alpha}{\alpha + \beta + n} \\
+    & = \frac{\frac{n}{n} \sum_{i = 1}^n X_i}{\alpha + \beta + n} + \frac{\frac{\alpha (\alpha + \beta)}{\alpha + \beta}}{\alpha + \beta + n} \\
+    & = \left( \frac{n}{\alpha + \beta + n} \right) \overline{X} + \left( \frac{\alpha + \beta}{\alpha + \beta + n}\right) \left( \frac{\alpha}{\alpha + \beta}\right)
+\end{align*}
+```
+and so we can see that the posterior mean is a *weighted average* of the prior mean and the MLE (in this case, the sample mean)!
+
+**Problem 4:** Suppose we have a random sample $X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)$, and choose a $Gamma(\alpha, \beta)$ prior for $\lambda$. Derive the posterior distribution, $\pi(\lambda \mid X_1, \dots, X_n)$.
+
+We can write,
+
+```{=tex}
+\begin{align*}
+    \pi(\lambda \mid X_1, \dots, X_n) \\
+    & \propto \left( \prod_{i = 1}^n f(x_i) \right) \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda} \\
+    & = \left( \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!} \right) \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda} \\
+    & = \frac{\lambda^{\sum_{i = 1}^n x_i}e^{-n\lambda}}{\prod_{i = 1}^n x_i!} \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda} \\
+    & \propto \lambda^{\sum_{i = 1}^n x_i + \alpha - 1} e^{-n\lambda - \beta \lambda} \\
+    & = \lambda^{\sum_{i = 1}^n x_i + \alpha - 1} e^{-(n + \beta)\lambda} 
+\end{align*}
+```
+where we recognize the kernel of a $Gamma(\sum_{i = 1}^n X_i + \alpha, n + \beta)$ distribution, and therefore this is the posterior distribution for $\lambda$.
+
+**Problem 5:** Derive the posterior mean for $\lambda$ in Problem 4.
+
+We know that the expectation of a $Gamma(a, b)$ distribution is given by $\frac{a}{b}$, and so we have
+
+```{=tex}
+\begin{align*}
+    \hat{\lambda} = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta}
+\end{align*}
+```
+**Problem 6:** Write the posterior mean from Problem 5 as a function of the MLE, $\hat{\lambda}_{MLE} = \overline{X}$, and the *prior* mean for $\lambda$. What do you notice?
+
+We can write,
+
+```{=tex}
+\begin{align*}
+    \hat{\lambda} & = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta} \\
+    & = \frac{\sum_{i = 1}^n X_i}{n + \beta} + \frac{\alpha}{n + \beta} \\
+    & = \frac{n \overline{X}}{n + \beta} + \frac{\frac{\beta\alpha}{\beta}}{n + \beta} \\
+    & = \left( \frac{n}{n + \beta}  \right) \overline{X} + \left( \frac{\beta}{n + \beta} \right) \frac{\alpha}{\beta}
+\end{align*}
+```
+and so we can see (again) that the posterior mean is a *weighted average* of the prior mean and the MLE (in this case, the sample mean)!
+
+**Problem 7:** What is the asymptotic behavior of the posterior means calculated in Problems 2 and 5?
+
+In both cases, as $n \to \infty$, the posterior mean will approach the MLE! This is easiest to note after we observe that the posterior mean is a weighted average of the MLE and the prior mean. The weight on the prior mean will approach zero, as the weight on the MLE will approach 1, as $n$ goes to infinity.
