@@ -218,7 +218,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced, breakable, sharp corners]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -609,10 +609,10 @@ familiar you are with the forms of the pdfs, the easier/faster it will
 be to work through problem sets and quizzes.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2027}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2297}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2568}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2838}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3108}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2027}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2297}}@{}}
 \caption{\emph{Table 1.} Table of main probability distributions we will
 work with for \emph{MATH/STAT 455}.}\tabularnewline
 \toprule\noalign{}
@@ -923,6 +923,8 @@ as desired.
 \textbf{Problem 1:} Suppose \(X \sim Exponential(\lambda)\). Calculate
 \(E[X]\) and \(Var[X]\).
 
+Solution:
+
 We know that \(f(x) = \lambda e^{-\lambda x}\). If we can calculate
 \(E[X]\) and \(E[X^2]\), then we're basically done! We can write
 
@@ -977,6 +979,8 @@ Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{
 variable is ``memoryless'', i.e.~show that
 \(\Pr(X > s + x \mid X > s) = \Pr(X > x)\), \(\forall s\).
 
+Solution:
+
 Recall that the CDF of an exponential distribution is given by
 \(F(x) = 1-e^{-\lambda x}\). Thanks to Bayes rule, we can write
 
@@ -1004,6 +1008,8 @@ and we're done!
 \textbf{Problem 3:} Suppose \(X \sim Exponential(1/\lambda)\), and
 \(Y \mid X \sim Poisson(X)\). Show that
 \(Y \sim Geometric(1/(1 + \lambda))\).
+
+Solution:
 
 Note that we can write \(f(x, y) = f(y \mid x) f(x)\), and
 \(f(y) = \int f(x, y) dx\). Then
@@ -1093,6 +1099,8 @@ some subtlety here that we're going to choose to ignore.
 \(Y = \frac{X - \mu}{\sigma}\). Find the distribution of \(Y\)
 (simplifying all of your math will be useful for this problem).
 
+Solution:
+
 To solve this problem, we can use the theorem on transforming continuous
 random variables. We must first define our function \(g\) that relates
 \(X\) and \(Y\). In this case, we have
@@ -1126,6 +1134,8 @@ and \(Y\) is given by
 \(f_{X,Y}(x,y) = \lambda \beta e^{-x\lambda - y\beta}\). Determine if
 \(X\) and \(Y\) are independent, showing why or why not.
 
+Solution:
+
 To determine whether \(X\) and \(Y\) are independent (or not), we need
 to determine if their joint pdf is ``separable.'' Doing some algebra, we
 can see that
@@ -1144,6 +1154,8 @@ in this case, both have exponential distributions).
 and \(Y\) is given by
 \(f_{X,Y}(x,y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} \binom{n}{y} x^{y + \alpha - 1} (1-x)^{n-y + \beta - 1}\).
 Determine if \(X\) and \(Y\) are independent, showing why or why not.
+
+Solution:
 
 To determine whether \(X\) and \(Y\) are independent (or not), we need
 to determine if their joint pdf is ``separable.'' Right away, we should
@@ -1508,6 +1520,8 @@ None for this chapter!
 \(X_1, \dots, X_n \sim Bernoulli(p)\), where
 \(f_X(x) = p^x(1-p)^{1-x}\). Find the MLE of \(p\).
 
+Solution:
+
 We can write the likelihood function as
 
 \[
@@ -1556,6 +1570,8 @@ for \(-\infty < x < \infty, \ -\infty < \mu < \infty,\) and
 this is Question 5 on the MLE section of Problem Set 1! For your HW, try
 your best to do this problem from scratch, without looking at the course
 notes!)
+
+Solution:
 
 Since we are dealing with a likelihood with two parameters, we'll need
 to solve a \emph{system} of equations to obtain the MLEs for \(\mu\) and
@@ -1782,6 +1798,8 @@ those known theoretical moments to make our lives easier.
 \textbf{Problem 1:} Suppose \(X_1, \dots, X_n \sim Poisson(\lambda)\).
 Find the MLE of \(\lambda\) \emph{and} the MOM estimator of \(\lambda\).
 
+Solution:
+
 To obtain the MLE, note that we can write the likelihood as
 
 \[
@@ -1817,6 +1835,8 @@ estimator for \(\lambda\) is again, just the sample average! Much
 \textbf{Problem 2:} Suppose \(X_1, \dots, X_n \sim Bernoulli(\theta)\).
 Find the MOM estimator for \(\theta\).
 
+Solution:
+
 Note that our pdf contains only one parameter. Then we only need to
 solve a ``system'' of one equation. We have
 
@@ -1830,6 +1850,8 @@ theoretical moment is exactly the parameter we're interested in.
 
 \textbf{Problem 3:} Suppose \(Y_1, \dots, Y_n \sim Uniform(0, \theta)\).
 Find the MOM estimator for \(\theta\).
+
+Solution:
 
 Note that our pdf contains only one parameter. Then we only need to
 solve a ``system'' of one equation. We have
@@ -2190,6 +2212,8 @@ UMVUE criterion.
 the MLE of \(\theta\), and show that it is an unbiased estimator of
 \(\theta\).
 
+Solution:
+
 Note that we can write
 
 \begin{align*}
@@ -2226,6 +2250,8 @@ as desired.
 \(\theta\). Hint: use the fact that
 \(Y_{(1)} \sim Exponential(n/\theta)\)
 
+Solution:
+
 Note that the mean of a random variable \(Y \sim Exponential(\lambda)\)
 is given by \(1/\lambda\). Then we can write
 
@@ -2241,6 +2267,8 @@ E[\hat{\theta}_3] = E[nY_{(1)}] = \frac{n}{n/\theta} = \theta
 
 \textbf{Problem 3:} Compare the variance of the estimators from Problems
 1 and 2. Which is most efficient?
+
+Solution:
 
 Recall that the variance of a random variable
 \(Y \sim Exponential(\lambda)\) is given by \(1/\lambda^2\). Let the MLE
@@ -2273,6 +2301,8 @@ estimator \(\hat{\mu} = \frac{1}{n} \sum_{i = 1}^n X_i\) \emph{and} the
 estimator \(\hat{\mu}_w = \sum_{i = 1}^n w_i X_i\) are both unbiased
 estimators of \(\mu\), where \(\sum_{i = 1}^n w_i = 1\).
 
+Solution:
+
 We can write
 
 \[
@@ -2292,6 +2322,8 @@ as desired.
 impose the constraint \(w_i \geq 0\) \(\forall i\). (Note that this is a
 more ``general'' example based on Example 5.4.5 in the course textbook)
 (Hint: use the Cauchy-Schwarz inequality)
+
+Solution:
 
 To determine relative efficiency, we must compute the variance of each
 estimator. We have
@@ -2328,6 +2360,8 @@ and therefore, \(\hat{\mu}\) is more efficient than \(\hat{\mu}_w\).
 MLE for \(\sigma^2\) is \emph{biased}, and suggest a modified variance
 estimator for \(\sigma^2\) that is \emph{unbiased}. (Note that this is
 example 5.4.4 in our course textbook)
+
+Solution:
 
 Recall that the MLE for \(\sigma^2\) is given by
 \(\frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2\). Then
@@ -2549,6 +2583,8 @@ well.
 \(X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)\). Show that the
 MLE for \(\sigma^2\) is \emph{asymptotically} unbiased.
 
+Solution:
+
 The MLE for \(\sigma^2\) is given by
 \(\frac{1}{n} \sum_{i = 1}^n (X_i - \overline{X})^2\) (see the MLE
 section of the course notes, worked example problem 2), and has
@@ -2570,6 +2606,8 @@ that \(\hat{\theta}_{MLE} = Y_{(n)}\) with
 \(f_{Y_{(n)}}(y \mid \theta) = \frac{n}{\theta^n} y^{n-1}\),
 \(0 \leq y \leq \theta\). Prove that \(\hat{\theta}_{MLE}\) is a
 consistent estimator for \(\theta\).
+
+Solution:
 
 To prove that \(\hat{\theta}_{MLE}\) is consistent, we must first show
 that \(\hat{\theta}_{MLE}\) is (either) unbiased or asymptotically
@@ -3091,6 +3129,8 @@ and so finally we have shown that \[
 asymptotic distribution of \(\sqrt{n}(Y_n^2 - \mu^2)\) when
 \(\mu \neq 0\).
 
+Solution:
+
 We can apply the delta-method with the function \(g(x) = x^2\). Note
 that \(g'(x) = 2x\), and therefore we can write
 
@@ -3109,6 +3149,8 @@ distribution of \(\hat{p}_{MLE}\) using the CLT and known properties of
 the Bernoulli distribution (expectation and variance, for example), and
 construct a 95\% confidence interval for \(p\) based on this asymptotic
 distribution.
+
+Solution:
 
 We know that \(E[X_i] = p\) and \(Var[X_i] = p(1-p)\). Then the CLT tell
 us that
@@ -3620,6 +3662,8 @@ hypotheses \(H_0: \mu = 8\) vs.~\(H_1: \mu > 8\) and we observe
 \(H_0\), with a significance threshold of \(\alpha = 0.05\)? (Use a Wald
 test statistic)
 
+Solution:
+
 Our hypotheses are already stated in the problem set-up. The next thing
 we should do is derive a Wald test statistic. We know that the MLE for
 \(\mu\) is given by \(\hat{\mu}_{MLE} = \overline{Y}\) (we have shown
@@ -3665,6 +3709,8 @@ level \(\alpha\). How would the procedure in Problem 1 change if we let
 \(\alpha = 0.001\)? How would the procedure in Problem 1 change if we
 let \(\alpha = 0.1\)?
 
+Solution:
+
 Changing the significance level changes the \emph{critical value}, and
 may change whether or not we reject \(H_0\), depending on the difference
 between our critical value and the test statistic. We can calculate what
@@ -3706,6 +3752,8 @@ estimator for \(p\) as \(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\).
 Derive a Wald test statistic for this hypothesis testing scenario
 (simplifying as much as you can).
 
+Solution:
+
 Recall that \(\hat{p}\) as defined in the problem set-up is the MLE for
 \(p\). Then the Wald test statistic can be written as
 
@@ -3733,6 +3781,8 @@ simplifies to
 
 \textbf{Problem 4:} Derive a LRT statistic for the hypothesis testing
 scenario described in Problem 3 (simplifying as much as you can).
+
+Solution:
 
 The LRT statistic is given by
 
@@ -3764,6 +3814,8 @@ And so our LRT statistic simplifies to
 \textbf{Problem 5:} Derive a score test statistic for the hypothesis
 testing scenario described in Problem 3 (simplifying as much as you
 can).
+
+Solution:
 
 The score test statistic is given by
 
@@ -3827,6 +3879,8 @@ is given by
 
 \textbf{Problem 6:} For each of Problems 3, 4, and 5, calculate the
 p-values from each test when \(\hat{p} = 0.4\) and \(n = 300\).
+
+Solution:
 
 We'll again use R to obtain the critical values for these hypothesis
 tests, noting that in each case, the test statistic follows a
@@ -3925,6 +3979,8 @@ Things to note:
 \(n = 95\). If your significance threshold were \(\alpha = 0.05\), would
 your conclusion to the hypothesis test be the same regardless of which
 test statistic you chose?
+
+Solution:
 
 To answer this question, we can again calculate p-values, and compare
 them to 0.05 (note that we could have also calculated a critical value,
@@ -4331,6 +4387,8 @@ count as a theorem cause it's just a probability rule!
 \(Beta(\alpha, \beta)\) prior for \(\theta\). Derive the posterior
 distribution, \(\pi(\theta \mid X_1, \dots, X_n)\).
 
+Solution:
+
 We can write,
 
 \begin{align*}
@@ -4348,6 +4406,8 @@ distribution, and therefore this is the posterior distribution for
 \textbf{Problem 2:} Derive the posterior mean for \(\theta\) in Problem
 1.
 
+Solution:
+
 We know that the expectation of a \(Beta(a, b)\) distribution is given
 by \(\frac{a}{a + b}\), and so we have
 
@@ -4358,6 +4418,8 @@ by \(\frac{a}{a + b}\), and so we have
 \textbf{Problem 3:} Write the posterior mean from Problem 2 as a
 function of the MLE, \(\hat{\theta}_{MLE} = \overline{X}\), and the
 \emph{prior} mean for \(\theta\). What do you notice?
+
+Solution:
 
 We can write,
 
@@ -4375,6 +4437,8 @@ of the prior mean and the MLE (in this case, the sample mean)!
 \(X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)\), and choose a
 \(Gamma(\alpha, \beta)\) prior for \(\lambda\). Derive the posterior
 distribution, \(\pi(\lambda \mid X_1, \dots, X_n)\).
+
+Solution:
 
 We can write,
 
@@ -4394,6 +4458,8 @@ therefore this is the posterior distribution for \(\lambda\).
 \textbf{Problem 5:} Derive the posterior mean for \(\lambda\) in Problem
 4.
 
+Solution:
+
 We know that the expectation of a \(Gamma(a, b)\) distribution is given
 by \(\frac{a}{b}\), and so we have
 
@@ -4404,6 +4470,8 @@ by \(\frac{a}{b}\), and so we have
 \textbf{Problem 6:} Write the posterior mean from Problem 5 as a
 function of the MLE, \(\hat{\lambda}_{MLE} = \overline{X}\), and the
 \emph{prior} mean for \(\lambda\). What do you notice?
+
+Solution:
 
 We can write,
 
@@ -4419,6 +4487,8 @@ average} of the prior mean and the MLE (in this case, the sample mean)!
 
 \textbf{Problem 7:} What is the asymptotic behavior of the posterior
 means calculated in Problems 2 and 5?
+
+Solution:
 
 In both cases, as \(n \to \infty\), the posterior mean will approach the
 MLE! This is easiest to note after we observe that the posterior mean is
