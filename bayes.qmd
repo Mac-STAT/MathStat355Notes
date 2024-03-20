@@ -133,6 +133,10 @@ None for this chapter, other than Bayes' theorem, which doesn't really count as 
 
 **Problem 1:** Suppose we have a random sample $X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(\theta)$, and choose a $Beta(\alpha, \beta)$ prior for $\theta$. Derive the posterior distribution, $\pi(\theta \mid X_1, \dots, X_n)$.
 
+<details>
+
+<summary>Solution:</summary>
+
 We can write,
 
 ```{=tex}
@@ -145,7 +149,13 @@ We can write,
 ```
 where we recognize the kernel of a $Beta(\sum_{i = 1}^n X_i + \alpha, n - \sum_{i = 1}^n X_i + \beta)$ distribution, and therefore this is the posterior distribution for $\theta$.
 
+</details>
+
 **Problem 2:** Derive the posterior mean for $\theta$ in Problem 1.
+
+<details>
+
+<summary>Solution:</summary>
 
 We know that the expectation of a $Beta(a, b)$ distribution is given by $\frac{a}{a + b}$, and so we have
 
@@ -153,7 +163,13 @@ $$
 \hat{\theta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\sum_{i = 1}^n X_i + \alpha + n - \sum_{i = 1}^n X_i + \beta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n}
 $$
 
+</details>
+
 **Problem 3:** Write the posterior mean from Problem 2 as a function of the MLE, $\hat{\theta}_{MLE} = \overline{X}$, and the *prior* mean for $\theta$. What do you notice?
+
+<details>
+
+<summary>Solution:</summary>
 
 We can write,
 
@@ -167,7 +183,13 @@ We can write,
 ```
 and so we can see that the posterior mean is a *weighted average* of the prior mean and the MLE (in this case, the sample mean)!
 
+</details>
+
 **Problem 4:** Suppose we have a random sample $X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)$, and choose a $Gamma(\alpha, \beta)$ prior for $\lambda$. Derive the posterior distribution, $\pi(\lambda \mid X_1, \dots, X_n)$.
+
+<details>
+
+<summary>Solution:</summary>
 
 We can write,
 
@@ -183,7 +205,13 @@ We can write,
 ```
 where we recognize the kernel of a $Gamma(\sum_{i = 1}^n X_i + \alpha, n + \beta)$ distribution, and therefore this is the posterior distribution for $\lambda$.
 
+</details>
+
 **Problem 5:** Derive the posterior mean for $\lambda$ in Problem 4.
+
+<details>
+
+<summary>Solution:</summary>
 
 We know that the expectation of a $Gamma(a, b)$ distribution is given by $\frac{a}{b}$, and so we have
 
@@ -192,7 +220,13 @@ We know that the expectation of a $Gamma(a, b)$ distribution is given by $\frac{
     \hat{\lambda} = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta}
 \end{align*}
 ```
+</details>
+
 **Problem 6:** Write the posterior mean from Problem 5 as a function of the MLE, $\hat{\lambda}_{MLE} = \overline{X}$, and the *prior* mean for $\lambda$. What do you notice?
+
+<details>
+
+<summary>Solution:</summary>
 
 We can write,
 
@@ -206,6 +240,14 @@ We can write,
 ```
 and so we can see (again) that the posterior mean is a *weighted average* of the prior mean and the MLE (in this case, the sample mean)!
 
+</details>
+
 **Problem 7:** What is the asymptotic behavior of the posterior means calculated in Problems 2 and 5?
 
+<details>
+
+<summary>Solution:</summary>
+
 In both cases, as $n \to \infty$, the posterior mean will approach the MLE! This is easiest to note after we observe that the posterior mean is a weighted average of the MLE and the prior mean. The weight on the prior mean will approach zero, as the weight on the MLE will approach 1, as $n$ goes to infinity.
+
+</details>

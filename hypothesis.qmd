@@ -259,6 +259,10 @@ as desired.
 
 **Problem 1:** Let $Y_i \overset{iid}{\sim} N(\mu, \sigma^2)$, where $\sigma^2 = 25$ is *known*. Suppose we want to test the hypotheses $H_0: \mu = 8$ vs. $H_1: \mu > 8$ and we observe $\overline{Y} = 10$ across $n = 64$ observations. Can we reject $H_0$, with a significance threshold of $\alpha = 0.05$? (Use a Wald test statistic)
 
+<details>
+
+<summary>Solution:</summary>
+
 Our hypotheses are already stated in the problem set-up. The next thing we should do is derive a Wald test statistic. We know that the MLE for $\mu$ is given by $\hat{\mu}_{MLE} = \overline{Y}$ (we have shown this is previous problem sets/worked examples). Then the Wald test statistic can be written as
 
 $$
@@ -286,7 +290,13 @@ qchisq(1 - 0.05, df = 1)
 
 Finally, noting that our test statistic is greater than the critical value, we reject $H_0$.
 
+</details>
+
 **Problem 2:** Suppose we wanted to use a different significance level $\alpha$. How would the procedure in Problem 1 change if we let $\alpha = 0.001$? How would the procedure in Problem 1 change if we let $\alpha = 0.1$?
+
+<details>
+
+<summary>Solution:</summary>
 
 Changing the significance level changes the *critical value*, and may change whether or not we reject $H_0$, depending on the difference between our critical value and the test statistic. We can calculate what the critical value would be if we let $\alpha = 0.01$ and $\alpha = 0.1$ again in R:
 
@@ -300,7 +310,13 @@ qchisq(1 - 0.1, df = 1)
 
 Note that when $\alpha = 0.1$, we still reject $H_0$. This should make intuitive sense, since increasing $\alpha$ only can only increase our rejection region. However, when $\alpha = 0.001$, we would *fail to reject* $H_0$, as our test statistic is not "more extreme" (greater) than the critical value.
 
+</details>
+
 **Problem 3:** Suppose we have a random sample $X_1, \dots, X_n \sim Bernoulli(p)$, and we want to test the hypotheses $H_0:p = 0.5$, $H_1:p \neq 0.5$. Suppose we calculate an estimator for $p$ as $\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i$. Derive a Wald test statistic for this hypothesis testing scenario (simplifying as much as you can).
+
+<details>
+
+<summary>Solution:</summary>
 
 Recall that $\hat{p}$ as defined in the problem set-up is the MLE for $p$. Then the Wald test statistic can be written as
 
@@ -322,7 +338,13 @@ $$
 
 (Note that this is as "simplified" as we can get without knowing $\hat{p}$ or $n$)
 
+</details>
+
 **Problem 4:** Derive a LRT statistic for the hypothesis testing scenario described in Problem 3 (simplifying as much as you can).
+
+<details>
+
+<summary>Solution:</summary>
 
 The LRT statistic is given by
 
@@ -351,7 +373,13 @@ And so our LRT statistic simplifies to
 ```
 (Note that this is as "simplified" as we can get without knowing $\hat{p}$ or $n$)
 
+</details>
+
 **Problem 5:** Derive a score test statistic for the hypothesis testing scenario described in Problem 3 (simplifying as much as you can).
+
+<details>
+
+<summary>Solution:</summary>
 
 The score test statistic is given by
 
@@ -411,7 +439,13 @@ Then, finally, the score test statistic (simplified as much as possible) is give
     & = n\left( -1 + 2 \hat{p}\right)^2
 \end{align*}
 ```
+</details>
+
 **Problem 6:** For each of Problems 3, 4, and 5, calculate the p-values from each test when $\hat{p} = 0.4$ and $n = 300$.
+
+<details>
+
+<summary>Solution:</summary>
 
 We'll again use R to obtain the critical values for these hypothesis tests, noting that in each case, the test statistic follows a $\chi^2_1$ distribution asymptotically:
 
@@ -446,7 +480,13 @@ Things to note:
 
 -   P-values are the probability that we would observe something *as or more extreme* than what we actually did observe, under the null hypothesis. In R, we can use the `p` function (for a given pdf) to calculate this.
 
+</details>
+
 **Problem 7:** Repeat Problem 6 but with $\hat{p} = 0.4$ and $n = 95$. If your significance threshold were $\alpha = 0.05$, would your conclusion to the hypothesis test be the same regardless of which test statistic you chose?
+
+<details>
+
+<summary>Solution:</summary>
 
 To answer this question, we can again calculate p-values, and compare them to 0.05 (note that we could have also calculated a critical value, and compared our test statistics to the critical value, as these are equivalent).
 
@@ -476,3 +516,5 @@ lambda_s
 ```
 
 In this case, we would reject $H_0$ using the Wald test statistic, but *fail to reject* using the LRT statistic and score test statistic, since the only p-value that was below our significance threshold was the one calculated from the Wald test statistic. Finite-sample distributions of the three classical test statistics are generally unknown; only asymptotically have they been shown to be equivalent, and therefore, can provide *different* answers to hypothesis tests when sample sizes are relatively small.
+
+</details>

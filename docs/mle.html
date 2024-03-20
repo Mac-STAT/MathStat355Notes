@@ -329,6 +329,10 @@ L(\boldsymbol{\theta}) = \prod_{i = 1}^n f_X(x_i \mid \boldsymbol{\theta}).
 <section id="worked-examples" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">2.5</span> Worked Examples</h2>
 <p><strong>Problem 1:</strong> Suppose we observe <span class="math inline">\(n\)</span> independent observations <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(p)\)</span>, where <span class="math inline">\(f_X(x) = p^x(1-p)^{1-x}\)</span>. Find the MLE of <span class="math inline">\(p\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We can write the likelihood function as</p>
 <p><span class="math display">\[
 L(p) = \prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i}
@@ -354,11 +358,16 @@ L(p) = \prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i}
 \frac{1}{n} \sum_{i = 1}^n x_i &amp; = p
 \end{align*}\]</span>
 <p>and by solving for <span class="math inline">\(p\)</span>, we get that the MLE of <span class="math inline">\(p\)</span> is equal to <span class="math inline">\(\frac{1}{n}\sum_{i = 1}^n x_i\)</span>. We will <em>often</em> see that the MLEs of parameters are functions of sample averages (in this case, just the identity function!).</p>
+</details>
 <p><strong>Problem 2:</strong> Suppose <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> are a random sample from the Normal pdf with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>:</p>
 <p><span class="math display">\[
 f_X(x ; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2},
 \]</span></p>
 <p>for <span class="math inline">\(-\infty &lt; x &lt; \infty, \ -\infty &lt; \mu &lt; \infty,\)</span> and <span class="math inline">\(\sigma^2 &gt; 0\)</span>. Find the MLEs of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. (Note that this is Question 5 on the MLE section of Problem Set 1! For your HW, try your best to do this problem from scratch, without looking at the course notes!)</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>Since we are dealing with a likelihood with two parameters, we’ll need to solve a <em>system</em> of equations to obtain the MLEs for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
 <span class="math display">\[\begin{align*}
     \log(L(\mu, \sigma^2)) &amp; = \log( \prod_{i = 1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp(-\frac{1}{2\sigma^2} (x_i - \mu)^2) ) \\
@@ -402,6 +411,7 @@ f_X(x ; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x-
     \theta &amp; = \frac{1}{n} \sum_{i = 1}^n (x_i - \bar{x} )^2
 \end{align*}\]</span>
 <p>where <span class="math inline">\(\bar{x} = \frac{1}{n} \sum_{i = 1}^n x_i\)</span>. And so finally, we have that the MLE for <span class="math inline">\(\sigma^2\)</span> is given by <span class="math inline">\(\frac{1}{n} \sum_{i = 1}^n (x_i - \bar{x} )^2\)</span>, and the MLE for <span class="math inline">\(\mu\)</span> is given by <span class="math inline">\(\bar{x}\)</span>!</p>
+</details>
 
 
 </section>

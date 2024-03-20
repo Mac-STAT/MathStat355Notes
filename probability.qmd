@@ -189,7 +189,7 @@ A few things to note:
 You are also expected to know the probability distributions contained in Table 1, below. Note that you *do not* need to memorize the pdfs for these distributions, but you *should* be familiar with what types of random variables (continuous/quantitative, categorical, integer-valued, etc.) may take on different distributions. The more familiar you are with the forms of the pdfs, the easier/faster it will be to work through problem sets and quizzes.
 
 | Distribution        | PDF/PMF                                                                                                                                                                                                                                                         | Parameters                                                                                                                          | Support                                                                          |
-|---------------|---------------------|-----------------------|---------------|
+|-----------------|-------------------|---------------------|-----------------|
 | Uniform             | $\pi(x) = \frac{1}{\beta - \alpha}$                                                                                                                                                                                                                             | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$                                                                                      | $x \in [\alpha, \beta]$                                                          |
 | Normal              | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$                                                                                                                                                                                | $\mu \in \mathbb{R}$, $\sigma > 0$                                                                                                  | $x \in \mathbb{R}$                                                               |
 | Multivariate Normal | $\pi(\textbf{x}) = (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$                                                                                                                                      | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite (in practice, almost always positive definite) | $x \in \mathbb{R}^{k}$                                                           |
@@ -382,6 +382,10 @@ as desired.
 
 **Problem 1:** Suppose $X \sim Exponential(\lambda)$. Calculate $E[X]$ and $Var[X]$.
 
+<details>
+
+<summary>Solution:</summary>
+
 We know that $f(x) = \lambda e^{-\lambda x}$. If we can calculate $E[X]$ and $E[X^2]$, then we're basically done! We can write
 
 ```{=tex}
@@ -427,7 +431,13 @@ Now we can calculate $Var[X] = E[X^2] - E[X]^2$ as $$
 Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
 $$ And so we have $E[X] = \frac{1}{\lambda}$ and $Var[X] = \frac{1}{\lambda^2}$.
 
+</details>
+
 **Problem 2:** Show that an exponentially distributed random variable is "memoryless", i.e. show that $\Pr(X > s + x \mid X > s) = \Pr(X > x)$, $\forall s$.
+
+<details>
+
+<summary>Solution:</summary>
 
 Recall that the CDF of an exponential distribution is given by $F(x) = 1-e^{-\lambda x}$. Thanks to Bayes rule, we can write
 
@@ -454,7 +464,13 @@ where the second equality is true because $x > 0$. Then we can write
 ```
 and we're done!
 
+</details>
+
 **Problem 3:** Suppose $X \sim Exponential(1/\lambda)$, and $Y \mid X \sim Poisson(X)$. Show that $Y \sim Geometric(1/(1 + \lambda))$.
+
+<details>
+
+<summary>Solution:</summary>
 
 Note that we can write $f(x, y) = f(y \mid x) f(x)$, and $f(y) = \int f(x, y) dx$. Then
 
@@ -520,7 +536,13 @@ An *alternative* solution (which perhaps embodies the phrase "work smarter, not 
 ```
 Note that we arrive at a slightly different answer with this approach. Specifically, we arrive at the pdf of a geometric random variable with parameter $p$ and trials that begin at 0, as opposed to 1. There's some subtlety here that we're going to choose to ignore.
 
+</details>
+
 **Problem 4:** Suppose that $X \sim N(\mu, \sigma^2)$, and let $Y = \frac{X - \mu}{\sigma}$. Find the distribution of $Y$ (simplifying all of your math will be useful for this problem).
+
+<details>
+
+<summary>Solution:</summary>
 
 To solve this problem, we can use the theorem on transforming continuous random variables. We must first define our function $g$ that relates $X$ and $Y$. In this case, we have $g(a) = \frac{a - \mu}{\sigma}$. Now all we need to do is collect the mathematical "pieces" we need to use theorem: $g^{-1}(a)$, and $g'(a)$, and finally, the pdf of a normal random variable. We have
 
@@ -544,7 +566,13 @@ Putting it all together, we have
 ```
 and note that this is the pdf of a normally distributed random variable with mean $0$ and variance $1$! Thus, we have shown that $\frac{X - \mu}{\sigma} \sim N(0,1)$. **Fun Fact:** If this random variable reminds you of a Z-score, *it should*!
 
+</details>
+
 **Problem 5:** Suppose the joint pdf of two random variables $X$ and $Y$ is given by $f_{X,Y}(x,y) = \lambda \beta e^{-x\lambda - y\beta}$. Determine if $X$ and $Y$ are independent, showing why or why not.
+
+<details>
+
+<summary>Solution:</summary>
 
 To determine whether $X$ and $Y$ are independent (or not), we need to determine if their joint pdf is "separable." Doing some algebra, we can see that
 
@@ -557,6 +585,14 @@ f_{X,Y}(x,y) & = \lambda \beta e^{-x \lambda - y\beta} \\
 ```
 and so since we can write the joint distribution as a function of $X$ multiplied by a function of $Y$, $X$ and $Y$ are independent (and in this case, both have exponential distributions).
 
+</details>
+
 **Problem 6:** Suppose the joint pdf of two random variables $X$ and $Y$ is given by $f_{X,Y}(x,y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} \binom{n}{y} x^{y + \alpha - 1} (1-x)^{n-y + \beta - 1}$. Determine if $X$ and $Y$ are independent, showing why or why not.
 
+<details>
+
+<summary>Solution:</summary>
+
 To determine whether $X$ and $Y$ are independent (or not), we need to determine if their joint pdf is "separable." Right away, we should note that a piece of the pdf contains $x^y$, and therefore we are *never* going to be able to fully separate out this joint pdf into a function of $x$ times a function $y$. Therefore, $X$ and $Y$ are *not* independent. In this case, we actually have $X \sim Beta(\alpha, \beta)$, and $Y \mid X \sim Binomial(n, y)$ (we'll return to this example in the Bayes chapter!).
+
+</details>

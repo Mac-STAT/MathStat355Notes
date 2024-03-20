@@ -301,6 +301,10 @@ P(|W-\mu| \geq \epsilon) &amp; \leq \frac{\sigma^2}{\epsilon^2}
 <section id="worked-examples" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">5.5</span> Worked Examples</h2>
 <p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>. Show that the MLE for <span class="math inline">\(\sigma^2\)</span> is <em>asymptotically</em> unbiased.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>The MLE for <span class="math inline">\(\sigma^2\)</span> is given by <span class="math inline">\(\frac{1}{n} \sum_{i = 1}^n (X_i - \overline{X})^2\)</span> (see the MLE section of the course notes, worked example problem 2), and has expectation <span class="math inline">\(\left( \frac{n-1}{n} \right)\sigma^2\)</span> (see the Properties section of the course notes, worked example problem 6). To show that this estimator is asymptotically unbiased, note that we have</p>
 <span class="math display">\[\begin{align*}
     \underset{n\to \infty}{\text{lim}} E[\hat{\sigma^2}_{MLE}] &amp; = \underset{n\to \infty}{\text{lim}} \left( \frac{n-1}{n} \right) \sigma^2 \\
@@ -308,7 +312,12 @@ P(|W-\mu| \geq \epsilon) &amp; \leq \frac{\sigma^2}{\epsilon^2}
     &amp; = \sigma^2
 \end{align*}\]</span>
 <p>and therefore, the MLE for <span class="math inline">\(\sigma^2\)</span> is asymptotically unbiased.</p>
+</details>
 <p><strong>Problem 2:</strong> Suppose <span class="math inline">\(Y_1, \dots, Y_n \overset{iid}{\sim} Uniform(0, \theta)\)</span>, and recall that <span class="math inline">\(\hat{\theta}_{MLE} = Y_{(n)}\)</span> with <span class="math inline">\(f_{Y_{(n)}}(y \mid \theta) = \frac{n}{\theta^n} y^{n-1}\)</span>, <span class="math inline">\(0 \leq y \leq \theta\)</span>. Prove that <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>To prove that <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is consistent, we must first show that <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is (either) unbiased or asymptotically unbiased, and then we must show that the variance of <span class="math inline">\(\hat{\theta}_{MLE}\)</span> tends to zero as <span class="math inline">\(n \to \infty\)</span>. To begin, note that</p>
 <span class="math display">\[\begin{align*}
     E\left[\hat{\theta}_{MLE}\right] &amp; = \int_{0}^\theta y f_{Y_{(n)}} (y \mid \theta) dy \\
@@ -340,6 +349,7 @@ P(|W-\mu| \geq \epsilon) &amp; \leq \frac{\sigma^2}{\epsilon^2}
     &amp; = 0
 \end{align*}\]</span>
 <p>where the last term goes to zero because <span class="math inline">\(\frac{n}{n^3} \to 0\)</span> as <span class="math inline">\(n \to \infty\)</span>. Therefore, <span class="math inline">\(\hat{\theta}_{MLE}\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>.</p>
+</details>
 
 
 </section>

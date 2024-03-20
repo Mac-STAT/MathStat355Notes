@@ -285,6 +285,10 @@ $$ as desired.
 
 **Problem 1:** Suppose $\sqrt{n}(Y_n - \mu) \overset{d}{\to} N(0, \sigma^2)$. Find the asymptotic distribution of $\sqrt{n}(Y_n^2 - \mu^2)$ when $\mu \neq 0$.
 
+<details>
+
+<summary>Solution:</summary>
+
 We can apply the delta-method with the function $g(x) = x^2$. Note that $g'(x) = 2x$, and therefore we can write
 
 ```{=tex}
@@ -295,7 +299,13 @@ We can apply the delta-method with the function $g(x) = x^2$. Note that $g'(x) =
     \sqrt{n}(Y_n^2 - \mu^2) & \overset{d}{\to} N(0, 4 \mu^2\sigma^2)
 \end{align*}
 ```
+</details>
+
 **Problem 2:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(p)$, and recall that the MLE for $p$ is given by $\hat{p}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i$. Find the asymptotic distribution of $\hat{p}_{MLE}$ using the CLT and known properties of the Bernoulli distribution (expectation and variance, for example), and construct a 95% confidence interval for $p$ based on this asymptotic distribution.
+
+<details>
+
+<summary>Solution:</summary>
 
 We know that $E[X_i] = p$ and $Var[X_i] = p(1-p)$. Then the CLT tell us that
 
@@ -318,3 +328,4 @@ and finally, (letting $\hat{p} = \hat{p}_{MLE}$ for ease of notation)
     & = \Pr\left(\hat{p} -1.96\sqrt{\hat{p}(1-\hat{p})/n} <  p  < \hat{p} + 1.96\sqrt{\hat{p}(1-\hat{p})/n}\right)
 \end{align*}
 ```
+</details>

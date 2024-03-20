@@ -359,10 +359,10 @@ M_X(t) = E[e^{tX}]
 <table class="table">
 <caption><em>Table 1.</em> Table of main probability distributions we will work with for <em>MATH/STAT 455</em>.</caption>
 <colgroup>
-<col style="width: 20%">
+<col style="width: 22%">
+<col style="width: 25%">
 <col style="width: 28%">
-<col style="width: 31%">
-<col style="width: 20%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -580,6 +580,10 @@ M_X(t) = E[e^{tX}]
 <section id="worked-examples" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">1.5</span> Worked Examples</h2>
 <p><strong>Problem 1:</strong> Suppose <span class="math inline">\(X \sim Exponential(\lambda)\)</span>. Calculate <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(Var[X]\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We know that <span class="math inline">\(f(x) = \lambda e^{-\lambda x}\)</span>. If we can calculate <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(E[X^2]\)</span>, then we’re basically done! We can write</p>
 <span class="math display">\[\begin{align*}    
 E[X] &amp; = \int_0^\infty x \lambda e^{-\lambda x} dx \\    
@@ -612,7 +616,12 @@ E[X] &amp; = \lambda \int_0^\infty x e^{-\lambda x} dx \\
 <p>Now we can calculate <span class="math inline">\(Var[X] = E[X^2] - E[X]^2\)</span> as <span class="math display">\[
 Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
 \]</span> And so we have <span class="math inline">\(E[X] = \frac{1}{\lambda}\)</span> and <span class="math inline">\(Var[X] = \frac{1}{\lambda^2}\)</span>.</p>
+</details>
 <p><strong>Problem 2:</strong> Show that an exponentially distributed random variable is “memoryless”, i.e.&nbsp;show that <span class="math inline">\(\Pr(X &gt; s + x \mid X &gt; s) = \Pr(X &gt; x)\)</span>, <span class="math inline">\(\forall s\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>Recall that the CDF of an exponential distribution is given by <span class="math inline">\(F(x) = 1-e^{-\lambda x}\)</span>. Thanks to Bayes rule, we can write</p>
 <span class="math display">\[\begin{align*}
     \Pr(X &gt; s + x \mid X &gt; s) &amp; = \frac{\Pr(X &gt; s + x , X &gt; s)}{\Pr(X &gt; s)} \\
@@ -631,7 +640,12 @@ Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{
     &amp; = \Pr(X &gt; x)
 \end{align*}\]</span>
 <p>and we’re done!</p>
+</details>
 <p><strong>Problem 3:</strong> Suppose <span class="math inline">\(X \sim Exponential(1/\lambda)\)</span>, and <span class="math inline">\(Y \mid X \sim Poisson(X)\)</span>. Show that <span class="math inline">\(Y \sim Geometric(1/(1 + \lambda))\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>Note that we can write <span class="math inline">\(f(x, y) = f(y \mid x) f(x)\)</span>, and <span class="math inline">\(f(y) = \int f(x, y) dx\)</span>. Then</p>
 <p><span class="math display">\[
 f(x, y) = \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
@@ -678,7 +692,12 @@ f(x, y) = \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x
         &amp;=p(1-p)^y\qquad (\text{where }p=\frac{1}{1+\lambda})
     \end{align*}\]</span>
 <p>Note that we arrive at a slightly different answer with this approach. Specifically, we arrive at the pdf of a geometric random variable with parameter <span class="math inline">\(p\)</span> and trials that begin at 0, as opposed to 1. There’s some subtlety here that we’re going to choose to ignore.</p>
+</details>
 <p><strong>Problem 4:</strong> Suppose that <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, and let <span class="math inline">\(Y = \frac{X - \mu}{\sigma}\)</span>. Find the distribution of <span class="math inline">\(Y\)</span> (simplifying all of your math will be useful for this problem).</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>To solve this problem, we can use the theorem on transforming continuous random variables. We must first define our function <span class="math inline">\(g\)</span> that relates <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. In this case, we have <span class="math inline">\(g(a) = \frac{a - \mu}{\sigma}\)</span>. Now all we need to do is collect the mathematical “pieces” we need to use theorem: <span class="math inline">\(g^{-1}(a)\)</span>, and <span class="math inline">\(g'(a)\)</span>, and finally, the pdf of a normal random variable. We have</p>
 <span class="math display">\[\begin{align*}
     f_X(x) &amp; = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2) \\
@@ -694,7 +713,12 @@ f(x, y) = \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x
     &amp; = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
 \end{align*}\]</span>
 <p>and note that this is the pdf of a normally distributed random variable with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>! Thus, we have shown that <span class="math inline">\(\frac{X - \mu}{\sigma} \sim N(0,1)\)</span>. <strong>Fun Fact:</strong> If this random variable reminds you of a Z-score, <em>it should</em>!</p>
+</details>
 <p><strong>Problem 5:</strong> Suppose the joint pdf of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by <span class="math inline">\(f_{X,Y}(x,y) = \lambda \beta e^{-x\lambda - y\beta}\)</span>. Determine if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, showing why or why not.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>To determine whether <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent (or not), we need to determine if their joint pdf is “separable.” Doing some algebra, we can see that</p>
 <span class="math display">\[\begin{align*}    
 f_{X,Y}(x,y) &amp; = \lambda \beta e^{-x \lambda - y\beta} \\    
@@ -702,8 +726,14 @@ f_{X,Y}(x,y) &amp; = \lambda \beta e^{-x \lambda - y\beta} \\
 &amp; = \left( \lambda  e^{-x \lambda} \right) \left( \beta e^{-y \beta} \right)
 \end{align*}\]</span>
 <p>and so since we can write the joint distribution as a function of <span class="math inline">\(X\)</span> multiplied by a function of <span class="math inline">\(Y\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent (and in this case, both have exponential distributions).</p>
+</details>
 <p><strong>Problem 6:</strong> Suppose the joint pdf of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by <span class="math inline">\(f_{X,Y}(x,y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} \binom{n}{y} x^{y + \alpha - 1} (1-x)^{n-y + \beta - 1}\)</span>. Determine if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, showing why or why not.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>To determine whether <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent (or not), we need to determine if their joint pdf is “separable.” Right away, we should note that a piece of the pdf contains <span class="math inline">\(x^y\)</span>, and therefore we are <em>never</em> going to be able to fully separate out this joint pdf into a function of <span class="math inline">\(x\)</span> times a function <span class="math inline">\(y\)</span>. Therefore, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <em>not</em> independent. In this case, we actually have <span class="math inline">\(X \sim Beta(\alpha, \beta)\)</span>, and <span class="math inline">\(Y \mid X \sim Binomial(n, y)\)</span> (we’ll return to this example in the Bayes chapter!).</p>
+</details>
 
 
 </section>

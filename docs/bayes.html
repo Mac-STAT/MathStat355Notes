@@ -319,6 +319,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="worked-examples" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">8.5</span> Worked Examples</h2>
 <p><strong>Problem 1:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(\theta)\)</span>, and choose a <span class="math inline">\(Beta(\alpha, \beta)\)</span> prior for <span class="math inline">\(\theta\)</span>. Derive the posterior distribution, <span class="math inline">\(\pi(\theta \mid X_1, \dots, X_n)\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We can write,</p>
 <span class="math display">\[\begin{align*}
     \pi(\theta \mid X_1, \dots, X_n) &amp; \propto \left( \prod_{i = 1}^n f(x_i) \right) \pi(\theta) \\
@@ -327,12 +331,22 @@ ul.task-list li input[type="checkbox"] {
     &amp; \propto \theta^{\sum_{i = 1}^n x_i + \alpha - 1} (1 - \theta)^{n - \sum_{i = 1}^n x_i + \beta - 1}
 \end{align*}\]</span>
 <p>where we recognize the kernel of a <span class="math inline">\(Beta(\sum_{i = 1}^n X_i + \alpha, n - \sum_{i = 1}^n X_i + \beta)\)</span> distribution, and therefore this is the posterior distribution for <span class="math inline">\(\theta\)</span>.</p>
+</details>
 <p><strong>Problem 2:</strong> Derive the posterior mean for <span class="math inline">\(\theta\)</span> in Problem 1.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We know that the expectation of a <span class="math inline">\(Beta(a, b)\)</span> distribution is given by <span class="math inline">\(\frac{a}{a + b}\)</span>, and so we have</p>
 <p><span class="math display">\[
 \hat{\theta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\sum_{i = 1}^n X_i + \alpha + n - \sum_{i = 1}^n X_i + \beta} = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n}
 \]</span></p>
+</details>
 <p><strong>Problem 3:</strong> Write the posterior mean from Problem 2 as a function of the MLE, <span class="math inline">\(\hat{\theta}_{MLE} = \overline{X}\)</span>, and the <em>prior</em> mean for <span class="math inline">\(\theta\)</span>. What do you notice?</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We can write,</p>
 <span class="math display">\[\begin{align*}
     \hat{\theta} &amp; = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n} \\
@@ -341,7 +355,12 @@ ul.task-list li input[type="checkbox"] {
     &amp; = \left( \frac{n}{\alpha + \beta + n} \right) \overline{X} + \left( \frac{\alpha + \beta}{\alpha + \beta + n}\right) \left( \frac{\alpha}{\alpha + \beta}\right)
 \end{align*}\]</span>
 <p>and so we can see that the posterior mean is a <em>weighted average</em> of the prior mean and the MLE (in this case, the sample mean)!</p>
+</details>
 <p><strong>Problem 4:</strong> Suppose we have a random sample <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)\)</span>, and choose a <span class="math inline">\(Gamma(\alpha, \beta)\)</span> prior for <span class="math inline">\(\lambda\)</span>. Derive the posterior distribution, <span class="math inline">\(\pi(\lambda \mid X_1, \dots, X_n)\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We can write,</p>
 <span class="math display">\[\begin{align*}
     \pi(\lambda \mid X_1, \dots, X_n) \\
@@ -352,12 +371,22 @@ ul.task-list li input[type="checkbox"] {
     &amp; = \lambda^{\sum_{i = 1}^n x_i + \alpha - 1} e^{-(n + \beta)\lambda}
 \end{align*}\]</span>
 <p>where we recognize the kernel of a <span class="math inline">\(Gamma(\sum_{i = 1}^n X_i + \alpha, n + \beta)\)</span> distribution, and therefore this is the posterior distribution for <span class="math inline">\(\lambda\)</span>.</p>
+</details>
 <p><strong>Problem 5:</strong> Derive the posterior mean for <span class="math inline">\(\lambda\)</span> in Problem 4.</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We know that the expectation of a <span class="math inline">\(Gamma(a, b)\)</span> distribution is given by <span class="math inline">\(\frac{a}{b}\)</span>, and so we have</p>
 <span class="math display">\[\begin{align*}
     \hat{\lambda} = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta}
 \end{align*}\]</span>
+</details>
 <p><strong>Problem 6:</strong> Write the posterior mean from Problem 5 as a function of the MLE, <span class="math inline">\(\hat{\lambda}_{MLE} = \overline{X}\)</span>, and the <em>prior</em> mean for <span class="math inline">\(\lambda\)</span>. What do you notice?</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>We can write,</p>
 <span class="math display">\[\begin{align*}
     \hat{\lambda} &amp; = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta} \\
@@ -366,8 +395,14 @@ ul.task-list li input[type="checkbox"] {
     &amp; = \left( \frac{n}{n + \beta}  \right) \overline{X} + \left( \frac{\beta}{n + \beta} \right) \frac{\alpha}{\beta}
 \end{align*}\]</span>
 <p>and so we can see (again) that the posterior mean is a <em>weighted average</em> of the prior mean and the MLE (in this case, the sample mean)!</p>
+</details>
 <p><strong>Problem 7:</strong> What is the asymptotic behavior of the posterior means calculated in Problems 2 and 5?</p>
+<details>
+<summary>
+Solution:
+</summary>
 <p>In both cases, as <span class="math inline">\(n \to \infty\)</span>, the posterior mean will approach the MLE! This is easiest to note after we observe that the posterior mean is a weighted average of the MLE and the prior mean. The weight on the prior mean will approach zero, as the weight on the MLE will approach 1, as <span class="math inline">\(n\)</span> goes to infinity.</p>
+</details>
 
 
 </section>

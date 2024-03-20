@@ -160,6 +160,10 @@ None for this chapter!
 
 **Problem 1:** Suppose we observe $n$ independent observations $X_1, \dots, X_n \sim Bernoulli(p)$, where $f_X(x) = p^x(1-p)^{1-x}$. Find the MLE of $p$.
 
+<details>
+
+<summary>Solution:</summary>
+
 We can write the likelihood function as
 
 $$
@@ -194,6 +198,8 @@ We can take the derivative of the log-likelihood with respect to $p$, and set it
 ```
 and by solving for $p$, we get that the MLE of $p$ is equal to $\frac{1}{n}\sum_{i = 1}^n x_i$. We will *often* see that the MLEs of parameters are functions of sample averages (in this case, just the identity function!).
 
+</details>
+
 **Problem 2:** Suppose $X_1, X_2, \dots, X_n$ are a random sample from the Normal pdf with parameters $\mu$ and $\sigma^2$:
 
 $$
@@ -201,6 +207,10 @@ f_X(x ; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x-
 $$
 
 for $-\infty < x < \infty, \ -\infty < \mu < \infty,$ and $\sigma^2 > 0$. Find the MLEs of $\mu$ and $\sigma^2$. (Note that this is Question 5 on the MLE section of Problem Set 1! For your HW, try your best to do this problem from scratch, without looking at the course notes!)
+
+<details>
+
+<summary>Solution:</summary>
 
 Since we are dealing with a likelihood with two parameters, we'll need to solve a *system* of equations to obtain the MLEs for $\mu$ and $\sigma^2$.
 
@@ -263,3 +273,5 @@ Well that's convenient! We already have the MLE for $\mu$ as being just the samp
 \end{align*}
 ```
 where $\bar{x} = \frac{1}{n} \sum_{i = 1}^n x_i$. And so finally, we have that the MLE for $\sigma^2$ is given by $\frac{1}{n} \sum_{i = 1}^n (x_i - \bar{x} )^2$, and the MLE for $\mu$ is given by $\bar{x}$!
+
+</details>
