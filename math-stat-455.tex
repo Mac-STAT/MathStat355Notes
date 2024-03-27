@@ -218,7 +218,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, breakable, frame hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, interior hidden, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -4501,7 +4501,236 @@ as \(n\) goes to infinity.
 \hypertarget{decision-theory}{%
 \chapter{Decision Theory}\label{decision-theory}}
 
-Under development\ldots{}
+Statistical decision theory is the branch of statistics that concerns
+itself with figuring out the best possible choice to make in a given
+situation using probability theory. Colloquially, decisions often have
+pros and cons. We can quantify these pros and cons using a \emph{loss
+function}, and calculate the expected loss of a given decision (formally
+called \emph{risk}). As you might guess, risk is something we want to
+\emph{minimize}. We can minimize risk (after formally defining it) using
+the same calculus techniques we've been using all semester!
+
+For the purposes of this class, the ``decisions'' we make are our choice
+of estimator for an unknown parameters. This is one type of
+\emph{deterministic} decision rule. At the beginning of this course, we
+learned about two different intuitive approaches to defining estimators
+(or ``decisions''): maximum likelihood estimation and the method of
+moments. In this chapter, we'll find estimators that minimize risk!
+
+While decision theory is not inherently Bayesian, it is one way to
+``justify'' point estimates from posterior distributions. \textbf{Bayes
+estimates} are posterior point estimates that minimize a certain loss
+function. The posterior mean, median, and mode are all such point
+estimates, for example.
+
+\hypertarget{admissibility}{%
+\subsection*{Admissibility}\label{admissibility}}
+
+An important concept in decision theory is the idea of
+\emph{admissibility}. An admissible decision rule is one that has the
+lowest possible risk out of all decision rules, for all possible
+parameter values. It is easier to define (in math) an
+\emph{inadmissible} decision rule, and then note that an admissible
+decision rule is \emph{not} inadmissible (double negative).
+
+An decision rule \(D\) (think, \(\hat{\theta}\)) is inadmissible if
+there exists a rule \(D'\) (think, some other estimator) such that
+
+\begin{align*}
+R(D, \theta) & \leq R(D, \theta) \quad \forall \theta \\
+R(D', \theta) & < R(D, \theta) \quad \text{ for some } \theta
+\end{align*}
+
+where \(R(D, \theta)\) is the risk of a decision \(D\) for a paramater
+\(\theta\). If \(D\) is not inadmissible, it is \emph{admissible}. In
+words, in order for a decision rule to be admissible, it must have risk
+\emph{at least as small} as every other possible decision rule
+everywhere in the parameter space, \emph{and} it must have strictly
+lower risk for at least one parameter value.
+
+One of the most fascinating results to come out of decision theory (in
+my personal opinion) is that the sample mean is \emph{not} an admissible
+decision rule for the mean of a Multivariate Normal distribution under
+MSE loss when the mean has greater than or equal to three dimensions!
+Relating this to what you know from introductory statistics, this means
+that (from a decision theory perspective) \emph{least squares} is not an
+admissible approach to estimating the regression coefficients in a
+linear regression model with \emph{at least two} covariates. The
+specific (biased) estimator of the mean that provides a lower MSE in
+this case is called the
+\href{https://en.wikipedia.org/wiki/James\%E2\%80\%93Stein_estimator}{James-Stein
+estimator}.
+
+\hypertarget{minimaxity}{%
+\subsection*{Minimaxity}\label{minimaxity}}
+
+One other ``property'' of a decision rule in addition to admissibility
+is called \emph{minimaxity}. Think once more about pros and cons of
+decisions. Some cons are worse than others (consider extreme side
+effects of drugs, for example). A \textbf{minimax} decision rule is one
+that the \emph{lowest possible} \emph{maximal} risk, out of a set of
+decision rules. It ``minimizes'' the ``maximum''!
+
+Bayes and minimax decision rules are generally related through the
+concept of a \emph{least favorable prior sequence}. Intuitively, a
+``least favorable'' prior is one that leads to higher risk than other
+priors. The theory involved in minimax problems requires a pretty solid
+understanding of analysis techniques, and are beyond the scope of this
+course (but are interesting to look into on your own time!).
+
+\hypertarget{learning-objectives-8}{%
+\section{Learning Objectives}\label{learning-objectives-8}}
+
+By the end of this chapter, you should be able to\ldots{}
+
+\begin{itemize}
+\tightlist
+\item
+  Derive a Bayes estimate for a common loss function
+\item
+  Distinguish between admissible and inadmissible decision rules
+\end{itemize}
+
+\hypertarget{reading-guide-8}{%
+\section{Reading Guide}\label{reading-guide-8}}
+
+Associated Readings: Chapter 5, Section 5.8 (beyond Example 5.8.4)
+
+This section of the textbook goes into a teeny tiny bit of decision
+theory, primarily Bayes estimates, but does \emph{not} approach decision
+theory broadly, or from a more formal perspective.
+
+\hypertarget{reading-questions-8}{%
+\subsection{Reading Questions}\label{reading-questions-8}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What are some examples of commonly-used loss functions?
+\item
+  What are the typical steps to finding a Bayes estimate?
+\item
+  What are the Bayes estimates for absolute error loss and squared error
+  loss?
+\item
+  What does it mean for a decision rule to be admissible (in colloquial
+  language)?
+\item
+  What does it mean for a decision rule to be minimax (in colloquial
+  language)?
+\end{enumerate}
+
+\hypertarget{definitions-8}{%
+\section{Definitions}\label{definitions-8}}
+
+\textbf{Loss Function}
+
+Let \(\hat{\theta}\) be an estimator for \(\theta\). A loss function
+associated with \(\hat{\theta}\) is denoted \(L(\hat{\theta}, \theta)\),
+where \(L(\hat{\theta}, \theta) \leq 0\) and \(L(\theta, \theta) = 0\).
+A reasonable loss function will increase the further away
+\(\hat{\theta}\) and \(\theta\) are from each other.
+
+\textbf{Decision Rule}
+
+For the purposes of this class, an estimator! In the statistics
+literature, you will often see this denoted \(D\), but we can also
+denote the decision rule \(\hat{\theta}\) for this class.
+
+\textbf{Risk}
+
+In words, risk is the expected loss of our decision, given our data. In
+math,
+
+\[
+R(\hat{\theta}, \theta) = E[L(\hat{\theta}, \theta) \mid \textbf{Y}] = \int L(\hat{\theta}, \theta) \pi(\theta \mid \textbf{Y}) d\theta
+\]
+
+\textbf{Bayes Estimate}
+
+A Bayes estimate is the estimate or decision rule that minimizes risk
+(expected posterior loss). This is sometimes called a ``Bayes rule'' in
+the literature.
+
+\textbf{Unique Bayes Rule}
+
+For a given prior \(\pi(\theta)\), a decision rule \(D_\pi\) is a
+\emph{unique Bayes rule} (estimate) if, for all \(\theta\), a decision
+rule is a Bayes rule if and only if it is equal to \(D_\pi\). Bayes
+rules are unique when:
+
+\begin{itemize}
+\item
+  The loss function used is MSE loss
+\item
+  The risk of the Bayes rule is finite
+\item
+  A \(\sigma\)-field condition is satisfied (well beyond the scope of
+  this course)
+\end{itemize}
+
+For what we consider in this course, whenever we use MSE loss in this
+course, the other two conditions will be satisfied.
+
+\textbf{Admissibility}
+
+An decision rule \(D\) is inadmissible if there exists a rule \(D'\)
+such that
+
+\begin{align*}
+R(D', \theta) & \leq R(D, \theta) \quad \forall \theta \\
+R(D', \theta) & < R(D, \theta) \quad \text{ for some } \theta
+\end{align*}
+
+where \(R(D, \theta)\) is the risk of a decision \(D\) for a paramater
+\(\theta\). If \(D\) is not inadmissible, it is \emph{admissible}.
+
+\hypertarget{theorems-8}{%
+\section{Theorems}\label{theorems-8}}
+
+\textbf{Theorem (Unique Bayes rules are admissible)}. Any unique Bayes
+rule is admissible.
+
+\textbf{Proof.} We'll prove this by contradiction!
+
+Suppose that \(D_\pi\) is a unique Bayes rule with respect to some prior
+\(\pi(\theta)\), and that \(D_\pi\) is \emph{inadmissible}. Then there
+exists some other decision rule \(D'\) such that
+\(R(D', \theta) \leq R(D_\pi, \theta)\), for all \(\theta\). Then,
+
+\begin{align*}
+    R(D', \theta) & \leq R(D_{\pi}, \theta) \quad \quad \text{(inadmissibility)} \\
+    & = \inf_D R(D, \pi) \quad \quad \text{($D_\pi$ is Bayes)}
+\end{align*}
+
+and since \(R(D', \theta) \leq \inf_D R(D, \pi)\), \(D'\) is Bayes. But
+\(D_\pi\) is \emph{unique} Bayes by assumption, so this is a
+contradiction.
+
+Therefore, \(D_\pi\) is admissible.
+
+\hypertarget{worked-examples-8}{%
+\section{Worked Examples}\label{worked-examples-8}}
+
+\textbf{Problem 1:} Show that the posterior median is the decision rule
+that minimizes risk with respect to absolute loss,
+\(L(\hat{\theta}, \theta) = |\hat{\theta} - \theta|\).
+
+Solution:
+
+Coming soon!
+
+\textbf{Problem 2:} Show that the posterior mode is the decision rule
+that minimizes risk with respect to 0-1 loss,
+
+\[
+L(\hat{\theta}, \theta) = \begin{cases} 0 & \text{if $\hat{\theta} = \theta$} \\ 1 & \text{if $\hat{\theta} \neq \theta$}\end{cases}
+\]
+
+Solution:
+
+Coming soon!
 
 \bookmarksetup{startatroot}
 
