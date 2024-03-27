@@ -299,5 +299,40 @@
     "title": "MATH/STAT 455: Mathematical Statistics",
     "section": "",
     "text": "Welcome to Mathematical Statistics!\nThis book contains the course notes for MATH/STAT 455: Mathematical Statistics at Macalester College, as taught by Prof. Taylor Okonek. These notes draw from course notes created by Prof. Kelsey Grinde, and from the course textbook, An Introduction to Mathematical Statistics and Its Applications by Richard Larsen and Morris Marx (6th Edition). Each chapter will contain (at a minimum):\n\nLearning Objectives\nReading Guide\nDefinitions\nTheorems\nWorked Examples\n\nI will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!\nIf you find any typos or have other questions, please email tokonek@macalester.edu."
+  },
+  {
+    "objectID": "decision.html#learning-objectives",
+    "href": "decision.html#learning-objectives",
+    "title": "9  Decision Theory",
+    "section": "9.1 Learning Objectives",
+    "text": "9.1 Learning Objectives\nBy the end of this chapter, you should be able to…\n\nDerive a Bayes estimate for a common loss function\nDistinguish between admissible and inadmissible decision rules"
+  },
+  {
+    "objectID": "decision.html#reading-guide",
+    "href": "decision.html#reading-guide",
+    "title": "9  Decision Theory",
+    "section": "9.2 Reading Guide",
+    "text": "9.2 Reading Guide\nAssociated Readings: Chapter 5, Section 5.8 (beyond Example 5.8.4)\nThis section of the textbook goes into a teeny tiny bit of decision theory, primarily Bayes estimates, but does not approach decision theory broadly, or from a more formal perspective.\n\n9.2.1 Reading Questions\n\nWhat are some examples of commonly-used loss functions?\nWhat are the typical steps to finding a Bayes estimate?\nWhat are the Bayes estimates for absolute error loss and squared error loss?\nWhat does it mean for a decision rule to be admissible (in colloquial language)?\nWhat does it mean for a decision rule to be minimax (in colloquial language)?"
+  },
+  {
+    "objectID": "decision.html#definitions",
+    "href": "decision.html#definitions",
+    "title": "9  Decision Theory",
+    "section": "9.3 Definitions",
+    "text": "9.3 Definitions\nLoss Function\nLet \\(\\hat{\\theta}\\) be an estimator for \\(\\theta\\). A loss function associated with \\(\\hat{\\theta}\\) is denoted \\(L(\\hat{\\theta}, \\theta)\\), where \\(L(\\hat{\\theta}, \\theta) \\leq 0\\) and \\(L(\\theta, \\theta) = 0\\). A reasonable loss function will increase the further away \\(\\hat{\\theta}\\) and \\(\\theta\\) are from each other.\nDecision Rule\nFor the purposes of this class, an estimator! In the statistics literature, you will often see this denoted \\(D\\), but we can also denote the decision rule \\(\\hat{\\theta}\\) for this class.\nRisk\nIn words, risk is the expected loss of our decision, given our data. In math,\n\\[\nR(\\hat{\\theta}, \\theta) = E[L(\\hat{\\theta}, \\theta) \\mid \\textbf{Y}] = \\int L(\\hat{\\theta}, \\theta) \\pi(\\theta \\mid \\textbf{Y}) d\\theta\n\\]\nBayes Estimate\nA Bayes estimate is the estimate or decision rule that minimizes risk (expected posterior loss). This is sometimes called a “Bayes rule” in the literature.\nUnique Bayes Rule\nFor a given prior \\(\\pi(\\theta)\\), a decision rule \\(D_\\pi\\) is a unique Bayes rule (estimate) if, for all \\(\\theta\\), a decision rule is a Bayes rule if and only if it is equal to \\(D_\\pi\\). Bayes rules are unique when:\n\nThe loss function used is MSE loss\nThe risk of the Bayes rule is finite\nA \\(\\sigma\\)-field condition is satisfied (well beyond the scope of this course)\n\nFor what we consider in this course, whenever we use MSE loss in this course, the other two conditions will be satisfied.\nAdmissibility\nAn decision rule \\(D\\) is inadmissible if there exists a rule \\(D'\\) such that\n\\[\\begin{align*}\nR(D', \\theta) & \\leq R(D, \\theta) \\quad \\forall \\theta \\\\\nR(D', \\theta) & &lt; R(D, \\theta) \\quad \\text{ for some } \\theta\n\\end{align*}\\]\nwhere \\(R(D, \\theta)\\) is the risk of a decision \\(D\\) for a paramater \\(\\theta\\). If \\(D\\) is not inadmissible, it is admissible."
+  },
+  {
+    "objectID": "decision.html#theorems",
+    "href": "decision.html#theorems",
+    "title": "9  Decision Theory",
+    "section": "9.4 Theorems",
+    "text": "9.4 Theorems\nTheorem (Unique Bayes rules are admissible). Any unique Bayes rule is admissible.\nProof. We’ll prove this by contradiction!\nSuppose that \\(D_\\pi\\) is a unique Bayes rule with respect to some prior \\(\\pi(\\theta)\\), and that \\(D_\\pi\\) is inadmissible. Then there exists some other decision rule \\(D'\\) such that \\(R(D', \\theta) \\leq R(D_\\pi, \\theta)\\), for all \\(\\theta\\). Then,\n\\[\\begin{align*}\n    R(D', \\theta) & \\leq R(D_{\\pi}, \\theta) \\quad \\quad \\text{(inadmissibility)} \\\\\n    & = \\inf_D R(D, \\pi) \\quad \\quad \\text{($D_\\pi$ is Bayes)}\n\\end{align*}\\]\nand since \\(R(D', \\theta) \\leq \\inf_D R(D, \\pi)\\), \\(D'\\) is Bayes. But \\(D_\\pi\\) is unique Bayes by assumption, so this is a contradiction.\nTherefore, \\(D_\\pi\\) is admissible."
+  },
+  {
+    "objectID": "decision.html#worked-examples",
+    "href": "decision.html#worked-examples",
+    "title": "9  Decision Theory",
+    "section": "9.5 Worked Examples",
+    "text": "9.5 Worked Examples\nProblem 1: Show that the posterior median is the decision rule that minimizes risk with respect to absolute loss, \\(L(\\hat{\\theta}, \\theta) = |\\hat{\\theta} - \\theta|\\).\n\n\nSolution:\n\nComing soon!\n\nProblem 2: Show that the posterior mode is the decision rule that minimizes risk with respect to 0-1 loss,\n\\[\nL(\\hat{\\theta}, \\theta) = \\begin{cases} 0 & \\text{if $\\hat{\\theta} = \\theta$} \\\\ 1 & \\text{if $\\hat{\\theta} \\neq \\theta$}\\end{cases}\n\\]\n\n\nSolution:\n\nComing soon!"
   }
 ]

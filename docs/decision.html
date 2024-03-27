@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -180,7 +182,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">9.1</span> Learning Objectives</a></li>
+  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">9.2</span> Reading Guide</a>
+  <ul class="collapse">
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">9.2.1</span> Reading Questions</a></li>
+  </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">9.3</span> Definitions</a></li>
+  <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">9.4</span> Theorems</a></li>
+  <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">9.5</span> Worked Examples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,9 +217,111 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Under development…</p>
+<p>Statistical decision theory is the branch of statistics that concerns itself with figuring out the best possible choice to make in a given situation using probability theory. Colloquially, decisions often have pros and cons. We can quantify these pros and cons using a <em>loss function</em>, and calculate the expected loss of a given decision (formally called <em>risk</em>). As you might guess, risk is something we want to <em>minimize</em>. We can minimize risk (after formally defining it) using the same calculus techniques we’ve been using all semester!</p>
+<p>For the purposes of this class, the “decisions” we make are our choice of estimator for an unknown parameters. This is one type of <em>deterministic</em> decision rule. At the beginning of this course, we learned about two different intuitive approaches to defining estimators (or “decisions”): maximum likelihood estimation and the method of moments. In this chapter, we’ll find estimators that minimize risk!</p>
+<p>While decision theory is not inherently Bayesian, it is one way to “justify” point estimates from posterior distributions. <strong>Bayes estimates</strong> are posterior point estimates that minimize a certain loss function. The posterior mean, median, and mode are all such point estimates, for example.</p>
+<section id="admissibility" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="admissibility">Admissibility</h3>
+<p>An important concept in decision theory is the idea of <em>admissibility</em>. An admissible decision rule is one that has the lowest possible risk out of all decision rules, for all possible parameter values. It is easier to define (in math) an <em>inadmissible</em> decision rule, and then note that an admissible decision rule is <em>not</em> inadmissible (double negative).</p>
+<p>An decision rule <span class="math inline">\(D\)</span> (think, <span class="math inline">\(\hat{\theta}\)</span>) is inadmissible if there exists a rule <span class="math inline">\(D'\)</span> (think, some other estimator) such that</p>
+<span class="math display">\[\begin{align*}
+R(D, \theta) &amp; \leq R(D, \theta) \quad \forall \theta \\
+R(D', \theta) &amp; &lt; R(D, \theta) \quad \text{ for some } \theta
+\end{align*}\]</span>
+<p>where <span class="math inline">\(R(D, \theta)\)</span> is the risk of a decision <span class="math inline">\(D\)</span> for a paramater <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(D\)</span> is not inadmissible, it is <em>admissible</em>. In words, in order for a decision rule to be admissible, it must have risk <em>at least as small</em> as every other possible decision rule everywhere in the parameter space, <em>and</em> it must have strictly lower risk for at least one parameter value.</p>
+<p>One of the most fascinating results to come out of decision theory (in my personal opinion) is that the sample mean is <em>not</em> an admissible decision rule for the mean of a Multivariate Normal distribution under MSE loss when the mean has greater than or equal to three dimensions! Relating this to what you know from introductory statistics, this means that (from a decision theory perspective) <em>least squares</em> is not an admissible approach to estimating the regression coefficients in a linear regression model with <em>at least two</em> covariates. The specific (biased) estimator of the mean that provides a lower MSE in this case is called the <a href="https://en.wikipedia.org/wiki/James%E2%80%93Stein_estimator">James-Stein estimator</a>.</p>
+</section>
+<section id="minimaxity" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="minimaxity">Minimaxity</h3>
+<p>One other “property” of a decision rule in addition to admissibility is called <em>minimaxity</em>. Think once more about pros and cons of decisions. Some cons are worse than others (consider extreme side effects of drugs, for example). A <strong>minimax</strong> decision rule is one that the <em>lowest possible</em> <em>maximal</em> risk, out of a set of decision rules. It “minimizes” the “maximum”!</p>
+<p>Bayes and minimax decision rules are generally related through the concept of a <em>least favorable prior sequence</em>. Intuitively, a “least favorable” prior is one that leads to higher risk than other priors. The theory involved in minimax problems requires a pretty solid understanding of analysis techniques, and are beyond the scope of this course (but are interesting to look into on your own time!).</p>
+</section>
+<section id="learning-objectives" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">9.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to…</p>
+<ul>
+<li>Derive a Bayes estimate for a common loss function</li>
+<li>Distinguish between admissible and inadmissible decision rules</li>
+</ul>
+</section>
+<section id="reading-guide" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">9.2</span> Reading Guide</h2>
+<p>Associated Readings: Chapter 5, Section 5.8 (beyond Example 5.8.4)</p>
+<p>This section of the textbook goes into a teeny tiny bit of decision theory, primarily Bayes estimates, but does <em>not</em> approach decision theory broadly, or from a more formal perspective.</p>
+<section id="reading-questions" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">9.2.1</span> Reading Questions</h3>
+<ol type="1">
+<li>What are some examples of commonly-used loss functions?</li>
+<li>What are the typical steps to finding a Bayes estimate?</li>
+<li>What are the Bayes estimates for absolute error loss and squared error loss?</li>
+<li>What does it mean for a decision rule to be admissible (in colloquial language)?</li>
+<li>What does it mean for a decision rule to be minimax (in colloquial language)?</li>
+</ol>
+</section>
+</section>
+<section id="definitions" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">9.3</span> Definitions</h2>
+<p><strong>Loss Function</strong></p>
+<p>Let <span class="math inline">\(\hat{\theta}\)</span> be an estimator for <span class="math inline">\(\theta\)</span>. A loss function associated with <span class="math inline">\(\hat{\theta}\)</span> is denoted <span class="math inline">\(L(\hat{\theta}, \theta)\)</span>, where <span class="math inline">\(L(\hat{\theta}, \theta) \leq 0\)</span> and <span class="math inline">\(L(\theta, \theta) = 0\)</span>. A reasonable loss function will increase the further away <span class="math inline">\(\hat{\theta}\)</span> and <span class="math inline">\(\theta\)</span> are from each other.</p>
+<p><strong>Decision Rule</strong></p>
+<p>For the purposes of this class, an estimator! In the statistics literature, you will often see this denoted <span class="math inline">\(D\)</span>, but we can also denote the decision rule <span class="math inline">\(\hat{\theta}\)</span> for this class.</p>
+<p><strong>Risk</strong></p>
+<p>In words, risk is the expected loss of our decision, given our data. In math,</p>
+<p><span class="math display">\[
+R(\hat{\theta}, \theta) = E[L(\hat{\theta}, \theta) \mid \textbf{Y}] = \int L(\hat{\theta}, \theta) \pi(\theta \mid \textbf{Y}) d\theta
+\]</span></p>
+<p><strong>Bayes Estimate</strong></p>
+<p>A Bayes estimate is the estimate or decision rule that minimizes risk (expected posterior loss). This is sometimes called a “Bayes rule” in the literature.</p>
+<p><strong>Unique Bayes Rule</strong></p>
+<p>For a given prior <span class="math inline">\(\pi(\theta)\)</span>, a decision rule <span class="math inline">\(D_\pi\)</span> is a <em>unique Bayes rule</em> (estimate) if, for all <span class="math inline">\(\theta\)</span>, a decision rule is a Bayes rule if and only if it is equal to <span class="math inline">\(D_\pi\)</span>. Bayes rules are unique when:</p>
+<ul>
+<li><p>The loss function used is MSE loss</p></li>
+<li><p>The risk of the Bayes rule is finite</p></li>
+<li><p>A <span class="math inline">\(\sigma\)</span>-field condition is satisfied (well beyond the scope of this course)</p></li>
+</ul>
+<p>For what we consider in this course, whenever we use MSE loss in this course, the other two conditions will be satisfied.</p>
+<p><strong>Admissibility</strong></p>
+<p>An decision rule <span class="math inline">\(D\)</span> is inadmissible if there exists a rule <span class="math inline">\(D'\)</span> such that</p>
+<span class="math display">\[\begin{align*}
+R(D', \theta) &amp; \leq R(D, \theta) \quad \forall \theta \\
+R(D', \theta) &amp; &lt; R(D, \theta) \quad \text{ for some } \theta
+\end{align*}\]</span>
+<p>where <span class="math inline">\(R(D, \theta)\)</span> is the risk of a decision <span class="math inline">\(D\)</span> for a paramater <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(D\)</span> is not inadmissible, it is <em>admissible</em>.</p>
+</section>
+<section id="theorems" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">9.4</span> Theorems</h2>
+<p><strong>Theorem (Unique Bayes rules are admissible)</strong>. Any unique Bayes rule is admissible.</p>
+<p><strong>Proof.</strong> We’ll prove this by contradiction!</p>
+<p>Suppose that <span class="math inline">\(D_\pi\)</span> is a unique Bayes rule with respect to some prior <span class="math inline">\(\pi(\theta)\)</span>, and that <span class="math inline">\(D_\pi\)</span> is <em>inadmissible</em>. Then there exists some other decision rule <span class="math inline">\(D'\)</span> such that <span class="math inline">\(R(D', \theta) \leq R(D_\pi, \theta)\)</span>, for all <span class="math inline">\(\theta\)</span>. Then,</p>
+<span class="math display">\[\begin{align*}
+    R(D', \theta) &amp; \leq R(D_{\pi}, \theta) \quad \quad \text{(inadmissibility)} \\
+    &amp; = \inf_D R(D, \pi) \quad \quad \text{($D_\pi$ is Bayes)}
+\end{align*}\]</span>
+<p>and since <span class="math inline">\(R(D', \theta) \leq \inf_D R(D, \pi)\)</span>, <span class="math inline">\(D'\)</span> is Bayes. But <span class="math inline">\(D_\pi\)</span> is <em>unique</em> Bayes by assumption, so this is a contradiction.</p>
+<p>Therefore, <span class="math inline">\(D_\pi\)</span> is admissible.</p>
+</section>
+<section id="worked-examples" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">9.5</span> Worked Examples</h2>
+<p><strong>Problem 1:</strong> Show that the posterior median is the decision rule that minimizes risk with respect to absolute loss, <span class="math inline">\(L(\hat{\theta}, \theta) = |\hat{\theta} - \theta|\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
+<p>Coming soon!</p>
+</details>
+<p><strong>Problem 2:</strong> Show that the posterior mode is the decision rule that minimizes risk with respect to 0-1 loss,</p>
+<p><span class="math display">\[
+L(\hat{\theta}, \theta) = \begin{cases} 0 &amp; \text{if $\hat{\theta} = \theta$} \\ 1 &amp; \text{if $\hat{\theta} \neq \theta$}\end{cases}
+\]</span></p>
+<details>
+<summary>
+Solution:
+</summary>
+<p>Coming soon!</p>
+</details>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,3 +1,140 @@
 # Decision Theory
 
-Under development...
+Statistical decision theory is the branch of statistics that concerns itself with figuring out the best possible choice to make in a given situation using probability theory. Colloquially, decisions often have pros and cons. We can quantify these pros and cons using a *loss function*, and calculate the expected loss of a given decision (formally called *risk*). As you might guess, risk is something we want to *minimize*. We can minimize risk (after formally defining it) using the same calculus techniques we've been using all semester!
+
+For the purposes of this class, the "decisions" we make are our choice of estimator for an unknown parameters. This is one type of *deterministic* decision rule. At the beginning of this course, we learned about two different intuitive approaches to defining estimators (or "decisions"): maximum likelihood estimation and the method of moments. In this chapter, we'll find estimators that minimize risk!
+
+While decision theory is not inherently Bayesian, it is one way to "justify" point estimates from posterior distributions. **Bayes estimates** are posterior point estimates that minimize a certain loss function. The posterior mean, median, and mode are all such point estimates, for example.
+
+### Admissibility {.unnumbered .unlisted}
+
+An important concept in decision theory is the idea of *admissibility*. An admissible decision rule is one that has the lowest possible risk out of all decision rules, for all possible parameter values. It is easier to define (in math) an *inadmissible* decision rule, and then note that an admissible decision rule is *not* inadmissible (double negative).
+
+An decision rule $D$ (think, $\hat{\theta}$) is inadmissible if there exists a rule $D'$ (think, some other estimator) such that
+
+```{=tex}
+\begin{align*}
+R(D, \theta) & \leq R(D, \theta) \quad \forall \theta \\
+R(D', \theta) & < R(D, \theta) \quad \text{ for some } \theta
+\end{align*}
+```
+where $R(D, \theta)$ is the risk of a decision $D$ for a paramater $\theta$. If $D$ is not inadmissible, it is *admissible*. In words, in order for a decision rule to be admissible, it must have risk *at least as small* as every other possible decision rule everywhere in the parameter space, *and* it must have strictly lower risk for at least one parameter value.
+
+One of the most fascinating results to come out of decision theory (in my personal opinion) is that the sample mean is *not* an admissible decision rule for the mean of a Multivariate Normal distribution under MSE loss when the mean has greater than or equal to three dimensions! Relating this to what you know from introductory statistics, this means that (from a decision theory perspective) *least squares* is not an admissible approach to estimating the regression coefficients in a linear regression model with *at least two* covariates. The specific (biased) estimator of the mean that provides a lower MSE in this case is called the [James-Stein estimator](https://en.wikipedia.org/wiki/James%E2%80%93Stein_estimator).
+
+### Minimaxity {.unnumbered .unlisted}
+
+One other "property" of a decision rule in addition to admissibility is called *minimaxity*. Think once more about pros and cons of decisions. Some cons are worse than others (consider extreme side effects of drugs, for example). A **minimax** decision rule is one that the *lowest possible* *maximal* risk, out of a set of decision rules. It "minimizes" the "maximum"!
+
+Bayes and minimax decision rules are generally related through the concept of a *least favorable prior sequence*. Intuitively, a "least favorable" prior is one that leads to higher risk than other priors. The theory involved in minimax problems requires a pretty solid understanding of analysis techniques, and are beyond the scope of this course (but are interesting to look into on your own time!).
+
+## Learning Objectives
+
+By the end of this chapter, you should be able to...
+
+-   Derive a Bayes estimate for a common loss function
+-   Distinguish between admissible and inadmissible decision rules
+
+## Reading Guide
+
+Associated Readings: Chapter 5, Section 5.8 (beyond Example 5.8.4)
+
+This section of the textbook goes into a teeny tiny bit of decision theory, primarily Bayes estimates, but does *not* approach decision theory broadly, or from a more formal perspective.
+
+### Reading Questions
+
+1.  What are some examples of commonly-used loss functions?
+2.  What are the typical steps to finding a Bayes estimate?
+3.  What are the Bayes estimates for absolute error loss and squared error loss?
+4.  What does it mean for a decision rule to be admissible (in colloquial language)?
+5.  What does it mean for a decision rule to be minimax (in colloquial language)?
+
+## Definitions
+
+**Loss Function**
+
+Let $\hat{\theta}$ be an estimator for $\theta$. A loss function associated with $\hat{\theta}$ is denoted $L(\hat{\theta}, \theta)$, where $L(\hat{\theta}, \theta) \leq 0$ and $L(\theta, \theta) = 0$. A reasonable loss function will increase the further away $\hat{\theta}$ and $\theta$ are from each other.
+
+**Decision Rule**
+
+For the purposes of this class, an estimator! In the statistics literature, you will often see this denoted $D$, but we can also denote the decision rule $\hat{\theta}$ for this class.
+
+**Risk**
+
+In words, risk is the expected loss of our decision, given our data. In math,
+
+$$
+R(\hat{\theta}, \theta) = E[L(\hat{\theta}, \theta) \mid \textbf{Y}] = \int L(\hat{\theta}, \theta) \pi(\theta \mid \textbf{Y}) d\theta
+$$
+
+**Bayes Estimate**
+
+A Bayes estimate is the estimate or decision rule that minimizes risk (expected posterior loss). This is sometimes called a "Bayes rule" in the literature.
+
+**Unique Bayes Rule**
+
+For a given prior $\pi(\theta)$, a decision rule $D_\pi$ is a *unique Bayes rule* (estimate) if, for all $\theta$, a decision rule is a Bayes rule if and only if it is equal to $D_\pi$. Bayes rules are unique when:
+
+-   The loss function used is MSE loss
+
+-   The risk of the Bayes rule is finite
+
+-   A $\sigma$-field condition is satisfied (well beyond the scope of this course)
+
+For what we consider in this course, whenever we use MSE loss in this course, the other two conditions will be satisfied.
+
+**Admissibility**
+
+An decision rule $D$ is inadmissible if there exists a rule $D'$ such that
+
+```{=tex}
+\begin{align*}
+R(D', \theta) & \leq R(D, \theta) \quad \forall \theta \\
+R(D', \theta) & < R(D, \theta) \quad \text{ for some } \theta
+\end{align*}
+```
+where $R(D, \theta)$ is the risk of a decision $D$ for a paramater $\theta$. If $D$ is not inadmissible, it is *admissible*.
+
+## Theorems
+
+**Theorem (Unique Bayes rules are admissible)**. Any unique Bayes rule is admissible.
+
+**Proof.** We'll prove this by contradiction!
+
+Suppose that $D_\pi$ is a unique Bayes rule with respect to some prior $\pi(\theta)$, and that $D_\pi$ is *inadmissible*. Then there exists some other decision rule $D'$ such that $R(D', \theta) \leq R(D_\pi, \theta)$, for all $\theta$. Then,
+
+```{=tex}
+\begin{align*}
+    R(D', \theta) & \leq R(D_{\pi}, \theta) \quad \quad \text{(inadmissibility)} \\
+    & = \inf_D R(D, \pi) \quad \quad \text{($D_\pi$ is Bayes)}
+\end{align*}
+```
+and since $R(D', \theta) \leq \inf_D R(D, \pi)$, $D'$ is Bayes. But $D_\pi$ is *unique* Bayes by assumption, so this is a contradiction.
+
+Therefore, $D_\pi$ is admissible.
+
+## Worked Examples
+
+**Problem 1:** Show that the posterior median is the decision rule that minimizes risk with respect to absolute loss, $L(\hat{\theta}, \theta) = |\hat{\theta} - \theta|$.
+
+<details>
+
+<summary>Solution:</summary>
+
+Coming soon!
+
+</details>
+
+**Problem 2:** Show that the posterior mode is the decision rule that minimizes risk with respect to 0-1 loss,
+
+$$
+L(\hat{\theta}, \theta) = \begin{cases} 0 & \text{if $\hat{\theta} = \theta$} \\ 1 & \text{if $\hat{\theta} \neq \theta$}\end{cases}
+$$
+
+<details>
+
+<summary>Solution:</summary>
+
+Coming soon!
+
+</details>
