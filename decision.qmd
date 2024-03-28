@@ -121,7 +121,29 @@ Therefore, $D_\pi$ is admissible.
 
 <summary>Solution:</summary>
 
-Coming soon!
+We can write the risk with respect to absolute loss as
+
+```{=tex}
+\begin{align*}
+    R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
+    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    & = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    & = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{I\{\theta_0 < \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    & = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} 
+\end{align*}
+```
+Taking the derivative with respect to $\theta_0$, and setting this equal to zero we get
+
+```{=tex}
+\begin{align*}
+    0 & \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
+    & = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y}  \right) \\
+    & =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    & = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y}
+\end{align*}
+```
+(recalling that $\int_{-\infty}^x f(y) dy = f(x)$ and $\int_x^\infty f(y) dy = -f(x)$ and applying chain rule), and note that these two integrals are equal when $\theta_0$ is the posterior median.
 
 </details>
 
@@ -131,10 +153,59 @@ $$
 L(\hat{\theta}, \theta) = \begin{cases} 0 & \text{if $\hat{\theta} = \theta$} \\ 1 & \text{if $\hat{\theta} \neq \theta$}\end{cases}
 $$
 
+when $\theta$ is a *discrete* random variable.
+
 <details>
 
 <summary>Solution:</summary>
 
-Coming soon!
+Note that we can rewrite the 0-1 loss function as $L(\hat{\theta},\theta) = 1 - I\{\hat{\theta} = \theta\}$. Then we can write,
+
+```{=tex}
+\begin{align*}
+    R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
+    & = \sum_{\theta} L(\theta_0, \theta) \pi(\theta \mid \textbf{y})  \\
+    & = \sum_{\theta} \left( 1 - I\{\theta_0 = \theta\} \right) \pi(
+    \theta \mid \textbf{y} )  \\
+    & = \sum_{\theta} \pi(
+    \theta \mid \textbf{y} ) - \sum_{\theta} I\{\theta_0 = \theta\} \pi(
+    \theta \mid \textbf{y})  \\
+    & = 1 - \pi(\theta_0 \mid \textbf{y})
+\end{align*}
+```
+since pmfs sum to $1$. Then taking the derivative and setting this equal to zero gives
+
+```{=tex}
+\begin{align*}
+    0 & \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
+    & = \frac{\partial}{\partial \theta_0}  \left( 1 - \pi(\theta_0 \mid \textbf{y}) \right) \\
+    & = \frac{\partial}{\partial \theta_0} \pi(\theta_0 \mid \textbf{y})
+\end{align*}
+```
+and the solution to this equation is, by definition, the posterior mode.
+
+</details>
+
+**Note:** For the case where $\theta$ is a continuous random variable, we need something called a [Dirac delta function](https://en.wikipedia.org/wiki/Dirac_delta_function) to prove this. The reasoning for *why* we need this (and the proof, which is similar to the discrete case) is given below.
+
+<details>
+
+<summary>Solution for continuous $\theta$ :</summary>
+
+Note that we can rewrite the 0-1 loss function as $L(\hat{\theta},\theta) = 1 - \delta\{\hat{\theta} - \theta\}$, where $\delta$ is the Dirac delta function. Then we can write,
+
+```{=tex}
+\begin{align*}
+    R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
+    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    & = \int \left( 1 - \delta(\theta_0 - \theta) \right) \pi(
+    \theta \mid \textbf{y} ) d\textbf{y} \\
+    & = \int \pi(
+    \theta \mid \textbf{y} ) d\textbf{y} - \int \delta(\theta_0 - \theta) \pi(
+    \theta \mid \textbf{y})  \\
+    & = 1 - \pi(\theta_0 \mid \textbf{y})
+\end{align*}
+```
+since pdfs integrate to $1$. The reason why we can't use the same indicator definition as for the discrete case is because the integral of an indicator that is only positive at a single observation is *zero*. The Dirac delta function, on the other hand, has positive mass (equal to 1) at $\theta_0 - \theta = 0$. Take Projects in Real Analysis to learn more! Taking the derivative and setting this equal to zero gives the same result as in the discrete case.
 
 </details>

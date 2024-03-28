@@ -307,17 +307,69 @@ R(D', \theta) &amp; &lt; R(D, \theta) \quad \text{ for some } \theta
 <summary>
 Solution:
 </summary>
-<p>Coming soon!</p>
+<p>We can write the risk with respect to absolute loss as</p>
+<span class="math display">\[\begin{align*}
+    R(\theta_0, \theta) &amp; = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
+    &amp; = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    &amp; = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    &amp; = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{I\{\theta_0 &lt; \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    &amp; = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y}
+\end{align*}\]</span>
+<p>Taking the derivative with respect to <span class="math inline">\(\theta_0\)</span>, and setting this equal to zero we get</p>
+<span class="math display">\[\begin{align*}
+    0 &amp; \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
+    &amp; = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y}  \right) \\
+    &amp; =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    &amp; = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} &amp; = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y}
+\end{align*}\]</span>
+<p>(recalling that <span class="math inline">\(\int_{-\infty}^x f(y) dy = f(x)\)</span> and <span class="math inline">\(\int_x^\infty f(y) dy = -f(x)\)</span> and applying chain rule), and note that these two integrals are equal when <span class="math inline">\(\theta_0\)</span> is the posterior median.</p>
 </details>
 <p><strong>Problem 2:</strong> Show that the posterior mode is the decision rule that minimizes risk with respect to 0-1 loss,</p>
 <p><span class="math display">\[
 L(\hat{\theta}, \theta) = \begin{cases} 0 &amp; \text{if $\hat{\theta} = \theta$} \\ 1 &amp; \text{if $\hat{\theta} \neq \theta$}\end{cases}
 \]</span></p>
+<p>when <span class="math inline">\(\theta\)</span> is a <em>discrete</em> random variable.</p>
 <details>
 <summary>
 Solution:
 </summary>
-<p>Coming soon!</p>
+<p>Note that we can rewrite the 0-1 loss function as <span class="math inline">\(L(\hat{\theta},\theta) = 1 - I\{\hat{\theta} = \theta\}\)</span>. Then we can write,</p>
+<span class="math display">\[\begin{align*}
+    R(\theta_0, \theta) &amp; = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
+    &amp; = \sum_{\theta} L(\theta_0, \theta) \pi(\theta \mid \textbf{y})  \\
+    &amp; = \sum_{\theta} \left( 1 - I\{\theta_0 = \theta\} \right) \pi(
+    \theta \mid \textbf{y} )  \\
+    &amp; = \sum_{\theta} \pi(
+    \theta \mid \textbf{y} ) - \sum_{\theta} I\{\theta_0 = \theta\} \pi(
+    \theta \mid \textbf{y})  \\
+    &amp; = 1 - \pi(\theta_0 \mid \textbf{y})
+\end{align*}\]</span>
+<p>since pmfs sum to <span class="math inline">\(1\)</span>. Then taking the derivative and setting this equal to zero gives</p>
+<span class="math display">\[\begin{align*}
+    0 &amp; \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
+    &amp; = \frac{\partial}{\partial \theta_0}  \left( 1 - \pi(\theta_0 \mid \textbf{y}) \right) \\
+    &amp; = \frac{\partial}{\partial \theta_0} \pi(\theta_0 \mid \textbf{y})
+\end{align*}\]</span>
+<p>and the solution to this equation is, by definition, the posterior mode.</p>
+</details>
+<p><strong>Note:</strong> For the case where <span class="math inline">\(\theta\)</span> is a continuous random variable, we need something called a <a href="https://en.wikipedia.org/wiki/Dirac_delta_function">Dirac delta function</a> to prove this. The reasoning for <em>why</em> we need this (and the proof, which is similar to the discrete case) is given below.</p>
+<details>
+<summary>
+Solution for continuous <span class="math inline">\(\theta\)</span> :
+</summary>
+<p>Note that we can rewrite the 0-1 loss function as <span class="math inline">\(L(\hat{\theta},\theta) = 1 - \delta\{\hat{\theta} - \theta\}\)</span>, where <span class="math inline">\(\delta\)</span> is the Dirac delta function. Then we can write,</p>
+<span class="math display">\[\begin{align*}
+    R(\theta_0, \theta) &amp; = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
+    &amp; = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    &amp; = \int \left( 1 - \delta(\theta_0 - \theta) \right) \pi(
+    \theta \mid \textbf{y} ) d\textbf{y} \\
+    &amp; = \int \pi(
+    \theta \mid \textbf{y} ) d\textbf{y} - \int \delta(\theta_0 - \theta) \pi(
+    \theta \mid \textbf{y})  \\
+    &amp; = 1 - \pi(\theta_0 \mid \textbf{y})
+\end{align*}\]</span>
+<p>since pdfs integrate to <span class="math inline">\(1\)</span>. The reason why we can’t use the same indicator definition as for the discrete case is because the integral of an indicator that is only positive at a single observation is <em>zero</em>. The Dirac delta function, on the other hand, has positive mass (equal to 1) at <span class="math inline">\(\theta_0 - \theta = 0\)</span>. Take Projects in Real Analysis to learn more! Taking the derivative and setting this equal to zero gives the same result as in the discrete case.</p>
 </details>
 
 
