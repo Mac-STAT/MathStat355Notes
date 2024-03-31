@@ -53,7 +53,7 @@ This section of the textbook goes into a teeny tiny bit of decision theory, prim
 
 **Loss Function**
 
-Let $\hat{\theta}$ be an estimator for $\theta$. A loss function associated with $\hat{\theta}$ is denoted $L(\hat{\theta}, \theta)$, where $L(\hat{\theta}, \theta) \leq 0$ and $L(\theta, \theta) = 0$. A reasonable loss function will increase the further away $\hat{\theta}$ and $\theta$ are from each other.
+Let $\hat{\theta}$ be an estimator for $\theta$. A loss function associated with $\hat{\theta}$ is denoted $L(\hat{\theta}, \theta)$, where $L(\hat{\theta}, \theta) \geq 0$ and $L(\theta, \theta) = 0$. A reasonable loss function will increase the further away $\hat{\theta}$ and $\theta$ are from each other.
 
 **Decision Rule**
 

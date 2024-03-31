@@ -1,3 +1,221 @@
 # Computational Optimization
 
-Under development...
+Welcome to the last chapter of the course notes! There are no worked examples for this chapter, which is instead focused on practical implementation of a handful of useful algorithms, and useful computational techniques that you may come across in your future, statistical career. Go forth and compute!
+
+## Newton-Raphson
+
+Recall from the second chapter of the course notes the typical procedure for finding an MLE:
+
+1.  Find the log likelihood
+
+2.  Take a derivative with respect to the unknown parameter(s)
+
+3.  Set it equal to zero, and solve
+
+We previously saw that *sometimes* this procedure doesn't work, in particular, when the support of the density function depends on our unknown parameters. In these cases, we noted that the MLE would be an order statistic. There are *other* situations, however, where neither the MLE is neither readily found analytically nor is it an order statistic. In these cases, we turn to computational techniques, such as **Newton-Raphson**.
+
+Newton-Raphson is a root-finding algorithm, and hence useful when trying to maximize a function (or a likelihood!). Suppose we want to find a root (i.e., the value of $x$ such that $f(x) = 0$) of the function $f$ with derivative denoted $f'$. Newton-Raphson takes the following steps:
+
+1.  Start with an initial guess $x_0$
+
+2.  Update your guess according to $x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}$
+
+3.  Repeat step 2 according to $x_n = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}$ until your guesses have "converged" (i.e. are very very similar)
+
+We can visualize this process as follows:
+
+```{r,echo=FALSE,fig.align='center',fig.width=3.5,fig.height=2.2}
+# set up data
+x = seq(-3,1,by=.1)
+f = function(x){
+  100-(x+5)^4 + (x+10)^3
+}
+
+fd = function(x){
+	-4*(x+5)^3+2*(x+10)^2
+}
+# plot f(x)
+par(mar=c(2,2,1.5,1))
+plot(x,fd(x),type='l',ylim=c(-500,200),ylab='f(x)', main = expression(paste('Tangent line to y = f(x) at ', x[n],'=0')))
+# add x-axis
+abline(h=0)
+# highlight initial guess
+x0 = 0
+points(x0,fd(x0),pch=19)
+# add tangent line
+fd2 = function(x){
+	-12*(x+5)^2+4*(x+10)
+}
+abline(a=fd(x0)-fd2(x0)*x0, b = fd2(x0),lty=2)
+```
+
+The equation of the tangent line to the curve $y = f(x)$ at a point $x = x_n$ is $$y = f'(x_n)(x-x_n) + f(x_n)$$
+
+```{r,echo=FALSE,fig.align='center',fig.width=3.5,fig.height=2.2}
+## plot curve
+par(mar=c(2,2,1.5,1))
+plot(x,fd(x),type='l', ylim=c(-500,200), ylab='f(x)', main = expression(paste('Find root of tangent line')))
+## add x-axis
+abline(h=0)
+## highlight initial guess
+x0 = 0
+points(x0,fd(x0),pch=19)
+## add tangent line
+abline(a=fd(x0)-fd2(x0)*x0, b = fd2(x0),lty=2)
+## highlight new guess
+x1 = x0 - fd(x0)/fd2(x0)
+points(x1,0,pch=19,col='red')
+```
+
+The root of this tangent line (i.e., the place where it crosses the x-axis) is easy to find: $$0 = f'(x_n)(x-x_n) + f(x_n) \iff x = x_n - f(x_n)/f'(x_n)$$
+
+Take this root of the tangent line as our next guess, then repeat...
+
+```{r newton-step1, echo = FALSE, fig.align='center', fig.height = 3, fig.width = 4.5}
+## step 1: initial guess
+par(mar=c(2,2,1.5,1))
+plot(x,fd(x),type='l',ylim=c(-500,200),ylab='f(x)',main = 'Step 1: initial guess')
+abline(h=0)
+x0 = 0
+points(x0,fd(x0),pch=19)
+fd2 = function(x){
+	-12*(x+5)^2+4*(x+10)
+}
+```
+
+...and repeat...
+
+```{r newton-step2, echo = FALSE, fig.align='center', fig.height = 3, fig.width = 4.5}
+## step 2: Update that guess according to $x_1 = x_0 - f(x_0)/f'(x_0)$
+## plot curve
+par(mar=c(2,2,1.5,1))
+plot(x,fd(x),type='l', ylim=c(-500,200), ylab='f(x)', main = 'Step 2: update')
+## add x-axis
+abline(h=0)
+## highlight initial guess
+x0 = 0
+points(x0,fd(x0),pch=19)
+## add tangent line
+abline(a=fd(x0)-fd2(x0)*x0, b = fd2(x0),lty=2)
+## highlight new guess
+x1 = x0 - fd(x0)/fd2(x0)
+points(x1,0,pch=19,col='red')
+```
+
+...and repeat...
+
+```{r newton-step3, echo = FALSE, fig.align='center', fig.height = 3, fig.width = 4.5}
+## step 3: update again
+par(mar=c(2,2,1.5,1))
+plot(x,fd(x),type='l',ylim=c(-500,200),ylab='f(x)', main = 'Step 3: update again')
+abline(h=0)
+points(x0,fd(x0),pch=19,col='grey')
+
+  xn1 = x1
+  xn = xn1
+	points(xn,fd(xn),pch=19)
+	abline(a=fd(xn)-fd2(xn)*xn, b = fd2(xn),lty=2)
+	xn1 = xn - fd(xn)/fd2(xn)
+	points(xn1,0,pch=19,col='red')
+```
+
+...and repeat...
+
+```{r newton-step4, echo = FALSE, fig.align='center', fig.height = 3, fig.width = 4.5}
+## step 4: and again
+par(mar=c(2,2,1.5,1))
+plot(x,fd(x),type='l',ylim=c(-500,200),ylab='f(x)', main = 'Step 4: and again')
+abline(h=0)
+points(x0,fd(x0),pch=19,col='grey')
+points(x1,fd(x1),pch=19,col='grey')
+
+  x2 = xn1
+  xn = xn1
+  points(xn,fd(xn),pch=19)
+	abline(a=fd(xn)-fd2(xn)*xn, b = fd2(xn),lty=2)
+	xn1 = xn - fd(xn)/fd2(xn)
+	points(xn1,0,pch=19,col='red')
+```
+
+...and repeat...
+
+```{r newton-step5, echo = FALSE, fig.align='center', fig.height = 3, fig.width = 4.5}
+## step 5: and again
+par(mar=c(2,2,1.5,1))
+plot(x,fd(x),type='l',ylim=c(-500,200),ylab='f(x)', main = 'Step 5: and again')
+abline(h=0)
+points(x0,fd(x0),pch=19,col='grey')
+points(x1,fd(x1),pch=19,col='grey')
+points(x2,fd(x2),pch=19,col='grey')
+	
+  x3 = xn1
+  xn = xn1
+  points(xn,fd(xn),pch=19)
+  abline(a=fd(xn)-fd2(xn)*xn, b = fd2(xn),lty=2)
+	xn1 = xn - fd(xn)/fd2(xn)
+	points(xn1,0,pch=19,col='red')
+	
+```
+
+...and keep repeating until you've converged!
+
+The multivariate version of Newton-Raphson is called the [Scoring algorithm](https://en.wikipedia.org/wiki/Scoring_algorithm) (also sometimes called Fisher's scoring), and is used in $\texttt{R}$ to obtain estimates of logistic regression coefficients.
+
+### Motivating Example: Logistic Regression {.unnumbered .unlisted}
+
+Suppose that we observe data $(y_i, x_i)$ where the outcome $y$ is binary. A natural model for these data is to assume the statistical model
+
+```{=tex}
+\begin{align*}
+y_i & \sim Bernoulli(p_i), \\
+\text{log} \left( \frac{p_i}{1 - p_i} \right) & = \beta_0 + \beta_1 x_i.
+\end{align*}
+```
+This is a simple logistic regression model, with unknown parameters given by the logistic regression coefficients $\beta_0, \beta_1$. Let's attempt to find MLEs for $\beta_0$ and $\beta_1$ analytically.
+
+Note that $p_i = \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}$. Then the likelihood of our Bernoulli observations $y_i$ can be written as
+
+$$
+L(\beta_0, \beta_1) = \prod_{i = 1}^n \left( \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right)^{y_i} \left( \frac{1}{1 + e^{\beta_0 + \beta_1 x_i}} \right)^{1 - y_i}
+$$
+
+Following the typical procedure, we log the likelihood...
+
+```{=tex}
+\begin{align*}
+    \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ y_i \log(\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}) + (1 - y_i) \log(\frac{1}{1 + e^{\beta_0 + \beta_1 x_i}}) \right] \\
+    & = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i) - y_i \log(1 + e^{\beta_0 + \beta_1 x_i}) - \log(1 + e^{\beta_0 + \beta_1 x_i}) + y_i \log(1 + e^{\beta_0 + \beta_1 x_i})\right] \\
+    & = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i)  - \log(1 + e^{\beta_0 + \beta_1 x_i}) \right]
+\end{align*}
+```
+...taking the partial derivatives with respect to $\beta_0$ and $\beta_1$ we get...
+
+```{=tex}
+\begin{align*}
+    \frac{\partial}{\partial \beta_0} \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
+    \frac{\partial}{\partial \beta_1} \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
+\end{align*}
+```
+...and if you try to solve the system of equations given by
+
+```{=tex}
+\begin{align*}
+    0 & \equiv \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
+    0 & \equiv \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
+\end{align*}
+```
+you'll get nowhere! There is no analytical (sometimes called "closed-form") solution. In this case, we'd need to use the Scoring algorithm to solve for the regression coefficient estimates, since we have more than one unknown parameter.
+
+### Why do anything analytically, if Newton-Raphson exists? {.unnumbered .unlisted}
+
+You may be wondering why I've forced you to do calculus/algebra the entire semester, when such an algorithm exists. The answer is two-fold.
+
+1.  Going through the steps of finding an MLE analytically helps build intuition. We saw that in the vast majority of cases, maximum likelihood estimators are functions of sample means. This is less obvious when doing everything numerically (using an algorithm). In addition to gaining insight from finding MLEs by hand, this practice also gave you the opportunity to learn/use common "tricks" in statistics, that will find their way into problems you complete down the road or research you may eventually conduct.
+
+2.  Numerical optimization is *slow*. For simple cases like the ones we've seen in class, numerical optimization would techniques like Newton-Raphson would run relatively quickly. However, for more complex likelihoods with many unknown parameters, various optimization techniques can be so slow as to be computationally prohibitive. Even with continual improvements in computational power (and improvements in the algorithms themselves), computational speed is an important consideration when conducting statistical research or developing new methodology. If it takes someone two weeks to fit their regression model using numerical optimization, for example, that person may never fit a regression model ever again, or give up entirely. Especially when considering *who* has access to computational power, this can become an equity issue. If you can solve something analytically, **do it**. It's significantly faster in the long-term, even it takes you some time to do the calculus/algebra.
+
+## Simulation Studies
+
+Sometimes proofs are hard.
+
+## Gibbs Samplers

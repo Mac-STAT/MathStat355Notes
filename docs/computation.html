@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -180,7 +182,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#newton-raphson" id="toc-newton-raphson" class="nav-link active" data-scroll-target="#newton-raphson"><span class="header-section-number">10.1</span> Newton-Raphson</a></li>
+  <li><a href="#simulation-studies" id="toc-simulation-studies" class="nav-link" data-scroll-target="#simulation-studies"><span class="header-section-number">10.2</span> Simulation Studies</a></li>
+  <li><a href="#gibbs-samplers" id="toc-gibbs-samplers" class="nav-link" data-scroll-target="#gibbs-samplers"><span class="header-section-number">10.3</span> Gibbs Samplers</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,9 +212,134 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Under development…</p>
+<p>Welcome to the last chapter of the course notes! There are no worked examples for this chapter, which is instead focused on practical implementation of a handful of useful algorithms, and useful computational techniques that you may come across in your future, statistical career. Go forth and compute!</p>
+<section id="newton-raphson" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="newton-raphson"><span class="header-section-number">10.1</span> Newton-Raphson</h2>
+<p>Recall from the second chapter of the course notes the typical procedure for finding an MLE:</p>
+<ol type="1">
+<li><p>Find the log likelihood</p></li>
+<li><p>Take a derivative with respect to the unknown parameter(s)</p></li>
+<li><p>Set it equal to zero, and solve</p></li>
+</ol>
+<p>We previously saw that <em>sometimes</em> this procedure doesn’t work, in particular, when the support of the density function depends on our unknown parameters. In these cases, we noted that the MLE would be an order statistic. There are <em>other</em> situations, however, where neither the MLE is neither readily found analytically nor is it an order statistic. In these cases, we turn to computational techniques, such as <strong>Newton-Raphson</strong>.</p>
+<p>Newton-Raphson is a root-finding algorithm, and hence useful when trying to maximize a function (or a likelihood!). Suppose we want to find a root (i.e., the value of <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x) = 0\)</span>) of the function <span class="math inline">\(f\)</span> with derivative denoted <span class="math inline">\(f'\)</span>. Newton-Raphson takes the following steps:</p>
+<ol type="1">
+<li><p>Start with an initial guess <span class="math inline">\(x_0\)</span></p></li>
+<li><p>Update your guess according to <span class="math inline">\(x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}\)</span></p></li>
+<li><p>Repeat step 2 according to <span class="math inline">\(x_n = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}\)</span> until your guesses have “converged” (i.e.&nbsp;are very very similar)</p></li>
+</ol>
+<p>We can visualize this process as follows:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="computation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="336"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The equation of the tangent line to the curve <span class="math inline">\(y = f(x)\)</span> at a point <span class="math inline">\(x = x_n\)</span> is <span class="math display">\[y = f'(x_n)(x-x_n) + f(x_n)\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="computation_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="336"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The root of this tangent line (i.e., the place where it crosses the x-axis) is easy to find: <span class="math display">\[0 = f'(x_n)(x-x_n) + f(x_n) \iff x = x_n - f(x_n)/f'(x_n)\]</span></p>
+<p>Take this root of the tangent line as our next guess, then repeat…</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="computation_files/figure-html/newton-step1-1.png" class="img-fluid figure-img" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>…and repeat…</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="computation_files/figure-html/newton-step2-1.png" class="img-fluid figure-img" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>…and repeat…</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="computation_files/figure-html/newton-step3-1.png" class="img-fluid figure-img" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="computation_files/figure-html/newton-step4-1.png" class="img-fluid figure-img" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="computation_files/figure-html/newton-step5-1.png" class="img-fluid figure-img" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>…until you’ve converged!</p>
+<section id="motivating-example-logistic-regression" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="motivating-example-logistic-regression">Motivating Example: Logistic Regression</h3>
+<p>Suppose that we observe data <span class="math inline">\((y_i, x_i)\)</span> where the outcome <span class="math inline">\(y\)</span> is binary. A natural model for these data is to assume the statistical model</p>
+<span class="math display">\[\begin{align*}
+y_i &amp; \sim Bernoulli(p_i), \\
+\text{log} \left( \frac{p_i}{1 - p_i} \right) &amp; = \beta_0 + \beta_1 x_i.
+\end{align*}\]</span>
+<p>This is a simple logistic regression model, with unknown parameters given by the logistic regression coefficients <span class="math inline">\(\beta_0, \beta_1\)</span>. Let’s attempt to find MLEs for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> analytically.</p>
+<p>Note that <span class="math inline">\(p_i = \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}\)</span>. Then the likelihood of our Bernoulli observations <span class="math inline">\(y_i\)</span> can be written as</p>
+<p><span class="math display">\[
+L(\beta_0, \beta_1) = \prod_{i = 1}^n \left( \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right)^{y_i} \left( \frac{1}{1 + e^{\beta_0 + \beta_1 x_i}} \right)^{1 - y_i}
+\]</span></p>
+<p>Following the typical procedure, we log the likelihood…</p>
+<span class="math display">\[\begin{align*}
+    \log(L(\beta_0, \beta_1)) &amp; = \sum_{i = 1}^n \left[ y_i \log(\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}) + (1 - y_i) \log(\frac{1}{1 + e^{\beta_0 + \beta_1 x_i}}) \right] \\
+    &amp; = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i) - y_i \log(1 + e^{\beta_0 + \beta_1 x_i}) - \log(1 + e^{\beta_0 + \beta_1 x_i}) + y_i \log(1 + e^{\beta_0 + \beta_1 x_i})\right] \\
+    &amp; = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i)  - \log(1 + e^{\beta_0 + \beta_1 x_i}) \right]
+\end{align*}\]</span>
+<p>…taking the partial derivatives with respect to <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> we get…</p>
+<span class="math display">\[\begin{align*}
+    \frac{\partial}{\partial \beta_0} \log(L(\beta_0, \beta_1)) &amp; = \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
+    \frac{\partial}{\partial \beta_1} \log(L(\beta_0, \beta_1)) &amp; = \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
+\end{align*}\]</span>
+<p>…and if you try to solve the system of equations given by</p>
+<span class="math display">\[\begin{align*}
+    0 &amp; \equiv \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
+    0 &amp; \equiv \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
+\end{align*}\]</span>
+<p>you’ll get nowhere! There is no analytical (sometimes called “closed-form”) solution.</p>
+</section>
+<section id="why-do-anything-analytically-if-newton-raphson-exists" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="why-do-anything-analytically-if-newton-raphson-exists">Why do anything analytically, if Newton-Raphson exists?</h3>
+</section>
+</section>
+<section id="simulation-studies" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="simulation-studies"><span class="header-section-number">10.2</span> Simulation Studies</h2>
+</section>
+<section id="gibbs-samplers" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="gibbs-samplers"><span class="header-section-number">10.3</span> Gibbs Samplers</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
