@@ -112,7 +112,11 @@ An estimator $\hat{\theta}_n$ is asymptotically normal if $\hat{\theta}_n$ conve
 
 **Asymptotic Efficiency**
 
-An estimator $\hat{\theta}_n$ is asymptotically efficient if it's asymptotic variance attains the C-R Lower Bound.
+An estimator $\hat{\theta}_n$ is asymptotically efficient if it's asymptotic variance attains the C-R Lower Bound. Note that this is the C-R Lower Bound for a *single* observation, and therefore the asymptotic distribution of an MLE looks something like this:
+
+$$
+\sqrt{n} (\hat{\theta}_n - \theta) \overset{d}{\to} N\left( 0, \frac{1}{I_1(\theta)}\right)
+$$
 
 **Confidence Interval**
 

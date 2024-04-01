@@ -228,7 +228,7 @@
     "href": "asymptotics.html#definitions",
     "title": "6  Asymptotics & the Central Limit Theorem",
     "section": "6.3 Definitions",
-    "text": "6.3 Definitions\nAsymptotic Normality\nAn estimator \\(\\hat{\\theta}_n\\) is asymptotically normal if \\(\\hat{\\theta}_n\\) converges in distribution to a normally distributed random variable.\nAsymptotic Efficiency\nAn estimator \\(\\hat{\\theta}_n\\) is asymptotically efficient if it’s asymptotic variance attains the C-R Lower Bound.\nConfidence Interval\nA 100(1 - \\(\\alpha\\))% confidence interval for a parameter \\(\\theta\\) is given by \\((a, b)\\), where \\(\\Pr(a \\leq \\theta \\leq b) = 1 - \\alpha\\)."
+    "text": "6.3 Definitions\nAsymptotic Normality\nAn estimator \\(\\hat{\\theta}_n\\) is asymptotically normal if \\(\\hat{\\theta}_n\\) converges in distribution to a normally distributed random variable.\nAsymptotic Efficiency\nAn estimator \\(\\hat{\\theta}_n\\) is asymptotically efficient if it’s asymptotic variance attains the C-R Lower Bound. Note that this is the C-R Lower Bound for a single observation, and therefore the asymptotic distribution of an MLE looks something like this:\n\\[\n\\sqrt{n} (\\hat{\\theta}_n - \\theta) \\overset{d}{\\to} N\\left( 0, \\frac{1}{I_1(\\theta)}\\right)\n\\]\nConfidence Interval\nA 100(1 - \\(\\alpha\\))% confidence interval for a parameter \\(\\theta\\) is given by \\((a, b)\\), where \\(\\Pr(a \\leq \\theta \\leq b) = 1 - \\alpha\\)."
   },
   {
     "objectID": "asymptotics.html#theorems",

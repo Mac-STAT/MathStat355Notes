@@ -305,7 +305,10 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Asymptotic Normality</strong></p>
 <p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is asymptotically normal if <span class="math inline">\(\hat{\theta}_n\)</span> converges in distribution to a normally distributed random variable.</p>
 <p><strong>Asymptotic Efficiency</strong></p>
-<p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is asymptotically efficient if it’s asymptotic variance attains the C-R Lower Bound.</p>
+<p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is asymptotically efficient if it’s asymptotic variance attains the C-R Lower Bound. Note that this is the C-R Lower Bound for a <em>single</em> observation, and therefore the asymptotic distribution of an MLE looks something like this:</p>
+<p><span class="math display">\[
+\sqrt{n} (\hat{\theta}_n - \theta) \overset{d}{\to} N\left( 0, \frac{1}{I_1(\theta)}\right)
+\]</span></p>
 <p><strong>Confidence Interval</strong></p>
 <p>A 100(1 - <span class="math inline">\(\alpha\)</span>)% confidence interval for a parameter <span class="math inline">\(\theta\)</span> is given by <span class="math inline">\((a, b)\)</span>, where <span class="math inline">\(\Pr(a \leq \theta \leq b) = 1 - \alpha\)</span>.</p>
 </section>
