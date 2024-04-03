@@ -257,7 +257,7 @@ as desired.
 
 ## Worked Examples
 
-**Problem 1:** Let $Y_i \overset{iid}{\sim} N(\mu, \sigma^2)$, where $\sigma^2 = 25$ is *known*. Suppose we want to test the hypotheses $H_0: \mu = 8$ vs. $H_1: \mu > 8$ and we observe $\overline{Y} = 10$ across $n = 64$ observations. Can we reject $H_0$, with a significance threshold of $\alpha = 0.05$? (Use a Wald test statistic)
+**Problem 1:** Let $Y_i \overset{iid}{\sim} N(\mu, \sigma^2)$, where $\sigma^2 = 25$ is *known*. Suppose we want to test the hypotheses $H_0: \mu = 8$ vs. $H_1: \mu \neq 8$ and we observe $\overline{Y} = 10$ across $n = 64$ observations. Can we reject $H_0$, with a significance threshold of $\alpha = 0.05$? (Use a Wald test statistic)
 
 <details>
 
