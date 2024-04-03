@@ -104,7 +104,7 @@ $$
 The posterior median is, as the name implies, the median of the posterior distribution. In math, the posterior median is the estimate $\hat{\theta}$ that satisfies,
 
 $$
-\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) dx = 0.5
+\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) d\theta = 0.5
 $$
 
 **Posterior mean**
@@ -112,7 +112,7 @@ $$
 The posterior mean is, as the name implies, the mean of the posterior distribution. In math, the posterior mean is the estimate
 
 $$
-\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) dx
+\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) d\theta
 $$
 
 **Credible interval**
@@ -120,7 +120,7 @@ $$
 A 100(1 - $\alpha$)% credible interval is an interval $(\Phi_{\alpha/2}, \Phi_{1 - \alpha/2})$ for a parameter $\theta$ is given by
 
 $$
-\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) dx = 1 - \alpha, 
+\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) d\theta = 1 - \alpha, 
 $$
 
 where $\Phi_p$ denotes the $p$th quantile of the posterior distribution.

@@ -298,17 +298,17 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Posterior median</strong></p>
 <p>The posterior median is, as the name implies, the median of the posterior distribution. In math, the posterior median is the estimate <span class="math inline">\(\hat{\theta}\)</span> that satisfies,</p>
 <p><span class="math display">\[
-\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) dx = 0.5
+\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) d\theta = 0.5
 \]</span></p>
 <p><strong>Posterior mean</strong></p>
 <p>The posterior mean is, as the name implies, the mean of the posterior distribution. In math, the posterior mean is the estimate</p>
 <p><span class="math display">\[
-\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) dx
+\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) d\theta
 \]</span></p>
 <p><strong>Credible interval</strong></p>
 <p>A 100(1 - <span class="math inline">\(\alpha\)</span>)% credible interval is an interval <span class="math inline">\((\Phi_{\alpha/2}, \Phi_{1 - \alpha/2})\)</span> for a parameter <span class="math inline">\(\theta\)</span> is given by</p>
 <p><span class="math display">\[
-\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) dx = 1 - \alpha,
+\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) d\theta = 1 - \alpha,
 \]</span></p>
 <p>where <span class="math inline">\(\Phi_p\)</span> denotes the <span class="math inline">\(p\)</span>th quantile of the posterior distribution.</p>
 </section>

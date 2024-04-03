@@ -310,18 +310,18 @@ Solution:
 <p>We can write the risk with respect to absolute loss as</p>
 <span class="math display">\[\begin{align*}
     R(\theta_0, \theta) &amp; = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
-    &amp; = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    &amp; = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    &amp; = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{I\{\theta_0 &lt; \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    &amp; = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y}
+    &amp; = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
+    &amp; = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\theta \\
+    &amp; = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{I\{\theta_0 &lt; \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta \\
+    &amp; = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}\]</span>
 <p>Taking the derivative with respect to <span class="math inline">\(\theta_0\)</span>, and setting this equal to zero we get</p>
 <span class="math display">\[\begin{align*}
     0 &amp; \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
-    &amp; = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y}  \right) \\
-    &amp; =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    &amp; = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} &amp; = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y}
+    &amp; = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta  \right) \\
+    &amp; =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    &amp; = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta &amp; = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}\]</span>
 <p>(recalling that <span class="math inline">\(\int_{-\infty}^x f(y) dy = f(x)\)</span> and <span class="math inline">\(\int_x^\infty f(y) dy = -f(x)\)</span> and applying chain rule), and note that these two integrals are equal when <span class="math inline">\(\theta_0\)</span> is the posterior median.</p>
 </details>
@@ -361,12 +361,12 @@ Solution for continuous <span class="math inline">\(\theta\)</span> :
 <p>Note that we can rewrite the 0-1 loss function as <span class="math inline">\(L(\hat{\theta},\theta) = 1 - \delta\{\hat{\theta} - \theta\}\)</span>, where <span class="math inline">\(\delta\)</span> is the Dirac delta function. Then we can write,</p>
 <span class="math display">\[\begin{align*}
     R(\theta_0, \theta) &amp; = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
-    &amp; = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    &amp; = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
     &amp; = \int \left( 1 - \delta(\theta_0 - \theta) \right) \pi(
-    \theta \mid \textbf{y} ) d\textbf{y} \\
+    \theta \mid \textbf{y} ) d\theta  \\
     &amp; = \int \pi(
-    \theta \mid \textbf{y} ) d\textbf{y} - \int \delta(\theta_0 - \theta) \pi(
-    \theta \mid \textbf{y})  \\
+    \theta \mid \textbf{y} ) d\theta  - \int \delta(\theta_0 - \theta) \pi(
+    \theta \mid \textbf{y}) d\theta   \\
     &amp; = 1 - \pi(\theta_0 \mid \textbf{y})
 \end{align*}\]</span>
 <p>since pdfs integrate to <span class="math inline">\(1\)</span>. The reason why we can’t use the same indicator definition as for the discrete case is because the integral of an indicator that is only positive at a single observation is <em>zero</em>. The Dirac delta function, on the other hand, has positive mass (equal to 1) at <span class="math inline">\(\theta_0 - \theta = 0\)</span>. Take Projects in Real Analysis to learn more! Taking the derivative and setting this equal to zero gives the same result as in the discrete case.</p>

@@ -126,10 +126,10 @@ We can write the risk with respect to absolute loss as
 ```{=tex}
 \begin{align*}
     R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
-    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{I\{\theta_0 < \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} 
+    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{I\{\theta_0 < \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
 ```
 Taking the derivative with respect to $\theta_0$, and setting this equal to zero we get
@@ -137,10 +137,10 @@ Taking the derivative with respect to $\theta_0$, and setting this equal to zero
 ```{=tex}
 \begin{align*}
     0 & \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
-    & = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y}  \right) \\
-    & =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y}
+    & = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta  \right) \\
+    & =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    & = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
 ```
 (recalling that $\int_{-\infty}^x f(y) dy = f(x)$ and $\int_x^\infty f(y) dy = -f(x)$ and applying chain rule), and note that these two integrals are equal when $\theta_0$ is the posterior median.
@@ -197,12 +197,12 @@ Note that we can rewrite the 0-1 loss function as $L(\hat{\theta},\theta) = 1 - 
 ```{=tex}
 \begin{align*}
     R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
-    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
     & = \int \left( 1 - \delta(\theta_0 - \theta) \right) \pi(
-    \theta \mid \textbf{y} ) d\textbf{y} \\
+    \theta \mid \textbf{y} ) d\theta  \\
     & = \int \pi(
-    \theta \mid \textbf{y} ) d\textbf{y} - \int \delta(\theta_0 - \theta) \pi(
-    \theta \mid \textbf{y})  \\
+    \theta \mid \textbf{y} ) d\theta  - \int \delta(\theta_0 - \theta) \pi(
+    \theta \mid \textbf{y}) d\theta   \\
     & = 1 - \pi(\theta_0 \mid \textbf{y})
 \end{align*}
 ```
