@@ -218,7 +218,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, breakable, boxrule=0pt, interior hidden, frame hidden, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, sharp corners, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, interior hidden, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -2910,7 +2910,13 @@ random variable.
 \textbf{Asymptotic Efficiency}
 
 An estimator \(\hat{\theta}_n\) is asymptotically efficient if it's
-asymptotic variance attains the C-R Lower Bound.
+asymptotic variance attains the C-R Lower Bound. Note that this is the
+C-R Lower Bound for a \emph{single} observation, and therefore the
+asymptotic distribution of an MLE looks something like this:
+
+\[
+\sqrt{n} (\hat{\theta}_n - \theta) \overset{d}{\to} N\left( 0, \frac{1}{I_1(\theta)}\right)
+\]
 
 \textbf{Confidence Interval}
 
@@ -3657,7 +3663,7 @@ function.
 
 \textbf{Problem 1:} Let \(Y_i \overset{iid}{\sim} N(\mu, \sigma^2)\),
 where \(\sigma^2 = 25\) is \emph{known}. Suppose we want to test the
-hypotheses \(H_0: \mu = 8\) vs.~\(H_1: \mu > 8\) and we observe
+hypotheses \(H_0: \mu = 8\) vs.~\(H_1: \mu \neq 8\) and we observe
 \(\overline{Y} = 10\) across \(n = 64\) observations. Can we reject
 \(H_0\), with a significance threshold of \(\alpha = 0.05\)? (Use a Wald
 test statistic)
@@ -4348,7 +4354,7 @@ posterior distribution. In math, the posterior median is the estimate
 \(\hat{\theta}\) that satisfies,
 
 \[
-\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) dx = 0.5
+\int_{-\infty}^{\hat{\theta}} \pi(\theta \mid \textbf{X}) d\theta = 0.5
 \]
 
 \textbf{Posterior mean}
@@ -4357,7 +4363,7 @@ The posterior mean is, as the name implies, the mean of the posterior
 distribution. In math, the posterior mean is the estimate
 
 \[
-\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) dx
+\hat{\theta} = E[\theta \mid \textbf{X}] = \int \theta \pi(\theta \mid \textbf{X}) d\theta
 \]
 
 \textbf{Credible interval}
@@ -4367,7 +4373,7 @@ A 100(1 - \(\alpha\))\% credible interval is an interval
 given by
 
 \[
-\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) dx = 1 - \alpha, 
+\int_{\Phi_{\alpha/2}}^{\Phi_{1 - \alpha/2}} \pi(\theta \mid \textbf{X}) d\theta = 1 - \alpha, 
 \]
 
 where \(\Phi_p\) denotes the \(p\)th quantile of the posterior
@@ -4628,7 +4634,7 @@ theory broadly, or from a more formal perspective.
 
 Let \(\hat{\theta}\) be an estimator for \(\theta\). A loss function
 associated with \(\hat{\theta}\) is denoted \(L(\hat{\theta}, \theta)\),
-where \(L(\hat{\theta}, \theta) \leq 0\) and \(L(\theta, \theta) = 0\).
+where \(L(\hat{\theta}, \theta) \geq 0\) and \(L(\theta, \theta) = 0\).
 A reasonable loss function will increase the further away
 \(\hat{\theta}\) and \(\theta\) are from each other.
 
@@ -4723,10 +4729,10 @@ We can write the risk with respect to absolute loss as
 
 \begin{align*}
     R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
-    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{I\{\theta_0 < \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y} 
+    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \int |\theta_0 - \theta| \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{I\{\theta_0 < \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
 
 Taking the derivative with respect to \(\theta_0\), and setting this
@@ -4734,10 +4740,10 @@ equal to zero we get
 
 \begin{align*}
     0 & \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
-    & = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\textbf{y}  \right) \\
-    & =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    & = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y} \\
-    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\textbf{y} & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\textbf{y}
+    & = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta  \right) \\
+    & =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    & = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
 
 (recalling that \(\int_{-\infty}^x f(y) dy = f(x)\) and
@@ -4796,12 +4802,12 @@ Note that we can rewrite the 0-1 loss function as
 
 \begin{align*}
     R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
-    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\textbf{y} \\
+    & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
     & = \int \left( 1 - \delta(\theta_0 - \theta) \right) \pi(
-    \theta \mid \textbf{y} ) d\textbf{y} \\
+    \theta \mid \textbf{y} ) d\theta  \\
     & = \int \pi(
-    \theta \mid \textbf{y} ) d\textbf{y} - \int \delta(\theta_0 - \theta) \pi(
-    \theta \mid \textbf{y})  \\
+    \theta \mid \textbf{y} ) d\theta  - \int \delta(\theta_0 - \theta) \pi(
+    \theta \mid \textbf{y}) d\theta   \\
     & = 1 - \pi(\theta_0 \mid \textbf{y})
 \end{align*}
 
@@ -4818,7 +4824,277 @@ zero gives the same result as in the discrete case.
 \hypertarget{computational-optimization}{%
 \chapter{Computational Optimization}\label{computational-optimization}}
 
-Under development\ldots{}
+Welcome to the last chapter of the course notes! There are no worked
+examples for this chapter, which is instead focused on practical
+implementation of a handful of useful algorithms, and useful
+computational techniques that you may come across in your future,
+statistical career. Go forth and compute!
+
+\hypertarget{newton-raphson}{%
+\section{Newton-Raphson}\label{newton-raphson}}
+
+Recall from the second chapter of the course notes the typical procedure
+for finding an MLE:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Find the log likelihood
+\item
+  Take a derivative with respect to the unknown parameter(s)
+\item
+  Set it equal to zero, and solve
+\end{enumerate}
+
+We previously saw that \emph{sometimes} this procedure doesn't work, in
+particular, when the support of the density function depends on our
+unknown parameters. In these cases, we noted that the MLE would be an
+order statistic. There are \emph{other} situations, however, where
+neither the MLE is neither readily found analytically nor is it an order
+statistic. In these cases, we turn to computational techniques, such as
+\textbf{Newton-Raphson}.
+
+Newton-Raphson is a root-finding algorithm, and hence useful when trying
+to maximize a function (or a likelihood!). Suppose we want to find a
+root (i.e., the value of \(x\) such that \(f(x) = 0\)) of the function
+\(f\) with derivative denoted \(f'\). Newton-Raphson takes the following
+steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Start with an initial guess \(x_0\)
+\item
+  Update your guess according to \(x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}\)
+\item
+  Repeat step 2 according to
+  \(x_n = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}\) until your guesses
+  have ``converged'' (i.e.~are very very similar)
+\end{enumerate}
+
+A maximum likelihood estimator is the root of the first derivative of
+the log-likelihood (a.k.a. the value at which the derivative of the
+log-likelihood crosses zero). This means that, for finding MLEs, the
+Newton-Raphson algorithm replaces
+\(f = \frac{\partial}{\partial \theta} \log L(\theta)\).
+
+We can visualize this process as follows:
+
+\begin{figure}
+
+{\centering \includegraphics{computation_files/figure-pdf/unnamed-chunk-1-1.pdf}
+
+}
+
+\end{figure}
+
+The equation of the tangent line to the curve \(y = f(x)\) at a point
+\(x = x_n\) is \[y = f'(x_n)(x-x_n) + f(x_n)\]
+
+\begin{figure}
+
+{\centering \includegraphics{computation_files/figure-pdf/unnamed-chunk-2-1.pdf}
+
+}
+
+\end{figure}
+
+The root of this tangent line (i.e., the place where it crosses the
+x-axis) is easy to find:
+\[0 = f'(x_n)(x-x_n) + f(x_n) \iff x = x_n - f(x_n)/f'(x_n)\]
+
+Take this root of the tangent line as our next guess, then
+repeat\ldots{}
+
+\begin{figure}
+
+{\centering \includegraphics{computation_files/figure-pdf/newton-step1-1.pdf}
+
+}
+
+\end{figure}
+
+\ldots and repeat\ldots{}
+
+\begin{figure}
+
+{\centering \includegraphics{computation_files/figure-pdf/newton-step2-1.pdf}
+
+}
+
+\end{figure}
+
+\ldots and repeat\ldots{}
+
+\begin{figure}
+
+{\centering \includegraphics{computation_files/figure-pdf/newton-step3-1.pdf}
+
+}
+
+\end{figure}
+
+\ldots and repeat\ldots{}
+
+\begin{figure}
+
+{\centering \includegraphics{computation_files/figure-pdf/newton-step4-1.pdf}
+
+}
+
+\end{figure}
+
+\ldots and repeat\ldots{}
+
+\begin{figure}
+
+{\centering \includegraphics{computation_files/figure-pdf/newton-step5-1.pdf}
+
+}
+
+\end{figure}
+
+\ldots and keep repeating until you've converged!
+
+The multivariate version of Newton-Raphson is called the
+\href{https://en.wikipedia.org/wiki/Scoring_algorithm}{Scoring
+algorithm} (also sometimes called Fisher's scoring), and is used in
+\(\texttt{R}\) to obtain estimates of logistic regression coefficients.
+
+\hypertarget{motivating-example-logistic-regression}{%
+\subsection*{Motivating Example: Logistic
+Regression}\label{motivating-example-logistic-regression}}
+
+Suppose that we observe data \((y_i, x_i)\) where the outcome \(y\) is
+binary. A natural model for these data is to assume the statistical
+model
+
+\begin{align*}
+y_i & \sim Bernoulli(p_i), \\
+\text{log} \left( \frac{p_i}{1 - p_i} \right) & = \beta_0 + \beta_1 x_i.
+\end{align*}
+
+This is a simple logistic regression model, with unknown parameters
+given by the logistic regression coefficients \(\beta_0, \beta_1\).
+Let's attempt to find MLEs for \(\beta_0\) and \(\beta_1\) analytically.
+
+Note that
+\(p_i = \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}\).
+Then the likelihood of our Bernoulli observations \(y_i\) can be written
+as
+
+\[
+L(\beta_0, \beta_1) = \prod_{i = 1}^n \left( \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right)^{y_i} \left( \frac{1}{1 + e^{\beta_0 + \beta_1 x_i}} \right)^{1 - y_i}
+\]
+
+Following the typical procedure, we log the likelihood\ldots{}
+
+\begin{align*}
+    \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ y_i \log(\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}) + (1 - y_i) \log(\frac{1}{1 + e^{\beta_0 + \beta_1 x_i}}) \right] \\
+    & = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i) - y_i \log(1 + e^{\beta_0 + \beta_1 x_i}) - \log(1 + e^{\beta_0 + \beta_1 x_i}) + y_i \log(1 + e^{\beta_0 + \beta_1 x_i})\right] \\
+    & = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i)  - \log(1 + e^{\beta_0 + \beta_1 x_i}) \right]
+\end{align*}
+
+\ldots taking the partial derivatives with respect to \(\beta_0\) and
+\(\beta_1\) we get\ldots{}
+
+\begin{align*}
+    \frac{\partial}{\partial \beta_0} \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
+    \frac{\partial}{\partial \beta_1} \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
+\end{align*}
+
+\ldots and if you try to solve the system of equations given by
+
+\begin{align*}
+    0 & \equiv \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
+    0 & \equiv \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
+\end{align*}
+
+you'll get nowhere! There is no analytical (sometimes called
+``closed-form'') solution. In this case, we'd need to use the Scoring
+algorithm to solve for the regression coefficient estimates, since we
+have more than one unknown parameter.
+
+\hypertarget{why-do-anything-analytically-if-newton-raphson-exists}{%
+\subsection*{Why do anything analytically, if Newton-Raphson
+exists?}\label{why-do-anything-analytically-if-newton-raphson-exists}}
+
+You may be wondering why you've been doing calculus/algebra the entire
+semester, when such an algorithm exists. The answer is two-fold.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Going through the steps of finding an MLE analytically helps build
+  intuition. We saw that in the vast majority of cases, maximum
+  likelihood estimators are functions of sample means. This is less
+  obvious when doing everything numerically (using an algorithm). In
+  addition to gaining insight from finding MLEs by hand, this practice
+  also gave you the opportunity to learn/use common ``tricks'' in
+  statistics, that will find their way into problems you complete down
+  the road or research you may eventually conduct.
+\item
+  Numerical optimization is \emph{slow}. For simple cases like the ones
+  we've seen in class, numerical optimization would techniques like
+  Newton-Raphson would run relatively quickly. However, for more complex
+  likelihoods with many unknown parameters, various optimization
+  techniques can be so slow as to be computationally prohibitive. Even
+  with continual improvements in computational power (and improvements
+  in the algorithms themselves), computational speed is an important
+  consideration when conducting statistical research or developing new
+  methodology. If it takes someone two weeks to fit their regression
+  model using numerical optimization, for example, that person may never
+  fit a regression model ever again, or give up entirely. Especially
+  when considering \emph{who} has access to computational power, this
+  can become an equity issue. If you can solve something analytically,
+  \textbf{do it}. It's significantly faster in the long-term, even it
+  takes you some time to do the calculus/algebra.
+\end{enumerate}
+
+\hypertarget{simulation-studies}{%
+\section{Simulation Studies}\label{simulation-studies}}
+
+Sometimes proofs are hard. In such cases (and more generally), it can
+often be useful to ``test'' or observe properties of estimators in a
+computational setting, rather than in a rigorous mathematical context.
+This is where simulation studies come into play, and if you eventually
+find yourself conducting statistical research, knowing how to conduct a
+well-designed, reproducible, simulation study is an incredibly important
+skill.
+
+The general idea of simulation study is to generate realistic settings
+(data) that could be observed in the real world, in order to compare
+properties of various estimators and their behavior in scenarios where
+the ``truth'' is \emph{known} (because \emph{you} generated the truth!).
+Steps include:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Determine your simulation settings (different parameter values, sample
+  sizes, etc.)
+\item
+  Generate \emph{many} data sets for each setting
+\item
+  Compute your estimator / implement your method for each data set
+\item
+  Record the relevant property of that estimator / method for each data
+  set
+\item
+  Summarize your results across data sets and simulation settings
+\end{enumerate}
+
+This can be a \emph{great} way to get a feel for how certain
+estimators/methods behave in different settings without needing to
+rigorously prove something. Additionally, it can be used to
+\emph{inform} more rigorous proofs down the line; if we can better
+understand how estimators/methods behave, we may be able to relate that
+behavior to existing proofs and build upon them!
+
+\hypertarget{gibbs-samplers}{%
+\section{Gibbs Samplers}\label{gibbs-samplers}}
+
+Not everything is conjugate.
 
 \bookmarksetup{startatroot}
 
