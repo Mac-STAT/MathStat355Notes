@@ -22,6 +22,8 @@ Newton-Raphson is a root-finding algorithm, and hence useful when trying to maxi
 
 3.  Repeat step 2 according to $x_n = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}$ until your guesses have "converged" (i.e. are very very similar)
 
+A maximum likelihood estimator is the root of the first derivative of the log-likelihood (a.k.a. the value at which the derivative of the log-likelihood crosses zero). This means that, for finding MLEs, the Newton-Raphson algorithm replaces $f = \frac{\partial}{\partial \theta} \log L(\theta)$.
+
 We can visualize this process as follows:
 
 ```{r,echo=FALSE,fig.align='center',fig.width=3.5,fig.height=2.2}
@@ -208,7 +210,7 @@ you'll get nowhere! There is no analytical (sometimes called "closed-form") solu
 
 ### Why do anything analytically, if Newton-Raphson exists? {.unnumbered .unlisted}
 
-You may be wondering why I've forced you to do calculus/algebra the entire semester, when such an algorithm exists. The answer is two-fold.
+You may be wondering why you've been doing calculus/algebra the entire semester, when such an algorithm exists. The answer is two-fold.
 
 1.  Going through the steps of finding an MLE analytically helps build intuition. We saw that in the vast majority of cases, maximum likelihood estimators are functions of sample means. This is less obvious when doing everything numerically (using an algorithm). In addition to gaining insight from finding MLEs by hand, this practice also gave you the opportunity to learn/use common "tricks" in statistics, that will find their way into problems you complete down the road or research you may eventually conduct.
 
@@ -216,6 +218,22 @@ You may be wondering why I've forced you to do calculus/algebra the entire semes
 
 ## Simulation Studies
 
-Sometimes proofs are hard.
+Sometimes proofs are hard. In such cases (and more generally), it can often be useful to "test" or observe properties of estimators in a computational setting, rather than in a rigorous mathematical context. This is where simulation studies come into play, and if you eventually find yourself conducting statistical research, knowing how to conduct a well-designed, reproducible, simulation study is an incredibly important skill.
+
+The general idea of simulation study is to generate realistic settings (data) that could be observed in the real world, in order to compare properties of various estimators and their behavior in scenarios where the "truth" is *known* (because *you* generated the truth!). Steps include:
+
+1.  Determine your simulation settings (different parameter values, sample sizes, etc.)
+
+2.  Generate *many* data sets for each setting
+
+3.  Compute your estimator / implement your method for each data set
+
+4.  Record the relevant property of that estimator / method for each data set
+
+5.  Summarize your results across data sets and simulation settings
+
+This can be a *great* way to get a feel for how certain estimators/methods behave in different settings without needing to rigorously prove something. Additionally, it can be used to *inform* more rigorous proofs down the line; if we can better understand how estimators/methods behave, we may be able to relate that behavior to existing proofs and build upon them!
 
 ## Gibbs Samplers
+
+Not everything is conjugate.

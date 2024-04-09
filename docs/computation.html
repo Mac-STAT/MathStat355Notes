@@ -228,6 +228,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Update your guess according to <span class="math inline">\(x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}\)</span></p></li>
 <li><p>Repeat step 2 according to <span class="math inline">\(x_n = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}\)</span> until your guesses have “converged” (i.e.&nbsp;are very very similar)</p></li>
 </ol>
+<p>A maximum likelihood estimator is the root of the first derivative of the log-likelihood (a.k.a. the value at which the derivative of the log-likelihood crosses zero). This means that, for finding MLEs, the Newton-Raphson algorithm replaces <span class="math inline">\(f = \frac{\partial}{\partial \theta} \log L(\theta)\)</span>.</p>
 <p>We can visualize this process as follows:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -279,6 +280,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>…and repeat…</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -288,6 +290,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>…and repeat…</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -297,7 +300,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>…until you’ve converged!</p>
+<p>…and keep repeating until you’ve converged!</p>
+<p>The multivariate version of Newton-Raphson is called the <a href="https://en.wikipedia.org/wiki/Scoring_algorithm">Scoring algorithm</a> (also sometimes called Fisher’s scoring), and is used in <span class="math inline">\(\texttt{R}\)</span> to obtain estimates of logistic regression coefficients.</p>
 <section id="motivating-example-logistic-regression" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="motivating-example-logistic-regression">Motivating Example: Logistic Regression</h3>
 <p>Suppose that we observe data <span class="math inline">\((y_i, x_i)\)</span> where the outcome <span class="math inline">\(y\)</span> is binary. A natural model for these data is to assume the statistical model</p>
@@ -326,17 +330,33 @@ L(\beta_0, \beta_1) = \prod_{i = 1}^n \left( \frac{e^{\beta_0 + \beta_1 x_i}}{1 
     0 &amp; \equiv \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
     0 &amp; \equiv \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
 \end{align*}\]</span>
-<p>you’ll get nowhere! There is no analytical (sometimes called “closed-form”) solution.</p>
+<p>you’ll get nowhere! There is no analytical (sometimes called “closed-form”) solution. In this case, we’d need to use the Scoring algorithm to solve for the regression coefficient estimates, since we have more than one unknown parameter.</p>
 </section>
 <section id="why-do-anything-analytically-if-newton-raphson-exists" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="why-do-anything-analytically-if-newton-raphson-exists">Why do anything analytically, if Newton-Raphson exists?</h3>
+<p>You may be wondering why you’ve been doing calculus/algebra the entire semester, when such an algorithm exists. The answer is two-fold.</p>
+<ol type="1">
+<li><p>Going through the steps of finding an MLE analytically helps build intuition. We saw that in the vast majority of cases, maximum likelihood estimators are functions of sample means. This is less obvious when doing everything numerically (using an algorithm). In addition to gaining insight from finding MLEs by hand, this practice also gave you the opportunity to learn/use common “tricks” in statistics, that will find their way into problems you complete down the road or research you may eventually conduct.</p></li>
+<li><p>Numerical optimization is <em>slow</em>. For simple cases like the ones we’ve seen in class, numerical optimization would techniques like Newton-Raphson would run relatively quickly. However, for more complex likelihoods with many unknown parameters, various optimization techniques can be so slow as to be computationally prohibitive. Even with continual improvements in computational power (and improvements in the algorithms themselves), computational speed is an important consideration when conducting statistical research or developing new methodology. If it takes someone two weeks to fit their regression model using numerical optimization, for example, that person may never fit a regression model ever again, or give up entirely. Especially when considering <em>who</em> has access to computational power, this can become an equity issue. If you can solve something analytically, <strong>do it</strong>. It’s significantly faster in the long-term, even it takes you some time to do the calculus/algebra.</p></li>
+</ol>
 </section>
 </section>
 <section id="simulation-studies" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="simulation-studies"><span class="header-section-number">10.2</span> Simulation Studies</h2>
+<p>Sometimes proofs are hard. In such cases (and more generally), it can often be useful to “test” or observe properties of estimators in a computational setting, rather than in a rigorous mathematical context. This is where simulation studies come into play, and if you eventually find yourself conducting statistical research, knowing how to conduct a well-designed, reproducible, simulation study is an incredibly important skill.</p>
+<p>The general idea of simulation study is to generate realistic settings (data) that could be observed in the real world, in order to compare properties of various estimators and their behavior in scenarios where the “truth” is <em>known</em> (because <em>you</em> generated the truth!). Steps include:</p>
+<ol type="1">
+<li><p>Determine your simulation settings (different parameter values, sample sizes, etc.)</p></li>
+<li><p>Generate <em>many</em> data sets for each setting</p></li>
+<li><p>Compute your estimator / implement your method for each data set</p></li>
+<li><p>Record the relevant property of that estimator / method for each data set</p></li>
+<li><p>Summarize your results across data sets and simulation settings</p></li>
+</ol>
+<p>This can be a <em>great</em> way to get a feel for how certain estimators/methods behave in different settings without needing to rigorously prove something. Additionally, it can be used to <em>inform</em> more rigorous proofs down the line; if we can better understand how estimators/methods behave, we may be able to relate that behavior to existing proofs and build upon them!</p>
 </section>
 <section id="gibbs-samplers" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="gibbs-samplers"><span class="header-section-number">10.3</span> Gibbs Samplers</h2>
+<p>Not everything is conjugate.</p>
 
 
 </section>
