@@ -236,4 +236,4 @@ This can be a *great* way to get a feel for how certain estimators/methods behav
 
 ## Gibbs Samplers
 
-Not everything is conjugate.
+Not everything is conjugate. More to come soon.
