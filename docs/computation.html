@@ -356,7 +356,23 @@ L(\beta_0, \beta_1) = \prod_{i = 1}^n \left( \frac{e^{\beta_0 + \beta_1 x_i}}{1 
 </section>
 <section id="gibbs-samplers" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="gibbs-samplers"><span class="header-section-number">10.3</span> Gibbs Samplers</h2>
-<p>Not everything is conjugate. More to come soon.</p>
+<p>Not everything is conjugate. In cases where we don’t have conjugate priors, posterior distributions may not have closed-form, analytical pdfs, and instead we rely on Markov-chain Monte-Carlo (MCMC) algorithms (or Laplace approximations) to generate samples from posteriors.</p>
+<p>As noted in the Bayes chapter of our course notes, <a href="https://www.bayesrulesbook.com/">Bayes Rules!</a> is a great place to go for an introduction to Bayesian statistics. Here, we’ll talk through one (classical) example of an MCMC approach to posterior inference; Gibbs Samplers.</p>
+<p>The gist of Gibbs Sampling is that, when we have more than one unknown parameter, we can obtain the <em>joint</em> posterior distribution for all parameters by updating our guesses about each parameter, one at a time. This involves working with what are typically called <em>full conditionals</em> (the distribution of each parameter <em>conditional on everything else</em>).</p>
+<p>The Gibbs Sampling algorithm is as follows:</p>
+<ol type="1">
+<li><p>Choose initial values for each unknown parameter, <span class="math inline">\(\theta_1^{(0)}\)</span>, <span class="math inline">\(\theta_2^{(0)}\)</span>, …, <span class="math inline">\(\theta_p^{(0)}\)</span></p></li>
+<li><p>Sample <span class="math inline">\(\theta_{1}^{(0)} \sim \pi(\theta_{1}^{(0)} \mid \theta_{2}^{(0)}, \dots, \theta_{p}^{(0)},\textbf{y})\)</span></p></li>
+<li><p>Sample <span class="math inline">\(\theta_{2}^{(0)} \sim \pi(\theta_{2}^{(0)} \mid, \theta_{1}^{(0)}, \theta_{3}^{(0)}, \dots, \theta_{p}^{(0)},\textbf{y})\)</span></p></li>
+<li><p>…</p></li>
+<li><p>Sample <span class="math inline">\(\theta_{p}^{(0)} \sim \pi(\theta_{p}^{(0)} \mid \theta_{1}^{(0)}, \dots, \theta_{p-1}^{(0)},\textbf{y})\)</span></p></li>
+<li><p>Repeat many times!</p></li>
+</ol>
+<p>It feels almost magical, but the end result is that we obtain many samples from the joint posterior distribution for all unknown parameters! MCMC methods such as Gibbs Samplers are what is known as “exact” methods for conducting Bayesian inference, because so long as sampling goes according to plan*, the posterior draws will be from the exactly correct, joint posterior distribution. This is opposed to Laplace approximation techniques which are, by definition, “approximate.”</p>
+<p>*Let’s define “according to plan.” Sometimes algorithms can go wrong. We saw an example of this with Newton-Raphson, where if we pick a terrible starting value, the algorithm can sometimes diverge. With Gibbs Samplers, we should be careful of checking convergence diagnostics. A visual tool for this is called a <strong>Trace Plot</strong>. Trace plots show the values of parameters that are being sampled across iterations. The values across iterations are referred to as <strong>chains</strong>.</p>
+<p>Here are some examples of chains that have converged:</p>
+<p><img src="images/traceplots.png" class="img-fluid"></p>
+<p>There are <em>many</em> other convergence diagnostics you will need to consider if you end up doing research involving MCMC algorithms. A recent research paper on convergence diagnostics that is generally accepted now as best practice among Bayesian statisticians can be found <a href="https://arxiv.org/pdf/1903.08008.pdf">here</a>.</p>
 
 
 </section>
