@@ -366,7 +366,7 @@ L(\beta_0, \beta_1) = \prod_{i = 1}^n \left( \frac{e^{\beta_0 + \beta_1 x_i}}{1 
 <li><p>Sample <span class="math inline">\(\theta_{2}^{(0)} \sim \pi(\theta_{2}^{(0)} \mid, \theta_{1}^{(0)}, \theta_{3}^{(0)}, \dots, \theta_{p}^{(0)},\textbf{y})\)</span></p></li>
 <li><p>…</p></li>
 <li><p>Sample <span class="math inline">\(\theta_{p}^{(0)} \sim \pi(\theta_{p}^{(0)} \mid \theta_{1}^{(0)}, \dots, \theta_{p-1}^{(0)},\textbf{y})\)</span></p></li>
-<li><p>Repeat many times!</p></li>
+<li><p>Repeat many times, always sampling new observations conditional on your most recent guess (iteration) for each parameter!</p></li>
 </ol>
 <p>It feels almost magical, but the end result is that we obtain many samples from the joint posterior distribution for all unknown parameters! MCMC methods such as Gibbs Samplers are what is known as “exact” methods for conducting Bayesian inference, because so long as sampling goes according to plan*, the posterior draws will be from the exactly correct, joint posterior distribution. This is opposed to Laplace approximation techniques which are, by definition, “approximate.”</p>
 <p>*Let’s define “according to plan.” Sometimes algorithms can go wrong. We saw an example of this with Newton-Raphson, where if we pick a terrible starting value, the algorithm can sometimes diverge. With Gibbs Samplers, we should be careful of checking convergence diagnostics. A visual tool for this is called a <strong>Trace Plot</strong>. Trace plots show the values of parameters that are being sampled across iterations. The values across iterations are referred to as <strong>chains</strong>.</p>
