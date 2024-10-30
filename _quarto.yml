@@ -3,13 +3,13 @@ project:
   output-dir: docs
 
 book:
-  title: "MATH/STAT 455: Mathematical Statistics"
-  output-file: "math-stat-455"
+  title: "MATH/STAT 355: Statistical Theory"
+  output-file: "math-stat-355"
   author: "Taylor Okonek"
   date: "12/7/2023"
   search: true
   repo-url: https://github.com/taylorokonek/MathematicalStatistics/
-  site-url: https://math-stat-455.com
+  site-url: https://math-stat-355.com
   downloads: [pdf]
   sidebar:
     style: docked
@@ -28,7 +28,7 @@ book:
     - bayes.qmd
     - decision.qmd
     - computation.qmd
-    - references.qmd
+    #- references.qmd
 
 bibliography: references.bib
 
@@ -43,6 +43,7 @@ format:
   pdf:
     documentclass: scrreprt
     keep-tex: true
+
 
 editor: visual
 

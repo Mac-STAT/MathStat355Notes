@@ -1,6 +1,8 @@
-# Welcome to Mathematical Statistics! {.unnumbered}
+# Welcome to Statistical Theory! {.unnumbered}
 
-This book contains the course notes for *MATH/STAT 455:* *Mathematical Statistics* at Macalester College, as taught by Prof. [Taylor Okonek](https://taylorokonek.github.io/). These notes draw from course notes created by Prof. [Kelsey Grinde](https://kegrinde.github.io/), and from the course textbook, *An Introduction to Mathematical Statistics and Its Applications* by Richard Larsen and Morris Marx (6th Edition). Each chapter will contain (at a minimum):
+This book contains the course notes for *MATH/STAT 355:* *Statistical Theory\** at Macalester College, as taught by Prof. [Taylor Okonek](https://taylorokonek.github.io/). These notes draw from reading guides created by Prof. [Kelsey Grinde](https://kegrinde.github.io/), and a little bit from the textbook, *An Introduction to Mathematical Statistics and Its Applications* by Richard Larsen and Morris Marx (6th Edition). As of Spring 2025, this course no longer requires a textbook, and relies heavily on these course notes instead.
+
+Each chapter of the course notes will contain (at a minimum):
 
 1.  Learning Objectives
 
@@ -12,9 +14,11 @@ This book contains the course notes for *MATH/STAT 455:* *Mathematical Statistic
 
 5.  Worked Examples
 
-**I will be editing and adding to these notes throughout Spring 2024, so please check consistently for updates!**
+**I will be editing and adding to these notes throughout Spring 2025, so please check consistently for updates!**
 
 If you find any typos or have other questions, please email [tokonek\@macalester.edu](mailto:tokonek@macalester.edu).
+
+\* *MATH/STAT 355: Statistical Theory* went under the title *MATH/STAT 455: Mathematical Statistics* prior to Spring 2025. The course content is largely similar, the differences primarily being the structure of the course and not the content itself.
 
 ```         
 ```
