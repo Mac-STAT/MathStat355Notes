@@ -4,21 +4,20 @@ This book contains the course notes for *MATH/STAT 355:* *Statistical Theory\** 
 
 Each chapter of the course notes will contain (at a minimum):
 
-1.  Learning Objectives
+1.  Topic Introduction
 
-2.  Reading Guide
+2.  Learning Objectives
 
-3.  Definitions
+3.  Concept Questions
 
-4.  Theorems
+4.  Definitions
 
-5.  Worked Examples
+5.  Theorems
+
+6.  Worked Examples
 
 **I will be editing and adding to these notes throughout Spring 2025, so please check consistently for updates!**
 
 If you find any typos or have other questions, please email [tokonek\@macalester.edu](mailto:tokonek@macalester.edu).
 
 \* *MATH/STAT 355: Statistical Theory* went under the title *MATH/STAT 455: Mathematical Statistics* prior to Spring 2025. The course content is largely similar, the differences primarily being the structure of the course and not the content itself.
-
-```         
-```

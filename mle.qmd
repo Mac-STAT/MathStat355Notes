@@ -90,11 +90,7 @@ By the end of this chapter, you should be able to...
 
 -   Explain (in plain English) why maximum likelihood estimation is an intuitive approach to estimating unknown parameters using a combination of (1) observed data, and (2) a distributional assumption
 
-## Reading Guide
-
-Associated Readings: Chapter 5 (Introduction through Example 5.2.5)
-
-### Reading Questions
+## Concept Questions
 
 1.  What is the intuition behind the maximum likelihood estimation (MLE) approach?
 
@@ -172,7 +168,6 @@ $$
 
 Then the log-likelihood is given by
 
-```{=tex}
 \begin{align*} 
 \log(L(p)) & = \log \left[ \prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i} \right] \\ 
 & = \sum_{i = 1}^n \log \left[p^{x_i} (1-p)^{1 - x_i} \right] \\
@@ -181,10 +176,9 @@ Then the log-likelihood is given by
 & = \log(p)\sum_{i = 1}^n x_i  + \log(1-p) \sum_{i = 1}^n (1 - x_i)  \\
 & = \log(p)\sum_{i = 1}^n x_i  + \log(1-p)  (n - \sum_{i = 1}^n x_i)
 \end{align*}
-```
+
 We can take the derivative of the log-likelihood with respect to $p$, and set it equal to zero...
 
-```{=tex}
 \begin{align*} 
 \frac{\partial}{\partial p} \log(L(p)) & = \frac{\partial}{\partial p} \left[ \log(p)\sum_{i = 1}^n x_i  + \log(1-p)  (n - \sum_{i = 1}^n x_i) \right] \\
 & = \frac{\sum_{i = 1}^n x_i }{p} - \frac{n - \sum_{i = 1}^n x_i}{1-p} \\
@@ -195,7 +189,7 @@ We can take the derivative of the log-likelihood with respect to $p$, and set it
 \sum_{i = 1}^n x_i & = pn \\
 \frac{1}{n} \sum_{i = 1}^n x_i & = p
 \end{align*}
-```
+
 and by solving for $p$, we get that the MLE of $p$ is equal to $\frac{1}{n}\sum_{i = 1}^n x_i$. We will *often* see that the MLEs of parameters are functions of sample averages (in this case, just the identity function!).
 
 </details>
@@ -214,26 +208,23 @@ for $-\infty < x < \infty, \ -\infty < \mu < \infty,$ and $\sigma^2 > 0$. Find t
 
 Since we are dealing with a likelihood with two parameters, we'll need to solve a *system* of equations to obtain the MLEs for $\mu$ and $\sigma^2$.
 
-```{=tex}
 \begin{align*}
     \log(L(\mu, \sigma^2)) & = \log( \prod_{i = 1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp(-\frac{1}{2\sigma^2} (x_i - \mu)^2) ) \\
     & = \sum_{i = 1}^n \left[ \log(\frac{1}{\sqrt{2\pi \sigma^2}})  - \frac{1}{2\sigma^2} (x_i - \mu)^2 \right] \\
     & = \sum_{i = 1}^n \left[ -\frac{1}{2} \log(2 \pi \sigma^2) - \frac{1}{2\sigma^2} (x_i - \mu)^2 \right] \\
     & = \frac{-n}{2} \log(2\pi \sigma^2) - \frac{1}{2\sigma^2} \sum_{i = 1}^n (x_i - \mu)^2
 \end{align*}
-```
+
 Now we need to find $\frac{\partial}{\partial \sigma^2}\log(L(\mu, \sigma^2))$ and $\frac{\partial}{\partial \mu}\log(L(\mu, \sigma^2))$. Let's make our lives a little bit easier by setting $\sigma^2 \equiv \theta$ (so we don't trip ourselves up with the exponent). We get
 
-```{=tex}
 \begin{align*}
     \frac{\partial}{\partial \theta}\log(L(\mu, \theta)) & = \frac{\partial}{\partial \theta} \left(\frac{-n}{2} \log(2\pi \theta) - \frac{1}{2\theta} \sum_{i = 1}^n (x_i - \mu)^2 \right)\\
     & = \frac{-2\pi n}{4 \pi \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2} \\
     & = \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2}
 \end{align*}
-```
+
 and
 
-```{=tex}
 \begin{align*}
     \frac{\partial}{\partial \mu}\log(L(\mu, \theta)) & = \frac{\partial}{\partial \mu} \left(\frac{-n}{2} \log(2\pi \theta) - \frac{1}{2\theta} \sum_{i = 1}^n (x_i - \mu)^2 \right)\\
     & = \frac{\partial}{\partial \mu} \left( -\frac{1}{2\theta} \sum_{i = 1}^n (x_i^2 - 2 \mu x_i + \mu^2)\right) \\
@@ -242,27 +233,24 @@ and
     & = \frac{\partial}{\partial \mu} \left(   \frac{\sum_{i = 1}^n x_i}{\theta} \mu - \frac{n}{2\theta}\mu^2  \right) \\
     & = \frac{\sum_{i = 1}^n x_i}{\theta} - \frac{n}{\theta} \mu
 \end{align*}
-```
+
 We now have the following system of equations to solve:
 
-```{=tex}
 \begin{align*}
     0 & \equiv \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2} \\
     0 & \equiv \frac{\sum_{i = 1}^n x_i}{\theta} - \frac{n}{\theta} \mu
 \end{align*}
-```
+
 Typically, we solve one of the equations for *one* of the parameters, plug that into the other equation, and then go from there. We'll start by solving the second equation for $\mu$.
 
-```{=tex}
 \begin{align*}
     0 & = \frac{\sum_{i = 1}^n x_i}{\theta} - \frac{n}{\theta} \mu \\
     \frac{n}{\theta} \mu & = \frac{\sum_{i = 1}^n x_i}{\theta} \\
     \mu & = \frac{1}{n} \sum_{i = 1}^n x_i
 \end{align*}
-```
+
 Well that's convenient! We already have the MLE for $\mu$ as being just the sample average. Plugging this into the first equation in our system we obtain
 
-```{=tex}
 \begin{align*}
     0 & = \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \mu)^2 }{2 \theta^2} \\
     0 & = \frac{-n}{2 \theta} + \frac{\sum_{i = 1}^n (x_i - \frac{1}{n} \sum_{i = 1}^n x_i )^2 }{2 \theta^2} \\
@@ -271,7 +259,7 @@ Well that's convenient! We already have the MLE for $\mu$ as being just the samp
     \theta & = \frac{1}{n} \sum_{i = 1}^n (x_i - \frac{1}{n} \sum_{i = 1}^n x_i )^2] \\
     \theta & = \frac{1}{n} \sum_{i = 1}^n (x_i - \bar{x} )^2
 \end{align*}
-```
+
 where $\bar{x} = \frac{1}{n} \sum_{i = 1}^n x_i$. And so finally, we have that the MLE for $\sigma^2$ is given by $\frac{1}{n} \sum_{i = 1}^n (x_i - \bar{x} )^2$, and the MLE for $\mu$ is given by $\bar{x}$!
 
 </details>

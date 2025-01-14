@@ -48,11 +48,7 @@ By the end of this chapter, you should be able to...
 -   Distinguish between finite sample properties and asymptotic properties of estimators
 -   Prove (using Chebyshev's inequality) whether or not an estimator is consistent
 
-## Reading Guide
-
-Associated Readings: Chapter 5, Section 5.7
-
-### Reading Questions
+## Concept Questions
 
 1.  What is the distinction between a fixed sample property and an asymptotic property of an estimator?
 
@@ -110,7 +106,6 @@ $$
 
 Let $\epsilon > 0$. Then
 
-```{=tex}
 \begin{align*}
 \sigma^2 & = \text{Var}(W) \\
 & = \int_{-\infty}^\infty (w-\mu)^2 f_W(w)dw \\
@@ -121,15 +116,14 @@ Let $\epsilon > 0$. Then
 & = \epsilon^2 \int_{|w-\mu|\ge \epsilon} f_W(w)dw\\
 & = \epsilon^2 P(|W-\mu| \ge \epsilon)
 \end{align*}
-```
+
 and rearranging yields
 
-```{=tex}
 \begin{align*}
 \sigma^2 & \geq \epsilon^2 P(|W-\mu| \ge \epsilon) \\
 P(|W-\mu| \geq \epsilon) & \leq \frac{\sigma^2}{\epsilon^2}
 \end{align*}
-```
+
 as desired.
 
 **Corollary 1:** If $\hat{\theta}_n$ is an unbiased estimator for $\theta$ and $\underset{n \to \infty}{\text{lim}} Var(\hat{\theta}_n) = 0$, then $\hat{\theta}_n$ is consistent for $\theta$. (You'll prove this corollary on a problem set!)
@@ -148,13 +142,12 @@ Note that the second corollary is a bit stronger than the first one, in that the
 
 The MLE for $\sigma^2$ is given by $\frac{1}{n} \sum_{i = 1}^n (X_i - \overline{X})^2$ (see the MLE section of the course notes, worked example problem 2), and has expectation $\left( \frac{n-1}{n} \right)\sigma^2$ (see the Properties section of the course notes, worked example problem 6). To show that this estimator is asymptotically unbiased, note that we have
 
-```{=tex}
 \begin{align*}
     \underset{n\to \infty}{\text{lim}} E[\hat{\sigma^2}_{MLE}] & = \underset{n\to \infty}{\text{lim}} \left( \frac{n-1}{n} \right) \sigma^2 \\
     & = \left( 1 \right) \sigma^2 \\
     & = \sigma^2
 \end{align*}
-```
+
 and therefore, the MLE for $\sigma^2$ is asymptotically unbiased.
 
 </details>
@@ -167,7 +160,6 @@ and therefore, the MLE for $\sigma^2$ is asymptotically unbiased.
 
 To prove that $\hat{\theta}_{MLE}$ is consistent, we must first show that $\hat{\theta}_{MLE}$ is (either) unbiased or asymptotically unbiased, and then we must show that the variance of $\hat{\theta}_{MLE}$ tends to zero as $n \to \infty$. To begin, note that
 
-```{=tex}
 \begin{align*}
     E\left[\hat{\theta}_{MLE}\right] & = \int_{0}^\theta y f_{Y_{(n)}} (y \mid \theta) dy \\
     & = \int_{0}^\theta y \left( \frac{n}{\theta^n} y^{n-1} \right) dy \\
@@ -176,12 +168,11 @@ To prove that $\hat{\theta}_{MLE}$ is consistent, we must first show that $\hat{
     & = \frac{n}{\theta^n} \left( \frac{\theta^{n + 1}}{n + 1} \right) \\
     & = \left( \frac{n}{n + 1} \right) \theta
 \end{align*}
-```
+
 and so $\hat{\theta}_{MLE}$ is biased. It is, however, asymptotically *unbiased*. Note that $\left( \frac{n}{n + 1} \right) \overset{n \to \infty}{\to} 1$, and therefore $E\left[\hat{\theta}_{MLE}\right] \overset{n \to \infty}{\to} \theta$.
 
 All that's left is to show that $Var\left[\hat{\theta}_{MLE}\right] \overset{n \to \infty}{\to} 0$. We can write
 
-```{=tex}
 \begin{align*}
         E\left[Y_{(n)}^2\right] & = \int_0^\theta y^2 \frac{ny^{n-1}}{\theta^n} dy \\
         & = \frac{n}{\theta^n} \int_0^\theta y^{n + 1} dy \\
@@ -189,10 +180,9 @@ All that's left is to show that $Var\left[\hat{\theta}_{MLE}\right] \overset{n \
         & = \frac{n}{\theta^n} \left( \frac{\theta^{n + 2}}{n + 2}\right) \\
         & = \left( \frac{n}{n + 2} \right) \theta^2
     \end{align*}
-```
+
 and therefore
 
-```{=tex}
 \begin{align*}
     \underset{n \to \infty}{\text{lim}} Var\left[\hat{\theta}_{MLE}\right] & = \underset{n \to \infty}{\text{lim}} \left[ E\left[Y_{(n)}^2\right] - E\left[Y_{(n)}\right]^2 \right]\\
     & = \underset{n \to \infty}{\text{lim}} \left[ \left( \frac{n}{n + 2} \right) \theta^2 - \left( \frac{n}{n + 1} \right)^2 \theta^2 \right] \\
@@ -204,7 +194,7 @@ and therefore
     & = \theta^2 \underset{n \to \infty}{\text{lim}} \left[  \frac{n}{n^3 + 4n^2  + 5n + 2} \right] \\
     & = 0
 \end{align*}
-```
+
 where the last term goes to zero because $\frac{n}{n^3} \to 0$ as $n \to \infty$. Therefore, $\hat{\theta}_{MLE}$ is a consistent estimator for $\theta$.
 
 </details>

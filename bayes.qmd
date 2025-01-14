@@ -59,11 +59,7 @@ By the end of this chapter, you should be able to...
 -   Evaluate the properties of posterior means, medians, etc.
 -   Articulate the impact of the choice of prior distribution on Bayesian estimation
 
-## Reading Guide
-
-Associated Readings: Chapter 5, Section 5.8 (through Example 5.8.4)
-
-### Reading Questions
+## Concept Questions
 
 1.  What is the difference between the Bayesian and Frequentist philosophies?
 2.  What are the typical steps to deriving a posterior distribution?
@@ -139,14 +135,13 @@ None for this chapter, other than Bayes' theorem, which doesn't really count as 
 
 We can write,
 
-```{=tex}
 \begin{align*}
     \pi(\theta \mid X_1, \dots, X_n) & \propto \left( \prod_{i = 1}^n f(x_i) \right) \pi(\theta) \\
     & = \left( \prod_{i = 1}^n \theta^{x_i} (1 - \theta)^{1 - x_i} \right) \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
     & = \theta^{\sum_{i = 1}^n x_i} (1 - \theta)^{n - \sum_{i = 1}^n x_i}  \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
     & \propto \theta^{\sum_{i = 1}^n x_i + \alpha - 1} (1 - \theta)^{n - \sum_{i = 1}^n x_i + \beta - 1}
 \end{align*}
-```
+
 where we recognize the kernel of a $Beta(\sum_{i = 1}^n X_i + \alpha, n - \sum_{i = 1}^n X_i + \beta)$ distribution, and therefore this is the posterior distribution for $\theta$.
 
 </details>
@@ -173,14 +168,13 @@ $$
 
 We can write,
 
-```{=tex}
 \begin{align*}
     \hat{\theta} & = \frac{\sum_{i = 1}^n X_i + \alpha}{\alpha + \beta + n} \\
     & = \frac{\sum_{i = 1}^n X_i }{\alpha + \beta + n} + \frac{\alpha}{\alpha + \beta + n} \\
     & = \frac{\frac{n}{n} \sum_{i = 1}^n X_i}{\alpha + \beta + n} + \frac{\frac{\alpha (\alpha + \beta)}{\alpha + \beta}}{\alpha + \beta + n} \\
     & = \left( \frac{n}{\alpha + \beta + n} \right) \overline{X} + \left( \frac{\alpha + \beta}{\alpha + \beta + n}\right) \left( \frac{\alpha}{\alpha + \beta}\right)
 \end{align*}
-```
+
 and so we can see that the posterior mean is a *weighted average* of the prior mean and the MLE (in this case, the sample mean)!
 
 </details>
@@ -193,7 +187,6 @@ and so we can see that the posterior mean is a *weighted average* of the prior m
 
 We can write,
 
-```{=tex}
 \begin{align*}
     \pi(\lambda \mid X_1, \dots, X_n) \\
     & \propto \left( \prod_{i = 1}^n f(x_i) \right) \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda} \\
@@ -202,7 +195,7 @@ We can write,
     & \propto \lambda^{\sum_{i = 1}^n x_i + \alpha - 1} e^{-n\lambda - \beta \lambda} \\
     & = \lambda^{\sum_{i = 1}^n x_i + \alpha - 1} e^{-(n + \beta)\lambda} 
 \end{align*}
-```
+
 where we recognize the kernel of a $Gamma(\sum_{i = 1}^n X_i + \alpha, n + \beta)$ distribution, and therefore this is the posterior distribution for $\lambda$.
 
 </details>
@@ -215,11 +208,10 @@ where we recognize the kernel of a $Gamma(\sum_{i = 1}^n X_i + \alpha, n + \beta
 
 We know that the expectation of a $Gamma(a, b)$ distribution is given by $\frac{a}{b}$, and so we have
 
-```{=tex}
 \begin{align*}
     \hat{\lambda} = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta}
 \end{align*}
-```
+
 </details>
 
 **Problem 6:** Write the posterior mean from Problem 5 as a function of the MLE, $\hat{\lambda}_{MLE} = \overline{X}$, and the *prior* mean for $\lambda$. What do you notice?
@@ -230,14 +222,13 @@ We know that the expectation of a $Gamma(a, b)$ distribution is given by $\frac{
 
 We can write,
 
-```{=tex}
 \begin{align*}
     \hat{\lambda} & = \frac{\sum_{i = 1}^n X_i + \alpha}{n + \beta} \\
     & = \frac{\sum_{i = 1}^n X_i}{n + \beta} + \frac{\alpha}{n + \beta} \\
     & = \frac{n \overline{X}}{n + \beta} + \frac{\frac{\beta\alpha}{\beta}}{n + \beta} \\
     & = \left( \frac{n}{n + \beta}  \right) \overline{X} + \left( \frac{\beta}{n + \beta} \right) \frac{\alpha}{\beta}
 \end{align*}
-```
+
 and so we can see (again) that the posterior mean is a *weighted average* of the prior mean and the MLE (in this case, the sample mean)!
 
 </details>

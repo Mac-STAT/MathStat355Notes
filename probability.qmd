@@ -6,7 +6,7 @@ editor_options:
 
 # Probability: A Brief Review
 
-*MATH/STAT 455* builds directly on topics covered in *MATH/STAT 354: Probability*. You're not expected to perfectly remember everything from *Probability*, but you will need to have sufficient facility with the following topics covered in this review Chapter in order to grasp the majority of concepts covered in *MATH/STAT 455*.
+*MATH/STAT 355* builds directly on topics covered in *MATH/STAT 354: Probability*. You're not expected to perfectly remember everything from *Probability*, but you will need to have sufficient facility with the following topics covered in this review Chapter in order to grasp the majority of concepts covered in *MATH/STAT 355*.
 
 ## Learning Objectives
 
@@ -18,17 +18,17 @@ By the end of this chapter, you should be able to...
 
 -   Define the moment generating function and use it to find moments or identify pdfs
 
-## Reading Guide
+-   Derive pdfs of transformations of continuous random variables
 
-Associated Readings: Chapters 2-4 (pages 15-277)
-
-### Reading Questions
+## Concept Questions
 
 1.  Which probability distributions are appropriate for *quantitative* (continuous) random variables?
 
 2.  Which probability distributions are appropriate for *categorical* random variables?
 
 3.  *Independently and Identically Distributed (iid)* random variables are an incredibly important assumption involved in many statistical methods. Why do you think it might be important/useful for random variables to have this property?
+
+4.  Why might we want to be able to derive distribution functions for transformations of random variables? In what scenarios can you imagine this being useful?
 
 ## Definitions
 
@@ -40,7 +40,7 @@ A random variable is a function that takes inputs from a sample space of all pos
 
 **Probability density function** (discrete, continuous)
 
--   Note: I don't care if you call a pmf a pdf... I will probably do this continuously throughout the semester. We don't need to be picky about this in *MATH/STAT 455*.
+-   Note: I don't care if you call a pmf a pdf... I will probably do this continuously throughout the semester. We don't need to be picky about this in *MATH/STAT 355*.
 
 There are many different accepted ways to write the notation for a pdf of a random variables. Any of the following are perfectly appropriate for this class: $f(x)$, $\pi(x)$, $p(x)$, $f_X(x)$. I typically use either $\pi$ or $p$, but might mix it up occasionally.
 
@@ -188,23 +188,23 @@ A few things to note:
 
 You are also expected to know the probability distributions contained in Table 1, below. Note that you *do not* need to memorize the pdfs for these distributions, but you *should* be familiar with what types of random variables (continuous/quantitative, categorical, integer-valued, etc.) may take on different distributions. The more familiar you are with the forms of the pdfs, the easier/faster it will be to work through problem sets and quizzes.
 
-| Distribution        | PDF/PMF                                                                                                                                                                                                                                                         | Parameters                                                                                                                          | Support                                                                          |
-|------------------|------------------|--------------------|------------------|
-| Uniform             | $\pi(x) = \frac{1}{\beta - \alpha}$                                                                                                                                                                                                                             | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$                                                                                      | $x \in [\alpha, \beta]$                                                          |
-| Normal              | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$                                                                                                                                                                                | $\mu \in \mathbb{R}$, $\sigma > 0$                                                                                                  | $x \in \mathbb{R}$                                                               |
-| Multivariate Normal | $\pi(\textbf{x}) = (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$                                                                                                                                      | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite (in practice, almost always positive definite) | $x \in \mathbb{R}^{k}$                                                           |
-| Gamma               | $\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}$                                                                                                                                                                                     | $\alpha \text{ (shape)}, \beta \text{ (rate)} > 0$                                                                                  | $x \in (0,\infty)$                                                               |
-| Chi-squared         | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2}$                                                                                                                                                                                               | $\nu > 0$                                                                                                                           | $x \in [0, \infty)$                                                              |
-| $F$                 | $\pi(x) = \frac{\Gamma(\frac{\nu_1 + \nu_2}{2})}{\Gamma(\frac{\nu_1}{2}) \Gamma(\frac{\nu_2}{2})} \left( \frac{\nu_1}{\nu_2}\right)^{\nu_1/2} \left( \frac{x^{(\nu_1 - 2)/2}}{\left( 1 + \left( \frac{\nu_1}{\nu_2}\right)x\right)^{(\nu_1 + \nu_2)/2}}\right)$ | $\nu_1, \nu_2 > 0$                                                                                                                  | $x \in [0, \infty)$                                                              |
-| Exponential         | $\pi(x) = \beta e^{-\beta x}$                                                                                                                                                                                                                                   | $\beta > 0$                                                                                                                         | $x \in [0, \infty)$                                                              |
-| Student-$t$         | $\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}$                                                                                                                                                        | $\nu > 0$                                                                                                                           | $x \in \mathbb{R}$                                                               |
-| Beta                | $\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}$                                                                                                                                                         | $\alpha, \beta > 0$                                                                                                                 | $x \in [0,1]$                                                                    |
-| Poisson             | $\pi(x) = \frac{\lambda^x e^{-\lambda}}{x!}$                                                                                                                                                                                                                    | $\lambda > 0$                                                                                                                       | $x \in \mathbb{N}$                                                               |
-| Binomial            | $\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}$                                                                                                                                                                                                                   | $p \in [0,1], n = \{0, 1, 2, \dots\}$                                                                                               | $x \in \{0, 1, \dots, n\}$                                                       |
-| Multinomial         | $\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}$                                                                                                                                                                                        | $p_i > 0$, $p_1 + \dots + p_k = 1$, $n = \{0, 1, 2, \dots \}$                                                                       | $\{ x_1, \dots, x_k \mid \sum_{i = 1}^k x_i = n, x_i \geq 0 (i = 1, \dots, k)\}$ |
-| Negative Binomial   | $\pi(x) = \binom{x + r - 1}{x} (1-p)^x p^r$                                                                                                                                                                                                                     | $r > 0$, $p \in [0,1]$                                                                                                              | $x \in \{0, 1, \dots\}$                                                          |
+| Distribution | PDF/PMF | Parameters | Support |
+|------------------|------------------|------------------|------------------|
+| Uniform | $\pi(x) = \frac{1}{\beta - \alpha}$ | $\alpha \in \mathbb{R}$, $\beta\in \mathbb{R}$ | $x \in [\alpha, \beta]$ |
+| Normal | $\pi(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2)$ | $\mu \in \mathbb{R}$, $\sigma > 0$ | $x \in \mathbb{R}$ |
+| Multivariate Normal | $\pi(\textbf{x}) = (2\pi)^{-k/2} |\Sigma|^{-1/2} \exp(-\frac{1}{2}(\textbf{x} - \mu)^\top \Sigma^{-1}(\textbf{x} - \mu)))$ | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k\times k}$ , positive semi-definite (in practice, almost always positive definite) | $x \in \mathbb{R}^{k}$ |
+| Gamma | $\pi(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha - 1} e^{-\beta x}$ | $\alpha \text{ (shape)}, \beta \text{ (rate)} > 0$ | $x \in (0,\infty)$ |
+| Chi-squared | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2}$ | $\nu > 0$ | $x \in [0, \infty)$ |
+| $F$ | $\pi(x) = \frac{\Gamma(\frac{\nu_1 + \nu_2}{2})}{\Gamma(\frac{\nu_1}{2}) \Gamma(\frac{\nu_2}{2})} \left( \frac{\nu_1}{\nu_2}\right)^{\nu_1/2} \left( \frac{x^{(\nu_1 - 2)/2}}{\left( 1 + \left( \frac{\nu_1}{\nu_2}\right)x\right)^{(\nu_1 + \nu_2)/2}}\right)$ | $\nu_1, \nu_2 > 0$ | $x \in [0, \infty)$ |
+| Exponential | $\pi(x) = \beta e^{-\beta x}$ | $\beta > 0$ | $x \in [0, \infty)$ |
+| Student-$t$ | $\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}$ | $\nu > 0$ | $x \in \mathbb{R}$ |
+| Beta | $\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}$ | $\alpha, \beta > 0$ | $x \in [0,1]$ |
+| Poisson | $\pi(x) = \frac{\lambda^x e^{-\lambda}}{x!}$ | $\lambda > 0$ | $x \in \mathbb{N}$ |
+| Binomial | $\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}$ | $p \in [0,1], n = \{0, 1, 2, \dots\}$ | $x \in \{0, 1, \dots, n\}$ |
+| Multinomial | $\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}$ | $p_i > 0$, $p_1 + \dots + p_k = 1$, $n = \{0, 1, 2, \dots \}$ | $\{ x_1, \dots, x_k \mid \sum_{i = 1}^k x_i = n, x_i \geq 0 (i = 1, \dots, k)\}$ |
+| Negative Binomial | $\pi(x) = \binom{x + r - 1}{x} (1-p)^x p^r$ | $r > 0$, $p \in [0,1]$ | $x \in \{0, 1, \dots\}$ |
 
-: *Table 1.* Table of main probability distributions we will work with for *MATH/STAT 455*.
+: *Table 1.* Table of main probability distributions we will work with for *MATH/STAT 355*.
 
 ## Theorems
 
@@ -294,7 +294,6 @@ You are also expected to know the probability distributions contained in Table 1
 
     If $X$ and $Y$ are independent, then $Cov(X, Y) = 0$. We can show this by noting that
 
-```{=tex}
 \begin{align}
 Cov(X, Y) & = E[(X - E[X])(Y - E[Y])] \\
 & = E[XY - XE[Y] - YE[X] + E[X]E[Y]] \\
@@ -302,7 +301,7 @@ Cov(X, Y) & = E[(X - E[X])(Y - E[Y])] \\
 & =  2E[X]E[Y] - 2E[X]E[Y] \\
 & = 0
 \end{align}
-```
+
 -   Using MGFs to find moments
 
     Recall that the moment generating function of a random variable $X$, denoted by $M_X(t)$ is
@@ -337,7 +336,9 @@ Cov(X, Y) & = E[(X - E[X])(Y - E[Y])] \\
 
 We will *often* take at face value previously proven *relationships* between random variables. What I mean by this, as an example, is that it is a nice (convenient) fact that a sum of two independent normal random variables is *still* normally distributed, with a nice form for the mean and variance. In particular, if $X \sim N(\mu, \sigma^2)$ and $Y \sim N(\theta, \nu^2)$, then $X + Y \sim N(\mu + \theta, \sigma^2 + \nu^2)$. Most frequently used examples of these sorts of relationships can be found in the \`\`Related Distributions" section of the Wikipedia page for a given probability distribution. Unless I explicitly ask you to derive/show how certain variables are related to each other, you can just state the known relationship, use it, and move on!
 
-If I *do* ask you to derive/show these things, there a few different ways we can go about this. For this course, I only expect you to know the "CDF method" for *one function* of *one random variable*, as we'll demonstrate below.
+If I *do* ask you to derive/show these things, there a few different ways we can go about this. For this course, I expect you to know the "CDF method" for *one function* of *one random variable*, **and** the "Jacobian method" for a function of *more than one* random variable. We'll demonstrate the former below.
+
+#### CDF Method: One random variable
 
 **Theorem**. Let $X$ be a continuous random variable with pdf $f_X(x)$. Define a new random variable $Y = g(X)$, for nice\* functions $g$. Then $f_Y(y) = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}$.
 
@@ -345,7 +346,6 @@ If I *do* ask you to derive/show these things, there a few different ways we can
 
 **Proof**. We can write
 
-```{=tex}
 \begin{align*}
     f_Y(y) & = \frac{\partial}{\partial y} F_Y(y) \\
     & = \frac{\partial}{\partial y} \Pr(Y \leq y) \\
@@ -354,12 +354,11 @@ If I *do* ask you to derive/show these things, there a few different ways we can
     & = \frac{\partial}{\partial y} F_X(g^{-1}(y)) \\
     & = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) 
 \end{align*}
-```
+
 where to obtain the last equality we use chain rule! Now we require some statistical trickery to continue... (note that this method is called the "CDF method" because we go *through* the CDF to derive the distribution for $Y$)
 
 You will *especially* see this in the Bayes chapter of our course notes, but it is often true that our lives are made easier as statisticians if we multiply things by one, or add zero. What exactly do I mean? Rearranging gross looking formulas into things we are familiar with (like pdfs, for example) often makes our lives easier and allows us to avoid dealing with such grossness. Here, the grossness is less obvious, but nonetheless relevant. Note that we can write
 
-```{=tex}
 \begin{align*}
     y & = y \\
     y & = g(g^{-1}(y)) \\
@@ -367,16 +366,17 @@ You will *especially* see this in the Bayes chapter of our course notes, but it 
     1 & = g'(g^{-1}(y)) \frac{\partial}{\partial y} g^{-1}(y) \hspace{1cm} \text{(chain rule again!)} \\
     \frac{1}{g'(g^{-1}(y))} & = \frac{\partial}{\partial y} g^{-1}(y)
 \end{align*}
-```
+
 The right-hand side should look familiar: it is exactly what we needed to "deal with" in our proof! Returning to that proof, we have
 
-```{=tex}
 \begin{align*}
     f_Y(y) & = f_X(g^{-1}(y)) \times \frac{\partial}{\partial y} g^{-1}(y) \\
     & = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} 
 \end{align*}
-```
+
 as desired.
+
+#### Jacobian Method: More than one random variable
 
 ## Worked Examples
 
@@ -388,15 +388,13 @@ as desired.
 
 We know that $f(x) = \lambda e^{-\lambda x}$. If we can calculate $E[X]$ and $E[X^2]$, then we're basically done! We can write
 
-```{=tex}
 \begin{align*}    
 E[X] & = \int_0^\infty x \lambda e^{-\lambda x} dx \\    
 & = \lambda \int_0^\infty x e^{-\lambda x} dx 
 \end{align*}
-```
+
 And now we need integration by parts! Set $u = x$, $dv = e^{-\lambda x} dx$. Then $du = 1dx$ and $v = \frac{-1}{\lambda} e^{-\lambda x}$. Since $\int u dv = uv - \int vdu$, we can continue
 
-```{=tex}
 \begin{align*}    
 E[X] & = \lambda \int_0^\infty x e^{-\lambda x} dx \\    
 & = \lambda \left( -\frac{x}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-1}{\lambda} e^{-\lambda x} dx \right) \\    
@@ -406,18 +404,16 @@ E[X] & = \lambda \int_0^\infty x e^{-\lambda x} dx \\
 & = \frac{1}{\lambda} e^{-0} \\    
 & = \frac{1}{\lambda}
 \end{align*}
-```
+
 We can follow a similar process to get $E[X^2]$ (using the law of the unconscious statistician!). We can write
 
-```{=tex}
 \begin{align*}
     E[X^2] & = \int_0^\infty x^2 \lambda e^{-\lambda x} dx \\
     & = \lambda \int_0^\infty x^2 e^{-\lambda x} dx 
 \end{align*}
-```
+
 And now we need integration by parts again! Set $u = x^2$, $dv = e^{-\lambda x} dx$. Then $du = 2xdx$ and $v = \frac{-1}{\lambda} e^{-\lambda x}$. Since $\int u dv = uv - \int vdu$, we can continue
 
-```{=tex}
 \begin{align*}
     E[X] & = \lambda \int_0^\infty x^2 e^{-\lambda x} dx \\
     & = \lambda \left( -\frac{x^2}{\lambda} e^{-\lambda x} \bigg|_0^\infty  - \int_0^\infty \frac{-2}{\lambda} xe^{-\lambda x} dx \right) \\
@@ -426,7 +422,7 @@ And now we need integration by parts again! Set $u = x^2$, $dv = e^{-\lambda x} 
     & = \lambda \left( 0  + \frac{2}{\lambda^3} \right) \\
     & = \frac{2}{\lambda^2}
 \end{align*}
-```
+
 Now we can calculate $Var[X] = E[X^2] - E[X]^2$ as $$
 Var[X] = E[X^2] - E[X]^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
 $$ And so we have $E[X] = \frac{1}{\lambda}$ and $Var[X] = \frac{1}{\lambda^2}$.
@@ -441,17 +437,15 @@ $$ And so we have $E[X] = \frac{1}{\lambda}$ and $Var[X] = \frac{1}{\lambda^2}$.
 
 Recall that the CDF of an exponential distribution is given by $F(x) = 1-e^{-\lambda x}$. Thanks to Bayes rule, we can write
 
-```{=tex}
 \begin{align*}
     \Pr(X > s + x \mid X > s) & = \frac{\Pr(X > s + x , X > s)}{\Pr(X > s)} \\
     & = \frac{\Pr(X > s + x)}{\Pr(X > s)} \\
     & = \frac{1 - \Pr(X < s + x)}{1 - \Pr(X < s)} \\
     & = \frac{1 - F(s + x)}{1 - F(s)}
 \end{align*}
-```
+
 where the second equality is true because $x > 0$. Then we can write
 
-```{=tex}
 \begin{align*}
     \Pr(X > s + x \mid X > s) & = \frac{1 - F(s + x)}{1 - F(s)} \\
     & = \frac{1 - \left(1 - e^{-\lambda(s + x)}\right)}{1 - \left(1 - e^{-\lambda s}\right)} \\
@@ -461,7 +455,7 @@ where the second equality is true because $x > 0$. Then we can write
     & = 1 - F(x) \\
     & = \Pr(X > x)
 \end{align*}
-```
+
 and we're done!
 
 </details>
@@ -478,34 +472,30 @@ $$
 f(x, y) = \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right)
 $$ And so,
 
-```{=tex}
 \begin{align*}
     f(y) & = \int f(x, y) dx \\
     & = \int \left( \frac{1}{\lambda} e^{-x/\lambda} \right) \left( \frac{x^y e^{-x}}{y!} \right) dx \\
     & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx
 \end{align*}
-```
+
 And we can again use integration by parts! Let $u = x^y$ and $dv = e^{-x(1 + \lambda)/\lambda} dx$. Then we have $du = yx^{y-1} dx$ and $v = -\frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda}$, and we can write
 
-```{=tex}
 \begin{align*}
     f(y) & = \frac{1}{\lambda y!} \int x^y e^{-x(1 + \lambda)/\lambda} dx \\
     & = \frac{1}{\lambda y!} \left( -x^y \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} \bigg|_{x = 0}^{x = \infty}  + \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx\right) \\
     & = \frac{1}{\lambda y!} \left(  \int \frac{\lambda}{1 + \lambda}e^{-x(1 + \lambda)/\lambda} yx^{y-1} dx \right) \\
     & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right) y \left(  \int e^{-x(1 + \lambda)/\lambda} x^{y-1} dx \right)
 \end{align*}
-```
+
 This *looks* gross, but it's actually not so bad. Note that, since $Y$ is Poisson, it can only take integer values beginning at 1! Then we can *repeat* the process of integration by parts $y$ *times* in order to get rid of $x^{y\dots}$ term on the inside of the integral. Specifically, each time we do this process we will pull out a $\left( \frac{\lambda }{1 + \lambda} \right)$, and a $y - i$ for the $i$th integration by parts step (try this one or two steps for yourself to see how it will simplify if you find this unintuitive!). We end up with,
 
-```{=tex}
 \begin{align*}
     f(y) & = \frac{1}{\lambda y!} \left( \frac{\lambda }{1 + \lambda} \right)^y y! \\
     & = \frac{1}{\lambda} \left(\frac{\lambda}{1 + \lambda}\right)^y
 \end{align*}
-```
+
 Now let $p = \frac{1}{1 + \lambda}$. If we can show that $f(y) \sim Geometric(p)$ then we're done. Note that $1 - p = \lambda/(1 + \lambda)$. We have
 
-```{=tex}
 \begin{align*}
     f(y) & = \frac{1}{\lambda} (1 - p)^y \\
     & = \frac{1}{\lambda} (1 - p)^{y-1} (1-p) \\
@@ -513,12 +503,11 @@ Now let $p = \frac{1}{1 + \lambda}$. If we can show that $f(y) \sim Geometric(p)
     & = (1 - p)^{y-1} \left( \frac{1}{1 + \lambda} \right) \\
     & = (1 - p)^{y-1} p
 \end{align*}
-```
+
 which is exactly the pdf of a geometric random variable with parameter $p$ and trials that begin at 1.
 
 An *alternative* solution (which perhaps embodies the phrase "work smarter, not harder") actually doesn't involve integration by parts at all! As statisticians, we typically like to avoid actually integrating anything whenever possible, and this is often achieved by manipulating algebra enough to essentially "create" a pdf out of what we see (since pdfs integrate to $1$!). Massive props to a student for solving this problem in a much "easier" way, answer below:
 
-```{=tex}
 \begin{align*}
         f(y) &= \int_{0}^{\infty} f(y \mid x) f(x) dx \\
         &= \int_{0}^{\infty} (\frac{1}{\lambda}e^{-\frac{x}{\lambda}}) (\frac{x^y}{y!} e^{-x}) dx \\
@@ -533,7 +522,7 @@ An *alternative* solution (which perhaps embodies the phrase "work smarter, not 
         &= \frac{1}{(1+\lambda)} (1 - \frac{1}{(1+\lambda)})^y \\
         &=p(1-p)^y\qquad (\text{where }p=\frac{1}{1+\lambda})
     \end{align*}
-```
+
 Note that we arrive at a slightly different answer with this approach. Specifically, we arrive at the pdf of a geometric random variable with parameter $p$ and trials that begin at 0, as opposed to 1. There's some subtlety here that we're going to choose to ignore.
 
 </details>
@@ -546,16 +535,14 @@ Note that we arrive at a slightly different answer with this approach. Specifica
 
 To solve this problem, we can use the theorem on transforming continuous random variables. We must first define our function $g$ that relates $X$ and $Y$. In this case, we have $g(a) = \frac{a - \mu}{\sigma}$. Now all we need to do is collect the mathematical "pieces" we need to use theorem: $g^{-1}(a)$, and $g'(a)$, and finally, the pdf of a normal random variable. We have
 
-```{=tex}
 \begin{align*}
     f_X(x) & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (x - \mu)^2) \\
     g^{-1}(a) & = \sigma a + \mu \\
     g'(a) & = \frac{\partial}{\partial a} \left(\frac{a - \mu}{\sigma}\right) = \frac{1}{\sigma}
 \end{align*}
-```
+
 Putting it all together, we have
 
-```{=tex}
 \begin{align*}
     f_Y(y) & = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))} \\
     & = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp(-\frac{1}{2\sigma^2} (\sigma y + \mu - \mu)^2) \times \sigma \\
@@ -563,7 +550,7 @@ Putting it all together, we have
     & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2\sigma^2} \sigma^2 y^2) \\
     & = \frac{1}{\sqrt{2 \pi}} \exp(-\frac{1}{2} y^2)
 \end{align*}
-```
+
 and note that this is the pdf of a normally distributed random variable with mean $0$ and variance $1$! Thus, we have shown that $\frac{X - \mu}{\sigma} \sim N(0,1)$. **Fun Fact:** If this random variable reminds you of a Z-score, *it should*!
 
 </details>
@@ -576,13 +563,12 @@ and note that this is the pdf of a normally distributed random variable with mea
 
 To determine whether $X$ and $Y$ are independent (or not), we need to determine if their joint pdf is "separable." Doing some algebra, we can see that
 
-```{=tex}
 \begin{align*}    
 f_{X,Y}(x,y) & = \lambda \beta e^{-x \lambda - y\beta} \\    
 & = \lambda \beta e^{-x \lambda} e^{-y \beta} \\   
 & = \left( \lambda  e^{-x \lambda} \right) \left( \beta e^{-y \beta} \right) 
 \end{align*}
-```
+
 and so since we can write the joint distribution as a function of $X$ multiplied by a function of $Y$, $X$ and $Y$ are independent (and in this case, both have exponential distributions).
 
 </details>

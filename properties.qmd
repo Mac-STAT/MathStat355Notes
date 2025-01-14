@@ -28,11 +28,7 @@ By the end of this chapter, you should be able to...
 
 -   Justify why there exists a bias-variance trade-off, and explain what consequences this may have when comparing estimators
 
-## Reading Guide
-
-Associated Readings: Chapter 5, Section 5.4 ("Properties of Estimators") & 5.5 ("Minimum-Variance Estimators: The Cramér-Rao Lower Bound")
-
-### Reading Questions
+## Concept Questions
 
 1.  Intuitively, what is the difference between bias and precision?
 
@@ -122,13 +118,12 @@ The proof is quite clear on [Wikipedia](https://en.wikipedia.org/wiki/Cauchy%E2%
 
 Let $f_Y(y \mid \theta)$ be a pdf with nice\* conditions, and let $Y_1, \dots, Y_n$ be a random sample from $f_Y(y \mid \theta)$. Let $\hat{\theta}$ be *any* unbiased estimator of $\theta$. Then
 
-```{=tex}
 \begin{align*} 
 Var(\hat{\theta}) & \geq \left\{ E\left[ \left( \frac{\partial \log( L(\theta \mid y))}{\partial \theta}\right)^2\right]\right\}^{-1} \\
 & = -\left\{ E\left[ \frac{\partial^2 \log( L(\theta \mid y))}{\partial \theta^2} \right] \right\}^{-1} \\
 & = \frac{1}{I(\theta)}
 \end{align*}
-```
+
 \*our nice conditions that we need are that $f_Y(y \mid \theta)$ has continuous first- and second-order derivatives, which would quickly discover we need by looking at the form for the C-R lower bound, and that the set of values $y$ where $f_Y(y \mid \theta) \neq 0$ does not depend on $\theta$. If you are familiar with the concept of the "support" of a function, that is where this second condition comes from. The key here is that this condition allows to interchange derivatives and integrals, in particular, $\frac{\partial}{\partial \theta} \int f(x) dx = \int \frac{\partial}{\partial \theta} f(x)dx$, which we'll need to complete the proof.
 
 **Proof.**
@@ -141,15 +136,13 @@ $$
 
 and so if we can show
 
-```{=tex}
 \begin{align*} 
 \frac{Cov(\hat{\theta},X)^2}{Var(X)} & = \left\{ E\left[ \left( \frac{\partial \log( L(\theta \mid \textbf{y}))}{\partial \theta}\right)^2\right]\right\}^{-1}  \\
 & = \frac{1}{I(\theta)}
 \end{align*}
-```
+
 then we're done, as this is the C-R lower bound. Note first that
 
-```{=tex}
 \begin{align*} 
 E[X] & = \int x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
 & = \int \left( \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta} \right)  f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
@@ -160,19 +153,17 @@ E[X] & = \int x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
 & = \frac{\partial}{\partial \theta} 1 \\
 & = 0
 \end{align*}
-```
+
 This means that
 
-```{=tex}
 \begin{align*}
     Var[X] & = E[X^2] - E[X]^2 \\
     & = E[X^2] \\
     & = E \left[ \left( \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta} \right)^2\right ]
 \end{align*}
-```
+
 and
 
-```{=tex}
 \begin{align*}
     Cov(\hat{\theta}, X) & = E[\hat{\theta} X] - E[\hat{\theta}] E[X] \\
     & = E[\hat{\theta}X] \\
@@ -186,16 +177,15 @@ and
     & = \frac{\partial}{\partial \theta} \theta \\
     & = 1
 \end{align*}
-```
+
 where $E[\hat{\theta}] = \theta$ since our estimator is unbiased. Putting this all together, we have
 
-```{=tex}
 \begin{align*}
     Var[\hat{\theta}] & \geq \frac{Cov(\hat{\theta},X)^2}{Var(X)} \\
     & = \frac{1^2}{E \left[ \left( \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta} \right)^2\right ]} \\
     & = \frac{1}{I(\theta)}
 \end{align*}
-```
+
 as desired.
 
 **Comment:** Note that what the Cramér-Rao lower bound tells us is that, if the variance of an unbiased estimator is *equal* to the Cramér-Rao lower bound, then that estimator has the *minimum possible variance* among all unbiased estimators there could possibly be. This allows us to *prove*, for example, whether or not an unbiased estimator is the UMVUE: If an unbiased estimator's variance achieves the C-R lower bound, then it is *optimal* according to the UMVUE criterion.
@@ -210,7 +200,6 @@ as desired.
 
 Note that we can write
 
-```{=tex}
 \begin{align*}
     L(\theta) & = \prod_{i = 1}^n \frac{1}{\theta} e^{-x_i / \theta} \\
     \log L(\theta) & = \sum_{i = 1}^n \log(\frac{1}{\theta} e^{-x_i / \theta}) \\
@@ -219,24 +208,22 @@ Note that we can write
     \frac{\partial}{\partial \theta} \log L(\theta) & = \frac{\partial}{\partial \theta}  \left( -n \log(\theta) - \frac{1}{\theta} \sum_{i = 1}^n x_i \right) \\
     & = -\frac{n}{\theta} + \frac{\sum_{i = 1}^n x_i }{\theta^2} 
 \end{align*}
-```
+
 Setting this equal to $0$ and solving for $\theta$ we obtain
 
-```{=tex}
 \begin{align*}
     0 & \equiv -\frac{n}{\theta} + \frac{\sum_{i = 1}^n x_i }{\theta^2}  \\
     \frac{n}{\theta} & = \frac{\sum_{i = 1}^n x_i }{\theta^2} \\
     n & = \frac{\sum_{i = 1}^n x_i }{\theta} \\
     \theta & = \frac{1}{n} \sum_{i = 1}^n x_i
 \end{align*}
-```
+
 and so the MLE for $\theta$ is the sample mean. To show that the MLE is unbiased, we note that
 
-```{=tex}
 \begin{align*}
     E \left[ \frac{1}{n} \sum_{i = 1}^n X_i \right] & = \frac{1}{n} \sum_{i = 1}^n E[X_i] = \frac{1}{n} \sum_{i = 1}^n \theta  = \theta
 \end{align*}
-```
+
 as desired.
 
 </details>
@@ -325,7 +312,6 @@ $$
 
 and
 
-```{=tex}
 \begin{align*}
     Var[\hat{\mu}_w] & =  Var \left[ \sum_{i = 1}^n w_i X_i \right] \\
     & = \sum_{i = 1}^n Var[w_i X_i] \\
@@ -333,17 +319,16 @@ and
     & = \sum_{i = 1}^n w_i^2  \sigma^2 \\
     & = \sigma^2 \sum_{i = 1}^n w_i^2
 \end{align*}
-```
+
 And so to determine which estimator is more efficient, we need to determine if $\frac{1}{n}$ is less than $\sum_{i = 1}^n w_i^2$ (or not). The Cauchy-Schwarz inequality tells us that
 
-```{=tex}
 \begin{align*}
     \left( \sum_{i = 1}^n w_i \cdot 1\right)^2 & \leq \left( \sum_{i = 1}^n w_i^2 \right) \left( \sum_{i = 1}^n 1^2 \right) \\
     \left( \sum_{i = 1}^n w_i \right)^2 & \leq \left( \sum_{i = 1}^n w_i^2 \right) n \\
     1 & \leq \left( \sum_{i = 1}^n w_i^2 \right) n  \\
     \frac{1}{n} & \leq \sum_{i = 1}^n w_i^2
 \end{align*}
-```
+
 and therefore, $\hat{\mu}$ is more efficient than $\hat{\mu}_w$.
 
 </details>
@@ -356,7 +341,6 @@ and therefore, $\hat{\mu}$ is more efficient than $\hat{\mu}_w$.
 
 Recall that the MLE for $\sigma^2$ is given by $\frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2$. Then
 
-```{=tex}
 \begin{align*}
     E\left[ \frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2\right] & = \frac{1}{n} \sum_{i = 1}^n E\left[ (X_i - \bar{X})^2\right] \\
     & = \frac{1}{n} \sum_{i = 1}^n E\left[ X_i^2 - 2X_i \bar{X} + \bar{X}^2\right] \\
@@ -365,10 +349,9 @@ Recall that the MLE for $\sigma^2$ is given by $\frac{1}{n} \sum_{i = 1}^n (X_i 
     & = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - 2 E\left[ \bar{X}^2  \right] + E[\bar{X}^2] \\
     & = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - E\left[ \bar{X}^2  \right] 
 \end{align*}
-```
+
 Recall that since $X_i \overset{iid}{\sim} N(\mu, \sigma^2)$, $\bar{X} \sim N(\mu, \sigma^2/n)$, and that we can write $Var[Y] + E[Y]^2 = E[Y^2]$ (definition of variance). Then we can write
 
-```{=tex}
 \begin{align*}
     E\left[ \frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2 \right] & = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - E\left[ \bar{X}^2  \right] \\
     & = \frac{1}{n} \sum_{i = 1}^n \left( \sigma^2 + \mu^2 \right) - \left( \frac{\sigma^2}{n} + \mu^2 \right) \\
@@ -377,15 +360,14 @@ Recall that since $X_i \overset{iid}{\sim} N(\mu, \sigma^2)$, $\bar{X} \sim N(\m
     & = \sigma^2 \left( 1 - \frac{1}{n} \right) \\
     & = \sigma^2  \left( \frac{n-1}{n} \right)
 \end{align*}
-```
+
 Therefore, since $E[\hat{\sigma}^2_{MLE}] \neq \sigma^2$, the MLE is unbiased. Note that
 
-```{=tex}
 \begin{align*}
     E\left[ \left( \frac{n}{n-1} \right)\frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2\right] & = \left( \frac{n}{n-1} \right) \left( \frac{n-1}{n} \right) \sigma^2   \\
     & = \sigma^2
 \end{align*}
-```
+
 and so the estimator $\frac{1}{n-1} \sum_{i = 1}^n (X_i - \bar{X})^2$ is an unbiased estimator for $\sigma^2$. This estimator is often called the "sample variance", and is denoted by $S^2$.
 
 </details>

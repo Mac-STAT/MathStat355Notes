@@ -100,13 +100,7 @@ By the end of this chapter, you should be able to...
 -   Describe the differences and relationships between Type I Error, Type II Error, and power, as well as the factors that influence each of them
 -   Calculate the power or Type II error for a given hypothesis test
 
-## Reading Guide
-
-Associated Readings: Chapter 6, Sections 6.1-6.5\*
-
-\*Note: I (Taylor) don't love the way that the textbook discusses hypothesis testing. This reading will not be required, but is included in the course notes as a reference if you'd like to read about hypothesis testing from a different perspective.
-
-### Reading Questions
+## Concept Questions
 
 1.  What is the goal of hypothesis testing?
 2.  What are the typical steps to deriving a hypothesis test?
@@ -222,15 +216,13 @@ $$Suppose $\phi'$ is any other test such that $E[\phi'(X) \mid \theta_0] \leq \a
 
 By assumption, we have
 
-```{=tex}
 \begin{align*}
     E[\phi(X) \mid \theta_0] &= \int \phi(x) f_X(x \mid \theta_0) dx = \alpha \\
     E[\phi'(X) \mid \theta_0] &= \int \phi'(x) f_X(x \mid \theta_0) dx \leq \alpha
 \end{align*}
-```
+
 Therefore we can write
 
-```{=tex}
 \begin{align*}
     E[\phi(X) & \mid \theta_1] - E[\phi'(X) \mid \theta_1] \\
     & = \int \phi(x) f_X(x \mid \theta_1) dx - \int \phi'(x) f_X(x \mid \theta_1) dx \\
@@ -242,15 +234,14 @@ Therefore we can write
     & \geq c(\alpha - \alpha) \\
     & = 0
 \end{align*}
-```
+
 And rearranging yields
 
-```{=tex}
 \begin{align*}
 E[\phi(X)  \mid \theta_1] - E[\phi'(X) \mid \theta_1] & \geq 0 \\
 E[\phi(X) \mid \theta_1] & \geq E[\phi'(X) \mid \theta_1]
 \end{align*}
-```
+
 as desired.
 
 \*Note: The $-2\log(\dots)$ piece comes into play for the LRT statistic to ensure that the test statistic converges in distribution to a $\chi^2$ random variable. When we're just comparing the LRT statistic to another LRT test statistic, we can (more simply) just compare the ratio of likelihoods. Think: comparing $X$ vs. $Y$ is equivalent to comparing $\log(X)$ vs. $\log(Y)$ if we are only interested in the direction of the difference between them, since $\log$ is a monotone function.
@@ -271,13 +262,12 @@ $$
 
 We can compare this test statistic to the critical value from a $\chi^2_1$ distribution since, by properties of normal distributions and recalling that standard normal distributions squared are $\chi^2_1$,
 
-```{=tex}
 \begin{align*}
     \overline{Y} & \sim N(\mu, \sigma^2/n) \\
     \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}} & \sim N(0,1) \\
     \left( \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}  \right)^2 & \sim \chi^2_1 
 \end{align*}
-```
+
 To calculate the critical value when $\alpha = 0.05$, we turn to R.
 
 ```{r}
@@ -360,7 +350,6 @@ $$
 
 And so our LRT statistic simplifies to
 
-```{=tex}
 \begin{align*}
 \lambda_{LRT} & = -2 \log\left(\frac{ L(0.5)} {L(\hat{p})} \right) \\
 & = -2 \left[\log L(0.5) - \log L(\hat{p}) \right] \\
@@ -370,7 +359,7 @@ And so our LRT statistic simplifies to
 & = -2 \left[ n\log(0.5) - \log(\hat{p}) n \overline{X} - \log(1 - \hat{p}) (n - n \overline{X})\right] \\
 & = -2 n \left[ \log(0.5) - \log(\hat{p}) \hat{p} - \log(1 - \hat{p}) (1 -  \hat{p})\right]
 \end{align*}
-```
+
 (Note that this is as "simplified" as we can get without knowing $\hat{p}$ or $n$)
 
 </details>
@@ -389,13 +378,12 @@ $$
 
 We can simplify by deriving the score and information matrix, and then plugging in $p_0 = 0.5$. We have,
 
-```{=tex}
 \begin{align*}
 \frac{\partial}{\partial p_0} \log L(p_0 \mid x) & = \frac{\partial}{\partial p_0} \left[ \log(p_0) \sum_{i = 1}^n X_i + \log(1 - p_0) \sum_{i = 1}^n (1 - X_i) \right] \\
 & = \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \\
 \left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2 & = \left(\frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right)^2
 \end{align*}
-```
+
 and plugging in $p_0 = 0.5$, we have,
 
 $$
@@ -404,16 +392,14 @@ $$
 
 The information matrix is given by $-E\left[ \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)\right]$. Piecing this together,
 
-```{=tex}
 \begin{align*}
  \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x) 
 & =  \frac{\partial}{\partial p_0} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
 & = \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2} 
 \end{align*}
-```
+
 And to get $I(p_0)$, we take the negative expectation of the above quantity under the null hypothesis (that is, where $E[X] = p_0$) to obtain
 
-```{=tex}
 \begin{align*}
     I(p_0) & = -E \left[ \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2} \right] \\
     & = \frac{1}{p_0^2} \sum_{i = 1}^n E[X_i] + \frac{1}{(1 - p_0)^2} \left( n - \sum_{i = 1}^n E[X_i]\right) \\
@@ -421,7 +407,7 @@ And to get $I(p_0)$, we take the negative expectation of the above quantity unde
     & = \frac{n}{p_0}  + \frac{n}{(1 - p_0)^2} \left( 1 - p_0\right) \\
     & = \frac{n}{p_0}  + \frac{n}{(1 - p_0)}
 \end{align*}
-```
+
 And plugging in $p_0 = 0.5$ we have
 
 $$
@@ -430,7 +416,6 @@ $$
 
 Then, finally, the score test statistic (simplified as much as possible) is given by
 
-```{=tex}
 \begin{align*}
     \lambda_S & = \frac{\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2}{I(p_0)} \\
     & = \frac{\left( -2n + 4\sum_{i = 1}^n X_i\right)^2}{4n} \\
@@ -438,7 +423,7 @@ Then, finally, the score test statistic (simplified as much as possible) is give
     & = \frac{4n^2\left( -1 + 2 \hat{p}\right)^2}{4n} \\
     & = n\left( -1 + 2 \hat{p}\right)^2
 \end{align*}
-```
+
 </details>
 
 **Problem 6:** For each of Problems 3, 4, and 5, calculate the p-values from each test when $\hat{p} = 0.4$ and $n = 300$.

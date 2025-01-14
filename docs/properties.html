@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MATH/STAT 355: Statistical Theory - 4&nbsp; Properties of Estimators</title>
+<title>4&nbsp; Properties of Estimators – MATH/STAT 355: Statistical Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-12acdecf0bfd8bf8a7d30417284c8ed4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -107,13 +107,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./properties.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Properties of Estimators</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -216,10 +216,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">4.1</span> Learning Objectives</a></li>
-  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">4.2</span> Reading Guide</a>
-  <ul class="collapse">
-  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">4.2.1</span> Reading Questions</a></li>
-  </ul></li>
+  <li><a href="#concept-questions" id="toc-concept-questions" class="nav-link" data-scroll-target="#concept-questions"><span class="header-section-number">4.2</span> Concept Questions</a></li>
   <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">4.3</span> Definitions</a></li>
   <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">4.4</span> Theorems</a></li>
   <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">4.5</span> Worked Examples</a></li>
@@ -270,11 +267,8 @@ window.Quarto = {
 <li><p>Justify why there exists a bias-variance trade-off, and explain what consequences this may have when comparing estimators</p></li>
 </ul>
 </section>
-<section id="reading-guide" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">4.2</span> Reading Guide</h2>
-<p>Associated Readings: Chapter 5, Section 5.4 (“Properties of Estimators”) &amp; 5.5 (“Minimum-Variance Estimators: The Cramér-Rao Lower Bound”)</p>
-<section id="reading-questions" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">4.2.1</span> Reading Questions</h3>
+<section id="concept-questions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="concept-questions"><span class="header-section-number">4.2</span> Concept Questions</h2>
 <ol type="1">
 <li><p>Intuitively, what is the difference between bias and precision?</p></li>
 <li><p>What are the typical steps to checking if an estimator is unbiased? (see Examples 5.4.2, 5.4.3, and 5.4.4 in the textbook)</p></li>
@@ -284,7 +278,6 @@ window.Quarto = {
 <li><p>Describe, in your own words, what the Cramér-Rao inequality tells us.</p></li>
 <li><p>What is the difference between a UMVUE and an efficient estimator? Does one imply the other? (see the Comment below Definition 5.5.2)</p></li>
 </ol>
-</section>
 </section>
 <section id="definitions" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">4.3</span> Definitions</h2>
@@ -331,11 +324,11 @@ Var(X) \geq \frac{Cov(X, Y)^2}{Var(Y)}
 <p>The proof is quite clear on <a href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">Wikipedia</a>.</p>
 <p><strong>Cramér-Rao Lower Bound</strong></p>
 <p>Let <span class="math inline">\(f_Y(y \mid \theta)\)</span> be a pdf with nice* conditions, and let <span class="math inline">\(Y_1, \dots, Y_n\)</span> be a random sample from <span class="math inline">\(f_Y(y \mid \theta)\)</span>. Let <span class="math inline">\(\hat{\theta}\)</span> be <em>any</em> unbiased estimator of <span class="math inline">\(\theta\)</span>. Then</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 Var(\hat{\theta}) &amp; \geq \left\{ E\left[ \left( \frac{\partial \log( L(\theta \mid y))}{\partial \theta}\right)^2\right]\right\}^{-1} \\
 &amp; = -\left\{ E\left[ \frac{\partial^2 \log( L(\theta \mid y))}{\partial \theta^2} \right] \right\}^{-1} \\
 &amp; = \frac{1}{I(\theta)}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>*our nice conditions that we need are that <span class="math inline">\(f_Y(y \mid \theta)\)</span> has continuous first- and second-order derivatives, which would quickly discover we need by looking at the form for the C-R lower bound, and that the set of values <span class="math inline">\(y\)</span> where <span class="math inline">\(f_Y(y \mid \theta) \neq 0\)</span> does not depend on <span class="math inline">\(\theta\)</span>. If you are familiar with the concept of the “support” of a function, that is where this second condition comes from. The key here is that this condition allows to interchange derivatives and integrals, in particular, <span class="math inline">\(\frac{\partial}{\partial \theta} \int f(x) dx = \int \frac{\partial}{\partial \theta} f(x)dx\)</span>, which we’ll need to complete the proof.</p>
 <p><strong>Proof.</strong></p>
 <p>Let <span class="math inline">\(X = \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta}\)</span>. By the Covariance Inequality,</p>
@@ -343,12 +336,12 @@ Var(\hat{\theta}) &amp; \geq \left\{ E\left[ \left( \frac{\partial \log( L(\thet
 Var(\hat{\theta}) \geq \frac{Cov(\hat{\theta},X)^2}{Var(X)}
 \]</span></p>
 <p>and so if we can show</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \frac{Cov(\hat{\theta},X)^2}{Var(X)} &amp; = \left\{ E\left[ \left( \frac{\partial \log( L(\theta \mid \textbf{y}))}{\partial \theta}\right)^2\right]\right\}^{-1}  \\
 &amp; = \frac{1}{I(\theta)}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>then we’re done, as this is the C-R lower bound. Note first that</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 E[X] &amp; = \int x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
 &amp; = \int \left( \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta} \right)  f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
 &amp; = \int \left( \frac{\partial \log f_Y(\textbf{y} \mid \theta)}{\partial \theta} \right)  f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
@@ -357,15 +350,15 @@ E[X] &amp; = \int x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
 &amp; = \frac{\partial}{\partial \theta} \int f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
 &amp; = \frac{\partial}{\partial \theta} 1 \\
 &amp; = 0
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>This means that</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     Var[X] &amp; = E[X^2] - E[X]^2 \\
     &amp; = E[X^2] \\
     &amp; = E \left[ \left( \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta} \right)^2\right ]
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>and</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     Cov(\hat{\theta}, X) &amp; = E[\hat{\theta} X] - E[\hat{\theta}] E[X] \\
     &amp; = E[\hat{\theta}X] \\
     &amp; = \int \hat{\theta} x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
@@ -377,13 +370,13 @@ E[X] &amp; = \int x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
     &amp; =  \frac{\partial}{\partial \theta} E[\hat{\theta}] \\
     &amp; = \frac{\partial}{\partial \theta} \theta \\
     &amp; = 1
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>where <span class="math inline">\(E[\hat{\theta}] = \theta\)</span> since our estimator is unbiased. Putting this all together, we have</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     Var[\hat{\theta}] &amp; \geq \frac{Cov(\hat{\theta},X)^2}{Var(X)} \\
     &amp; = \frac{1^2}{E \left[ \left( \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta} \right)^2\right ]} \\
     &amp; = \frac{1}{I(\theta)}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>as desired.</p>
 <p><strong>Comment:</strong> Note that what the Cramér-Rao lower bound tells us is that, if the variance of an unbiased estimator is <em>equal</em> to the Cramér-Rao lower bound, then that estimator has the <em>minimum possible variance</em> among all unbiased estimators there could possibly be. This allows us to <em>prove</em>, for example, whether or not an unbiased estimator is the UMVUE: If an unbiased estimator’s variance achieves the C-R lower bound, then it is <em>optimal</em> according to the UMVUE criterion.</p>
 </section>
@@ -395,25 +388,25 @@ E[X] &amp; = \int x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
 Solution:
 </summary>
 <p>Note that we can write</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     L(\theta) &amp; = \prod_{i = 1}^n \frac{1}{\theta} e^{-x_i / \theta} \\
     \log L(\theta) &amp; = \sum_{i = 1}^n \log(\frac{1}{\theta} e^{-x_i / \theta}) \\
     &amp; = \sum_{i = 1}^n  \log(\frac{1}{\theta}) - \sum_{i = 1}^n x_i / \theta \\
     &amp; = -n \log(\theta) - \frac{1}{\theta} \sum_{i = 1}^n x_i \\
     \frac{\partial}{\partial \theta} \log L(\theta) &amp; = \frac{\partial}{\partial \theta}  \left( -n \log(\theta) - \frac{1}{\theta} \sum_{i = 1}^n x_i \right) \\
     &amp; = -\frac{n}{\theta} + \frac{\sum_{i = 1}^n x_i }{\theta^2}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>Setting this equal to <span class="math inline">\(0\)</span> and solving for <span class="math inline">\(\theta\)</span> we obtain</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     0 &amp; \equiv -\frac{n}{\theta} + \frac{\sum_{i = 1}^n x_i }{\theta^2}  \\
     \frac{n}{\theta} &amp; = \frac{\sum_{i = 1}^n x_i }{\theta^2} \\
     n &amp; = \frac{\sum_{i = 1}^n x_i }{\theta} \\
     \theta &amp; = \frac{1}{n} \sum_{i = 1}^n x_i
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>and so the MLE for <span class="math inline">\(\theta\)</span> is the sample mean. To show that the MLE is unbiased, we note that</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E \left[ \frac{1}{n} \sum_{i = 1}^n X_i \right] &amp; = \frac{1}{n} \sum_{i = 1}^n E[X_i] = \frac{1}{n} \sum_{i = 1}^n \theta  = \theta
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>as desired.</p>
 </details>
 <p><strong>Problem 2:</strong> Suppose again that <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Exponential(1/\theta)\)</span>. Let <span class="math inline">\(\hat{\theta}_2 = Y_1\)</span>, and <span class="math inline">\(\hat{\theta}_3 = nY_{(1)}\)</span>. Show that <span class="math inline">\(\hat{\theta}_2\)</span> and <span class="math inline">\(\hat{\theta}_3\)</span> are unbiased estimators of <span class="math inline">\(\theta\)</span>. Hint: use the fact that <span class="math inline">\(Y_{(1)} \sim Exponential(n/\theta)\)</span></p>
@@ -474,20 +467,20 @@ Solution:
 Var[\hat{\mu}] = Var \left[ \frac{1}{n} \sum_{i = 1}^n X_i \right] = \frac{1}{n^2} \sum_{i = 1}^n Var[X_i] = \frac{1}{n^2} \sum_{i = 1}^n \sigma^2 = \sigma^2 / n
 \]</span></p>
 <p>and</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     Var[\hat{\mu}_w] &amp; =  Var \left[ \sum_{i = 1}^n w_i X_i \right] \\
     &amp; = \sum_{i = 1}^n Var[w_i X_i] \\
     &amp; = \sum_{i = 1}^n w_i^2 Var[X_i] \\
     &amp; = \sum_{i = 1}^n w_i^2  \sigma^2 \\
     &amp; = \sigma^2 \sum_{i = 1}^n w_i^2
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>And so to determine which estimator is more efficient, we need to determine if <span class="math inline">\(\frac{1}{n}\)</span> is less than <span class="math inline">\(\sum_{i = 1}^n w_i^2\)</span> (or not). The Cauchy-Schwarz inequality tells us that</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     \left( \sum_{i = 1}^n w_i \cdot 1\right)^2 &amp; \leq \left( \sum_{i = 1}^n w_i^2 \right) \left( \sum_{i = 1}^n 1^2 \right) \\
     \left( \sum_{i = 1}^n w_i \right)^2 &amp; \leq \left( \sum_{i = 1}^n w_i^2 \right) n \\
     1 &amp; \leq \left( \sum_{i = 1}^n w_i^2 \right) n  \\
     \frac{1}{n} &amp; \leq \sum_{i = 1}^n w_i^2
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>and therefore, <span class="math inline">\(\hat{\mu}\)</span> is more efficient than <span class="math inline">\(\hat{\mu}_w\)</span>.</p>
 </details>
 <p><strong>Problem 6:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>. Show that the MLE for <span class="math inline">\(\sigma^2\)</span> is <em>biased</em>, and suggest a modified variance estimator for <span class="math inline">\(\sigma^2\)</span> that is <em>unbiased</em>. (Note that this is example 5.4.4 in our course textbook)</p>
@@ -496,28 +489,28 @@ Var[\hat{\mu}] = Var \left[ \frac{1}{n} \sum_{i = 1}^n X_i \right] = \frac{1}{n^
 Solution:
 </summary>
 <p>Recall that the MLE for <span class="math inline">\(\sigma^2\)</span> is given by <span class="math inline">\(\frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2\)</span>. Then</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E\left[ \frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2\right] &amp; = \frac{1}{n} \sum_{i = 1}^n E\left[ (X_i - \bar{X})^2\right] \\
     &amp; = \frac{1}{n} \sum_{i = 1}^n E\left[ X_i^2 - 2X_i \bar{X} + \bar{X}^2\right] \\
     &amp; = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - 2 E\left[ \frac{1}{n} \sum_{i = 1}^n X_i \bar{X} \right] + E[\bar{X}^2] \\
     &amp; = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - 2 E\left[ \bar{X} \frac{1}{n} \sum_{i = 1}^n X_i  \right] + E[\bar{X}^2] \\
     &amp; = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - 2 E\left[ \bar{X}^2  \right] + E[\bar{X}^2] \\
     &amp; = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - E\left[ \bar{X}^2  \right]
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>Recall that since <span class="math inline">\(X_i \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>, <span class="math inline">\(\bar{X} \sim N(\mu, \sigma^2/n)\)</span>, and that we can write <span class="math inline">\(Var[Y] + E[Y]^2 = E[Y^2]\)</span> (definition of variance). Then we can write</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E\left[ \frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2 \right] &amp; = \frac{1}{n} \sum_{i = 1}^n E[X_i^2] - E\left[ \bar{X}^2  \right] \\
     &amp; = \frac{1}{n} \sum_{i = 1}^n \left( \sigma^2 + \mu^2 \right) - \left( \frac{\sigma^2}{n} + \mu^2 \right) \\
     &amp; = \sigma^2 + \mu^2 - \frac{\sigma^2}{n} - \mu^2  \\
     &amp; = \sigma^2 - \frac{\sigma^2}{n} \\
     &amp; = \sigma^2 \left( 1 - \frac{1}{n} \right) \\
     &amp; = \sigma^2  \left( \frac{n-1}{n} \right)
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>Therefore, since <span class="math inline">\(E[\hat{\sigma}^2_{MLE}] \neq \sigma^2\)</span>, the MLE is unbiased. Note that</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E\left[ \left( \frac{n}{n-1} \right)\frac{1}{n} \sum_{i = 1}^n (X_i - \bar{X})^2\right] &amp; = \left( \frac{n}{n-1} \right) \left( \frac{n-1}{n} \right) \sigma^2   \\
     &amp; = \sigma^2
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>and so the estimator <span class="math inline">\(\frac{1}{n-1} \sum_{i = 1}^n (X_i - \bar{X})^2\)</span> is an unbiased estimator for <span class="math inline">\(\sigma^2\)</span>. This estimator is often called the “sample variance”, and is denoted by <span class="math inline">\(S^2\)</span>.</p>
 </details>
 
@@ -560,18 +553,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -603,7 +585,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/math-stat-355\.com");
@@ -611,7 +615,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

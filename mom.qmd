@@ -30,11 +30,7 @@ By the end of this chapter, you should be able to...
 
 -   Explain (in plain English) why method of moments estimation is an intuitive approach to estimating unknown parameters
 
-## Reading Guide
-
-Associated Readings: Chapter 5 ("The Method of Moments" through Example 5.2.7)
-
-### Reading Questions
+## Concept Questions
 
 1.  What is the intuition behind the method of moments (MOM) procedure for estimating unknown parameters?
 
@@ -60,14 +56,13 @@ The $r^{th}$ *sample* moment of a probability distribution is given by $\frac{1}
 
 Let $x_1, \dots, x_n$ be a random sample of observations from the pdf $f_X(x \mid \boldsymbol{\theta})$. The method of moments estimates are then the solutions to the set of $s$ equations given by
 
-```{=tex}
 \begin{align*}
   E[X] & = \frac{1}{n} \sum_{i = 1}^n x_i \\
   E[X^2] & = \frac{1}{n} \sum_{i = 1}^n x_i^2 \\
   & \vdots \\
   E[X^s] & = \frac{1}{n} \sum_{i = 1}^n x_i^s
 \end{align*}
-```
+
 If our pdf depends on only a single unknown parameter, we only need to solve the first equation. If we have two unknown parameters, we need to solve the system of the first two equations. So on and so forth.
 
 ## Theorems
@@ -98,14 +93,13 @@ $$
 
 where I've used one "log rule" in the above to simplify: $\log(a^b) = b \times log(a)$. Taking the derivative of the log-likelihood and setting it equal to zero, we obtain
 
-```{=tex}
 \begin{align*}
   \frac{\partial}{\partial \lambda} \log(L(\lambda)) & = \frac{1}{\lambda} \sum_{i = 1}^n x_i - n \\
   0 & \equiv \frac{1}{\lambda} \sum_{i = 1}^n x_i - n \\
   n & = \frac{1}{\lambda} \sum_{i = 1}^n x_i \\
   \lambda & = \frac{1}{n} \sum_{i = 1}^n x_i
 \end{align*}
-```
+
 and so the MLE for $\lambda$ is the sample average. To obtain the MOM estimator for $\lambda$, first note that the pdf contains only one parameter. Therefore, we only need to set the first theoretical moment equal to the first sample moment, and solve. Note that the first theoretical moment of a Poisson distribution is $E[X] = \lambda$, and so equating this to the first sample moment, we obtain that the MOM estimator for $\lambda$ is again, just the sample average! Much "easier" to compute than the MLE, in this case.
 
 </details>
@@ -118,12 +112,11 @@ and so the MLE for $\lambda$ is the sample average. To obtain the MOM estimator 
 
 Note that our pdf contains only one parameter. Then we only need to solve a "system" of one equation. We have
 
-```{=tex}
 \begin{align*}
   E[X] & = \frac{1}{n} \sum_{i = 1}^n x_i \\
   \theta & = \frac{1}{n} \sum_{i = 1}^n x_i
 \end{align*}
-```
+
 and we're done! The system is pretty easy to "solve" when the theoretical moment is exactly the parameter we're interested in.
 
 </details>
@@ -136,13 +129,12 @@ and we're done! The system is pretty easy to "solve" when the theoretical moment
 
 Note that our pdf contains only one parameter. Then we only need to solve a "system" of one equation. We have
 
-```{=tex}
 \begin{align*}
   E[Y] & = \frac{1}{n} \sum_{i = 1}^n y_i \\
   \frac{\theta}{2} & = \frac{1}{n} \sum_{i = 1}^n y_i \\
   \theta & = 2 \bar{y}
 \end{align*}
-```
+
 And so the MOM estimator for $\theta$ is 2 times the sample mean. Note that this is an example where the MOM estimator and MLE are not the same (you derived the MLE on your first problem set)!
 
 </details>

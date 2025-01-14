@@ -43,14 +43,28 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -70,7 +84,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -80,7 +94,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -106,15 +120,17 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 
@@ -163,9 +179,7 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
+
 \usepackage{bookmark}
 
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -180,6 +194,7 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
+
 \title{MATH/STAT 355: Statistical Theory}
 \author{Taylor Okonek}
 \date{2023-12-07}
@@ -193,6 +208,7 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+
 \bookmarksetup{startatroot}
 
 \chapter*{Welcome to Statistical
@@ -217,9 +233,11 @@ Each chapter of the course notes will contain (at a minimum):
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
+  Topic Introduction
+\item
   Learning Objectives
 \item
-  Reading Guide
+  Concept Questions
 \item
   Definitions
 \item
@@ -239,19 +257,16 @@ If you find any typos or have other questions, please email
 course content is largely similar, the differences primarily being the
 structure of the course and not the content itself.
 
-\begin{verbatim}
-\end{verbatim}
-
 \bookmarksetup{startatroot}
 
 \chapter{Probability: A Brief Review}\label{probability-a-brief-review}
 
-\emph{MATH/STAT 455} builds directly on topics covered in
+\emph{MATH/STAT 355} builds directly on topics covered in
 \emph{MATH/STAT 354: Probability}. You're not expected to perfectly
 remember everything from \emph{Probability}, but you will need to have
 sufficient facility with the following topics covered in this review
 Chapter in order to grasp the majority of concepts covered in
-\emph{MATH/STAT 455}.
+\emph{MATH/STAT 355}.
 
 \section{Learning Objectives}\label{learning-objectives}
 
@@ -267,13 +282,11 @@ By the end of this chapter, you should be able to\ldots{}
 \item
   Define the moment generating function and use it to find moments or
   identify pdfs
+\item
+  Derive pdfs of transformations of continuous random variables
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide}
-
-Associated Readings: Chapters 2-4 (pages 15-277)
-
-\subsection{Reading Questions}\label{reading-questions}
+\section{Concept Questions}\label{concept-questions}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -288,6 +301,10 @@ Associated Readings: Chapters 2-4 (pages 15-277)
   variables are an incredibly important assumption involved in many
   statistical methods. Why do you think it might be important/useful for
   random variables to have this property?
+\item
+  Why might we want to be able to derive distribution functions for
+  transformations of random variables? In what scenarios can you imagine
+  this being useful?
 \end{enumerate}
 
 \section{Definitions}\label{definitions}
@@ -313,7 +330,7 @@ with capital Roman letters, like \(X\), \(Y\), \(Z\), etc.
 \item
   Note: I don't care if you call a pmf a pdf\ldots{} I will probably do
   this continuously throughout the semester. We don't need to be picky
-  about this in \emph{MATH/STAT 455}.
+  about this in \emph{MATH/STAT 355}.
 \end{itemize}
 
 There are many different accepted ways to write the notation for a pdf
@@ -577,12 +594,12 @@ familiar you are with the forms of the pdfs, the easier/faster it will
 be to work through problem sets and quizzes.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2432}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2432}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2703}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2432}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \caption{\emph{Table 1.} Table of main probability distributions we will
-work with for \emph{MATH/STAT 455}.}\tabularnewline
+work with for \emph{MATH/STAT 355}.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Distribution
@@ -820,9 +837,14 @@ variables are related to each other, you can just state the known
 relationship, use it, and move on!
 
 If I \emph{do} ask you to derive/show these things, there a few
-different ways we can go about this. For this course, I only expect you
-to know the ``CDF method'' for \emph{one function} of \emph{one random
-variable}, as we'll demonstrate below.
+different ways we can go about this. For this course, I expect you to
+know the ``CDF method'' for \emph{one function} of \emph{one random
+variable}, \textbf{and} the ``Jacobian method'' for a function of
+\emph{more than one} random variable. We'll demonstrate the former
+below.
+
+\subsubsection{CDF Method: One random
+variable}\label{cdf-method-one-random-variable}
 
 \textbf{Theorem}. Let \(X\) be a continuous random variable with pdf
 \(f_X(x)\). Define a new random variable \(Y = g(X)\), for nice*
@@ -882,6 +904,9 @@ to ``deal with'' in our proof! Returning to that proof, we have
 \end{align*}
 
 as desired.
+
+\subsubsection{Jacobian Method: More than one random
+variable}\label{jacobian-method-more-than-one-random-variable}
 
 \section{Worked Examples}\label{worked-examples}
 
@@ -1343,11 +1368,7 @@ By the end of this chapter, you should be able to\ldots{}
   combination of (1) observed data, and (2) a distributional assumption
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-1}
-
-Associated Readings: Chapter 5 (Introduction through Example 5.2.5)
-
-\subsection{Reading Questions}\label{reading-questions-1}
+\section{Concept Questions}\label{concept-questions-1}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1672,12 +1693,7 @@ By the end of this chapter, you should be able to\ldots{}
   intuitive approach to estimating unknown parameters
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-2}
-
-Associated Readings: Chapter 5 (``The Method of Moments'' through
-Example 5.2.7)
-
-\subsection{Reading Questions}\label{reading-questions-2}
+\section{Concept Questions}\label{concept-questions-2}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1914,13 +1930,7 @@ By the end of this chapter, you should be able to\ldots{}
   consequences this may have when comparing estimators
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-3}
-
-Associated Readings: Chapter 5, Section 5.4 (``Properties of
-Estimators'') \& 5.5 (``Minimum-Variance Estimators: The Cramér-Rao
-Lower Bound'')
-
-\subsection{Reading Questions}\label{reading-questions-3}
+\section{Concept Questions}\label{concept-questions-3}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2358,7 +2368,7 @@ the \emph{entire shape} of a distribution, as opposed to just the
 \emph{center} of our distribution. Prof.~Brianna Heggeseth and
 Prof.~Kelsey Grinde have a great visual for this below:
 
-\includegraphics{consistency_files/figure-pdf/unnamed-chunk-1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{consistency_files/figure-pdf/unnamed-chunk-1-1.pdf}}
 
 The idea here is that as our sample size gets large (as we move to the
 right on the x-axis), consistency tells us something about the entire
@@ -2390,11 +2400,7 @@ By the end of this chapter, you should be able to\ldots{}
   consistent
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-4}
-
-Associated Readings: Chapter 5, Section 5.7
-
-\subsection{Reading Questions}\label{reading-questions-4}
+\section{Concept Questions}\label{concept-questions-4}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2802,11 +2808,7 @@ By the end of this chapter, you should be able to\ldots{}
   or exact distributions
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-5}
-
-Associated Readings: Chapter 4, Section 5.3
-
-\subsection{Reading Questions}\label{reading-questions-5}
+\section{Concept Questions}\label{concept-questions-5}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3332,16 +3334,7 @@ By the end of this chapter, you should be able to\ldots{}
   Calculate the power or Type II error for a given hypothesis test
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-6}
-
-Associated Readings: Chapter 6, Sections 6.1-6.5*
-
-*Note: I (Taylor) don't love the way that the textbook discusses
-hypothesis testing. This reading will not be required, but is included
-in the course notes as a reference if you'd like to read about
-hypothesis testing from a different perspective.
-
-\subsection{Reading Questions}\label{reading-questions-6}
+\section{Concept Questions}\label{concept-questions-6}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4172,11 +4165,7 @@ By the end of this chapter, you should be able to\ldots{}
   estimation
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-7}
-
-Associated Readings: Chapter 5, Section 5.8 (through Example 5.8.4)
-
-\subsection{Reading Questions}\label{reading-questions-7}
+\section{Concept Questions}\label{concept-questions-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4489,15 +4478,9 @@ By the end of this chapter, you should be able to\ldots{}
   Distinguish between admissible and inadmissible decision rules
 \end{itemize}
 
-\section{Reading Guide}\label{reading-guide-8}
+\section{Concept Questions}\label{concept-questions-8}
 
-Associated Readings: Chapter 5, Section 5.8 (beyond Example 5.8.4)
-
-This section of the textbook goes into a teeny tiny bit of decision
-theory, primarily Bayes estimates, but does \emph{not} approach decision
-theory broadly, or from a more formal perspective.
-
-\subsection{Reading Questions}\label{reading-questions-8}
+\subsection{Reading Questions}\label{reading-questions}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4711,9 +4694,9 @@ zero gives the same result as in the discrete case.
 \chapter{Computational Optimization}\label{computational-optimization}
 
 Welcome to the last chapter of the course notes! There are no worked
-examples for this chapter, which is instead focused on practical
-implementation of a handful of useful algorithms, and useful
-computational techniques that you may come across in your future,
+examples or concept questions for this chapter, which is instead focused
+on practical implementation of a handful of useful algorithms, and
+useful computational techniques that you may come across in your future,
 statistical career. Go forth and compute!
 
 \section{Newton-Raphson}\label{newton-raphson}
@@ -4766,14 +4749,14 @@ Newton-Raphson algorithm replaces
 We can visualize this process as follows:
 
 \begin{center}
-\includegraphics{computation_files/figure-pdf/unnamed-chunk-1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{computation_files/figure-pdf/unnamed-chunk-1-1.pdf}}
 \end{center}
 
 The equation of the tangent line to the curve \(y = f(x)\) at a point
 \(x = x_n\) is \[y = f'(x_n)(x-x_n) + f(x_n)\]
 
 \begin{center}
-\includegraphics{computation_files/figure-pdf/unnamed-chunk-2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{computation_files/figure-pdf/unnamed-chunk-2-1.pdf}}
 \end{center}
 
 The root of this tangent line (i.e., the place where it crosses the
@@ -4784,31 +4767,31 @@ Take this root of the tangent line as our next guess, then
 repeat\ldots{}
 
 \begin{center}
-\includegraphics{computation_files/figure-pdf/newton-step1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{computation_files/figure-pdf/newton-step1-1.pdf}}
 \end{center}
 
 \ldots and repeat\ldots{}
 
 \begin{center}
-\includegraphics{computation_files/figure-pdf/newton-step2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{computation_files/figure-pdf/newton-step2-1.pdf}}
 \end{center}
 
 \ldots and repeat\ldots{}
 
 \begin{center}
-\includegraphics{computation_files/figure-pdf/newton-step3-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{computation_files/figure-pdf/newton-step3-1.pdf}}
 \end{center}
 
 \ldots and repeat\ldots{}
 
 \begin{center}
-\includegraphics{computation_files/figure-pdf/newton-step4-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{computation_files/figure-pdf/newton-step4-1.pdf}}
 \end{center}
 
 \ldots and repeat\ldots{}
 
 \begin{center}
-\includegraphics{computation_files/figure-pdf/newton-step5-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{computation_files/figure-pdf/newton-step5-1.pdf}}
 \end{center}
 
 \ldots and keep repeating until you've converged!
@@ -5007,13 +4990,14 @@ values across iterations are referred to as \textbf{chains}.
 
 Here are some examples of chains that have converged:
 
-\includegraphics{images/traceplots.png}
+\pandocbounded{\includegraphics[keepaspectratio]{images/traceplots.png}}
 
 There are \emph{many} other convergence diagnostics you will need to
 consider if you end up doing research involving MCMC algorithms. A
 recent research paper on convergence diagnostics that is generally
 accepted now as best practice among Bayesian statisticians can be found
 \href{https://arxiv.org/pdf/1903.08008.pdf}{here}.
+
 
 
 

@@ -12,12 +12,11 @@ An important concept in decision theory is the idea of *admissibility*. An admis
 
 An decision rule $D$ (think, $\hat{\theta}$) is inadmissible if there exists a rule $D'$ (think, some other estimator) such that
 
-```{=tex}
 \begin{align*}
 R(D, \theta) & \leq R(D, \theta) \quad \forall \theta \\
 R(D', \theta) & < R(D, \theta) \quad \text{ for some } \theta
 \end{align*}
-```
+
 where $R(D, \theta)$ is the risk of a decision $D$ for a paramater $\theta$. If $D$ is not inadmissible, it is *admissible*. In words, in order for a decision rule to be admissible, it must have risk *at least as small* as every other possible decision rule everywhere in the parameter space, *and* it must have strictly lower risk for at least one parameter value.
 
 One of the most fascinating results to come out of decision theory (in my personal opinion) is that the sample mean is *not* an admissible decision rule for the mean of a Multivariate Normal distribution under MSE loss when the mean has greater than or equal to three dimensions! Relating this to what you know from introductory statistics, this means that (from a decision theory perspective) *least squares* is not an admissible approach to estimating the regression coefficients in a linear regression model with *at least two* covariates. The specific (biased) estimator of the mean that provides a lower MSE in this case is called the [James-Stein estimator](https://en.wikipedia.org/wiki/James%E2%80%93Stein_estimator).
@@ -35,11 +34,7 @@ By the end of this chapter, you should be able to...
 -   Derive a Bayes estimate for a common loss function
 -   Distinguish between admissible and inadmissible decision rules
 
-## Reading Guide
-
-Associated Readings: Chapter 5, Section 5.8 (beyond Example 5.8.4)
-
-This section of the textbook goes into a teeny tiny bit of decision theory, primarily Bayes estimates, but does *not* approach decision theory broadly, or from a more formal perspective.
+## Concept Questions
 
 ### Reading Questions
 
@@ -87,12 +82,11 @@ For what we consider in this course, whenever we use MSE loss in this course, th
 
 An decision rule $D$ is inadmissible if there exists a rule $D'$ such that
 
-```{=tex}
 \begin{align*}
 R(D', \theta) & \leq R(D, \theta) \quad \forall \theta \\
 R(D', \theta) & < R(D, \theta) \quad \text{ for some } \theta
 \end{align*}
-```
+
 where $R(D, \theta)$ is the risk of a decision $D$ for a paramater $\theta$. If $D$ is not inadmissible, it is *admissible*.
 
 ## Theorems
@@ -103,12 +97,11 @@ where $R(D, \theta)$ is the risk of a decision $D$ for a paramater $\theta$. If 
 
 Suppose that $D_\pi$ is a unique Bayes rule with respect to some prior $\pi(\theta)$, and that $D_\pi$ is *inadmissible*. Then there exists some other decision rule $D'$ such that $R(D', \theta) \leq R(D_\pi, \theta)$, for all $\theta$. Then,
 
-```{=tex}
 \begin{align*}
     R(D', \theta) & \leq R(D_{\pi}, \theta) \quad \quad \text{(inadmissibility)} \\
     & = \inf_D R(D, \pi) \quad \quad \text{($D_\pi$ is Bayes)}
 \end{align*}
-```
+
 and since $R(D', \theta) \leq \inf_D R(D, \pi)$, $D'$ is Bayes. But $D_\pi$ is *unique* Bayes by assumption, so this is a contradiction.
 
 Therefore, $D_\pi$ is admissible.
@@ -123,7 +116,6 @@ Therefore, $D_\pi$ is admissible.
 
 We can write the risk with respect to absolute loss as
 
-```{=tex}
 \begin{align*}
     R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
     & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
@@ -131,10 +123,9 @@ We can write the risk with respect to absolute loss as
     & = \int_{I\{\theta_0 \geq \theta \}} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{I\{\theta_0 < \theta \}} \left(  \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta \\
     & = \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
-```
+
 Taking the derivative with respect to $\theta_0$, and setting this equal to zero we get
 
-```{=tex}
 \begin{align*}
     0 & \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
     & = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta  \right) \\
@@ -142,7 +133,7 @@ Taking the derivative with respect to $\theta_0$, and setting this equal to zero
     & = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
     \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
-```
+
 (recalling that $\int_{-\infty}^x f(y) dy = f(x)$ and $\int_x^\infty f(y) dy = -f(x)$ and applying chain rule), and note that these two integrals are equal when $\theta_0$ is the posterior median.
 
 </details>
@@ -161,7 +152,6 @@ when $\theta$ is a *discrete* random variable.
 
 Note that we can rewrite the 0-1 loss function as $L(\hat{\theta},\theta) = 1 - I\{\hat{\theta} = \theta\}$. Then we can write,
 
-```{=tex}
 \begin{align*}
     R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
     & = \sum_{\theta} L(\theta_0, \theta) \pi(\theta \mid \textbf{y})  \\
@@ -172,16 +162,15 @@ Note that we can rewrite the 0-1 loss function as $L(\hat{\theta},\theta) = 1 - 
     \theta \mid \textbf{y})  \\
     & = 1 - \pi(\theta_0 \mid \textbf{y})
 \end{align*}
-```
+
 since pmfs sum to $1$. Then taking the derivative and setting this equal to zero gives
 
-```{=tex}
 \begin{align*}
     0 & \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
     & = \frac{\partial}{\partial \theta_0}  \left( 1 - \pi(\theta_0 \mid \textbf{y}) \right) \\
     & = \frac{\partial}{\partial \theta_0} \pi(\theta_0 \mid \textbf{y})
 \end{align*}
-```
+
 and the solution to this equation is, by definition, the posterior mode.
 
 </details>
@@ -194,7 +183,6 @@ and the solution to this equation is, by definition, the posterior mode.
 
 Note that we can rewrite the 0-1 loss function as $L(\hat{\theta},\theta) = 1 - \delta\{\hat{\theta} - \theta\}$, where $\delta$ is the Dirac delta function. Then we can write,
 
-```{=tex}
 \begin{align*}
     R(\theta_0, \theta) & = E[L(\theta_0, \theta) \mid \textbf{Y}] \\
     & = \int L(\theta_0, \theta) \pi(\theta \mid \textbf{y}) d\theta \\
@@ -205,7 +193,7 @@ Note that we can rewrite the 0-1 loss function as $L(\hat{\theta},\theta) = 1 - 
     \theta \mid \textbf{y}) d\theta   \\
     & = 1 - \pi(\theta_0 \mid \textbf{y})
 \end{align*}
-```
+
 since pdfs integrate to $1$. The reason why we can't use the same indicator definition as for the discrete case is because the integral of an indicator that is only positive at a single observation is *zero*. The Dirac delta function, on the other hand, has positive mass (equal to 1) at $\theta_0 - \theta = 0$. Take Projects in Real Analysis to learn more! Taking the derivative and setting this equal to zero gives the same result as in the discrete case.
 
 </details>

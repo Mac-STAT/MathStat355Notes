@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MATH/STAT 355: Statistical Theory - 3&nbsp; Method of Moments</title>
+<title>3&nbsp; Method of Moments – MATH/STAT 355: Statistical Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-12acdecf0bfd8bf8a7d30417284c8ed4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -107,13 +107,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./mom.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Method of Moments</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -216,10 +216,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">3.1</span> Learning Objectives</a></li>
-  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">3.2</span> Reading Guide</a>
-  <ul class="collapse">
-  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">3.2.1</span> Reading Questions</a></li>
-  </ul></li>
+  <li><a href="#concept-questions" id="toc-concept-questions" class="nav-link" data-scroll-target="#concept-questions"><span class="header-section-number">3.2</span> Concept Questions</a></li>
   <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">3.3</span> Definitions</a></li>
   <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">3.4</span> Theorems</a></li>
   <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">3.5</span> Worked Examples</a></li>
@@ -271,18 +268,14 @@ window.Quarto = {
 <li><p>Explain (in plain English) why method of moments estimation is an intuitive approach to estimating unknown parameters</p></li>
 </ul>
 </section>
-<section id="reading-guide" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">3.2</span> Reading Guide</h2>
-<p>Associated Readings: Chapter 5 (“The Method of Moments” through Example 5.2.7)</p>
-<section id="reading-questions" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">3.2.1</span> Reading Questions</h3>
+<section id="concept-questions" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="concept-questions"><span class="header-section-number">3.2</span> Concept Questions</h2>
 <ol type="1">
 <li><p>What is the intuition behind the method of moments (MOM) procedure for estimating unknown parameters?</p></li>
 <li><p>What are the typical steps to find a MOM estimator? (see Ex 5.2.6, 5.2.7, and Case Study 5.2.2; work through at least one of these examples in detail, filling in any steps that the textbook left out)</p></li>
 <li><p>What advantages does the MOM approach offer compared to MLE?</p></li>
 <li><p>Do the MOM and MLE approaches always yield the same estimate? (look through the examples in Section 5.2 and try using the other approach — do you always get the same answer?)</p></li>
 </ol>
-</section>
 </section>
 <section id="definitions" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">3.3</span> Definitions</h2>
@@ -293,12 +286,12 @@ window.Quarto = {
 <p>The <span class="math inline">\(r^{th}\)</span> <em>sample</em> moment of a probability distribution is given by <span class="math inline">\(\frac{1}{n} \sum_{i = 1}^n x_i^r\)</span>, for a random sample of observations <span class="math inline">\(x_1, \dots, x_n\)</span>.</p>
 <p><strong>Method of Moments Estimates</strong></p>
 <p>Let <span class="math inline">\(x_1, \dots, x_n\)</span> be a random sample of observations from the pdf <span class="math inline">\(f_X(x \mid \boldsymbol{\theta})\)</span>. The method of moments estimates are then the solutions to the set of <span class="math inline">\(s\)</span> equations given by</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
   E[X] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i \\
   E[X^2] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i^2 \\
   &amp; \vdots \\
   E[X^s] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i^s
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>If our pdf depends on only a single unknown parameter, we only need to solve the first equation. If we have two unknown parameters, we need to solve the system of the first two equations. So on and so forth.</p>
 </section>
 <section id="theorems" class="level2" data-number="3.4">
@@ -322,12 +315,12 @@ L(\lambda) = \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!}
 \log(L(\lambda)) = \sum_{i = 1}^n \left[ x_i\log(\lambda) - \lambda - \log(x_i!)\right]
 \]</span></p>
 <p>where I’ve used one “log rule” in the above to simplify: <span class="math inline">\(\log(a^b) = b \times log(a)\)</span>. Taking the derivative of the log-likelihood and setting it equal to zero, we obtain</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
   \frac{\partial}{\partial \lambda} \log(L(\lambda)) &amp; = \frac{1}{\lambda} \sum_{i = 1}^n x_i - n \\
   0 &amp; \equiv \frac{1}{\lambda} \sum_{i = 1}^n x_i - n \\
   n &amp; = \frac{1}{\lambda} \sum_{i = 1}^n x_i \\
   \lambda &amp; = \frac{1}{n} \sum_{i = 1}^n x_i
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>and so the MLE for <span class="math inline">\(\lambda\)</span> is the sample average. To obtain the MOM estimator for <span class="math inline">\(\lambda\)</span>, first note that the pdf contains only one parameter. Therefore, we only need to set the first theoretical moment equal to the first sample moment, and solve. Note that the first theoretical moment of a Poisson distribution is <span class="math inline">\(E[X] = \lambda\)</span>, and so equating this to the first sample moment, we obtain that the MOM estimator for <span class="math inline">\(\lambda\)</span> is again, just the sample average! Much “easier” to compute than the MLE, in this case.</p>
 </details>
 <p><strong>Problem 2:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \sim Bernoulli(\theta)\)</span>. Find the MOM estimator for <span class="math inline">\(\theta\)</span>.</p>
@@ -336,10 +329,10 @@ L(\lambda) = \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!}
 Solution:
 </summary>
 <p>Note that our pdf contains only one parameter. Then we only need to solve a “system” of one equation. We have</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
   E[X] &amp; = \frac{1}{n} \sum_{i = 1}^n x_i \\
   \theta &amp; = \frac{1}{n} \sum_{i = 1}^n x_i
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>and we’re done! The system is pretty easy to “solve” when the theoretical moment is exactly the parameter we’re interested in.</p>
 </details>
 <p><strong>Problem 3:</strong> Suppose <span class="math inline">\(Y_1, \dots, Y_n \sim Uniform(0, \theta)\)</span>. Find the MOM estimator for <span class="math inline">\(\theta\)</span>.</p>
@@ -348,11 +341,11 @@ Solution:
 Solution:
 </summary>
 <p>Note that our pdf contains only one parameter. Then we only need to solve a “system” of one equation. We have</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
   E[Y] &amp; = \frac{1}{n} \sum_{i = 1}^n y_i \\
   \frac{\theta}{2} &amp; = \frac{1}{n} \sum_{i = 1}^n y_i \\
   \theta &amp; = 2 \bar{y}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>And so the MOM estimator for <span class="math inline">\(\theta\)</span> is 2 times the sample mean. Note that this is an example where the MOM estimator and MLE are not the same (you derived the MLE on your first problem set)!</p>
 </details>
 
@@ -395,18 +388,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -438,7 +420,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/math-stat-355\.com");
@@ -446,7 +450,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MATH/STAT 355: Statistical Theory - 7&nbsp; Hypothesis Testing</title>
+<title>7&nbsp; Hypothesis Testing – MATH/STAT 355: Statistical Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-12acdecf0bfd8bf8a7d30417284c8ed4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -141,13 +141,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hypothesis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -250,10 +250,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
-  <li><a href="#reading-guide" id="toc-reading-guide" class="nav-link" data-scroll-target="#reading-guide"><span class="header-section-number">7.2</span> Reading Guide</a>
-  <ul class="collapse">
-  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link" data-scroll-target="#reading-questions"><span class="header-section-number">7.2.1</span> Reading Questions</a></li>
-  </ul></li>
+  <li><a href="#concept-questions" id="toc-concept-questions" class="nav-link" data-scroll-target="#concept-questions"><span class="header-section-number">7.2</span> Concept Questions</a></li>
   <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">7.3</span> Definitions</a></li>
   <li><a href="#theorems" id="toc-theorems" class="nav-link" data-scroll-target="#theorems"><span class="header-section-number">7.4</span> Theorems</a></li>
   <li><a href="#worked-examples" id="toc-worked-examples" class="nav-link" data-scroll-target="#worked-examples"><span class="header-section-number">7.5</span> Worked Examples</a></li>
@@ -358,12 +355,8 @@ E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
 <li>Calculate the power or Type II error for a given hypothesis test</li>
 </ul>
 </section>
-<section id="reading-guide" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="reading-guide"><span class="header-section-number">7.2</span> Reading Guide</h2>
-<p>Associated Readings: Chapter 6, Sections 6.1-6.5*</p>
-<p>*Note: I (Taylor) don’t love the way that the textbook discusses hypothesis testing. This reading will not be required, but is included in the course notes as a reference if you’d like to read about hypothesis testing from a different perspective.</p>
-<section id="reading-questions" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="reading-questions"><span class="header-section-number">7.2.1</span> Reading Questions</h3>
+<section id="concept-questions" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="concept-questions"><span class="header-section-number">7.2</span> Concept Questions</h2>
 <ol type="1">
 <li>What is the goal of hypothesis testing?</li>
 <li>What are the typical steps to deriving a hypothesis test?</li>
@@ -374,7 +367,6 @@ E[Y \mid X] = \beta_0 + \beta_1 X_{Cat2} + \beta_2 X_{Cat3}
 <li>How is type II error related to the power of a hypothesis test?</li>
 <li>What factors influence the power of a test? In practice, which of these factors can we control?</li>
 </ol>
-</section>
 </section>
 <section id="definitions" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="definitions"><span class="header-section-number">7.3</span> Definitions</h2>
@@ -441,12 +433,12 @@ E[\phi'(X) \mid \theta] \leq E[\phi(X) \mid \theta],
 \end{cases}
 \]</span>Suppose <span class="math inline">\(\phi'\)</span> is any other test such that <span class="math inline">\(E[\phi'(X) \mid \theta_0] \leq \alpha\)</span> (another level <span class="math inline">\(\alpha\)</span> test). Then we must show that <span class="math inline">\(E[\phi'(X) \mid \theta_1] \leq E[\phi(X) \mid \theta_1]\)</span>.</p>
 <p>By assumption, we have</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E[\phi(X) \mid \theta_0] &amp;= \int \phi(x) f_X(x \mid \theta_0) dx = \alpha \\
     E[\phi'(X) \mid \theta_0] &amp;= \int \phi'(x) f_X(x \mid \theta_0) dx \leq \alpha
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>Therefore we can write</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     E[\phi(X) &amp; \mid \theta_1] - E[\phi'(X) \mid \theta_1] \\
     &amp; = \int \phi(x) f_X(x \mid \theta_1) dx - \int \phi'(x) f_X(x \mid \theta_1) dx \\
     &amp; = \int [\phi(x) - \phi'(x)] f_X(x \mid \theta_1) dx \\
@@ -456,12 +448,12 @@ E[\phi'(X) \mid \theta] \leq E[\phi(X) \mid \theta],
     &amp; = c \int \phi(x) f_X(x \mid \theta_0) dx - c \int \phi'(x) f_X(x \mid \theta_0) dx \\
     &amp; \geq c(\alpha - \alpha) \\
     &amp; = 0
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>And rearranging yields</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 E[\phi(X)  \mid \theta_1] - E[\phi'(X) \mid \theta_1] &amp; \geq 0 \\
 E[\phi(X) \mid \theta_1] &amp; \geq E[\phi'(X) \mid \theta_1]
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>as desired.</p>
 <p>*Note: The <span class="math inline">\(-2\log(\dots)\)</span> piece comes into play for the LRT statistic to ensure that the test statistic converges in distribution to a <span class="math inline">\(\chi^2\)</span> random variable. When we’re just comparing the LRT statistic to another LRT test statistic, we can (more simply) just compare the ratio of likelihoods. Think: comparing <span class="math inline">\(X\)</span> vs.&nbsp;<span class="math inline">\(Y\)</span> is equivalent to comparing <span class="math inline">\(\log(X)\)</span> vs.&nbsp;<span class="math inline">\(\log(Y)\)</span> if we are only interested in the direction of the difference between them, since <span class="math inline">\(\log\)</span> is a monotone function.</p>
 </section>
@@ -477,11 +469,11 @@ Solution:
 \lambda_W = \left( \frac{\hat{\mu}_{MLE} - \mu_0}{\sigma/\sqrt{n}}\right)^2 = \left( \frac{10 - 8}{5/\sqrt{64}}\right)^2 = 10.24
 \]</span></p>
 <p>We can compare this test statistic to the critical value from a <span class="math inline">\(\chi^2_1\)</span> distribution since, by properties of normal distributions and recalling that standard normal distributions squared are <span class="math inline">\(\chi^2_1\)</span>,</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     \overline{Y} &amp; \sim N(\mu, \sigma^2/n) \\
     \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}} &amp; \sim N(0,1) \\
     \left( \frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}  \right)^2 &amp; \sim \chi^2_1
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>To calculate the critical value when <span class="math inline">\(\alpha = 0.05\)</span>, we turn to R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The quantile function for a given distribution gives us the value at which</span></span>
@@ -548,7 +540,7 @@ Solution:
 L(p) = \prod_{i = 1}^n p^{x_i} (1 - p)^{(1 - x_i)}
 \]</span></p>
 <p>And so our LRT statistic simplifies to</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \lambda_{LRT} &amp; = -2 \log\left(\frac{ L(0.5)} {L(\hat{p})} \right) \\
 &amp; = -2 \left[\log L(0.5) - \log L(\hat{p}) \right] \\
 &amp; = -2 \left[ \log(0.5) \sum_{i = 1}^n X_i + \log(1 - 0.5)\sum_{i = 1}^n(1 - X_i) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
@@ -556,7 +548,7 @@ L(p) = \prod_{i = 1}^n p^{x_i} (1 - p)^{(1 - x_i)}
 &amp; = -2 \left[ n\log(0.5) - \log(\hat{p}) \sum_{i = 1}^n X_i - \log(1 - \hat{p})\sum_{i = 1}^n(1 - X_i)\right] \\
 &amp; = -2 \left[ n\log(0.5) - \log(\hat{p}) n \overline{X} - \log(1 - \hat{p}) (n - n \overline{X})\right] \\
 &amp; = -2 n \left[ \log(0.5) - \log(\hat{p}) \hat{p} - \log(1 - \hat{p}) (1 -  \hat{p})\right]
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>(Note that this is as “simplified” as we can get without knowing <span class="math inline">\(\hat{p}\)</span> or <span class="math inline">\(n\)</span>)</p>
 </details>
 <p><strong>Problem 5:</strong> Derive a score test statistic for the hypothesis testing scenario described in Problem 3 (simplifying as much as you can).</p>
@@ -569,41 +561,41 @@ Solution:
 \lambda_S = \frac{\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2}{I(p_0)}.
 \]</span></p>
 <p>We can simplify by deriving the score and information matrix, and then plugging in <span class="math inline">\(p_0 = 0.5\)</span>. We have,</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \frac{\partial}{\partial p_0} \log L(p_0 \mid x) &amp; = \frac{\partial}{\partial p_0} \left[ \log(p_0) \sum_{i = 1}^n X_i + \log(1 - p_0) \sum_{i = 1}^n (1 - X_i) \right] \\
 &amp; = \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \\
 \left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2 &amp; = \left(\frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right)^2
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>and plugging in <span class="math inline">\(p_0 = 0.5\)</span>, we have,</p>
 <p><span class="math display">\[
 \left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x)\right)^2 = \left(\frac{\sum_{i = 1}^n X_i}{0.5} - \frac{n - \sum_{i = 1}^n  X_i}{1 - 0.5} \right)^2 = \left( \frac{-n + 2\sum_{i = 1}^n X_i}{0.5}\right)^2 = \left( -2n + 4\sum_{i = 1}^n X_i\right)^2.
 \]</span></p>
 <p>The information matrix is given by <span class="math inline">\(-E\left[ \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)\right]\)</span>. Piecing this together,</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \frac{\partial^2}{\partial p_0^2} \log L(p_0 \mid x)
 &amp; =  \frac{\partial}{\partial p_0} \left[ \frac{\sum_{i = 1}^n X_i}{p_0} - \frac{n - \sum_{i = 1}^n  X_i}{1 - p_0} \right] \\
 &amp; = \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>And to get <span class="math inline">\(I(p_0)\)</span>, we take the negative expectation of the above quantity under the null hypothesis (that is, where <span class="math inline">\(E[X] = p_0\)</span>) to obtain</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     I(p_0) &amp; = -E \left[ \frac{-\sum_{i = 1}^n X_i}{p_0^2} - \frac{n - \sum_{i = 1}^n  X_i}{(1 - p_0)^2} \right] \\
     &amp; = \frac{1}{p_0^2} \sum_{i = 1}^n E[X_i] + \frac{1}{(1 - p_0)^2} \left( n - \sum_{i = 1}^n E[X_i]\right) \\
     &amp; = \frac{1}{p_0^2} \sum_{i = 1}^n p_0 + \frac{1}{(1 - p_0)^2} \left( n - \sum_{i = 1}^n p_0\right) \\
     &amp; = \frac{n}{p_0}  + \frac{n}{(1 - p_0)^2} \left( 1 - p_0\right) \\
     &amp; = \frac{n}{p_0}  + \frac{n}{(1 - p_0)}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>And plugging in <span class="math inline">\(p_0 = 0.5\)</span> we have</p>
 <p><span class="math display">\[
 I(0.5) = \frac{n}{0.5}  + \frac{n}{(1 - 0.5)} = 2n + 2n = 4n.
 \]</span></p>
 <p>Then, finally, the score test statistic (simplified as much as possible) is given by</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     \lambda_S &amp; = \frac{\left( \frac{\partial}{\partial p_0} \log L(p_0 \mid x) \right)^2}{I(p_0)} \\
     &amp; = \frac{\left( -2n + 4\sum_{i = 1}^n X_i\right)^2}{4n} \\
     &amp; = \frac{\left( -2n + 4n \hat{p}\right)^2}{4n} \\
     &amp; = \frac{4n^2\left( -1 + 2 \hat{p}\right)^2}{4n} \\
     &amp; = n\left( -1 + 2 \hat{p}\right)^2
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 </details>
 <p><strong>Problem 6:</strong> For each of Problems 3, 4, and 5, calculate the p-values from each test when <span class="math inline">\(\hat{p} = 0.4\)</span> and <span class="math inline">\(n = 300\)</span>.</p>
 <details>
@@ -747,18 +739,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -790,7 +771,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/math-stat-355\.com");
@@ -798,7 +801,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

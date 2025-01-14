@@ -94,11 +94,7 @@ By the end of this chapter, you should be able to...
 
 -   Derive confidence intervals for unknown parameters based on asymptotic or exact distributions
 
-## Reading Guide
-
-Associated Readings: Chapter 4, Section 5.3
-
-### Reading Questions
+## Concept Questions
 
 1.  What feature of a confidence interval tells us about the precision of our estimator?
 
@@ -160,14 +156,13 @@ $$
 
 where the last two terms are equal since
 
-```{=tex}
 \begin{align*}
     \frac{1}{\sqrt{n}} \sum_{i = 1}^n Y_i & = \frac{1}{\sqrt{n}} \sum_{i = 1}^n \left( \frac{X_i - \mu}{\sigma}\right)\\
     & = \frac{1}{\sigma\sqrt{n}} \sum_{i = 1}^n (X_i - \mu) \\
     & = \frac{1}{\sigma\sqrt{n}}  (n\bar{X} - n\mu) \\
     & = \frac{\sqrt{n}(\bar{X} - \mu)}{\sigma}
 \end{align*}
-```
+
 We'll show that $Z_n \overset{d}{\to} N(0,1)$ by showing that the MGF of $Z_n$ converges to the MGF of a standard normal distribution. Let $M_Y(t)$ denote the MGF of each $Y_i$. Then the MGF of $\sum_{i = 1}^n Y_i$ is given by
 
 $$
@@ -264,23 +259,21 @@ $$
 
 and so
 
-```{=tex}
 \begin{align*}
     \sqrt{n}\left( g(Y) - g(\mu) \right) = \sqrt{n}(Y - \mu) g'(\mu) + O(\sqrt{n} |Y - \mu|^2)
 \end{align*}
-```
+
 Then note that $\sqrt{n}(Y - \mu) \overset{d}{\to} N(0, \sigma^2)$, $g'(\mu) \overset{p}{\to} g'(\mu)$ since it's just a constant, and $O(\sqrt{n} |Y - \mu|^2) \overset{p}{\to} 0$ (due to the $\sqrt{n}$ term). Then using two applications of Slutsky's theorem, we can write that
 
 $$
 \sqrt{n}(Y - \mu)g'(\mu) \overset{d}{\to} N(0, \sigma^2)g'(\mu) = \overset{d}{\to} N(0, [g'(\mu)]^2\sigma^2)
 $$ and
 
-```{=tex}
 \begin{align*}
     \sqrt{n}(Y - \mu)g'(\mu) + O(\sqrt{n} |Y - \mu|^2) & \overset{d}{\to} N(0, \sigma^2)g'(\mu) + 0\\
     & \overset{d}{=} N(0, [g'(\mu)]^2\sigma^2) 
 \end{align*}
-```
+
 and so finally we have shown that $$
 \sqrt{n}\left( g(Y) - g(\mu) \right) \overset{d}{\to}  N(0, [g'(\mu)]^2\sigma^2)
 $$ as desired.
@@ -295,14 +288,13 @@ $$ as desired.
 
 We can apply the delta-method with the function $g(x) = x^2$. Note that $g'(x) = 2x$, and therefore we can write
 
-```{=tex}
 \begin{align*}
     \sqrt{n}(Y_n - \mu) & \overset{d}{\to} N(0, \sigma^2) \\
     \sqrt{n}(g(Y_n) - g(\mu)) & \overset{d}{\to} N(0, [g'(\mu)]^2\sigma^2) \\
     \sqrt{n}(Y_n^2 - \mu^2) & \overset{d}{\to} N(0, [2\mu]^2\sigma^2) \\
     \sqrt{n}(Y_n^2 - \mu^2) & \overset{d}{\to} N(0, 4 \mu^2\sigma^2)
 \end{align*}
-```
+
 </details>
 
 **Problem 2:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} Bernoulli(p)$, and recall that the MLE for $p$ is given by $\hat{p}_{MLE} = \frac{1}{n} \sum_{i = 1}^n X_i$. Find the asymptotic distribution of $\hat{p}_{MLE}$ using the CLT and known properties of the Bernoulli distribution (expectation and variance, for example), and construct a 95% confidence interval for $p$ based on this asymptotic distribution.
@@ -325,11 +317,10 @@ $$
 
 and finally, (letting $\hat{p} = \hat{p}_{MLE}$ for ease of notation)
 
-```{=tex}
 \begin{align*}
     0.95 & = \Pr\left(-1.96 < \frac{\hat{p} - p}{\sqrt{\hat{p}(1-\hat{p})/n}}  < 1.96\right)  \\
     & = \Pr\left(-1.96\sqrt{\hat{p}(1-\hat{p})/n} < \hat{p} - p  < 1.96\sqrt{\hat{p}(1-\hat{p})/n}\right) \\
     & = \Pr\left(\hat{p} -1.96\sqrt{\hat{p}(1-\hat{p})/n} <  p  < \hat{p} + 1.96\sqrt{\hat{p}(1-\hat{p})/n}\right)
 \end{align*}
-```
+
 </details>

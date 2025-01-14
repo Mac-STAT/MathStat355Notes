@@ -1,6 +1,6 @@
 # Computational Optimization
 
-Welcome to the last chapter of the course notes! There are no worked examples for this chapter, which is instead focused on practical implementation of a handful of useful algorithms, and useful computational techniques that you may come across in your future, statistical career. Go forth and compute!
+Welcome to the last chapter of the course notes! There are no worked examples or concept questions for this chapter, which is instead focused on practical implementation of a handful of useful algorithms, and useful computational techniques that you may come across in your future, statistical career. Go forth and compute!
 
 ## Newton-Raphson
 
@@ -167,12 +167,11 @@ The multivariate version of Newton-Raphson is called the [Scoring algorithm](htt
 
 Suppose that we observe data $(y_i, x_i)$ where the outcome $y$ is binary. A natural model for these data is to assume the statistical model
 
-```{=tex}
 \begin{align*}
 y_i & \sim Bernoulli(p_i), \\
 \text{log} \left( \frac{p_i}{1 - p_i} \right) & = \beta_0 + \beta_1 x_i.
 \end{align*}
-```
+
 This is a simple logistic regression model, with unknown parameters given by the logistic regression coefficients $\beta_0, \beta_1$. Let's attempt to find MLEs for $\beta_0$ and $\beta_1$ analytically.
 
 Note that $p_i = \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}$. Then the likelihood of our Bernoulli observations $y_i$ can be written as
@@ -183,29 +182,26 @@ $$
 
 Following the typical procedure, we log the likelihood...
 
-```{=tex}
 \begin{align*}
     \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ y_i \log(\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}) + (1 - y_i) \log(\frac{1}{1 + e^{\beta_0 + \beta_1 x_i}}) \right] \\
     & = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i) - y_i \log(1 + e^{\beta_0 + \beta_1 x_i}) - \log(1 + e^{\beta_0 + \beta_1 x_i}) + y_i \log(1 + e^{\beta_0 + \beta_1 x_i})\right] \\
     & = \sum_{i = 1}^n \left[ y_i (\beta_0 + \beta_1 x_i)  - \log(1 + e^{\beta_0 + \beta_1 x_i}) \right]
 \end{align*}
-```
+
 ...taking the partial derivatives with respect to $\beta_0$ and $\beta_1$ we get...
 
-```{=tex}
 \begin{align*}
     \frac{\partial}{\partial \beta_0} \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
     \frac{\partial}{\partial \beta_1} \log(L(\beta_0, \beta_1)) & = \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
 \end{align*}
-```
+
 ...and if you try to solve the system of equations given by
 
-```{=tex}
 \begin{align*}
     0 & \equiv \sum_{i = 1}^n \left[ y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}  \right]\\
     0 & \equiv \sum_{i = 1}^n \left[ x_i \left( y_i -\frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} \right) \right]
 \end{align*}
-```
+
 you'll get nowhere! There is no analytical (sometimes called "closed-form") solution. In this case, we'd need to use the Scoring algorithm to solve for the regression coefficient estimates, since we have more than one unknown parameter.
 
 ### Why do anything analytically, if Newton-Raphson exists? {.unnumbered .unlisted}
