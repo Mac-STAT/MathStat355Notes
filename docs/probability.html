@@ -324,6 +324,18 @@ f_X(x) = \int f_{X,Z}(x,z)dz
 <p>Note that the “opposite” is also true: <span class="math inline">\(f_{Z\mid X}(z\mid x) = f_Z(z)\)</span></p></li>
 </ul>
 <p>In notation, we denote that two variables are independent as <span class="math inline">\(X \perp\!\!\!\perp Z\)</span>, or <span class="math inline">\(X \perp Z\)</span>. In LaTeX, the <em>latter</em> is typeset as “\perp”, and the former is typeset as “\perp\!\!\!\perp”. As a matter of personal preference, I (Taylor) prefer <span class="math inline">\(\perp\!\!\!\perp\)</span>, but I don’t like typing it out every time. Consider using the “\newcommand” functionality in LaTeX to create a shorthand for this for your documents!</p>
+<p><strong>Jacobian Matrix</strong></p>
+<p>Let <span class="math inline">\(f\)</span> be a 1-1 and onto function, where <span class="math inline">\(f(x_i) = y_i\)</span> for <span class="math inline">\(i = 1, \dots, n\)</span>. Then the Jacobian matrix of <span class="math inline">\(f\)</span> is the matrix of partial derivatives,</p>
+<p><span class="math display">\[
+J_f(x) = \begin{pmatrix}
+\frac{\partial y_1}{\partial x_1} &amp; \dots &amp; \frac{\partial y_n}{\partial x_1} \\
+\vdots &amp; &amp; \vdots \\
+\frac{\partial y_1}{\partial x_n} &amp; \dots &amp; \frac{\partial y_n}{\partial x_n}
+\end{pmatrix}
+\]</span></p>
+<p>The Jacobian matrix is sometimes simply referred to as the “Jacobian”, but be careful when simply calling it the Jacobian, since this can sometimes refer to the <em>determinant</em> of the Jacobian matrix as well. For this course, we’ll always refer to the Jacobian matrix as a matrix, and the “Jacobian” as its determinant.</p>
+<p><strong>Jacobian</strong></p>
+<p>The Jacobian is the determinant of the Jacobian matrix, denoted by <span class="math inline">\(| J_f(x) |\)</span>.</p>
 <p><strong>Expected Value / Expectation</strong></p>
 <p>The expectation (or expected value) of a random variable is defined as:</p>
 <p><span class="math display">\[
@@ -442,36 +454,42 @@ M_X(t) = E[e^{tX}]
 <td><span class="math inline">\(x \in [0, \infty)\)</span></td>
 </tr>
 <tr class="even">
+<td>Laplace (Double Exponential)</td>
+<td><span class="math inline">\(\pi(x) = \frac{1}{2b} \exp( - \frac{|x - \mu|}{b})\)</span></td>
+<td><span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(b &gt; 0\)</span></td>
+<td><span class="math inline">\(x \in \mathbb{R}\)</span></td>
+</tr>
+<tr class="odd">
 <td>Student-<span class="math inline">\(t\)</span></td>
 <td><span class="math inline">\(\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}\)</span></td>
 <td><span class="math inline">\(\nu &gt; 0\)</span></td>
 <td><span class="math inline">\(x \in \mathbb{R}\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Beta</td>
 <td><span class="math inline">\(\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}\)</span></td>
 <td><span class="math inline">\(\alpha, \beta &gt; 0\)</span></td>
 <td><span class="math inline">\(x \in [0,1]\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Poisson</td>
 <td><span class="math inline">\(\pi(x) = \frac{\lambda^x e^{-\lambda}}{x!}\)</span></td>
 <td><span class="math inline">\(\lambda &gt; 0\)</span></td>
 <td><span class="math inline">\(x \in \mathbb{N}\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Binomial</td>
 <td><span class="math inline">\(\pi(x) = \binom{n}{x} p^{x} (1 - p)^{n - x}\)</span></td>
 <td><span class="math inline">\(p \in [0,1], n = \{0, 1, 2, \dots\}\)</span></td>
 <td><span class="math inline">\(x \in \{0, 1, \dots, n\}\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Multinomial</td>
 <td><span class="math inline">\(\pi(\textbf{x}) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}\)</span></td>
 <td><span class="math inline">\(p_i &gt; 0\)</span>, <span class="math inline">\(p_1 + \dots + p_k = 1\)</span>, <span class="math inline">\(n = \{0, 1, 2, \dots \}\)</span></td>
 <td><span class="math inline">\(\{ x_1, \dots, x_k \mid \sum_{i = 1}^k x_i = n, x_i \geq 0 (i = 1, \dots, k)\}\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Negative Binomial</td>
 <td><span class="math inline">\(\pi(x) = \binom{x + r - 1}{x} (1-p)^x p^r\)</span></td>
 <td><span class="math inline">\(r &gt; 0\)</span>, <span class="math inline">\(p \in [0,1]\)</span></td>
@@ -606,6 +624,29 @@ M_X(t) = E[e^{tX}]
 </section>
 <section id="jacobian-method-more-than-one-random-variable" class="level4" data-number="1.4.1.2">
 <h4 data-number="1.4.1.2" class="anchored" data-anchor-id="jacobian-method-more-than-one-random-variable"><span class="header-section-number">1.4.1.2</span> Jacobian Method: More than one random variable</h4>
+<p>Transformations of single random variables are great, but we’ll need to work with transformations of <em>more than one</em> random variable if we want to be able to manipulate joint pdfs. Suppose, for example, we have <span class="math inline">\(X \sim Gamma(\alpha, \lambda)\)</span> and <span class="math inline">\(Y \sim Gamma(\beta, \lambda)\)</span>, where <span class="math inline">\(X \perp\!\!\!\perp Y\)</span>. Let <span class="math inline">\(U = X + Y\)</span> and <span class="math inline">\(W = \frac{X}{X + Y}\)</span>. How do we show that <span class="math inline">\(U\)</span> and <span class="math inline">\(W\)</span> are independent? Through finding the joint pdf! Which means we need a method for transforming more than one, continuous random variable. Enter the Jacobian Method.</p>
+<p><strong>Theorem</strong>. Let <span class="math inline">\(X = (x_1, \dots, x_n)\)</span> be a vector of random variables (a random vector) with pdf <span class="math inline">\(\pi_{X}(x)\)</span>. Suppose that <span class="math inline">\(f(x) = y\)</span> is a 1-1 and onto function, and that <span class="math inline">\(|J_f(x)| &gt; 0\)</span> almost everywhere. Then <span class="math inline">\(\pi_Y(y)\)</span> is given by</p>
+<p><span class="math display">\[
+\pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
+\]</span> where <span class="math inline">\(I_Y \{y \}\)</span> denotes the support of <span class="math inline">\(Y\)</span>.</p>
+<p><strong>Proof</strong>.</p>
+<p>Note that if <span class="math inline">\(f\)</span> is both 1-1 and onto, then <span class="math inline">\(f\)</span> is <em>either</em> monotone increasing or monotone decreasing. We’ll prove the case where <span class="math inline">\(f\)</span> is increasing, and we’ll note (but not show) how the decreasing case follows directly.</p>
+<p>Let <span class="math inline">\(f\)</span> be an increasing, continuous function. For some subset <span class="math inline">\(C \subseteq \mathbb{R}^n\)</span>,</p>
+<p><span class="math display">\[\begin{align*}
+\int_C \pi_Y(y) dy &amp; = \Pr(Y \in C) \\
+&amp; = \Pr(f(X) \in C) \\
+&amp; = \Pr(X \in f^{-1}(C)) \\
+&amp; = \int_{f^{-1}(C)} \pi_X(x) dx
+\end{align*}\]</span></p>
+<p>Now we’ll use a (convoluted) <span class="math inline">\(u\)</span>-substitution to make this look like what we want it to look like. Let <span class="math inline">\(u = f^{-1}(y)\)</span>. Note that this also means <span class="math inline">\(u = x\)</span>. Then <span class="math inline">\(du = (f^{-1}(y))' dy = dx\)</span>. Proceeding with <span class="math inline">\(u\)</span>-substitution, we have</p>
+<p><span class="math display">\[\begin{align*}
+\int_C \pi_Y(y) dy &amp; = \int_{f^{-1}(C)} \pi_X(x) dx \\
+&amp; = \int_C \pi_X(u) du \\
+&amp; = \int_C \pi_X(f^{-1}(y)) (f^{-1}(y))' dy \\
+&amp; = \int_C \pi_X(f^{-1}(y))
+\bigg| \frac{dx}{dy} \bigg| dy
+\end{align*}\]</span> which implies <span class="math inline">\(\pi_Y(y) = \pi_X(f^{-1}(y))
+\bigg| \frac{dx}{dy} \bigg|\)</span>, as desired. The absolute value signs (the Jacobian piece) come into play to help us deal with the decreasing case.</p>
 </section>
 </section>
 </section>
@@ -765,6 +806,13 @@ f_{X,Y}(x,y) &amp; = \lambda \beta e^{-x \lambda - y\beta} \\
 Solution:
 </summary>
 <p>To determine whether <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent (or not), we need to determine if their joint pdf is “separable.” Right away, we should note that a piece of the pdf contains <span class="math inline">\(x^y\)</span>, and therefore we are <em>never</em> going to be able to fully separate out this joint pdf into a function of <span class="math inline">\(x\)</span> times a function <span class="math inline">\(y\)</span>. Therefore, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <em>not</em> independent. In this case, we actually have <span class="math inline">\(X \sim Beta(\alpha, \beta)\)</span>, and <span class="math inline">\(Y \mid X \sim Binomial(n, y)\)</span> (we’ll return to this example in the Bayes chapter!).</p>
+</details>
+<p><strong>Problem 7:</strong> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be independent random variables with <span class="math inline">\(X \sim Exponential(1)\)</span> and <span class="math inline">\(Y \sim Exponential(1)\)</span>. Find the joint distribution of <span class="math inline">\(Z = X - Y\)</span> and <span class="math inline">\(W = X + Y\)</span>, and use this joint distribution to show that <span class="math inline">\(Z \sim Laplace(0, 1)\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
+<p>Solution…</p>
 </details>
 
 

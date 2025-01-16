@@ -463,6 +463,31 @@ As a matter of personal preference, I (Taylor) prefer
 Consider using the ``\textbackslash newcommand'' functionality in LaTeX
 to create a shorthand for this for your documents!
 
+\textbf{Jacobian Matrix}
+
+Let \(f\) be a 1-1 and onto function, where \(f(x_i) = y_i\) for
+\(i = 1, \dots, n\). Then the Jacobian matrix of \(f\) is the matrix of
+partial derivatives,
+
+\[
+J_f(x) = \begin{pmatrix}
+\frac{\partial y_1}{\partial x_1} & \dots & \frac{\partial y_n}{\partial x_1} \\
+\vdots & & \vdots \\
+\frac{\partial y_1}{\partial x_n} & \dots & \frac{\partial y_n}{\partial x_n}
+\end{pmatrix}
+\]
+
+The Jacobian matrix is sometimes simply referred to as the ``Jacobian'',
+but be careful when simply calling it the Jacobian, since this can
+sometimes refer to the \emph{determinant} of the Jacobian matrix as
+well. For this course, we'll always refer to the Jacobian matrix as a
+matrix, and the ``Jacobian'' as its determinant.
+
+\textbf{Jacobian}
+
+The Jacobian is the determinant of the Jacobian matrix, denoted by
+\(| J_f(x) |\).
+
 \textbf{Expected Value / Expectation}
 
 The expectation (or expected value) of a random variable is defined as:
@@ -649,6 +674,9 @@ Chi-squared &
 & \(\nu_1, \nu_2 > 0\) & \(x \in [0, \infty)\) \\
 Exponential & \(\pi(x) = \beta e^{-\beta x}\) & \(\beta > 0\) &
 \(x \in [0, \infty)\) \\
+Laplace (Double Exponential) &
+\(\pi(x) = \frac{1}{2b} \exp( - \frac{|x - \mu|}{b})\) &
+\(\mu \in \mathbb{R}\), \(b > 0\) & \(x \in \mathbb{R}\) \\
 Student-\(t\) &
 \(\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}\)
 & \(\nu > 0\) & \(x \in \mathbb{R}\) \\
@@ -908,6 +936,57 @@ as desired.
 \subsubsection{Jacobian Method: More than one random
 variable}\label{jacobian-method-more-than-one-random-variable}
 
+Transformations of single random variables are great, but we'll need to
+work with transformations of \emph{more than one} random variable if we
+want to be able to manipulate joint pdfs. Suppose, for example, we have
+\(X \sim Gamma(\alpha, \lambda)\) and \(Y \sim Gamma(\beta, \lambda)\),
+where \(X \perp\!\!\!\perp Y\). Let \(U = X + Y\) and
+\(W = \frac{X}{X + Y}\). How do we show that \(U\) and \(W\) are
+independent? Through finding the joint pdf! Which means we need a method
+for transforming more than one, continuous random variable. Enter the
+Jacobian Method.
+
+\textbf{Theorem}. Let \(X = (x_1, \dots, x_n)\) be a vector of random
+variables (a random vector) with pdf \(\pi_{X}(x)\). Suppose that
+\(f(x) = y\) is a 1-1 and onto function, and that \(|J_f(x)| > 0\)
+almost everywhere. Then \(\pi_Y(y)\) is given by
+
+\[
+\pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
+\] where \(I_Y \{y \}\) denotes the support of \(Y\).
+
+\textbf{Proof}.
+
+Note that if \(f\) is both 1-1 and onto, then \(f\) is \emph{either}
+monotone increasing or monotone decreasing. We'll prove the case where
+\(f\) is increasing, and we'll note (but not show) how the decreasing
+case follows directly.
+
+Let \(f\) be an increasing, continuous function. For some subset
+\(C \subseteq \mathbb{R}^n\),
+
+\begin{align*}
+\int_C \pi_Y(y) dy & = \Pr(Y \in C) \\
+& = \Pr(f(X) \in C) \\
+& = \Pr(X \in f^{-1}(C)) \\
+& = \int_{f^{-1}(C)} \pi_X(x) dx 
+\end{align*}
+
+Now we'll use a (convoluted) \(u\)-substitution to make this look like
+what we want it to look like. Let \(u = f^{-1}(y)\). Note that this also
+means \(u = x\). Then \(du = (f^{-1}(y))' dy = dx\). Proceeding with
+\(u\)-substitution, we have
+
+\begin{align*}
+\int_C \pi_Y(y) dy & = \int_{f^{-1}(C)} \pi_X(x) dx \\
+& = \int_C \pi_X(u) du \\
+& = \int_C \pi_X(f^{-1}(y)) (f^{-1}(y))' dy \\
+& = \int_C \pi_X(f^{-1}(y)) 
+\bigg| \frac{dx}{dy} \bigg| dy 
+\end{align*} which implies \(\pi_Y(y) = \pi_X(f^{-1}(y))
+\bigg| \frac{dx}{dy} \bigg|\), as desired. The absolute value signs (the
+Jacobian piece) come into play to help us deal with the decreasing case.
+
 \section{Worked Examples}\label{worked-examples}
 
 \textbf{Problem 1:} Suppose \(X \sim Exponential(\lambda)\). Calculate
@@ -1155,6 +1234,15 @@ a function of \(x\) times a function \(y\). Therefore, \(X\) and \(Y\)
 are \emph{not} independent. In this case, we actually have
 \(X \sim Beta(\alpha, \beta)\), and \(Y \mid X \sim Binomial(n, y)\)
 (we'll return to this example in the Bayes chapter!).
+
+\textbf{Problem 7:} Let \(X\) and \(Y\) be independent random variables
+with \(X \sim Exponential(1)\) and \(Y \sim Exponential(1)\). Find the
+joint distribution of \(Z = X - Y\) and \(W = X + Y\), and use this
+joint distribution to show that \(Z \sim Laplace(0, 1)\).
+
+Solution:
+
+Solution\ldots{}
 
 \bookmarksetup{startatroot}
 

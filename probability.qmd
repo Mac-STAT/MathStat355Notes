@@ -106,6 +106,24 @@ Two random variables $X$ and $Z$ are *independent* if and only if:
 
 In notation, we denote that two variables are independent as $X \perp\!\!\!\perp Z$, or $X \perp Z$. In LaTeX, the *latter* is typeset as "\\perp", and the former is typeset as "\\perp\\!\\!\\!\\perp". As a matter of personal preference, I (Taylor) prefer $\perp\!\!\!\perp$, but I don't like typing it out every time. Consider using the "\\newcommand" functionality in LaTeX to create a shorthand for this for your documents!
 
+**Jacobian Matrix**
+
+Let $f$ be a 1-1 and onto function, where $f(x_i) = y_i$ for $i = 1, \dots, n$. Then the Jacobian matrix of $f$ is the matrix of partial derivatives,
+
+$$
+J_f(x) = \begin{pmatrix}
+\frac{\partial y_1}{\partial x_1} & \dots & \frac{\partial y_n}{\partial x_1} \\
+\vdots & & \vdots \\
+\frac{\partial y_1}{\partial x_n} & \dots & \frac{\partial y_n}{\partial x_n}
+\end{pmatrix}
+$$
+
+The Jacobian matrix is sometimes simply referred to as the "Jacobian", but be careful when simply calling it the Jacobian, since this can sometimes refer to the *determinant* of the Jacobian matrix as well. For this course, we'll always refer to the Jacobian matrix as a matrix, and the "Jacobian" as its determinant.
+
+**Jacobian**
+
+The Jacobian is the determinant of the Jacobian matrix, denoted by $| J_f(x) |$.
+
 **Expected Value / Expectation**
 
 The expectation (or expected value) of a random variable is defined as:
@@ -197,6 +215,7 @@ You are also expected to know the probability distributions contained in Table 1
 | Chi-squared | $\pi(x) = \frac{2^{-\nu/2}}{\Gamma(\nu/2)} x^{\nu/2 - 1}e^{-x/2}$ | $\nu > 0$ | $x \in [0, \infty)$ |
 | $F$ | $\pi(x) = \frac{\Gamma(\frac{\nu_1 + \nu_2}{2})}{\Gamma(\frac{\nu_1}{2}) \Gamma(\frac{\nu_2}{2})} \left( \frac{\nu_1}{\nu_2}\right)^{\nu_1/2} \left( \frac{x^{(\nu_1 - 2)/2}}{\left( 1 + \left( \frac{\nu_1}{\nu_2}\right)x\right)^{(\nu_1 + \nu_2)/2}}\right)$ | $\nu_1, \nu_2 > 0$ | $x \in [0, \infty)$ |
 | Exponential | $\pi(x) = \beta e^{-\beta x}$ | $\beta > 0$ | $x \in [0, \infty)$ |
+| Laplace (Double Exponential) | $\pi(x) = \frac{1}{2b} \exp( - \frac{|x - \mu|}{b})$ | $\mu \in \mathbb{R}$, $b > 0$ | $x \in \mathbb{R}$ |
 | Student-$t$ | $\pi(x) = \frac{\Gamma((\nu + 1)/2)}{\Gamma(\nu/2) \sqrt{\nu \pi}} (1 + \frac{x^2}{\nu})^{-(\nu + 1)/2}$ | $\nu > 0$ | $x \in \mathbb{R}$ |
 | Beta | $\pi(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha - 1}(1 - x)^{\beta - 1}$ | $\alpha, \beta > 0$ | $x \in [0,1]$ |
 | Poisson | $\pi(x) = \frac{\lambda^x e^{-\lambda}}{x!}$ | $\lambda > 0$ | $x \in \mathbb{N}$ |
@@ -377,6 +396,38 @@ The right-hand side should look familiar: it is exactly what we needed to "deal 
 as desired.
 
 #### Jacobian Method: More than one random variable
+
+Transformations of single random variables are great, but we'll need to work with transformations of *more than one* random variable if we want to be able to manipulate joint pdfs. Suppose, for example, we have $X \sim Gamma(\alpha, \lambda)$ and $Y \sim Gamma(\beta, \lambda)$, where $X \perp\!\!\!\perp Y$. Let $U = X + Y$ and $W = \frac{X}{X + Y}$. How do we show that $U$ and $W$ are independent? Through finding the joint pdf! Which means we need a method for transforming more than one, continuous random variable. Enter the Jacobian Method.
+
+**Theorem**. Let $X = (x_1, \dots, x_n)$ be a vector of random variables (a random vector) with pdf $\pi_{X}(x)$. Suppose that $f(x) = y$ is a 1-1 and onto function, and that $|J_f(x)| > 0$ almost everywhere. Then $\pi_Y(y)$ is given by
+
+$$
+\pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
+$$ where $I_Y \{y \}$ denotes the support of $Y$.
+
+**Proof**.
+
+Note that if $f$ is both 1-1 and onto, then $f$ is *either* monotone increasing or monotone decreasing. We'll prove the case where $f$ is increasing, and we'll note (but not show) how the decreasing case follows directly.
+
+Let $f$ be an increasing, continuous function. For some subset $C \subseteq \mathbb{R}^n$,
+
+\begin{align*}
+\int_C \pi_Y(y) dy & = \Pr(Y \in C) \\
+& = \Pr(f(X) \in C) \\
+& = \Pr(X \in f^{-1}(C)) \\
+& = \int_{f^{-1}(C)} \pi_X(x) dx 
+\end{align*}
+
+Now we'll use a (convoluted) $u$-substitution to make this look like what we want it to look like. Let $u = f^{-1}(y)$. Note that this also means $u = x$. Then $du = (f^{-1}(y))' dy = dx$. Proceeding with $u$-substitution, we have
+
+\begin{align*}
+\int_C \pi_Y(y) dy & = \int_{f^{-1}(C)} \pi_X(x) dx \\
+& = \int_C \pi_X(u) du \\
+& = \int_C \pi_X(f^{-1}(y)) (f^{-1}(y))' dy \\
+& = \int_C \pi_X(f^{-1}(y)) 
+\bigg| \frac{dx}{dy} \bigg| dy 
+\end{align*} which implies $\pi_Y(y) = \pi_X(f^{-1}(y))
+\bigg| \frac{dx}{dy} \bigg|$, as desired. The absolute value signs (the Jacobian piece) come into play to help us deal with the decreasing case.
 
 ## Worked Examples
 
@@ -580,5 +631,15 @@ and so since we can write the joint distribution as a function of $X$ multiplied
 <summary>Solution:</summary>
 
 To determine whether $X$ and $Y$ are independent (or not), we need to determine if their joint pdf is "separable." Right away, we should note that a piece of the pdf contains $x^y$, and therefore we are *never* going to be able to fully separate out this joint pdf into a function of $x$ times a function $y$. Therefore, $X$ and $Y$ are *not* independent. In this case, we actually have $X \sim Beta(\alpha, \beta)$, and $Y \mid X \sim Binomial(n, y)$ (we'll return to this example in the Bayes chapter!).
+
+</details>
+
+**Problem 7:** Let $X$ and $Y$ be independent random variables with $X \sim Exponential(1)$ and $Y \sim Exponential(1)$. Find the joint distribution of $Z = X - Y$ and $W = X + Y$, and use this joint distribution to show that $Z \sim Laplace(0, 1)$.
+
+<details>
+
+<summary>Solution:</summary>
+
+Solution...
 
 </details>
