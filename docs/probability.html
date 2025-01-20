@@ -335,7 +335,7 @@ J_f(x) = \begin{pmatrix}
 \]</span></p>
 <p>The Jacobian matrix is sometimes simply referred to as the “Jacobian”, but be careful when simply calling it the Jacobian, since this can sometimes refer to the <em>determinant</em> of the Jacobian matrix as well. For this course, we’ll always refer to the Jacobian matrix as a matrix, and the “Jacobian” as its determinant.</p>
 <p><strong>Jacobian</strong></p>
-<p>The Jacobian is the determinant of the Jacobian matrix, denoted by <span class="math inline">\(| J_f(x) |\)</span>.</p>
+<p>The Jacobian is the determinant of the Jacobian matrix, denoted by <span class="math inline">\(| J_f(x) |\)</span>. Recall from linear algebra that <span class="math inline">\(Det(A) = Det(A^\top)\)</span>. This is convenient, because it means we won’t have worry too much about remembering which order our partial derivatives go in our matrix, for 2x2 matrices (which is all we’ll be working with for this course).</p>
 <p><strong>Expected Value / Expectation</strong></p>
 <p>The expectation (or expected value) of a random variable is defined as:</p>
 <p><span class="math display">\[
@@ -629,6 +629,7 @@ M_X(t) = E[e^{tX}]
 <p><span class="math display">\[
 \pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
 \]</span> where <span class="math inline">\(I_Y \{y \}\)</span> denotes the support of <span class="math inline">\(Y\)</span>.</p>
+<p>NOTE: <span class="math inline">\(| J_f(y) | = | \frac{\partial x}{\partial y} |\)</span>, above, where <span class="math inline">\(f(x) = y\)</span>. This means that the numerators and denominators in the Jacobian Matrix in the definition in the Course Notes are <em>flipped</em> here. See Worked Example 7.</p>
 <p><strong>Proof</strong>.</p>
 <p>Note that if <span class="math inline">\(f\)</span> is both 1-1 and onto, then <span class="math inline">\(f\)</span> is <em>either</em> monotone increasing or monotone decreasing. We’ll prove the case where <span class="math inline">\(f\)</span> is increasing, and we’ll note (but not show) how the decreasing case follows directly.</p>
 <p>Let <span class="math inline">\(f\)</span> be an increasing, continuous function. For some subset <span class="math inline">\(C \subseteq \mathbb{R}^n\)</span>,</p>
@@ -812,7 +813,55 @@ Solution:
 <summary>
 Solution:
 </summary>
-<p>Solution…</p>
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be independent random variables with <span class="math inline">\(X \sim Exponential(1)\)</span> and <span class="math inline">\(Y \sim Exponential(1)\)</span>. Find the joint distribution of <span class="math inline">\(Z = X - Y\)</span> and <span class="math inline">\(W = X + Y\)</span>, and use this joint distribution to show that <span class="math inline">\(Z \sim Laplace(0, 1)\)</span>.</p>
+We’ll need a couple things before we can directly apply the Jacobian method:
+<p>Since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, we have <span class="math display">\[
+\pi_{X,Y}(x,y) = e^{-x}e^{-y} = e^{-x - y}
+\]</span> Now we must determine what our function <span class="math inline">\(f\)</span> is, and its inverse. From the problem set-up, we have <span class="math inline">\(f(x, y) \longmapsto (x - y, x + y)\)</span>. To find the inverse function, we can rearrange these outputs to define <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> solely in terms of <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span>. Some algebra included below: <span class="math display">\[\begin{align*}
+    x &amp; = z + y \\
+    y &amp; = w - x \\
+    x &amp; = z + w - x \\
+    2x &amp; = z + w \\
+    x &amp; = \frac{z + w}{2} \quad \text{(Our first equation)!} \\
+    y &amp; = w - \frac{z + w}{2} \\
+    y &amp; = \frac{2w - z - w}{2} \\
+    y &amp; = \frac{w - z}{2} \quad \text{(Our second equation!)}
+\end{align*}\]</span> Which gives us <span class="math inline">\(f^{-1}(z,w) \longmapsto (\frac{z + w}{2}, \frac{w - z}{2})\)</span>. The Jacobian matrix is then given by <span class="math display">\[
+J_f(z,w) = \begin{pmatrix}
+    \frac{\partial (\frac{z + w}{2})}{\partial z} &amp; \frac{\partial (\frac{z + w}{2})}{\partial w} \\
+     \frac{\partial (\frac{w - z}{2})}{\partial z} &amp; \frac{\partial (\frac{w - z}{2})}{\partial w}
+\end{pmatrix} = \begin{pmatrix}
+     \frac{1}{2} &amp; \frac{1}{2} \\
+     \frac{-1}{2} &amp; \frac{1}{2}
+     \end{pmatrix}
+\]</span> and the Jacobian is given by <span class="math inline">\(|J_f(z,w)| = (1/2)(1/2) - (1/2)(-1/2) = 1/2\)</span>.</p>
+<p>Now we determine the support of the distribution <span class="math inline">\(\pi_{Z,W} (z,w)\)</span>. Since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are exponential, we know that <span class="math display">\[\begin{align*}
+    &amp; 0 \leq x &lt; \infty \\
+    &amp; 0 \leq y &lt; \infty
+\end{align*}\]</span> Plugging in some things and rearranging, we get <span class="math display">\[\begin{align*}
+    &amp; 0 \leq \frac{z + w}{2} &lt; \infty \\
+    &amp; 0 \leq z + w &lt; \infty \\
+    &amp; -z \leq w &lt; \infty \quad \text{(or)} -w \leq z &lt; \infty
+\end{align*}\]</span> and<br>
+<span class="math display">\[\begin{align*}
+    &amp; 0 \leq \frac{w - z}{2} &lt; \infty \\
+    &amp; 0 \leq w - z &lt; \infty \\
+    &amp; z \leq w &lt; \infty
+\end{align*}\]</span></p>
+<p>Putting these together, we have <span class="math inline">\(-w \leq z \leq w &lt; \infty\)</span>, so the support for <span class="math inline">\(z\)</span>, marginally is given by <span class="math inline">\([-w, w]\)</span>. The support for <span class="math inline">\(w\)</span>, marginally, is given by <span class="math inline">\([0, \infty)\)</span>, since it is a sum of two random variables that have that same support. Note that this therefore means <span class="math inline">\(z\)</span> can range from <span class="math inline">\((-\infty, \infty)\)</span>, depending on the value of <span class="math inline">\(w\)</span>.</p>
+<p>We can now finally apply the Jacobian method to obtain <span class="math inline">\(\pi_{Z,W}(z,w)\)</span> using the separate pieces we have calculated, obtaining: <span class="math display">\[\begin{align*}
+    \pi_{Z,W}(z,w) &amp; = \pi_{X,Y}(f^{-1}(z,w)) \times | J_f(z,w) |  \times I \{ -w \leq z \leq w, 0 \leq w &lt; \infty \}\\
+    &amp; = \exp(-\frac{z + w}{2} - \frac{w-z}{2}) \times \frac{1}{2} \times I \{ -w \leq z \leq w, 0 \leq w &lt; \infty \}\\
+    &amp; = \frac{1}{2} \exp(\frac{-z - w - w + z}{2}) \times I \{ -w \leq z \leq w, 0 \leq w &lt; \infty \}\\
+    &amp; = \frac{1}{2} e^{-w} \times I \{ -w \leq z \leq w, 0 \leq w &lt; \infty \}
+\end{align*}\]</span> Now that we have the joint distribution <span class="math inline">\(\pi_{Z,W}(z,w)\)</span>, we must integrate with respect to <span class="math inline">\(W\)</span> to get the marginal distribution of <span class="math inline">\(Z\)</span>. Recall that we have both <span class="math inline">\(-z \leq w &lt; \infty\)</span> and <span class="math inline">\(z \leq w &lt; \infty\)</span>, so we consider these two cases separately. We have <span class="math display">\[
+\pi_Z(z) = \begin{cases}
+    \int_z^\infty \frac{1}{2} e^{-w} dw = - \frac{1}{2} e^{-w} \big|_z^\infty = \frac{1}{2}e^{-z} &amp; 0 \leq z &lt; \infty\\
+    \int_{-z}^\infty \frac{1}{2} e^{-w} dw = - \frac{1}{2} e^{-w} \big|_{-z}^\infty = \frac{1}{2}e^{z} &amp; -\infty &lt; z \leq 0
+\end{cases}
+\]</span> which can equivalently be written as <span class="math display">\[
+\pi_Z(z) = \frac{1}{2} e^{-|z|} \quad -\infty &lt; z &lt; \infty
+\]</span> which implies <span class="math inline">\(Z \sim Laplace(0,1)\)</span>.</p>
 </details>
 
 

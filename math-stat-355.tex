@@ -486,7 +486,11 @@ matrix, and the ``Jacobian'' as its determinant.
 \textbf{Jacobian}
 
 The Jacobian is the determinant of the Jacobian matrix, denoted by
-\(| J_f(x) |\).
+\(| J_f(x) |\). Recall from linear algebra that
+\(Det(A) = Det(A^\top)\). This is convenient, because it means we won't
+have worry too much about remembering which order our partial
+derivatives go in our matrix, for 2x2 matrices (which is all we'll be
+working with for this course).
 
 \textbf{Expected Value / Expectation}
 
@@ -955,6 +959,11 @@ almost everywhere. Then \(\pi_Y(y)\) is given by
 \pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
 \] where \(I_Y \{y \}\) denotes the support of \(Y\).
 
+NOTE: \(| J_f(y) | = | \frac{\partial x}{\partial y} |\), above, where
+\(f(x) = y\). This means that the numerators and denominators in the
+Jacobian Matrix in the definition in the Course Notes are \emph{flipped}
+here. See Worked Example 7.
+
 \textbf{Proof}.
 
 Note that if \(f\) is both 1-1 and onto, then \(f\) is \emph{either}
@@ -1242,7 +1251,92 @@ joint distribution to show that \(Z \sim Laplace(0, 1)\).
 
 Solution:
 
-Solution\ldots{}
+Let \(X\) and \(Y\) be independent random variables with
+\(X \sim Exponential(1)\) and \(Y \sim Exponential(1)\). Find the joint
+distribution of \(Z = X - Y\) and \(W = X + Y\), and use this joint
+distribution to show that \(Z \sim Laplace(0, 1)\).
+
+We'll need a couple things before we can directly apply the Jacobian
+method:
+
+\begin{enumerate}
+    \item The joint distribution, $\pi_{X,Y}(x,y)$
+    \item Our function $f(x,y)$ and its inverse
+    \item Our Jacobian matrix, given by $J_{f}(z,w) = \begin{pmatrix} \frac{\partial x}{\partial z} & \frac{\partial x}{\partial w} \\\frac{\partial y}{\partial z} & \frac{\partial y}{\partial w} \end{pmatrix}$
+    \item Our Jacobian, given by $\bigg| J_{f}(z,w) \bigg|$
+    \item The support of the joint distribution $\pi_{Z,W}(z,w)$ (we'll do this step at the end).
+\end{enumerate}
+
+Since \(X\) and \(Y\) are independent, we have \[
+\pi_{X,Y}(x,y) = e^{-x}e^{-y} = e^{-x - y}
+\] Now we must determine what our function \(f\) is, and its inverse.
+From the problem set-up, we have \(f(x, y) \longmapsto (x - y, x + y)\).
+To find the inverse function, we can rearrange these outputs to define
+\(x\) and \(y\) solely in terms of \(z\) and \(w\). Some algebra
+included below: \begin{align*}
+    x & = z + y \\
+    y & = w - x \\
+    x & = z + w - x \\
+    2x & = z + w \\
+    x & = \frac{z + w}{2} \quad \text{(Our first equation)!} \\
+    y & = w - \frac{z + w}{2} \\
+    y & = \frac{2w - z - w}{2} \\
+    y & = \frac{w - z}{2} \quad \text{(Our second equation!)}
+\end{align*} Which gives us
+\(f^{-1}(z,w) \longmapsto (\frac{z + w}{2}, \frac{w - z}{2})\). The
+Jacobian matrix is then given by \[
+J_f(z,w) = \begin{pmatrix}
+    \frac{\partial (\frac{z + w}{2})}{\partial z} & \frac{\partial (\frac{z + w}{2})}{\partial w} \\
+     \frac{\partial (\frac{w - z}{2})}{\partial z} & \frac{\partial (\frac{w - z}{2})}{\partial w} 
+\end{pmatrix} = \begin{pmatrix}
+     \frac{1}{2} & \frac{1}{2} \\
+     \frac{-1}{2} & \frac{1}{2}
+     \end{pmatrix}
+\] and the Jacobian is given by
+\(|J_f(z,w)| = (1/2)(1/2) - (1/2)(-1/2) = 1/2\).
+
+Now we determine the support of the distribution \(\pi_{Z,W} (z,w)\).
+Since \(X\) and \(Y\) are exponential, we know that \begin{align*}
+    & 0 \leq x < \infty \\
+    & 0 \leq y < \infty
+\end{align*} Plugging in some things and rearranging, we get
+\begin{align*}
+    & 0 \leq \frac{z + w}{2} < \infty \\
+    & 0 \leq z + w < \infty \\
+    & -z \leq w < \infty \quad \text{(or)} -w \leq z < \infty
+\end{align*} and\\
+\begin{align*}
+    & 0 \leq \frac{w - z}{2} < \infty \\
+    & 0 \leq w - z < \infty \\
+    & z \leq w < \infty
+\end{align*}
+
+Putting these together, we have \(-w \leq z \leq w < \infty\), so the
+support for \(z\), marginally is given by \([-w, w]\). The support for
+\(w\), marginally, is given by \([0, \infty)\), since it is a sum of two
+random variables that have that same support. Note that this therefore
+means \(z\) can range from \((-\infty, \infty)\), depending on the value
+of \(w\).
+
+We can now finally apply the Jacobian method to obtain
+\(\pi_{Z,W}(z,w)\) using the separate pieces we have calculated,
+obtaining: \begin{align*}
+    \pi_{Z,W}(z,w) & = \pi_{X,Y}(f^{-1}(z,w)) \times | J_f(z,w) |  \times I \{ -w \leq z \leq w, 0 \leq w < \infty \}\\
+    & = \exp(-\frac{z + w}{2} - \frac{w-z}{2}) \times \frac{1}{2} \times I \{ -w \leq z \leq w, 0 \leq w < \infty \}\\
+    & = \frac{1}{2} \exp(\frac{-z - w - w + z}{2}) \times I \{ -w \leq z \leq w, 0 \leq w < \infty \}\\
+    & = \frac{1}{2} e^{-w} \times I \{ -w \leq z \leq w, 0 \leq w < \infty \}
+\end{align*} Now that we have the joint distribution \(\pi_{Z,W}(z,w)\),
+we must integrate with respect to \(W\) to get the marginal distribution
+of \(Z\). Recall that we have both \(-z \leq w < \infty\) and
+\(z \leq w < \infty\), so we consider these two cases separately. We
+have \[
+\pi_Z(z) = \begin{cases}
+    \int_z^\infty \frac{1}{2} e^{-w} dw = - \frac{1}{2} e^{-w} \big|_z^\infty = \frac{1}{2}e^{-z} & 0 \leq z < \infty\\
+    \int_{-z}^\infty \frac{1}{2} e^{-w} dw = - \frac{1}{2} e^{-w} \big|_{-z}^\infty = \frac{1}{2}e^{z} & -\infty < z \leq 0
+\end{cases}
+\] which can equivalently be written as \[
+\pi_Z(z) = \frac{1}{2} e^{-|z|} \quad -\infty < z < \infty
+\] which implies \(Z \sim Laplace(0,1)\).
 
 \bookmarksetup{startatroot}
 
