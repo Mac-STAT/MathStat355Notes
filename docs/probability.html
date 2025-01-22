@@ -814,7 +814,14 @@ Solution:
 Solution:
 </summary>
 <p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be independent random variables with <span class="math inline">\(X \sim Exponential(1)\)</span> and <span class="math inline">\(Y \sim Exponential(1)\)</span>. Find the joint distribution of <span class="math inline">\(Z = X - Y\)</span> and <span class="math inline">\(W = X + Y\)</span>, and use this joint distribution to show that <span class="math inline">\(Z \sim Laplace(0, 1)\)</span>.</p>
-We’ll need a couple things before we can directly apply the Jacobian method:
+<p>We’ll need a couple things before we can directly apply the Jacobian method:</p>
+<ul>
+<li><p>The joint distribution, <span class="math inline">\(\pi_{X,Y}(x,y)\)</span></p></li>
+<li><p>Our function <span class="math inline">\(f(x,y)\)</span> and its inverse</p></li>
+<li><p>Our Jacobian matrix, given by <span class="math inline">\(J_{f}(z,w) = \begin{pmatrix} \frac{\partial x}{\partial z} &amp; \frac{\partial x}{\partial w} \\\frac{\partial y}{\partial z} &amp; \frac{\partial y}{\partial w} \end{pmatrix}\)</span></p></li>
+<li><p>Our Jacobian, given by <span class="math inline">\(\bigg| J_{f}(z,w) \bigg|\)</span></p></li>
+<li><p>The support of the joint distribution <span class="math inline">\(\pi_{Z,W}(z,w)\)</span> (we’ll do this step at the end).</p></li>
+</ul>
 <p>Since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, we have <span class="math display">\[
 \pi_{X,Y}(x,y) = e^{-x}e^{-y} = e^{-x - y}
 \]</span> Now we must determine what our function <span class="math inline">\(f\)</span> is, and its inverse. From the problem set-up, we have <span class="math inline">\(f(x, y) \longmapsto (x - y, x + y)\)</span>. To find the inverse function, we can rearrange these outputs to define <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> solely in terms of <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span>. Some algebra included below: <span class="math display">\[\begin{align*}

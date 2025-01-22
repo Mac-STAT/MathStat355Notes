@@ -645,13 +645,16 @@ To determine whether $X$ and $Y$ are independent (or not), we need to determine 
 Let $X$ and $Y$ be independent random variables with $X \sim Exponential(1)$ and $Y \sim Exponential(1)$. Find the joint distribution of $Z = X - Y$ and $W = X + Y$, and use this joint distribution to show that $Z \sim Laplace(0, 1)$.
 
 We'll need a couple things before we can directly apply the Jacobian method:
-\begin{enumerate}
-    \item The joint distribution, $\pi_{X,Y}(x,y)$
-    \item Our function $f(x,y)$ and its inverse
-    \item Our Jacobian matrix, given by $J_{f}(z,w) = \begin{pmatrix} \frac{\partial x}{\partial z} & \frac{\partial x}{\partial w} \\\frac{\partial y}{\partial z} & \frac{\partial y}{\partial w} \end{pmatrix}$
-    \item Our Jacobian, given by $\bigg| J_{f}(z,w) \bigg|$
-    \item The support of the joint distribution $\pi_{Z,W}(z,w)$ (we'll do this step at the end).
-\end{enumerate}
+
+- The joint distribution, $\pi_{X,Y}(x,y)$
+
+- Our function $f(x,y)$ and its inverse
+
+- Our Jacobian matrix, given by $J_{f}(z,w) = \begin{pmatrix} \frac{\partial x}{\partial z} & \frac{\partial x}{\partial w} \\\frac{\partial y}{\partial z} & \frac{\partial y}{\partial w} \end{pmatrix}$
+
+- Our Jacobian, given by $\bigg| J_{f}(z,w) \bigg|$
+
+- The support of the joint distribution $\pi_{Z,W}(z,w)$ (we'll do this step at the end).
 
 Since $X$ and $Y$ are independent, we have
 $$

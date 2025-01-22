@@ -1259,13 +1259,20 @@ distribution to show that \(Z \sim Laplace(0, 1)\).
 We'll need a couple things before we can directly apply the Jacobian
 method:
 
-\begin{enumerate}
-    \item The joint distribution, $\pi_{X,Y}(x,y)$
-    \item Our function $f(x,y)$ and its inverse
-    \item Our Jacobian matrix, given by $J_{f}(z,w) = \begin{pmatrix} \frac{\partial x}{\partial z} & \frac{\partial x}{\partial w} \\\frac{\partial y}{\partial z} & \frac{\partial y}{\partial w} \end{pmatrix}$
-    \item Our Jacobian, given by $\bigg| J_{f}(z,w) \bigg|$
-    \item The support of the joint distribution $\pi_{Z,W}(z,w)$ (we'll do this step at the end).
-\end{enumerate}
+\begin{itemize}
+\item
+  The joint distribution, \(\pi_{X,Y}(x,y)\)
+\item
+  Our function \(f(x,y)\) and its inverse
+\item
+  Our Jacobian matrix, given by
+  \(J_{f}(z,w) = \begin{pmatrix} \frac{\partial x}{\partial z} & \frac{\partial x}{\partial w} \\\frac{\partial y}{\partial z} & \frac{\partial y}{\partial w} \end{pmatrix}\)
+\item
+  Our Jacobian, given by \(\bigg| J_{f}(z,w) \bigg|\)
+\item
+  The support of the joint distribution \(\pi_{Z,W}(z,w)\) (we'll do
+  this step at the end).
+\end{itemize}
 
 Since \(X\) and \(Y\) are independent, we have \[
 \pi_{X,Y}(x,y) = e^{-x}e^{-y} = e^{-x - y}
