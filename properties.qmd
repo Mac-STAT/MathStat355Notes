@@ -16,6 +16,18 @@ If you are familiar with machine learning techniques or models for prediction pu
 
 It just so happens that we can decompose mean squared error into a sum of two terms: the variance of our estimator + the bias of our estimator (squared). What this means for us is that two estimators may have the *exact same* MSE, but *very* different variances or biases (potentially). In general, if we hold MSE constant and imagine *increasing* the variance of our estimator, the bias would need to decrease accordingly to maintain the same MSE. This is where the "trade-off" comes from. MSE is an *incredibly* commonly used metric for assessing prediction models, but as we will see, doesn't necessarily paint a full picture in terms of how "good" an estimator is. Smaller MSE does not automatically imply "better estimator," just as smaller bias (in some cases) does not automatically imply "better estimator."
 
+### Sufficiency {.unnumbered .unlisted}
+
+Another property we like to have in an estimator (sometimes) is called *sufficiency*. I like to think about sufficiency in terms of minimizing the amount of information we need to retain in order to get a "complete picture" of what's going on. Suppose, for example, someone is allergic to tomatoes. Rather than listing *every food* that contains tomatoes and saying that they're allergic to each of them individually, they could just say that they're allergic to tomatoes and call it a day. Stating "tomatoes" is **sufficient** information in this case for us to get the whole picture of their allergies!
+
+A similar concept applies to estimators. Recall from the MLE chapter of the notes that we previously showed that the MLE of a sample proportion is given by $\bar{X}$. If I want someone to be able to obtain the MLE for a sample proportion, I then have a few options. I could give them:
+
+-  Every observation I know, $x_1, \dots,x_n$
+-  Just one number, the sample mean, $\frac{1}{n}\sum_{i = 1}^n x_i$
+-  All my observations plus some extra information, just for fun!
+
+It should hopefully be obvious that you don't need extra information for fun, but we *also* don't need to know the value of each individual observation. The sample mean is sufficient! Formal definitions and a relevant theorem  to follow.
+
 ## Learning Objectives
 
 By the end of this chapter, you should be able to...
@@ -68,6 +80,14 @@ $$
 MSE(\hat{\theta}) = E[(\hat{\theta} - \theta)^2] = Var(\hat{\theta}) + Bias(\hat{\theta})^2
 $$
 
+**Sufficient**
+
+For some function $T$, $T(X)$ is a sufficient statistic for an unknown parameter $\theta$ if the conditional distribution of $X$ given $T(X)$ does not depend on $\theta$. A "looser" definition is that the distribution of $X$ must depend on $\theta$ *only through* $T(X)$.
+
+**Minimal Sufficiency**
+
+For some function $T^*$, $T^*(X)$ is a minimal sufficient statistic for an unknown parameter $\theta$ if $T^*(X)$ is sufficient, *and* for every other sufficient statistic $T(X)$. $T^*(X) = f(T(X))$ for some function $f$.
+
 **Relative Efficiency**
 
 The relative efficiency of an estimator $\hat{\theta}_1$ with respect to an estimator $\hat{\theta}_2$ is the ratio $Var(\hat{\theta}_2)/Var(\hat{\theta}_1)$.
@@ -113,6 +133,88 @@ Var(X) \geq \frac{Cov(X, Y)^2}{Var(Y)}
 $$
 
 The proof is quite clear on [Wikipedia](https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality).
+
+**The Factorization Criterion for sufficiency**
+
+Consider a pdf for a random variable $X$ that depends on an unknown parameter $\theta$, given by $\pi(x \mid \theta)$. The statistic $T(x)$ is sufficient for $\theta$ if and only if $\pi(x \mid \theta)$ factors as:
+
+$$
+\pi(x \mid \theta) = g(T(x) \mid \theta) h(x)
+$$
+where $g(T(x) \mid \theta)$ depends on $x$ only through $T(x)$, and $h(x)$ does not depend on $\theta$.
+
+Note that in the statistics literature this criterion is sometimes referred to as the Fisher-Neyman Factorization Criterion.
+
+**Proof.**
+
+Two proofs available on [Wikipedia](https://en.wikipedia.org/wiki/Sufficient_statistic#Proof). The one for the discrete-only case is more intuitive, if you'd like to look through one of them.
+
+**Lehmann-Scheffe Theorem**
+
+Suppose that a random variable $X$ has pdf given by $f(x \mid \theta)$, and that $T^*(X)$ is such that for every* pair of points $(x,y)$, the ratio of pdfs
+
+$$
+\frac{f(y \mid \theta)}{f(x \mid \theta)}
+$$
+does not depend on $\theta$ **if and only if** $T^*(x) = T^*(y)$. Then $T^*(X)$ is a minimal sufficient statistic for $\theta$.
+
+*every pair of points that have the same support as $X$.
+
+**Proof.** 
+
+We'll utilize something called a likelihood ratio (literally a ratio of likelihoods) to prove this theorem. We'll also come back to likelihood ratios later in the Hypothesis Testing chapter! 
+
+Let $\theta_1$ and $\theta_2$ be two possible values of our unknown parameter $\theta$. Then a likelihood ratio comparing densities evaluated at these two values is defined as
+
+$$
+L_{\theta_1, \theta_2}(x) \equiv \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)}
+$$
+Our proof will proceed as follows:
+
+1. We'll show that if $T(X)$ is sufficient, then $L_{\theta_1, \theta_2}(X)$ is a function of $T(X)$ $\forall$ $\theta_1, \theta_2$.
+
+2. We'll show the converse: If $L_{\theta_1, \theta_2}(X)$ is a function of $T(X)$ $\forall$ $\theta_1, \theta_2$, then $T(X)$ is sufficient. This combined with (1) will show that $L_{\theta_1, \theta_2}(X)$ is a minimal sufficient statistic.
+
+3. We'll use the above two statements to prove the theorem!
+
+First, suppose that $T(X)$ is sufficient for $\theta$. Then, by definition we can write
+
+$$
+L_{\theta_1, \theta_2}(x) = \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)} = \frac{g(T(x) \mid \theta_1)h(x)}{g(T(x) \mid \theta_2)h(x)} = \frac{g(T(x) \mid \theta_1)}{g(T(x) \mid \theta_2)}
+$$
+and so $L_{\theta_1, \theta_2}(X)$ is a function of $T(x)$ $\forall$ $\theta_1, \theta_2$.
+
+Second, assume WLOG that $\theta_1$ is fixed, and denote our unknown parameter $\theta_2 = \theta$. We can rearrange our likelihood ratio as 
+
+\begin{align*}
+    L_{\theta_1, \theta}(x) & = \frac{f(x \mid \theta)}{f(x \mid \theta_1)} \\
+    f(x \mid \theta) & = L_{\theta_1, \theta}(x) f(x \mid \theta_1) 
+\end{align*}
+
+and note that $L_{\theta_1, \theta}(x)$ is a function of $T(X)$ by assumption, and $f(x \mid \theta_1)$ is a function of $x$ that does not depend on our unknown parameter $\theta$. Then $T(X)$ satisfies the factorization criterion, and is therefore sufficient. 
+
+Let $T^{**}(X) \equiv L_{\theta_1, \theta_2}(X)$. Then the first two statements we have shown give us that
+
+$$
+T(X) \text{ is sufficient } \iff T^{**}(X) \text{ is a function of } T(X)
+$$
+
+and therefore $T^{**}(X)$ is a minimal sufficient statistic, by definition.
+
+We'll now (officially) prove our theorem. By hypothesis of the theorem,
+
+\begin{align*}
+    T^*(x) = T^*(y) & \iff \frac{f(y \mid \theta)}{f(x \mid \theta)} \text{ is } \theta-free \\
+    & \iff \frac{f(y \mid \theta_1)}{f(x \mid \theta_1)} = \frac{f(y \mid \theta_2)}{f(x \mid \theta_2)} \quad \forall \theta_1, \theta_2 \\
+    & \iff \frac{f(y \mid \theta_2)}{f(y \mid \theta_1)} = \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)} \quad \forall \theta_1, \theta_2 \\
+    & \iff L_{\theta_1, \theta_2}(y) = L_{\theta_1, \theta_2} (x) \quad \forall \theta_1, \theta_2 \\
+    & \iff T^{**}(y) = T^{**}(x)
+\end{align*}
+
+Therefore $T^*(X)$ and $T^{**}(X)$ are equivalent. Since $T^{**}(X)$ is a minimal sufficient statistic, $T^*(X)$ is therefore also minimal sufficient.
+
+
+
 
 **Cramér-Rao Lower Bound**
 

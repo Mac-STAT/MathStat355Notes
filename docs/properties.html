@@ -257,6 +257,17 @@ window.Quarto = {
 <p>If you are familiar with machine learning techniques or models for prediction purposes more generally (as opposed to inference), you may have stumbled upon the phrase “bias-variance trade-off.” In scenarios where we want to make good predictions for new observations using a statistical model, one way to measure how “well” our model is predicting new observations is through minimizing <strong>mean squared error</strong>. Intuitively, this is something we should <em>want</em> to minimize: “errors” (the difference between a predicted value and an observed value) are bad, we square them because the direction of the error (above or below) shouldn’t matter too much, and average over them because we need a summary measure of all our errors combined, and an average seems reasonable. In statistical terms, mean squared error has a very specific definition (see below) as the expected value of what is sometimes called a <em>loss function</em> (where in this case, loss is defined as squared error loss). We’ll return to this in the decision theory chapter of our course notes.</p>
 <p>It just so happens that we can decompose mean squared error into a sum of two terms: the variance of our estimator + the bias of our estimator (squared). What this means for us is that two estimators may have the <em>exact same</em> MSE, but <em>very</em> different variances or biases (potentially). In general, if we hold MSE constant and imagine <em>increasing</em> the variance of our estimator, the bias would need to decrease accordingly to maintain the same MSE. This is where the “trade-off” comes from. MSE is an <em>incredibly</em> commonly used metric for assessing prediction models, but as we will see, doesn’t necessarily paint a full picture in terms of how “good” an estimator is. Smaller MSE does not automatically imply “better estimator,” just as smaller bias (in some cases) does not automatically imply “better estimator.”</p>
 </section>
+<section id="sufficiency" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="sufficiency">Sufficiency</h3>
+<p>Another property we like to have in an estimator (sometimes) is called <em>sufficiency</em>. I like to think about sufficiency in terms of minimizing the amount of information we need to retain in order to get a “complete picture” of what’s going on. Suppose, for example, someone is allergic to tomatoes. Rather than listing <em>every food</em> that contains tomatoes and saying that they’re allergic to each of them individually, they could just say that they’re allergic to tomatoes and call it a day. Stating “tomatoes” is <strong>sufficient</strong> information in this case for us to get the whole picture of their allergies!</p>
+<p>A similar concept applies to estimators. Recall from the MLE chapter of the notes that we previously showed that the MLE of a sample proportion is given by <span class="math inline">\(\bar{X}\)</span>. If I want someone to be able to obtain the MLE for a sample proportion, I then have a few options. I could give them:</p>
+<ul>
+<li>Every observation I know, <span class="math inline">\(x_1, \dots,x_n\)</span></li>
+<li>Just one number, the sample mean, <span class="math inline">\(\frac{1}{n}\sum_{i = 1}^n x_i\)</span></li>
+<li>All my observations plus some extra information, just for fun!</li>
+</ul>
+<p>It should hopefully be obvious that you don’t need extra information for fun, but we <em>also</em> don’t need to know the value of each individual observation. The sample mean is sufficient! Formal definitions and a relevant theorem to follow.</p>
+</section>
 <section id="learning-objectives" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">4.1</span> Learning Objectives</h2>
 <p>By the end of this chapter, you should be able to…</p>
@@ -293,6 +304,10 @@ window.Quarto = {
 <p><span class="math display">\[
 MSE(\hat{\theta}) = E[(\hat{\theta} - \theta)^2] = Var(\hat{\theta}) + Bias(\hat{\theta})^2
 \]</span></p>
+<p><strong>Sufficient</strong></p>
+<p>For some function <span class="math inline">\(T\)</span>, <span class="math inline">\(T(X)\)</span> is a sufficient statistic for an unknown parameter <span class="math inline">\(\theta\)</span> if the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(T(X)\)</span> does not depend on <span class="math inline">\(\theta\)</span>. A “looser” definition is that the distribution of <span class="math inline">\(X\)</span> must depend on <span class="math inline">\(\theta\)</span> <em>only through</em> <span class="math inline">\(T(X)\)</span>.</p>
+<p><strong>Minimal Sufficiency</strong></p>
+<p>For some function <span class="math inline">\(T^*\)</span>, <span class="math inline">\(T^*(X)\)</span> is a minimal sufficient statistic for an unknown parameter <span class="math inline">\(\theta\)</span> if <span class="math inline">\(T^*(X)\)</span> is sufficient, <em>and</em> for every other sufficient statistic <span class="math inline">\(T(X)\)</span>. <span class="math inline">\(T^*(X) = f(T(X))\)</span> for some function <span class="math inline">\(f\)</span>.</p>
 <p><strong>Relative Efficiency</strong></p>
 <p>The relative efficiency of an estimator <span class="math inline">\(\hat{\theta}_1\)</span> with respect to an estimator <span class="math inline">\(\hat{\theta}_2\)</span> is the ratio <span class="math inline">\(Var(\hat{\theta}_2)/Var(\hat{\theta}_1)\)</span>.</p>
 <p><strong>Uniformly Minimum-Variance Unbiased Estimator (UMVUE)</strong></p>
@@ -322,6 +337,55 @@ I(\theta) = E \left[ \left( \frac{\partial}{\partial \theta} \log L(\theta \mid 
 Var(X) \geq \frac{Cov(X, Y)^2}{Var(Y)}
 \]</span></p>
 <p>The proof is quite clear on <a href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">Wikipedia</a>.</p>
+<p><strong>The Factorization Criterion for sufficiency</strong></p>
+<p>Consider a pdf for a random variable <span class="math inline">\(X\)</span> that depends on an unknown parameter <span class="math inline">\(\theta\)</span>, given by <span class="math inline">\(\pi(x \mid \theta)\)</span>. The statistic <span class="math inline">\(T(x)\)</span> is sufficient for <span class="math inline">\(\theta\)</span> if and only if <span class="math inline">\(\pi(x \mid \theta)\)</span> factors as:</p>
+<p><span class="math display">\[
+\pi(x \mid \theta) = g(T(x) \mid \theta) h(x)
+\]</span> where <span class="math inline">\(g(T(x) \mid \theta)\)</span> depends on <span class="math inline">\(x\)</span> only through <span class="math inline">\(T(x)\)</span>, and <span class="math inline">\(h(x)\)</span> does not depend on <span class="math inline">\(\theta\)</span>.</p>
+<p>Note that in the statistics literature this criterion is sometimes referred to as the Fisher-Neyman Factorization Criterion.</p>
+<p><strong>Proof.</strong></p>
+<p>Two proofs available on <a href="https://en.wikipedia.org/wiki/Sufficient_statistic#Proof">Wikipedia</a>. The one for the discrete-only case is more intuitive, if you’d like to look through one of them.</p>
+<p><strong>Lehmann-Scheffe Theorem</strong></p>
+<p>Suppose that a random variable <span class="math inline">\(X\)</span> has pdf given by <span class="math inline">\(f(x \mid \theta)\)</span>, and that <span class="math inline">\(T^*(X)\)</span> is such that for every* pair of points <span class="math inline">\((x,y)\)</span>, the ratio of pdfs</p>
+<p><span class="math display">\[
+\frac{f(y \mid \theta)}{f(x \mid \theta)}
+\]</span> does not depend on <span class="math inline">\(\theta\)</span> <strong>if and only if</strong> <span class="math inline">\(T^*(x) = T^*(y)\)</span>. Then <span class="math inline">\(T^*(X)\)</span> is a minimal sufficient statistic for <span class="math inline">\(\theta\)</span>.</p>
+<p>*every pair of points that have the same support as <span class="math inline">\(X\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>We’ll utilize something called a likelihood ratio (literally a ratio of likelihoods) to prove this theorem. We’ll also come back to likelihood ratios later in the Hypothesis Testing chapter!</p>
+<p>Let <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> be two possible values of our unknown parameter <span class="math inline">\(\theta\)</span>. Then a likelihood ratio comparing densities evaluated at these two values is defined as</p>
+<p><span class="math display">\[
+L_{\theta_1, \theta_2}(x) \equiv \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)}
+\]</span> Our proof will proceed as follows:</p>
+<ol type="1">
+<li><p>We’ll show that if <span class="math inline">\(T(X)\)</span> is sufficient, then <span class="math inline">\(L_{\theta_1, \theta_2}(X)\)</span> is a function of <span class="math inline">\(T(X)\)</span> <span class="math inline">\(\forall\)</span> <span class="math inline">\(\theta_1, \theta_2\)</span>.</p></li>
+<li><p>We’ll show the converse: If <span class="math inline">\(L_{\theta_1, \theta_2}(X)\)</span> is a function of <span class="math inline">\(T(X)\)</span> <span class="math inline">\(\forall\)</span> <span class="math inline">\(\theta_1, \theta_2\)</span>, then <span class="math inline">\(T(X)\)</span> is sufficient. This combined with (1) will show that <span class="math inline">\(L_{\theta_1, \theta_2}(X)\)</span> is a minimal sufficient statistic.</p></li>
+<li><p>We’ll use the above two statements to prove the theorem!</p></li>
+</ol>
+<p>First, suppose that <span class="math inline">\(T(X)\)</span> is sufficient for <span class="math inline">\(\theta\)</span>. Then, by definition we can write</p>
+<p><span class="math display">\[
+L_{\theta_1, \theta_2}(x) = \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)} = \frac{g(T(x) \mid \theta_1)h(x)}{g(T(x) \mid \theta_2)h(x)} = \frac{g(T(x) \mid \theta_1)}{g(T(x) \mid \theta_2)}
+\]</span> and so <span class="math inline">\(L_{\theta_1, \theta_2}(X)\)</span> is a function of <span class="math inline">\(T(x)\)</span> <span class="math inline">\(\forall\)</span> <span class="math inline">\(\theta_1, \theta_2\)</span>.</p>
+<p>Second, assume WLOG that <span class="math inline">\(\theta_1\)</span> is fixed, and denote our unknown parameter <span class="math inline">\(\theta_2 = \theta\)</span>. We can rearrange our likelihood ratio as</p>
+<p><span class="math display">\[\begin{align*}
+    L_{\theta_1, \theta}(x) &amp; = \frac{f(x \mid \theta)}{f(x \mid \theta_1)} \\
+    f(x \mid \theta) &amp; = L_{\theta_1, \theta}(x) f(x \mid \theta_1)
+\end{align*}\]</span></p>
+<p>and note that <span class="math inline">\(L_{\theta_1, \theta}(x)\)</span> is a function of <span class="math inline">\(T(X)\)</span> by assumption, and <span class="math inline">\(f(x \mid \theta_1)\)</span> is a function of <span class="math inline">\(x\)</span> that does not depend on our unknown parameter <span class="math inline">\(\theta\)</span>. Then <span class="math inline">\(T(X)\)</span> satisfies the factorization criterion, and is therefore sufficient.</p>
+<p>Let <span class="math inline">\(T^{**}(X) \equiv L_{\theta_1, \theta_2}(X)\)</span>. Then the first two statements we have shown give us that</p>
+<p><span class="math display">\[
+T(X) \text{ is sufficient } \iff T^{**}(X) \text{ is a function of } T(X)
+\]</span></p>
+<p>and therefore <span class="math inline">\(T^{**}(X)\)</span> is a minimal sufficient statistic, by definition.</p>
+<p>We’ll now (officially) prove our theorem. By hypothesis of the theorem,</p>
+<p><span class="math display">\[\begin{align*}
+    T^*(x) = T^*(y) &amp; \iff \frac{f(y \mid \theta)}{f(x \mid \theta)} \text{ is } \theta-free \\
+    &amp; \iff \frac{f(y \mid \theta_1)}{f(x \mid \theta_1)} = \frac{f(y \mid \theta_2)}{f(x \mid \theta_2)} \quad \forall \theta_1, \theta_2 \\
+    &amp; \iff \frac{f(y \mid \theta_2)}{f(y \mid \theta_1)} = \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)} \quad \forall \theta_1, \theta_2 \\
+    &amp; \iff L_{\theta_1, \theta_2}(y) = L_{\theta_1, \theta_2} (x) \quad \forall \theta_1, \theta_2 \\
+    &amp; \iff T^{**}(y) = T^{**}(x)
+\end{align*}\]</span></p>
+<p>Therefore <span class="math inline">\(T^*(X)\)</span> and <span class="math inline">\(T^{**}(X)\)</span> are equivalent. Since <span class="math inline">\(T^{**}(X)\)</span> is a minimal sufficient statistic, <span class="math inline">\(T^*(X)\)</span> is therefore also minimal sufficient.</p>
 <p><strong>Cramér-Rao Lower Bound</strong></p>
 <p>Let <span class="math inline">\(f_Y(y \mid \theta)\)</span> be a pdf with nice* conditions, and let <span class="math inline">\(Y_1, \dots, Y_n\)</span> be a random sample from <span class="math inline">\(f_Y(y \mid \theta)\)</span>. Let <span class="math inline">\(\hat{\theta}\)</span> be <em>any</em> unbiased estimator of <span class="math inline">\(\theta\)</span>. Then</p>
 <p><span class="math display">\[\begin{align*}

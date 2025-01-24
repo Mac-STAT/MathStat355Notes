@@ -1,6 +1,6 @@
 # Welcome to Statistical Theory! {.unnumbered}
 
-This book contains the course notes for *MATH/STAT 355:* *Statistical Theory\** at Macalester College, as taught by Prof. [Taylor Okonek](https://taylorokonek.github.io/). These notes draw from reading guides created by Prof. [Kelsey Grinde](https://kegrinde.github.io/), and a little bit from the textbook, *An Introduction to Mathematical Statistics and Its Applications* by Richard Larsen and Morris Marx (6th Edition). As of Spring 2025, this course no longer requires a textbook, and relies heavily on these course notes instead.
+This book contains the course notes for *MATH/STAT 355:* *Statistical Theory\** at Macalester College, as taught by Prof. [Taylor Okonek](https://taylorokonek.github.io/). These notes draw from reading guides created by Prof. [Kelsey Grinde](https://kegrinde.github.io/), a little bit from the textbook, *An Introduction to Mathematical Statistics and Its Applications* by Richard Larsen and Morris Marx (6th Edition), and the STAT 512/513 Course Notes developed by Dr. Michael Perlman at the University of Washington. As of Spring 2025, this course no longer requires a textbook, and relies heavily on these course notes instead.
 
 Each chapter of the course notes will contain (at a minimum):
 
