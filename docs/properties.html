@@ -308,6 +308,14 @@ MSE(\hat{\theta}) = E[(\hat{\theta} - \theta)^2] = Var(\hat{\theta}) + Bias(\hat
 <p>For some function <span class="math inline">\(T\)</span>, <span class="math inline">\(T(X)\)</span> is a sufficient statistic for an unknown parameter <span class="math inline">\(\theta\)</span> if the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(T(X)\)</span> does not depend on <span class="math inline">\(\theta\)</span>. A “looser” definition is that the distribution of <span class="math inline">\(X\)</span> must depend on <span class="math inline">\(\theta\)</span> <em>only through</em> <span class="math inline">\(T(X)\)</span>.</p>
 <p><strong>Minimal Sufficiency</strong></p>
 <p>For some function <span class="math inline">\(T^*\)</span>, <span class="math inline">\(T^*(X)\)</span> is a minimal sufficient statistic for an unknown parameter <span class="math inline">\(\theta\)</span> if <span class="math inline">\(T^*(X)\)</span> is sufficient, <em>and</em> for every other sufficient statistic <span class="math inline">\(T(X)\)</span>. <span class="math inline">\(T^*(X) = f(T(X))\)</span> for some function <span class="math inline">\(f\)</span>.</p>
+<p><strong>Complete</strong></p>
+<p>A statistic <span class="math inline">\(T(X)\)</span> is <em>complete</em> for an unknown parameter <span class="math inline">\(\theta\)</span> if <span class="math display">\[
+E[g(T(x))] \text{ is } \theta-\text{free} \implies g(T(x)) \text{ is constant, almost everywhere}
+\]</span> for a nice function <span class="math inline">\(g\)</span>.</p>
+<p>Importantly, it is <em>equivalent</em> to say that <span class="math inline">\(T(X)\)</span> is <em>complete</em> for an unknown parameter <span class="math inline">\(\theta\)</span> if</p>
+<p><span class="math display">\[
+E[g(T(x))] = 0 \implies g(T(x)) = 0 \quad\text{ almost everywhere}
+\]</span></p>
 <p><strong>Relative Efficiency</strong></p>
 <p>The relative efficiency of an estimator <span class="math inline">\(\hat{\theta}_1\)</span> with respect to an estimator <span class="math inline">\(\hat{\theta}_2\)</span> is the ratio <span class="math inline">\(Var(\hat{\theta}_2)/Var(\hat{\theta}_1)\)</span>.</p>
 <p><strong>Uniformly Minimum-Variance Unbiased Estimator (UMVUE)</strong></p>
@@ -343,7 +351,6 @@ Var(X) \geq \frac{Cov(X, Y)^2}{Var(Y)}
 \pi(x \mid \theta) = g(T(x) \mid \theta) h(x)
 \]</span> where <span class="math inline">\(g(T(x) \mid \theta)\)</span> depends on <span class="math inline">\(x\)</span> only through <span class="math inline">\(T(x)\)</span>, and <span class="math inline">\(h(x)\)</span> does not depend on <span class="math inline">\(\theta\)</span>.</p>
 <p>Note that in the statistics literature this criterion is sometimes referred to as the Fisher-Neyman Factorization Criterion.</p>
-<p><strong>Proof.</strong></p>
 <p>Two proofs available on <a href="https://en.wikipedia.org/wiki/Sufficient_statistic#Proof">Wikipedia</a>. The one for the discrete-only case is more intuitive, if you’d like to look through one of them.</p>
 <p><strong>Lehmann-Scheffe Theorem</strong></p>
 <p>Suppose that a random variable <span class="math inline">\(X\)</span> has pdf given by <span class="math inline">\(f(x \mid \theta)\)</span>, and that <span class="math inline">\(T^*(X)\)</span> is such that for every* pair of points <span class="math inline">\((x,y)\)</span>, the ratio of pdfs</p>
@@ -351,7 +358,10 @@ Var(X) \geq \frac{Cov(X, Y)^2}{Var(Y)}
 \frac{f(y \mid \theta)}{f(x \mid \theta)}
 \]</span> does not depend on <span class="math inline">\(\theta\)</span> <strong>if and only if</strong> <span class="math inline">\(T^*(x) = T^*(y)\)</span>. Then <span class="math inline">\(T^*(X)\)</span> is a minimal sufficient statistic for <span class="math inline">\(\theta\)</span>.</p>
 <p>*every pair of points that have the same support as <span class="math inline">\(X\)</span>.</p>
-<p><strong>Proof.</strong></p>
+<details>
+<summary>
+Proof.
+</summary>
 <p>We’ll utilize something called a likelihood ratio (literally a ratio of likelihoods) to prove this theorem. We’ll also come back to likelihood ratios later in the Hypothesis Testing chapter!</p>
 <p>Let <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> be two possible values of our unknown parameter <span class="math inline">\(\theta\)</span>. Then a likelihood ratio comparing densities evaluated at these two values is defined as</p>
 <p><span class="math display">\[
@@ -386,6 +396,46 @@ T(X) \text{ is sufficient } \iff T^{**}(X) \text{ is a function of } T(X)
     &amp; \iff T^{**}(y) = T^{**}(x)
 \end{align*}\]</span></p>
 <p>Therefore <span class="math inline">\(T^*(X)\)</span> and <span class="math inline">\(T^{**}(X)\)</span> are equivalent. Since <span class="math inline">\(T^{**}(X)\)</span> is a minimal sufficient statistic, <span class="math inline">\(T^*(X)\)</span> is therefore also minimal sufficient.</p>
+</details>
+<p><strong>Complete, Sufficient, Minimal</strong></p>
+<p>If <span class="math inline">\(T(X)\)</span> is complete and sufficient, then <span class="math inline">\(T(X)\)</span> is minimal sufficient.</p>
+<details>
+<summary>
+Proof.
+</summary>
+<p>Just kidding! Prove it on your own and show it to me, if you want bonus points in my heart :)</p>
+</details>
+<p><strong>Rao-Blackwell-Lehmann-Scheffe (RBLS)</strong></p>
+<p>Let <span class="math inline">\(T(X)\)</span> be a complete and sufficient statistic for unknown parameter <span class="math inline">\(\theta\)</span>, and let <span class="math inline">\(\tau(\theta)\)</span> be some function of <span class="math inline">\(\theta\)</span>. If there exists at least one unbiased estimator <span class="math inline">\(\tilde{\tau}(X)\)</span> for <span class="math inline">\(\tau(\theta)\)</span>, then there exists a <em>unique</em> UMVUE <span class="math inline">\(\hat{\tau}(T(X))\)</span> for <span class="math inline">\(\tau(\theta)\)</span> given by</p>
+<p><span class="math display">\[
+\hat{\tau}(T(X)) = E[\tilde{\tau}(X) \mid T(X)]
+\]</span></p>
+<p><em>Why do we care?</em> An important consequence of the RBLS Theorem is that if <span class="math inline">\(T(X)\)</span> is a complete and sufficient statistic for <span class="math inline">\(\theta\)</span>, then any function <span class="math inline">\(\phi(T(X))\)</span> is the UMVUE of its expectation <span class="math inline">\(E[\phi(T(X))]\)</span> (so long as the expectation is finite for all <span class="math inline">\(\theta\)</span>). This Theorem is therefore a <em>very</em> convenient way to find UMVUEs: (1) Find a complete and sufficient statistic for an unknown parameter, and (2) functions of that statistic are then the UMVUE for their expectation!</p>
+<details>
+<summary>
+Proof.
+</summary>
+<p>To prove RBLS, we first must prove an Improvement Lemma and a Uniqueness Lemma.</p>
+<p><em>Improvement Lemma.</em> Suppose that <span class="math inline">\(T(X)\)</span> is a sufficient statistic for <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(\tilde{\tau}(X)\)</span> is an unbiased estimator of <span class="math inline">\(\tau(\theta)\)</span>, then <span class="math inline">\(E[\tilde{\tau}(X) \mid T(X)]\)</span> does not depend on <span class="math inline">\(\theta\)</span> (by sufficiency) and is also an estimator of <span class="math inline">\(\tau(\theta)\)</span>, which (importantly) has smaller variance than <span class="math inline">\(\tilde{\tau}(X)\)</span>.</p>
+<p><em>Proof of Lemma.</em> First, note that <span class="math inline">\(E[\tilde{\tau}(X) \mid T(X)]\)</span> is an unbiased estimator for <span class="math inline">\(\tau(\theta)\)</span>, since <span class="math display">\[\begin{align*}
+    E[E[\tilde{\tau}(X) \mid T(X)]] &amp; = E[\tilde{\tau}(X)] \quad \quad \text{(Law of Iterated Expectation)} \\
+    &amp; = \tau(\theta) \quad \quad (\tilde{\tau}(X) \text{ is unbiased})
+\end{align*}\]</span> Then, <span class="math display">\[\begin{align*}
+    Var(\tilde{\tau}(X)) &amp; = E[Var(\tilde{\tau}(X) \mid T(X))] + Var(E[\tilde{\tau}(X) \mid T(X)]) \\
+    &amp; \geq Var(E[\tilde{\tau}(X) \mid T(X)])
+\end{align*}\]</span> and we’re done! <span class="math inline">\(E[\tilde{\tau}(X) \mid T(X)]\)</span> has a smaller variance than <span class="math inline">\(\tilde{\tau(X)}\)</span>. Since both are unbiased, this is considered an “improvement” (hence the name of the Lemma).</p>
+<p><em>Uniqueness Lemma.</em> If <span class="math inline">\(T(X)\)</span> is complete, then for some unknown parameter <span class="math inline">\(\theta\)</span> and function of it <span class="math inline">\(\tau(\theta)\)</span>, <span class="math inline">\(\tau(\theta)\)</span> has at most <em>one</em> unbiased estimator <span class="math inline">\(\hat{\tau}(T(X))\)</span> <em>that depends on</em> <span class="math inline">\(T(X)\)</span>.</p>
+<p><em>Proof of Lemma.</em> Suppose, toward contradiction, that <span class="math inline">\(\tau(\theta)\)</span> has more than one unbiased estimator that depends on <span class="math inline">\(T(X)\)</span>, given by <span class="math inline">\(\tilde{\tau}(T(X))\)</span> and <span class="math inline">\(\hat{\tau}(T(X))\)</span>, <span class="math inline">\(\tilde{\tau}(T(X)) \neq \hat{\tau}(T(X))\)</span>. Then</p>
+<p><span class="math display">\[
+E[\tilde{\tau}(T(X)) - \hat{\tau}(T(X))] = \tau(\theta) - \tau(\theta) = 0 \quad \forall \theta
+\]</span> Let <span class="math inline">\(g(T(X)) = \tilde{\tau}(T(X)) - \hat{\tau}(T(X))\)</span>. Since <span class="math inline">\(T(X)\)</span> is complete, and <span class="math inline">\(E[g(T(X))] = 0\)</span>, this implies <span class="math inline">\(\tilde{\tau}(T(X)) - \hat{\tau}(T(X)) = 0\)</span>, which means <span class="math inline">\(\tilde{\tau}(T(X)) = \hat{\tau}(T(X))\)</span>. Contradiction.</p>
+<p><em>Back to the proof of RBLS</em>.</p>
+<p>We’ve shown previously that <span class="math inline">\(\hat{\tau}(T(X))\)</span> is an unbiased estimator for <span class="math inline">\(\tau{\theta}\)</span> (law of iterated expectation). Let <span class="math inline">\(\tau_1(X)\)</span> be any other unbiased estimator for <span class="math inline">\(\tau(\theta)\)</span>, and let <span class="math inline">\(\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]\)</span>. Then <span class="math inline">\(\tau_2(T(X))\)</span> is also unbiased for <span class="math inline">\(\tau(\theta)\)</span> (again, iterated expectation), and by the Uniqueness Lemma (since <span class="math inline">\(T\)</span> is complete by supposition), <span class="math inline">\(\hat{\tau}(T(X)) = \tau_2(T(X))\)</span>. But,</p>
+<p><span class="math display">\[\begin{align*}
+    Var(\hat{\tau}(T(X))) &amp; = Var(\tau_2(T(X))) \quad \quad (\hat{\tau} = \tau_2) \\
+    &amp; \leq Var(\tau_1(T(X))) \quad \quad \text{(Improvement Lemma)}
+\end{align*}\]</span> so <span class="math inline">\(\hat{\tau}(T(X))\)</span> is the UMVUE for <span class="math inline">\(\tau(\theta)\)</span>, as desired.</p>
+</details>
 <p><strong>Cramér-Rao Lower Bound</strong></p>
 <p>Let <span class="math inline">\(f_Y(y \mid \theta)\)</span> be a pdf with nice* conditions, and let <span class="math inline">\(Y_1, \dots, Y_n\)</span> be a random sample from <span class="math inline">\(f_Y(y \mid \theta)\)</span>. Let <span class="math inline">\(\hat{\theta}\)</span> be <em>any</em> unbiased estimator of <span class="math inline">\(\theta\)</span>. Then</p>
 <p><span class="math display">\[\begin{align*}
@@ -394,7 +444,10 @@ Var(\hat{\theta}) &amp; \geq \left\{ E\left[ \left( \frac{\partial \log( L(\thet
 &amp; = \frac{1}{I(\theta)}
 \end{align*}\]</span></p>
 <p>*our nice conditions that we need are that <span class="math inline">\(f_Y(y \mid \theta)\)</span> has continuous first- and second-order derivatives, which would quickly discover we need by looking at the form for the C-R lower bound, and that the set of values <span class="math inline">\(y\)</span> where <span class="math inline">\(f_Y(y \mid \theta) \neq 0\)</span> does not depend on <span class="math inline">\(\theta\)</span>. If you are familiar with the concept of the “support” of a function, that is where this second condition comes from. The key here is that this condition allows to interchange derivatives and integrals, in particular, <span class="math inline">\(\frac{\partial}{\partial \theta} \int f(x) dx = \int \frac{\partial}{\partial \theta} f(x)dx\)</span>, which we’ll need to complete the proof.</p>
-<p><strong>Proof.</strong></p>
+<details>
+<summary>
+Proof.
+</summary>
 <p>Let <span class="math inline">\(X = \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta}\)</span>. By the Covariance Inequality,</p>
 <p><span class="math display">\[
 Var(\hat{\theta}) \geq \frac{Cov(\hat{\theta},X)^2}{Var(X)}
@@ -442,6 +495,7 @@ E[X] &amp; = \int x f_Y(\textbf{y} \mid \theta) d\textbf{y} \\
     &amp; = \frac{1}{I(\theta)}
 \end{align*}\]</span></p>
 <p>as desired.</p>
+</details>
 <p><strong>Comment:</strong> Note that what the Cramér-Rao lower bound tells us is that, if the variance of an unbiased estimator is <em>equal</em> to the Cramér-Rao lower bound, then that estimator has the <em>minimum possible variance</em> among all unbiased estimators there could possibly be. This allows us to <em>prove</em>, for example, whether or not an unbiased estimator is the UMVUE: If an unbiased estimator’s variance achieves the C-R lower bound, then it is <em>optimal</em> according to the UMVUE criterion.</p>
 </section>
 <section id="worked-examples" class="level2" data-number="4.5">

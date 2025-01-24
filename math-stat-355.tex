@@ -768,6 +768,17 @@ Negative Binomial & \(\pi(x) = \binom{x + r - 1}{x} (1-p)^x p^r\) &
 
   Also, recall that \(Cov[X, X] = Var[X]\).
 \item
+  Iterated Things
+\end{itemize}
+
+\[
+E[X] = E[E[X \mid Y]]
+\] and \[
+Var(X) = E[Var(X \mid Y)] + Var(E[X \mid Y])
+\]
+
+\begin{itemize}
+\item
   Finding a marginal pdf from a joint pdf
 
   \[
@@ -896,7 +907,9 @@ continuous random variables when considering transforming them. We will
 mostly ignore these considerations in this class, but a technically
 complete derivation (or proof) must consider them.
 
-\textbf{Proof}. We can write
+Proof.
+
+We can write
 
 \begin{align*}
     f_Y(y) & = \frac{\partial}{\partial y} F_Y(y) \\
@@ -965,7 +978,7 @@ NOTE: \(| J_f(y) | = | \frac{\partial x}{\partial y} |\), above, where
 Jacobian Matrix in the definition in the Course Notes are \emph{flipped}
 here. See Worked Example 7.
 
-\textbf{Proof}.
+Proof.
 
 Note that if \(f\) is both 1-1 and onto, then \(f\) is \emph{either}
 monotone increasing or monotone decreasing. We'll prove the case where
@@ -2222,6 +2235,20 @@ for an unknown parameter \(\theta\) if \(T^*(X)\) is sufficient,
 \emph{and} for every other sufficient statistic \(T(X)\).
 \(T^*(X) = f(T(X))\) for some function \(f\).
 
+\textbf{Complete}
+
+A statistic \(T(X)\) is \emph{complete} for an unknown parameter
+\(\theta\) if \[
+E[g(T(x))] \text{ is } \theta-\text{free} \implies g(T(x)) \text{ is constant, almost everywhere}
+\] for a nice function \(g\).
+
+Importantly, it is \emph{equivalent} to say that \(T(X)\) is
+\emph{complete} for an unknown parameter \(\theta\) if
+
+\[
+E[g(T(x))] = 0 \implies g(T(x)) = 0 \quad\text{ almost everywhere}
+\]
+
 \textbf{Relative Efficiency}
 
 The relative efficiency of an estimator \(\hat{\theta}_1\) with respect
@@ -2307,8 +2334,6 @@ and \(h(x)\) does not depend on \(\theta\).
 Note that in the statistics literature this criterion is sometimes
 referred to as the Fisher-Neyman Factorization Criterion.
 
-\textbf{Proof.}
-
 Two proofs available on
 \href{https://en.wikipedia.org/wiki/Sufficient_statistic\#Proof}{Wikipedia}.
 The one for the discrete-only case is more intuitive, if you'd like to
@@ -2328,7 +2353,7 @@ for \(\theta\).
 
 *every pair of points that have the same support as \(X\).
 
-\textbf{Proof.}
+Proof.
 
 We'll utilize something called a likelihood ratio (literally a ratio of
 likelihoods) to prove this theorem. We'll also come back to likelihood
@@ -2403,6 +2428,93 @@ Therefore \(T^*(X)\) and \(T^{**}(X)\) are equivalent. Since
 \(T^{**}(X)\) is a minimal sufficient statistic, \(T^*(X)\) is therefore
 also minimal sufficient.
 
+\textbf{Complete, Sufficient, Minimal}
+
+If \(T(X)\) is complete and sufficient, then \(T(X)\) is minimal
+sufficient.
+
+Proof.
+
+Just kidding! Prove it on your own and show it to me, if you want bonus
+points in my heart :)
+
+\textbf{Rao-Blackwell-Lehmann-Scheffe (RBLS)}
+
+Let \(T(X)\) be a complete and sufficient statistic for unknown
+parameter \(\theta\), and let \(\tau(\theta)\) be some function of
+\(\theta\). If there exists at least one unbiased estimator
+\(\tilde{\tau}(X)\) for \(\tau(\theta)\), then there exists a
+\emph{unique} UMVUE \(\hat{\tau}(T(X))\) for \(\tau(\theta)\) given by
+
+\[
+\hat{\tau}(T(X)) = E[\tilde{\tau}(X) \mid T(X)]
+\]
+
+\emph{Why do we care?} An important consequence of the RBLS Theorem is
+that if \(T(X)\) is a complete and sufficient statistic for \(\theta\),
+then any function \(\phi(T(X))\) is the UMVUE of its expectation
+\(E[\phi(T(X))]\) (so long as the expectation is finite for all
+\(\theta\)). This Theorem is therefore a \emph{very} convenient way to
+find UMVUEs: (1) Find a complete and sufficient statistic for an unknown
+parameter, and (2) functions of that statistic are then the UMVUE for
+their expectation!
+
+Proof.
+
+To prove RBLS, we first must prove an Improvement Lemma and a Uniqueness
+Lemma.
+
+\emph{Improvement Lemma.} Suppose that \(T(X)\) is a sufficient
+statistic for \(\theta\). If \(\tilde{\tau}(X)\) is an unbiased
+estimator of \(\tau(\theta)\), then \(E[\tilde{\tau}(X) \mid T(X)]\)
+does not depend on \(\theta\) (by sufficiency) and is also an estimator
+of \(\tau(\theta)\), which (importantly) has smaller variance than
+\(\tilde{\tau}(X)\).
+
+\emph{Proof of Lemma.} First, note that \(E[\tilde{\tau}(X) \mid T(X)]\)
+is an unbiased estimator for \(\tau(\theta)\), since \begin{align*}
+    E[E[\tilde{\tau}(X) \mid T(X)]] & = E[\tilde{\tau}(X)] \quad \quad \text{(Law of Iterated Expectation)} \\
+    & = \tau(\theta) \quad \quad (\tilde{\tau}(X) \text{ is unbiased})
+\end{align*} Then, \begin{align*}
+    Var(\tilde{\tau}(X)) & = E[Var(\tilde{\tau}(X) \mid T(X))] + Var(E[\tilde{\tau}(X) \mid T(X)]) \\
+    & \geq Var(E[\tilde{\tau}(X) \mid T(X)])
+\end{align*} and we're done! \(E[\tilde{\tau}(X) \mid T(X)]\) has a
+smaller variance than \(\tilde{\tau(X)}\). Since both are unbiased, this
+is considered an ``improvement'' (hence the name of the Lemma).
+
+\emph{Uniqueness Lemma.} If \(T(X)\) is complete, then for some unknown
+parameter \(\theta\) and function of it \(\tau(\theta)\),
+\(\tau(\theta)\) has at most \emph{one} unbiased estimator
+\(\hat{\tau}(T(X))\) \emph{that depends on} \(T(X)\).
+
+\emph{Proof of Lemma.} Suppose, toward contradiction, that
+\(\tau(\theta)\) has more than one unbiased estimator that depends on
+\(T(X)\), given by \(\tilde{\tau}(T(X))\) and \(\hat{\tau}(T(X))\),
+\(\tilde{\tau}(T(X)) \neq \hat{\tau}(T(X))\). Then
+
+\[
+E[\tilde{\tau}(T(X)) - \hat{\tau}(T(X))] = \tau(\theta) - \tau(\theta) = 0 \quad \forall \theta
+\] Let \(g(T(X)) = \tilde{\tau}(T(X)) - \hat{\tau}(T(X))\). Since
+\(T(X)\) is complete, and \(E[g(T(X))] = 0\), this implies
+\(\tilde{\tau}(T(X)) - \hat{\tau}(T(X)) = 0\), which means
+\(\tilde{\tau}(T(X)) = \hat{\tau}(T(X))\). Contradiction.
+
+\emph{Back to the proof of RBLS}.
+
+We've shown previously that \(\hat{\tau}(T(X))\) is an unbiased
+estimator for \(\tau{\theta}\) (law of iterated expectation). Let
+\(\tau_1(X)\) be any other unbiased estimator for \(\tau(\theta)\), and
+let \(\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]\). Then \(\tau_2(T(X))\) is
+also unbiased for \(\tau(\theta)\) (again, iterated expectation), and by
+the Uniqueness Lemma (since \(T\) is complete by supposition),
+\(\hat{\tau}(T(X)) = \tau_2(T(X))\). But,
+
+\begin{align*}
+    Var(\hat{\tau}(T(X))) & = Var(\tau_2(T(X))) \quad \quad (\hat{\tau} = \tau_2) \\
+    & \leq Var(\tau_1(T(X))) \quad \quad \text{(Improvement Lemma)}
+\end{align*} so \(\hat{\tau}(T(X))\) is the UMVUE for \(\tau(\theta)\),
+as desired.
+
 \textbf{Cramér-Rao Lower Bound}
 
 Let \(f_Y(y \mid \theta)\) be a pdf with nice* conditions, and let
@@ -2426,7 +2538,7 @@ derivatives and integrals, in particular,
 \(\frac{\partial}{\partial \theta} \int f(x) dx = \int \frac{\partial}{\partial \theta} f(x)dx\),
 which we'll need to complete the proof.
 
-\textbf{Proof.}
+Proof.
 
 Let
 \(X = \frac{\partial \log L(\theta \mid \textbf{y})}{\partial \theta}\).

@@ -545,6 +545,14 @@ Var[cX + b] = c^2 Var[X]
 Var[X] = E[(X - E[X])^2] = E[X^2] - E[X]^2
 \]</span></p>
 <p>Also, recall that <span class="math inline">\(Cov[X, X] = Var[X]\)</span>.</p></li>
+<li><p>Iterated Things</p></li>
+</ul>
+<p><span class="math display">\[
+E[X] = E[E[X \mid Y]]
+\]</span> and <span class="math display">\[
+Var(X) = E[Var(X \mid Y)] + Var(E[X \mid Y])
+\]</span></p>
+<ul>
 <li><p>Finding a marginal pdf from a joint pdf</p>
 <p><span class="math display">\[
 f_X(x) = \int_{-\infty}^\infty f_{X,Y}(x, y) dy
@@ -597,7 +605,11 @@ M_X(t) = E[e^{tX}]
 <h4 data-number="1.4.1.1" class="anchored" data-anchor-id="cdf-method-one-random-variable"><span class="header-section-number">1.4.1.1</span> CDF Method: One random variable</h4>
 <p><strong>Theorem</strong>. Let <span class="math inline">\(X\)</span> be a continuous random variable with pdf <span class="math inline">\(f_X(x)\)</span>. Define a new random variable <span class="math inline">\(Y = g(X)\)</span>, for nice* functions <span class="math inline">\(g\)</span>. Then <span class="math inline">\(f_Y(y) = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}\)</span>.</p>
 <p><img src="images/chilipepper.png" width="20" height="16"> *By <em>nice</em> functions we mean functions that are strictly increasing and smooth <em>on the required range</em>. As an example, <span class="math inline">\(exp(x)\)</span> is a smooth, strictly increasing function; <span class="math inline">\(|x|\)</span> is not on the <em>whole real line</em>, but <em>is</em> from <span class="math inline">\((0, \infty)\)</span> (where a lot of useful pdfs are defined). For the purposes of this class, every function that you will need to do this for will be “nice.” Note that there are also considerations that need to be taken regarding the <em>range</em> of continuous random variables when considering transforming them. We will mostly ignore these considerations in this class, but a technically complete derivation (or proof) must consider them.</p>
-<p><strong>Proof</strong>. We can write</p>
+<details>
+<summary>
+Proof.
+</summary>
+<p>We can write</p>
 <p><span class="math display">\[\begin{align*}
     f_Y(y) &amp; = \frac{\partial}{\partial y} F_Y(y) \\
     &amp; = \frac{\partial}{\partial y} \Pr(Y \leq y) \\
@@ -621,7 +633,8 @@ M_X(t) = E[e^{tX}]
     &amp; = f_X(g^{-1}(y)) \times \frac{1}{g'(g^{-1}(y))}
 \end{align*}\]</span></p>
 <p>as desired.</p>
-</section>
+<details>
+</details></details></section>
 <section id="jacobian-method-more-than-one-random-variable" class="level4" data-number="1.4.1.2">
 <h4 data-number="1.4.1.2" class="anchored" data-anchor-id="jacobian-method-more-than-one-random-variable"><span class="header-section-number">1.4.1.2</span> Jacobian Method: More than one random variable</h4>
 <p>Transformations of single random variables are great, but we’ll need to work with transformations of <em>more than one</em> random variable if we want to be able to manipulate joint pdfs. Suppose, for example, we have <span class="math inline">\(X \sim Gamma(\alpha, \lambda)\)</span> and <span class="math inline">\(Y \sim Gamma(\beta, \lambda)\)</span>, where <span class="math inline">\(X \perp\!\!\!\perp Y\)</span>. Let <span class="math inline">\(U = X + Y\)</span> and <span class="math inline">\(W = \frac{X}{X + Y}\)</span>. How do we show that <span class="math inline">\(U\)</span> and <span class="math inline">\(W\)</span> are independent? Through finding the joint pdf! Which means we need a method for transforming more than one, continuous random variable. Enter the Jacobian Method.</p>
@@ -630,7 +643,10 @@ M_X(t) = E[e^{tX}]
 \pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
 \]</span> where <span class="math inline">\(I_Y \{y \}\)</span> denotes the support of <span class="math inline">\(Y\)</span>.</p>
 <p>NOTE: <span class="math inline">\(| J_f(y) | = | \frac{\partial x}{\partial y} |\)</span>, above, where <span class="math inline">\(f(x) = y\)</span>. This means that the numerators and denominators in the Jacobian Matrix in the definition in the Course Notes are <em>flipped</em> here. See Worked Example 7.</p>
-<p><strong>Proof</strong>.</p>
+<details>
+<summary>
+Proof.
+</summary>
 <p>Note that if <span class="math inline">\(f\)</span> is both 1-1 and onto, then <span class="math inline">\(f\)</span> is <em>either</em> monotone increasing or monotone decreasing. We’ll prove the case where <span class="math inline">\(f\)</span> is increasing, and we’ll note (but not show) how the decreasing case follows directly.</p>
 <p>Let <span class="math inline">\(f\)</span> be an increasing, continuous function. For some subset <span class="math inline">\(C \subseteq \mathbb{R}^n\)</span>,</p>
 <p><span class="math display">\[\begin{align*}
@@ -648,6 +664,7 @@ M_X(t) = E[e^{tX}]
 \bigg| \frac{dx}{dy} \bigg| dy
 \end{align*}\]</span> which implies <span class="math inline">\(\pi_Y(y) = \pi_X(f^{-1}(y))
 \bigg| \frac{dx}{dy} \bigg|\)</span>, as desired. The absolute value signs (the Jacobian piece) come into play to help us deal with the decreasing case.</p>
+</details>
 </section>
 </section>
 </section>
