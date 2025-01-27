@@ -34,11 +34,11 @@ By the end of this chapter, you should be able to...
 
 1.  What is the intuition behind the method of moments (MOM) procedure for estimating unknown parameters?
 
-2.  What are the typical steps to find a MOM estimator? (see Ex 5.2.6, 5.2.7, and Case Study 5.2.2; work through at least one of these examples in detail, filling in any steps that the textbook left out)
+2.  What are the typical steps to find a MOM estimator?
 
 3.  What advantages does the MOM approach offer compared to MLE?
 
-4.  Do the MOM and MLE approaches always yield the same estimate? (look through the examples in Section 5.2 and try using the other approach --- do you always get the same answer?)
+4.  Do the MOM and MLE approaches always yield the same estimate?
 
 ## Definitions
 

@@ -44,17 +44,19 @@ By the end of this chapter, you should be able to...
 
 1.  Intuitively, what is the difference between bias and precision?
 
-2.  What are the typical steps to checking if an estimator is unbiased? (see Examples 5.4.2, 5.4.3, and 5.4.4 in the textbook)
+2.  What are the typical steps to checking if an estimator is unbiased? 
 
-3.  How can we construct unbiased estimators? (see comment in Example 5.4.2 and 5.4.4)
+3.  How can we construct unbiased estimators? 
 
 4.  If an estimator is unbiased, is it also *asymptotically* unbiased? If an estimator is asymptotically unbiased, is it necessarily unbiased?
 
-5.  When comparing estimators, how can we determine which estimator is more efficient? (see Examples 5.4.5 and 5.4.6)
+5.  When comparing estimators, how can we determine which estimator is more efficient? 
 
-6.  Describe, in your own words, what the Cramér-Rao inequality tells us.
+6.  Why might we care about sufficiency, particularly when thinking about the variance of unbiased estimators?
 
-7.  What is the difference between a UMVUE and an efficient estimator? Does one imply the other? (see the Comment below Definition 5.5.2)
+7.  Describe, in your own words, what the Cramér-Rao inequality tells us.
+
+8.  What is the difference between a UMVUE and an efficient estimator? Does one imply the other? 
 
 ## Definitions
 

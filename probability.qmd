@@ -361,9 +361,9 @@ Cov(X, Y) & = E[(X - E[X])(Y - E[Y])] \\
 
 ### Transforming Continuous Random Variables
 
-We will *often* take at face value previously proven *relationships* between random variables. What I mean by this, as an example, is that it is a nice (convenient) fact that a sum of two independent normal random variables is *still* normally distributed, with a nice form for the mean and variance. In particular, if $X \sim N(\mu, \sigma^2)$ and $Y \sim N(\theta, \nu^2)$, then $X + Y \sim N(\mu + \theta, \sigma^2 + \nu^2)$. Most frequently used examples of these sorts of relationships can be found in the \`\`Related Distributions" section of the Wikipedia page for a given probability distribution. Unless I explicitly ask you to derive/show how certain variables are related to each other, you can just state the known relationship, use it, and move on!
+We will *often* take at face value previously proven *relationships* between random variables. What I mean by this, as an example, is that it is a nice (convenient) fact that a sum of two independent normal random variables is *still* normally distributed, with a nice form for the mean and variance. In particular, if $X \sim N(\mu, \sigma^2)$ and $Y \sim N(\theta, \nu^2)$, then $X + Y \sim N(\mu + \theta, \sigma^2 + \nu^2)$. Most frequently used examples of these sorts of relationships can be found in the "Related Distributions" section of the Wikipedia page for a given probability distribution. Unless I explicitly ask you to derive/show how certain variables are related to each other, you can just state the known relationship, use it, and move on!
 
-If I *do* ask you to derive/show these things, there a few different ways we can go about this. For this course, I expect you to know the "CDF method" for *one function* of *one random variable*, **and** the "Jacobian method" for a function of *more than one* random variable. We'll demonstrate the former below.
+If I *do* ask you to derive/show these things, there a few different ways we can go about this. For this course, I expect you to know the "CDF method" for *one function* of *one random variable*, **and** the "Jacobian method" for a function of *more than one* random variable.
 
 #### CDF Method: One random variable
 
@@ -407,7 +407,7 @@ The right-hand side should look familiar: it is exactly what we needed to "deal 
 
 as desired.
 
-<details>
+</details>
 
 #### Jacobian Method: More than one random variable
 

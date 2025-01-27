@@ -94,11 +94,11 @@ By the end of this chapter, you should be able to...
 
 1.  What is the intuition behind the maximum likelihood estimation (MLE) approach?
 
-2.  What are the typical steps to find a MLE? (see Ex 5.2.1, 5.2.2, and Case Study 5.2.1; work through at least one of these examples in detail, filling in any steps that the textbook left out)
+2.  What are the typical steps to find a MLE?
 
-3.  Are there ever situations when the typical steps to finding a MLE don't work? If so, what can we do instead to find the MLE? (see Ex 5.2.3, 5.2.4)
+3.  Are there ever situations when the typical steps to finding a MLE don't work? If so, what can we do instead to find the MLE?
 
-4.  How do the steps to finding a MLE change when we have more than one unknown parameter? (see Ex 5.2.5)
+4.  How do the steps to finding a MLE change when we have more than one unknown parameter?
 
 ## Definitions
 
