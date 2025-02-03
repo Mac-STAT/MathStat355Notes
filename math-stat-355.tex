@@ -965,8 +965,8 @@ Jacobian Method.
 
 \textbf{Theorem}. Let \(X = (x_1, \dots, x_n)\) be a vector of random
 variables (a random vector) with pdf \(\pi_{X}(x)\). Suppose that
-\(f(x) = y\) is a 1-1 and onto function, and that \(|J_f(x)| > 0\)
-almost everywhere. Then \(\pi_Y(y)\) is given by
+\(f(x) = y\) is a smooth, 1-1 and onto function, and that
+\(|J_f(x)| > 0\) almost everywhere. Then \(\pi_Y(y)\) is given by
 
 \[
 \pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
@@ -975,7 +975,10 @@ almost everywhere. Then \(\pi_Y(y)\) is given by
 NOTE: \(| J_f(y) | = | \frac{\partial x}{\partial y} |\), above, where
 \(f(x) = y\). This means that the numerators and denominators in the
 Jacobian Matrix in the definition in the Course Notes are \emph{flipped}
-here. See Worked Example 7.
+here. The reason for this becomes clear in the proof sketched below,
+noting that
+\(| \frac{\partial x}{\partial y} |^{-1} = | \frac{\partial y}{\partial x} |\),
+for the supposed functions \(f\).
 
 Proof.
 
@@ -984,7 +987,7 @@ monotone increasing or monotone decreasing. We'll prove the case where
 \(f\) is increasing, and we'll note (but not show) how the decreasing
 case follows directly.
 
-Let \(f\) be an increasing, continuous function. For some subset
+Let \(f\) be a smooth, monotone increasing function. For some subset
 \(C \subseteq \mathbb{R}^n\),
 
 \begin{align*}
@@ -1470,7 +1473,6 @@ usually involves plotting the likelihood as a function of the unknown
 parameter. We then look at where that function achieves its maximum
 (usually at one of the endpoints), and determine which observation
 (again, typically the minimum or maximum) will maximize our likelihood.
-An example of this can be found in Example 5.2.4 in our course textbook.
 
 \subsection*{Maximum Likelihood: Does it make sense? Is it even
 ``good''?}\label{maximum-likelihood-does-it-make-sense-is-it-even-good}
@@ -1679,10 +1681,6 @@ of random variables \(X_1, \dots, X_n\) as \(X_{(1)}\) , the maximum as
 order statistic if \(n\) is even (since the median is an average of two
 values, \(X_{(m)}\) and \(X_{(m+1)}\), in this case.
 
-See Example 5.2.4 in the Textbook for an example of where order
-statistics occasionally come into play when calculating maximum
-likelihood estimates.
-
 \section{Theorems}\label{theorems-1}
 
 None for this chapter!
@@ -1866,8 +1864,7 @@ world (it's actually often quite easy to implement), it can be
 general, if we can obtain a closed form estimator \emph{analytically}
 (via calculus/algebra, for example), we'll be better off in the long
 run.* With the method of moments approach, it is often much easier to
-obtain a closed form estimator analytically. An example of this can be
-found in Example 5.2.7 in the course textbook.
+obtain a closed form estimator analytically.
 
 * This is mostly a function the fact that much statistics research
 focuses on developing new methods for solving problems and analyzing
@@ -2281,16 +2278,15 @@ some regularity conditions). This is shown as part of the proof of the
 C-R lower bound in the Theorems section of this chapter.
 
 The information matrix is sometimes written in terms of a pdf for a
-single random variable as opposed to a likelihood (this is what our
-textbook does, for example). In this case, we have
+single random variable as opposed to a likelihood. In this case, we have
 \(I(\theta) = n I_1(\theta)\), where the \(I_1(\theta)\) on the
 right-hand side is defined as
 \(E \left[ \left( \frac{\partial}{\partial \theta} \log f_X(x \mid \theta) \right)^2\right]\).
-Sometimes (as in the textbook) \(I_1(\theta)\) is written without the
-subscript \(1\) which is a slight abuse of notation that is endlessly
-confusing (to me, at least). For this set of course notes, we'll always
-specify the information matrix in terms of a pdf for a single random
-variable with the subscript \(1\), for clarity.
+Sometimes \(I_1(\theta)\) is written without the subscript \(1\) which
+is a slight abuse of notation that is endlessly confusing (to me, at
+least). For this set of course notes, we'll always specify the
+information matrix in terms of a pdf for a single random variable with
+the subscript \(1\), for clarity.
 
 *The information matrix is often referred to as the Fisher Information
 matrix, as it was developed by Sir Ronald Fisher. Fisher developed
@@ -2720,7 +2716,7 @@ as desired.
 \textbf{Problem 5:} Determine whether the estimator \(\hat{\mu}\) or
 \(\hat{\mu}_w\) is more efficient, in Problem 5, if we additionally
 impose the constraint \(w_i \geq 0\) \(\forall i\). (Note that this is a
-more ``general'' example based on Example 5.4.5 in the course textbook)
+more ``general'' example based on Example 5.4.5 in Larsen \& Marx)
 (Hint: use the Cauchy-Schwarz inequality)
 
 Solution:
@@ -2758,8 +2754,8 @@ and therefore, \(\hat{\mu}\) is more efficient than \(\hat{\mu}_w\).
 \textbf{Problem 6:} Suppose
 \(X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)\). Show that the
 MLE for \(\sigma^2\) is \emph{biased}, and suggest a modified variance
-estimator for \(\sigma^2\) that is \emph{unbiased}. (Note that this is
-example 5.4.4 in our course textbook)
+estimator for \(\sigma^2\) that is \emph{unbiased}. (This is Example
+5.4.4 in Larsen \& Marx)
 
 Solution:
 
@@ -2893,8 +2889,8 @@ all \(\epsilon > 0\),
 
 Note that we write our estimator with a subscript \(n\) here to clarify
 that our estimator depends on our sample size. There is an alternative
-\(\epsilon-\delta\) definition of consistency in the textbook, but we
-won't focus on it for this course.
+\(\epsilon-\delta\) definition of consistency, but we won't focus on it
+for this course.
 
 \textbf{Weak Law of Large Numbers}
 
@@ -3079,9 +3075,7 @@ not. There is no probability involved in that statement. Probability
 comes into play when considering that, under repeated sampling, if we
 construct confidence intervals each time we take a new sample and
 construct an estimator, a given percentage \emph{of those intervals}
-will contain the true parameter. A visual representation of the
-confidence interval construction process is given in Figure 5.3.2 in the
-course textbook.
+will contain the true parameter.
 
 \subsubsection*{Confidence Intervals - The
 CLT}\label{confidence-intervals---the-clt}

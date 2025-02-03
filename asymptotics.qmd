@@ -6,7 +6,7 @@ Asymptotic unbiasedness and consistency allow us to assess the behavior of estim
 
 Confidence intervals are one of the most difficult concepts for a budding statistician to grasp, because they don't have the intuitive, probabilistic definition we often want them to have (aka the probability that the truth lies within the interval). As with Frequentist statistics more generally, the definition of a confidence interval relies on the concept of *repeated sampling* from a population.
 
-A confidence interval either contains the true parameter, or it does not. There is no probability involved in that statement. Probability comes into play when considering that, under repeated sampling, if we construct confidence intervals each time we take a new sample and construct an estimator, a given percentage *of those intervals* will contain the true parameter. A visual representation of the confidence interval construction process is given in Figure 5.3.2 in the course textbook.
+A confidence interval either contains the true parameter, or it does not. There is no probability involved in that statement. Probability comes into play when considering that, under repeated sampling, if we construct confidence intervals each time we take a new sample and construct an estimator, a given percentage *of those intervals* will contain the true parameter.
 
 #### Confidence Intervals - The CLT {.unnumbered .unlisted}
 

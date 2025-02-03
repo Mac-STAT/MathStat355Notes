@@ -335,7 +335,7 @@ Var(\hat{\theta}^*) \leq Var(\hat{\theta})
 I(\theta) = E \left[ \left( \frac{\partial}{\partial \theta} \log L(\theta \mid x) \right)^2\right] = -E\left[ \frac{\partial^2}{\partial \theta^2} \log L(\theta \mid x)\right]
 \]</span></p>
 <p>Note that the above formula <em>is</em> in fact the variance of the score, since we can show that the <em>expectation</em> of the score is 0 (under some regularity conditions). This is shown as part of the proof of the C-R lower bound in the Theorems section of this chapter.</p>
-<p>The information matrix is sometimes written in terms of a pdf for a single random variable as opposed to a likelihood (this is what our textbook does, for example). In this case, we have <span class="math inline">\(I(\theta) = n I_1(\theta)\)</span>, where the <span class="math inline">\(I_1(\theta)\)</span> on the right-hand side is defined as <span class="math inline">\(E \left[ \left( \frac{\partial}{\partial \theta} \log f_X(x \mid \theta) \right)^2\right]\)</span>. Sometimes (as in the textbook) <span class="math inline">\(I_1(\theta)\)</span> is written without the subscript <span class="math inline">\(1\)</span> which is a slight abuse of notation that is endlessly confusing (to me, at least). For this set of course notes, we’ll always specify the information matrix in terms of a pdf for a single random variable with the subscript <span class="math inline">\(1\)</span>, for clarity.</p>
+<p>The information matrix is sometimes written in terms of a pdf for a single random variable as opposed to a likelihood. In this case, we have <span class="math inline">\(I(\theta) = n I_1(\theta)\)</span>, where the <span class="math inline">\(I_1(\theta)\)</span> on the right-hand side is defined as <span class="math inline">\(E \left[ \left( \frac{\partial}{\partial \theta} \log f_X(x \mid \theta) \right)^2\right]\)</span>. Sometimes <span class="math inline">\(I_1(\theta)\)</span> is written without the subscript <span class="math inline">\(1\)</span> which is a slight abuse of notation that is endlessly confusing (to me, at least). For this set of course notes, we’ll always specify the information matrix in terms of a pdf for a single random variable with the subscript <span class="math inline">\(1\)</span>, for clarity.</p>
 <p>*The information matrix is often referred to as the Fisher Information matrix, as it was developed by Sir Ronald Fisher. Fisher developed <em>much</em> of the core, statistical theory that we use today. He was also the founding chairman of the University of Cambridge Eugenics Society, and contributed to a large body of scientific work and public policy that promoted racist and classist ideals.</p>
 </section>
 <section id="theorems" class="level2" data-number="4.4">
@@ -576,7 +576,7 @@ E[\hat{\mu}_w] = E \left[ \sum_{i = 1}^n w_i X_i \right] = \sum_{i = 1}^n w_i E 
 \]</span></p>
 <p>as desired.</p>
 </details>
-<p><strong>Problem 5:</strong> Determine whether the estimator <span class="math inline">\(\hat{\mu}\)</span> or <span class="math inline">\(\hat{\mu}_w\)</span> is more efficient, in Problem 5, if we additionally impose the constraint <span class="math inline">\(w_i \geq 0\)</span> <span class="math inline">\(\forall i\)</span>. (Note that this is a more “general” example based on Example 5.4.5 in the course textbook) (Hint: use the Cauchy-Schwarz inequality)</p>
+<p><strong>Problem 5:</strong> Determine whether the estimator <span class="math inline">\(\hat{\mu}\)</span> or <span class="math inline">\(\hat{\mu}_w\)</span> is more efficient, in Problem 5, if we additionally impose the constraint <span class="math inline">\(w_i \geq 0\)</span> <span class="math inline">\(\forall i\)</span>. (Note that this is a more “general” example based on Example 5.4.5 in Larsen &amp; Marx) (Hint: use the Cauchy-Schwarz inequality)</p>
 <details>
 <summary>
 Solution:
@@ -602,7 +602,7 @@ Var[\hat{\mu}] = Var \left[ \frac{1}{n} \sum_{i = 1}^n X_i \right] = \frac{1}{n^
 \end{align*}\]</span></p>
 <p>and therefore, <span class="math inline">\(\hat{\mu}\)</span> is more efficient than <span class="math inline">\(\hat{\mu}_w\)</span>.</p>
 </details>
-<p><strong>Problem 6:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>. Show that the MLE for <span class="math inline">\(\sigma^2\)</span> is <em>biased</em>, and suggest a modified variance estimator for <span class="math inline">\(\sigma^2\)</span> that is <em>unbiased</em>. (Note that this is example 5.4.4 in our course textbook)</p>
+<p><strong>Problem 6:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)\)</span>. Show that the MLE for <span class="math inline">\(\sigma^2\)</span> is <em>biased</em>, and suggest a modified variance estimator for <span class="math inline">\(\sigma^2\)</span> that is <em>unbiased</em>. (This is Example 5.4.4 in Larsen &amp; Marx)</p>
 <details>
 <summary>
 Solution:

@@ -413,13 +413,13 @@ as desired.
 
 Transformations of single random variables are great, but we'll need to work with transformations of *more than one* random variable if we want to be able to manipulate joint pdfs. Suppose, for example, we have $X \sim Gamma(\alpha, \lambda)$ and $Y \sim Gamma(\beta, \lambda)$, where $X \perp\!\!\!\perp Y$. Let $U = X + Y$ and $W = \frac{X}{X + Y}$. How do we show that $U$ and $W$ are independent? Through finding the joint pdf! Which means we need a method for transforming more than one, continuous random variable. Enter the Jacobian Method.
 
-**Theorem**. Let $X = (x_1, \dots, x_n)$ be a vector of random variables (a random vector) with pdf $\pi_{X}(x)$. Suppose that $f(x) = y$ is a 1-1 and onto function, and that $|J_f(x)| > 0$ almost everywhere. Then $\pi_Y(y)$ is given by
+**Theorem**. Let $X = (x_1, \dots, x_n)$ be a vector of random variables (a random vector) with pdf $\pi_{X}(x)$. Suppose that $f(x) = y$ is a smooth, 1-1 and onto function, and that $|J_f(x)| > 0$ almost everywhere. Then $\pi_Y(y)$ is given by
 
 $$
 \pi_Y(y) = \pi_{X}(f^{-1}(y)) \times \bigg| \frac{\partial x}{\partial y} \bigg| \times I_Y\{y\}
 $$ where $I_Y \{y \}$ denotes the support of $Y$.
 
-NOTE: $| J_f(y) | = | \frac{\partial x}{\partial y} |$, above, where $f(x) = y$. This means that the numerators and denominators in the Jacobian Matrix in the definition in the Course Notes are *flipped* here. See Worked Example 7.
+NOTE: $| J_f(y) | = | \frac{\partial x}{\partial y} |$, above, where $f(x) = y$. This means that the numerators and denominators in the Jacobian Matrix in the definition in the Course Notes are *flipped* here. The reason for this becomes clear in the proof sketched below, noting that $| \frac{\partial x}{\partial y} |^{-1} = | \frac{\partial y}{\partial x} |$, for the supposed functions $f$.
 
 <details>
 
@@ -427,7 +427,7 @@ NOTE: $| J_f(y) | = | \frac{\partial x}{\partial y} |$, above, where $f(x) = y$.
 
 Note that if $f$ is both 1-1 and onto, then $f$ is *either* monotone increasing or monotone decreasing. We'll prove the case where $f$ is increasing, and we'll note (but not show) how the decreasing case follows directly.
 
-Let $f$ be an increasing, continuous function. For some subset $C \subseteq \mathbb{R}^n$,
+Let $f$ be a smooth, monotone increasing function. For some subset $C \subseteq \mathbb{R}^n$,
 
 \begin{align*}
 \int_C \pi_Y(y) dy & = \Pr(Y \in C) \\

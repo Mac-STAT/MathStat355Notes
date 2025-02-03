@@ -134,7 +134,7 @@ $$
 
 Note that the above formula *is* in fact the variance of the score, since we can show that the *expectation* of the score is 0 (under some regularity conditions). This is shown as part of the proof of the C-R lower bound in the Theorems section of this chapter.
 
-The information matrix is sometimes written in terms of a pdf for a single random variable as opposed to a likelihood (this is what our textbook does, for example). In this case, we have $I(\theta) = n I_1(\theta)$, where the $I_1(\theta)$ on the right-hand side is defined as $E \left[ \left( \frac{\partial}{\partial \theta} \log f_X(x \mid \theta) \right)^2\right]$. Sometimes (as in the textbook) $I_1(\theta)$ is written without the subscript $1$ which is a slight abuse of notation that is endlessly confusing (to me, at least). For this set of course notes, we'll always specify the information matrix in terms of a pdf for a single random variable with the subscript $1$, for clarity.
+The information matrix is sometimes written in terms of a pdf for a single random variable as opposed to a likelihood. In this case, we have $I(\theta) = n I_1(\theta)$, where the $I_1(\theta)$ on the right-hand side is defined as $E \left[ \left( \frac{\partial}{\partial \theta} \log f_X(x \mid \theta) \right)^2\right]$. Sometimes $I_1(\theta)$ is written without the subscript $1$ which is a slight abuse of notation that is endlessly confusing (to me, at least). For this set of course notes, we'll always specify the information matrix in terms of a pdf for a single random variable with the subscript $1$, for clarity.
 
 \*The information matrix is often referred to as the Fisher Information matrix, as it was developed by Sir Ronald Fisher. Fisher developed *much* of the core, statistical theory that we use today. He was also the founding chairman of the University of Cambridge Eugenics Society, and contributed to a large body of scientific work and public policy that promoted racist and classist ideals.
 
@@ -487,7 +487,7 @@ as desired.
 
 </details>
 
-**Problem 5:** Determine whether the estimator $\hat{\mu}$ or $\hat{\mu}_w$ is more efficient, in Problem 5, if we additionally impose the constraint $w_i \geq 0$ $\forall i$. (Note that this is a more "general" example based on Example 5.4.5 in the course textbook) (Hint: use the Cauchy-Schwarz inequality)
+**Problem 5:** Determine whether the estimator $\hat{\mu}$ or $\hat{\mu}_w$ is more efficient, in Problem 5, if we additionally impose the constraint $w_i \geq 0$ $\forall i$. (Note that this is a more "general" example based on Example 5.4.5 in Larsen & Marx) (Hint: use the Cauchy-Schwarz inequality)
 
 <details>
 
@@ -522,7 +522,7 @@ and therefore, $\hat{\mu}$ is more efficient than $\hat{\mu}_w$.
 
 </details>
 
-**Problem 6:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)$. Show that the MLE for $\sigma^2$ is *biased*, and suggest a modified variance estimator for $\sigma^2$ that is *unbiased*. (Note that this is example 5.4.4 in our course textbook)
+**Problem 6:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)$. Show that the MLE for $\sigma^2$ is *biased*, and suggest a modified variance estimator for $\sigma^2$ that is *unbiased*. (This is Example 5.4.4 in Larsen & Marx)
 
 <details>
 

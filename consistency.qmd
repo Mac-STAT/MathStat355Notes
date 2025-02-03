@@ -74,7 +74,7 @@ $$
 \underset{n \to \infty}{\text{lim}} \Pr(| \hat{\theta}_n - \theta | < \epsilon) = 1
 $$
 
-Note that we write our estimator with a subscript $n$ here to clarify that our estimator depends on our sample size. There is an alternative $\epsilon-\delta$ definition of consistency in the textbook, but we won't focus on it for this course.
+Note that we write our estimator with a subscript $n$ here to clarify that our estimator depends on our sample size. There is an alternative $\epsilon-\delta$ definition of consistency, but we won't focus on it for this course.
 
 **Weak Law of Large Numbers**
 
