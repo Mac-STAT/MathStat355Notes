@@ -22,11 +22,11 @@ Another property we like to have in an estimator (sometimes) is called *sufficie
 
 A similar concept applies to estimators. Recall from the MLE chapter of the notes that we previously showed that the MLE of a sample proportion is given by $\bar{X}$. If I want someone to be able to obtain the MLE for a sample proportion, I then have a few options. I could give them:
 
--  Every observation I know, $x_1, \dots,x_n$
--  Just one number, the sample mean, $\frac{1}{n}\sum_{i = 1}^n x_i$
--  All my observations plus some extra information, just for fun!
+-   Every observation I know, $x_1, \dots,x_n$
+-   Just one number, the sample mean, $\frac{1}{n}\sum_{i = 1}^n x_i$
+-   All my observations plus some extra information, just for fun!
 
-It should hopefully be obvious that you don't need extra information for fun, but we *also* don't need to know the value of each individual observation. The sample mean is sufficient! Formal definitions and a relevant theorem  to follow.
+It should hopefully be obvious that you don't need extra information for fun, but we *also* don't need to know the value of each individual observation. The sample mean is sufficient! Formal definitions and a relevant theorem to follow.
 
 ## Learning Objectives
 
@@ -44,19 +44,19 @@ By the end of this chapter, you should be able to...
 
 1.  Intuitively, what is the difference between bias and precision?
 
-2.  What are the typical steps to checking if an estimator is unbiased? 
+2.  What are the typical steps to checking if an estimator is unbiased?
 
-3.  How can we construct unbiased estimators? 
+3.  How can we construct unbiased estimators?
 
 4.  If an estimator is unbiased, is it also *asymptotically* unbiased? If an estimator is asymptotically unbiased, is it necessarily unbiased?
 
-5.  When comparing estimators, how can we determine which estimator is more efficient? 
+5.  When comparing estimators, how can we determine which estimator is more efficient?
 
 6.  Why might we care about sufficiency, particularly when thinking about the variance of unbiased estimators?
 
 7.  Describe, in your own words, what the Cramér-Rao inequality tells us.
 
-8.  What is the difference between a UMVUE and an efficient estimator? Does one imply the other? 
+8.  What is the difference between a UMVUE and an efficient estimator? Does one imply the other?
 
 ## Definitions
 
@@ -92,13 +92,11 @@ For some function $T^*$, $T^*(X)$ is a minimal sufficient statistic for an unkno
 
 **Complete**
 
-A statistic $T(X)$ is *complete* for an unknown parameter $\theta$ if 
-$$
+A statistic $T(X)$ is *complete* for an unknown parameter $\theta$ if $$
 E[g(T(x))] \text{ is } \theta-\text{free} \implies g(T(x)) \text{ is constant, almost everywhere}
-$$
-for a nice function $g$.
+$$ for a nice function $g$.
 
-Importantly, it is *equivalent* to say that $T(X)$ is *complete* for an unknown parameter $\theta$ if 
+Importantly, it is *equivalent* to say that $T(X)$ is *complete* for an unknown parameter $\theta$ if
 
 $$
 E[g(T(x))] = 0 \implies g(T(x)) = 0 \quad\text{ almost everywhere}
@@ -156,8 +154,7 @@ Consider a pdf for a random variable $X$ that depends on an unknown parameter $\
 
 $$
 \pi(x \mid \theta) = g(T(x) \mid \theta) h(x)
-$$
-where $g(T(x) \mid \theta)$ depends on $x$ only through $T(x)$, and $h(x)$ does not depend on $\theta$.
+$$ where $g(T(x) \mid \theta)$ depends on $x$ only through $T(x)$, and $h(x)$ does not depend on $\theta$.
 
 Note that in the statistics literature this criterion is sometimes referred to as the Fisher-Neyman Factorization Criterion.
 
@@ -165,49 +162,46 @@ Two proofs available on [Wikipedia](https://en.wikipedia.org/wiki/Sufficient_sta
 
 **Lehmann-Scheffe Theorem**
 
-Suppose that a random variable $X$ has pdf given by $f(x \mid \theta)$, and that $T^*(X)$ is such that for every* pair of points $(x,y)$, the ratio of pdfs
+Suppose that a random variable $X$ has pdf given by $f(x \mid \theta)$, and that $T^*(X)$ is such that for every\* pair of points $(x,y)$, the ratio of pdfs
 
 $$
 \frac{f(y \mid \theta)}{f(x \mid \theta)}
-$$
-does not depend on $\theta$ **if and only if** $T^*(x) = T^*(y)$. Then $T^*(X)$ is a minimal sufficient statistic for $\theta$.
+$$ does not depend on $\theta$ **if and only if** $T^*(x) = T^*(y)$. Then $T^*(X)$ is a minimal sufficient statistic for $\theta$.
 
-*every pair of points that have the same support as $X$.
+\*every pair of points that have the same support as $X$.
 
 <details>
 
 <summary>Proof.</summary>
 
-We'll utilize something called a likelihood ratio (literally a ratio of likelihoods) to prove this theorem. We'll also come back to likelihood ratios later in the Hypothesis Testing chapter! 
+We'll utilize something called a likelihood ratio (literally a ratio of likelihoods) to prove this theorem. We'll also come back to likelihood ratios later in the Hypothesis Testing chapter!
 
 Let $\theta_1$ and $\theta_2$ be two possible values of our unknown parameter $\theta$. Then a likelihood ratio comparing densities evaluated at these two values is defined as
 
 $$
 L_{\theta_1, \theta_2}(x) \equiv \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)}
-$$
-Our proof will proceed as follows:
+$$ Our proof will proceed as follows:
 
-1. We'll show that if $T(X)$ is sufficient, then $L_{\theta_1, \theta_2}(X)$ is a function of $T(X)$ $\forall$ $\theta_1, \theta_2$.
+1.  We'll show that if $T(X)$ is sufficient, then $L_{\theta_1, \theta_2}(X)$ is a function of $T(X)$ $\forall$ $\theta_1, \theta_2$.
 
-2. We'll show the converse: If $L_{\theta_1, \theta_2}(X)$ is a function of $T(X)$ $\forall$ $\theta_1, \theta_2$, then $T(X)$ is sufficient. This combined with (1) will show that $L_{\theta_1, \theta_2}(X)$ is a minimal sufficient statistic.
+2.  We'll show the converse: If $L_{\theta_1, \theta_2}(X)$ is a function of $T(X)$ $\forall$ $\theta_1, \theta_2$, then $T(X)$ is sufficient. This combined with (1) will show that $L_{\theta_1, \theta_2}(X)$ is a minimal sufficient statistic.
 
-3. We'll use the above two statements to prove the theorem!
+3.  We'll use the above two statements to prove the theorem!
 
 First, suppose that $T(X)$ is sufficient for $\theta$. Then, by definition we can write
 
 $$
 L_{\theta_1, \theta_2}(x) = \frac{f(x \mid \theta_2)}{f(x \mid \theta_1)} = \frac{g(T(x) \mid \theta_1)h(x)}{g(T(x) \mid \theta_2)h(x)} = \frac{g(T(x) \mid \theta_1)}{g(T(x) \mid \theta_2)}
-$$
-and so $L_{\theta_1, \theta_2}(X)$ is a function of $T(x)$ $\forall$ $\theta_1, \theta_2$.
+$$ and so $L_{\theta_1, \theta_2}(X)$ is a function of $T(x)$ $\forall$ $\theta_1, \theta_2$.
 
-Second, assume WLOG that $\theta_1$ is fixed, and denote our unknown parameter $\theta_2 = \theta$. We can rearrange our likelihood ratio as 
+Second, assume WLOG that $\theta_1$ is fixed, and denote our unknown parameter $\theta_2 = \theta$. We can rearrange our likelihood ratio as
 
 \begin{align*}
     L_{\theta_1, \theta}(x) & = \frac{f(x \mid \theta)}{f(x \mid \theta_1)} \\
     f(x \mid \theta) & = L_{\theta_1, \theta}(x) f(x \mid \theta_1) 
 \end{align*}
 
-and note that $L_{\theta_1, \theta}(x)$ is a function of $T(X)$ by assumption, and $f(x \mid \theta_1)$ is a function of $x$ that does not depend on our unknown parameter $\theta$. Then $T(X)$ satisfies the factorization criterion, and is therefore sufficient. 
+and note that $L_{\theta_1, \theta}(x)$ is a function of $T(X)$ by assumption, and $f(x \mid \theta_1)$ is a function of $x$ that does not depend on our unknown parameter $\theta$. Then $T(X)$ satisfies the factorization criterion, and is therefore sufficient.
 
 Let $T^{**}(X) \equiv L_{\theta_1, \theta_2}(X)$. Then the first two statements we have shown give us that
 
@@ -231,7 +225,6 @@ Therefore $T^*(X)$ and $T^{**}(X)$ are equivalent. Since $T^{**}(X)$ is a minima
 
 </details>
 
-
 **Complete, Sufficient, Minimal**
 
 If $T(X)$ is complete and sufficient, then $T(X)$ is minimal sufficient.
@@ -243,7 +236,6 @@ If $T(X)$ is complete and sufficient, then $T(X)$ is minimal sufficient.
 Just kidding! Prove it on your own and show it to me, if you want bonus points in my heart :)
 
 </details>
-
 
 **Rao-Blackwell-Lehmann-Scheffe (RBLS)**
 
@@ -259,21 +251,17 @@ $$
 
 <summary>Proof.</summary>
 
-To prove RBLS, we first must prove an Improvement Lemma and a Uniqueness Lemma. 
+To prove RBLS, we first must prove an Improvement Lemma and a Uniqueness Lemma.
 
 *Improvement Lemma.* Suppose that $T(X)$ is a sufficient statistic for $\theta$. If $\tilde{\tau}(X)$ is an unbiased estimator of $\tau(\theta)$, then $E[\tilde{\tau}(X) \mid T(X)]$ does not depend on $\theta$ (by sufficiency) and is also an estimator of $\tau(\theta)$, which (importantly) has smaller variance than $\tilde{\tau}(X)$.
 
-*Proof of Lemma.* First, note that $E[\tilde{\tau}(X) \mid T(X)]$ is an unbiased estimator for $\tau(\theta)$, since
-\begin{align*}
+*Proof of Lemma.* First, note that $E[\tilde{\tau}(X) \mid T(X)]$ is an unbiased estimator for $\tau(\theta)$, since \begin{align*}
     E[E[\tilde{\tau}(X) \mid T(X)]] & = E[\tilde{\tau}(X)] \quad \quad \text{(Law of Iterated Expectation)} \\
     & = \tau(\theta) \quad \quad (\tilde{\tau}(X) \text{ is unbiased})
-\end{align*}
-Then,
-\begin{align*}
+\end{align*} Then, \begin{align*}
     Var(\tilde{\tau}(X)) & = E[Var(\tilde{\tau}(X) \mid T(X))] + Var(E[\tilde{\tau}(X) \mid T(X)]) \\
     & \geq Var(E[\tilde{\tau}(X) \mid T(X)])
-\end{align*}
-and we're done! $E[\tilde{\tau}(X) \mid T(X)]$ has a smaller variance than $\tilde{\tau(X)}$. Since both are unbiased, this is considered an "improvement" (hence the name of the Lemma).
+\end{align*} and we're done! $E[\tilde{\tau}(X) \mid T(X)]$ has a smaller variance than $\tilde{\tau(X)}$. Since both are unbiased, this is considered an "improvement" (hence the name of the Lemma).
 
 *Uniqueness Lemma.* If $T(X)$ is complete, then for some unknown parameter $\theta$ and function of it $\tau(\theta)$, $\tau(\theta)$ has at most *one* unbiased estimator $\hat{\tau}(T(X))$ *that depends on* $T(X)$.
 
@@ -281,21 +269,18 @@ and we're done! $E[\tilde{\tau}(X) \mid T(X)]$ has a smaller variance than $\til
 
 $$
 E[\tilde{\tau}(T(X)) - \hat{\tau}(T(X))] = \tau(\theta) - \tau(\theta) = 0 \quad \forall \theta
-$$
-Let $g(T(X)) = \tilde{\tau}(T(X)) - \hat{\tau}(T(X))$. Since $T(X)$ is complete, and $E[g(T(X))] = 0$, this implies $\tilde{\tau}(T(X)) - \hat{\tau}(T(X)) = 0$, which means $\tilde{\tau}(T(X)) = \hat{\tau}(T(X))$. Contradiction. 
+$$ Let $g(T(X)) = \tilde{\tau}(T(X)) - \hat{\tau}(T(X))$. Since $T(X)$ is complete, and $E[g(T(X))] = 0$, this implies $\tilde{\tau}(T(X)) - \hat{\tau}(T(X)) = 0$, which means $\tilde{\tau}(T(X)) = \hat{\tau}(T(X))$. Contradiction.
 
-*Back to the proof of RBLS*. 
+*Back to the proof of RBLS*.
 
 We've shown previously that $\hat{\tau}(T(X))$ is an unbiased estimator for $\tau{\theta}$ (law of iterated expectation). Let $\tau_1(X)$ be any other unbiased estimator for $\tau(\theta)$, and let $\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]$. Then $\tau_2(T(X))$ is also unbiased for $\tau(\theta)$ (again, iterated expectation), and by the Uniqueness Lemma (since $T$ is complete by supposition), $\hat{\tau}(T(X)) = \tau_2(T(X))$. But,
 
 \begin{align*}
     Var(\hat{\tau}(T(X))) & = Var(\tau_2(T(X))) \quad \quad (\hat{\tau} = \tau_2) \\
     & \leq Var(\tau_1(T(X))) \quad \quad \text{(Improvement Lemma)}
-\end{align*}
-so $\hat{\tau}(T(X))$ is the UMVUE for $\tau(\theta)$, as desired.
+\end{align*} so $\hat{\tau}(T(X))$ is the UMVUE for $\tau(\theta)$, as desired.
 
 </details>
-
 
 **Cramér-Rao Lower Bound**
 
@@ -374,8 +359,6 @@ where $E[\hat{\theta}] = \theta$ since our estimator is unbiased. Putting this a
 as desired.
 
 </details>
-
-
 
 **Comment:** Note that what the Cramér-Rao lower bound tells us is that, if the variance of an unbiased estimator is *equal* to the Cramér-Rao lower bound, then that estimator has the *minimum possible variance* among all unbiased estimators there could possibly be. This allows us to *prove*, for example, whether or not an unbiased estimator is the UMVUE: If an unbiased estimator's variance achieves the C-R lower bound, then it is *optimal* according to the UMVUE criterion.
 
@@ -487,7 +470,7 @@ as desired.
 
 </details>
 
-**Problem 5:** Determine whether the estimator $\hat{\mu}$ or $\hat{\mu}_w$ is more efficient, in Problem 5, if we additionally impose the constraint $w_i \geq 0$ $\forall i$. (Note that this is a more "general" example based on Example 5.4.5 in Larsen & Marx) (Hint: use the Cauchy-Schwarz inequality)
+**Problem 5:** Determine whether the estimator $\hat{\mu}$ or $\hat{\mu}_w$ is more efficient, in Problem 4, if we additionally impose the constraint $w_i \geq 0$ $\forall i$. (Hint: use the Cauchy-Schwarz inequality)
 
 <details>
 
@@ -522,7 +505,7 @@ and therefore, $\hat{\mu}$ is more efficient than $\hat{\mu}_w$.
 
 </details>
 
-**Problem 6:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)$. Show that the MLE for $\sigma^2$ is *biased*, and suggest a modified variance estimator for $\sigma^2$ that is *unbiased*. (This is Example 5.4.4 in Larsen & Marx)
+**Problem 6:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} N(\mu, \sigma^2)$. Show that the MLE for $\sigma^2$ is *biased*, and suggest a modified variance estimator for $\sigma^2$ that is *unbiased*.
 
 <details>
 

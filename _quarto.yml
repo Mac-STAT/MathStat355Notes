@@ -4,6 +4,7 @@ project:
 
 book:
   title: "MATH/STAT 355: Statistical Theory"
+  favicon: "favicon-32x32.png"
   output-file: "math-stat-355"
   author: "Taylor Okonek"
   date: "12/7/2023"
