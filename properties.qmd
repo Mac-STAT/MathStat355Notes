@@ -543,3 +543,39 @@ Therefore, since $E[\hat{\sigma}^2_{MLE}] \neq \sigma^2$, the MLE is unbiased. N
 and so the estimator $\frac{1}{n-1} \sum_{i = 1}^n (X_i - \bar{X})^2$ is an unbiased estimator for $\sigma^2$. This estimator is often called the "sample variance", and is denoted by $S^2$.
 
 </details>
+
+**Problem 7:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} Uniform(0, \theta)$. Show that $X_{(n)}$ is sufficient for $\theta$.
+
+<details>
+
+<summary>Solution:</summary>
+
+We can write the joint distribution of $X_1, \dots, X_n$ as
+
+\begin{align*}
+    f(x_1, \dots, x_n \mid \theta) & = \left( \prod_{i = 1}^n \frac{1}{\theta} \right) I \{0 \leq x_1, \dots, x_n \leq \theta \} \\
+    & = \frac{1}{\theta^n} I \{0 \leq x_{(1)}, \dots, x_{(n)} \leq \theta \} \\
+    & = \frac{1}{\theta^n} I \{ x_{n} \leq \theta \} 
+\end{align*}
+
+since if $x_{(n)} \leq \theta$, *all* observations are less than $\theta$. Then $f(x_1, \dots, x_n \mid \theta)$ depends on $\theta$ only through $x_{(n)}$, and there $x_{(n)}$ is sufficient for $\theta$.
+
+</details>
+
+**Problem 8:** Suppose that $X_1, \dots, X_n \overset{iid}{\sim} Gamma(\alpha, \beta)$. Find a *jointly* sufficient statistic for $(\alpha, \beta)$.
+
+<details>
+
+<summary>Solution:</summary>
+
+We can write
+
+\begin{align*}
+    f(x_1, \dots, x_n \mid \alpha, \beta) & = \prod_{i = 1}^n \frac{\beta^\alpha}{\Gamma(\alpha)} x_i^{\alpha - 1} e^{-\beta x_i} \\
+    & = \left( \frac{\beta^\alpha}{\Gamma(\alpha)} \right)^n \left( \prod_{i = 1}^n x_i^{\alpha - 1} \right) e^{-\beta \sum_{i = 1}^n x_i} \\
+    & = \left( \frac{\beta^\alpha}{\Gamma(\alpha)} \right)^n \left( \prod_{i = 1}^n x_i \right)^{\alpha - 1}  e^{-\beta \sum_{i = 1}^n x_i}
+\end{align*}
+
+and so $f(x_1, \dots, x_n \mid \alpha, \beta)$ depends on $(\alpha, \beta)$ on $x_i$ only through $(\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)$, and therefore $(\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)$ is sufficient for $(\alpha, \beta)$.
+
+</details>

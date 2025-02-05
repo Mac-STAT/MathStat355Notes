@@ -633,6 +633,32 @@ Solution:
 \end{align*}\]</span></p>
 <p>and so the estimator <span class="math inline">\(\frac{1}{n-1} \sum_{i = 1}^n (X_i - \bar{X})^2\)</span> is an unbiased estimator for <span class="math inline">\(\sigma^2\)</span>. This estimator is often called the “sample variance”, and is denoted by <span class="math inline">\(S^2\)</span>.</p>
 </details>
+<p><strong>Problem 7:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Uniform(0, \theta)\)</span>. Show that <span class="math inline">\(X_{(n)}\)</span> is sufficient for <span class="math inline">\(\theta\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
+<p>We can write the joint distribution of <span class="math inline">\(X_1, \dots, X_n\)</span> as</p>
+<p><span class="math display">\[\begin{align*}
+    f(x_1, \dots, x_n \mid \theta) &amp; = \left( \prod_{i = 1}^n \frac{1}{\theta} \right) I \{0 \leq x_1, \dots, x_n \leq \theta \} \\
+    &amp; = \frac{1}{\theta^n} I \{0 \leq x_{(1)}, \dots, x_{(n)} \leq \theta \} \\
+    &amp; = \frac{1}{\theta^n} I \{ x_{n} \leq \theta \}
+\end{align*}\]</span></p>
+<p>since if <span class="math inline">\(x_{(n)} \leq \theta\)</span>, <em>all</em> observations are less than <span class="math inline">\(\theta\)</span>. Then <span class="math inline">\(f(x_1, \dots, x_n \mid \theta)\)</span> depends on <span class="math inline">\(\theta\)</span> only through <span class="math inline">\(x_{(n)}\)</span>, and there <span class="math inline">\(x_{(n)}\)</span> is sufficient for <span class="math inline">\(\theta\)</span>.</p>
+</details>
+<p><strong>Problem 8:</strong> Suppose that <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Gamma(\alpha, \beta)\)</span>. Find a <em>jointly</em> sufficient statistic for <span class="math inline">\((\alpha, \beta)\)</span>.</p>
+<details>
+<summary>
+Solution:
+</summary>
+<p>We can write</p>
+<p><span class="math display">\[\begin{align*}
+    f(x_1, \dots, x_n \mid \alpha, \beta) &amp; = \prod_{i = 1}^n \frac{\beta^\alpha}{\Gamma(\alpha)} x_i^{\alpha - 1} e^{-\beta x_i} \\
+    &amp; = \left( \frac{\beta^\alpha}{\Gamma(\alpha)} \right)^n \left( \prod_{i = 1}^n x_i^{\alpha - 1} \right) e^{-\beta \sum_{i = 1}^n x_i} \\
+    &amp; = \left( \frac{\beta^\alpha}{\Gamma(\alpha)} \right)^n \left( \prod_{i = 1}^n x_i \right)^{\alpha - 1}  e^{-\beta \sum_{i = 1}^n x_i}
+\end{align*}\]</span></p>
+<p>and so <span class="math inline">\(f(x_1, \dots, x_n \mid \alpha, \beta)\)</span> depends on <span class="math inline">\((\alpha, \beta)\)</span> on <span class="math inline">\(x_i\)</span> only through <span class="math inline">\((\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)\)</span>, and therefore <span class="math inline">\((\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)\)</span> is sufficient for <span class="math inline">\((\alpha, \beta)\)</span>.</p>
+</details>
 
 
 </section>
