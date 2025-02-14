@@ -537,18 +537,18 @@ Solution:
 \end{align*}\]</span></p>
 <p>as desired.</p>
 </details>
-<p><strong>Problem 2:</strong> Suppose again that <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Exponential(1/\theta)\)</span>. Let <span class="math inline">\(\hat{\theta}_2 = Y_1\)</span>, and <span class="math inline">\(\hat{\theta}_3 = nY_{(1)}\)</span>. Show that <span class="math inline">\(\hat{\theta}_2\)</span> and <span class="math inline">\(\hat{\theta}_3\)</span> are unbiased estimators of <span class="math inline">\(\theta\)</span>. Hint: use the fact that <span class="math inline">\(Y_{(1)} \sim Exponential(n/\theta)\)</span></p>
+<p><strong>Problem 2:</strong> Suppose again that <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Exponential(1/\theta)\)</span>. Let <span class="math inline">\(\hat{\theta}_2 = X_1\)</span>, and <span class="math inline">\(\hat{\theta}_3 = nX_{(1)}\)</span>. Show that <span class="math inline">\(\hat{\theta}_2\)</span> and <span class="math inline">\(\hat{\theta}_3\)</span> are unbiased estimators of <span class="math inline">\(\theta\)</span>. Hint: use the fact that <span class="math inline">\(X_{(1)} \sim Exponential(n/\theta)\)</span></p>
 <details>
 <summary>
 Solution:
 </summary>
-<p>Note that the mean of a random variable <span class="math inline">\(Y \sim Exponential(\lambda)\)</span> is given by <span class="math inline">\(1/\lambda\)</span>. Then we can write</p>
+<p>Note that the mean of a random variable <span class="math inline">\(X \sim Exponential(\lambda)\)</span> is given by <span class="math inline">\(1/\lambda\)</span>. Then we can write</p>
 <p><span class="math display">\[
-E[\hat{\theta}_2] = E[Y_1] = \frac{1}{1/\theta} = \theta
+E[\hat{\theta}_2] = E[X_1] = \frac{1}{1/\theta} = \theta
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-E[\hat{\theta}_3] = E[nY_{(1)}] = \frac{n}{n/\theta} = \theta
+E[\hat{\theta}_3] = E[nX_{(1)}] = \frac{n}{n/\theta} = \theta
 \]</span> as desired.</p>
 </details>
 <p><strong>Problem 3:</strong> Compare the variance of the estimators from Problems 1 and 2. Which is most efficient?</p>

@@ -2656,24 +2656,24 @@ as desired.
 
 \textbf{Problem 2:} Suppose again that
 \(X_1, \dots, X_n \overset{iid}{\sim} Exponential(1/\theta)\). Let
-\(\hat{\theta}_2 = Y_1\), and \(\hat{\theta}_3 = nY_{(1)}\). Show that
+\(\hat{\theta}_2 = X_1\), and \(\hat{\theta}_3 = nX_{(1)}\). Show that
 \(\hat{\theta}_2\) and \(\hat{\theta}_3\) are unbiased estimators of
 \(\theta\). Hint: use the fact that
-\(Y_{(1)} \sim Exponential(n/\theta)\)
+\(X_{(1)} \sim Exponential(n/\theta)\)
 
 Solution:
 
-Note that the mean of a random variable \(Y \sim Exponential(\lambda)\)
+Note that the mean of a random variable \(X \sim Exponential(\lambda)\)
 is given by \(1/\lambda\). Then we can write
 
 \[
-E[\hat{\theta}_2] = E[Y_1] = \frac{1}{1/\theta} = \theta
+E[\hat{\theta}_2] = E[X_1] = \frac{1}{1/\theta} = \theta
 \]
 
 and
 
 \[
-E[\hat{\theta}_3] = E[nY_{(1)}] = \frac{n}{n/\theta} = \theta
+E[\hat{\theta}_3] = E[nX_{(1)}] = \frac{n}{n/\theta} = \theta
 \] as desired.
 
 \textbf{Problem 3:} Compare the variance of the estimators from Problems
