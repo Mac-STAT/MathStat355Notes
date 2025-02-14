@@ -277,6 +277,8 @@ window.Quarto = {
 <li><p>Explain the distinction between bias and variance colloquially in terms of precision and accuracy, and why these properties are important</p></li>
 <li><p>Compare estimators in terms of their relative efficiency</p></li>
 <li><p>Justify why there exists a bias-variance trade-off, and explain what consequences this may have when comparing estimators</p></li>
+<li><p>Be able to determine / show when an estimator is sufficient</p></li>
+<li><p>Use RBLS to be able to find UMVUEs</p></li>
 </ul>
 </section>
 <section id="concept-questions" class="level2" data-number="4.2">
@@ -324,6 +326,12 @@ E[g(T(x))] = 0 \implies g(T(x)) = 0 \quad\text{ almost everywhere}
 <p>An estimator <span class="math inline">\(\hat{\theta}^*\)</span> is the UMVUE if, for all estimators <span class="math inline">\(\hat{\theta}\)</span> in the class of unbiased estimators <span class="math inline">\(\Theta\)</span>,</p>
 <p><span class="math display">\[
 Var(\hat{\theta}^*) \leq Var(\hat{\theta})
+\]</span></p>
+<p>NOTE: the UMVUE is <em>not necessarily</em> efficient (defined below).</p>
+<p><strong>Efficient</strong></p>
+<p>An <em>unbiased</em> estimator <span class="math inline">\(\hat{\theta}\)</span> is efficient if it achieves the C-R lower bound, i.e.&nbsp;if</p>
+<p><span class="math display">\[
+Var(\hat{\theta}) = \frac{1}{I(\theta)}
 \]</span></p>
 <p><strong>Score</strong></p>
 <p>The score is defined as the first partial derivative with respect to <span class="math inline">\(\theta\)</span> of the log-likelihood function, given by</p>
@@ -658,6 +666,36 @@ Solution:
     &amp; = \left( \frac{\beta^\alpha}{\Gamma(\alpha)} \right)^n \left( \prod_{i = 1}^n x_i \right)^{\alpha - 1}  e^{-\beta \sum_{i = 1}^n x_i}
 \end{align*}\]</span></p>
 <p>and so <span class="math inline">\(f(x_1, \dots, x_n \mid \alpha, \beta)\)</span> depends on <span class="math inline">\((\alpha, \beta)\)</span> on <span class="math inline">\(x_i\)</span> only through <span class="math inline">\((\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)\)</span>, and therefore <span class="math inline">\((\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)\)</span> is sufficient for <span class="math inline">\((\alpha, \beta)\)</span>.</p>
+</details>
+<p><strong>Problem 9:</strong> The density of a random variable <span class="math inline">\(X \sim Cauchy(x_0, \gamma)\)</span> is given by <span class="math display">\[
+f_X(x \mid x_0, \gamma) = \frac{1}{\pi \gamma \left[ 1 + \left( \frac{x - x_0}{\gamma}\right)^2 \right]}.
+\]</span> Use the Lehmann-Scheffe theorem to show that the set of all order statistics is minimal sufficient for <span class="math inline">\(\gamma\)</span>. (Note: This is sort of wild, since the set of all order statistics is literally every observation we have! Colloquially, this means that in order to get a “complete picture” of what is going on with <span class="math inline">\(\gamma\)</span>, we need to know the exact value of every single data point!)</p>
+<p>Hint: If a ratio of two polynomials has identical roots, then the denominator and numerator are equal up to a constant of proportionality.</p>
+<details>
+<summary>
+Solution:
+</summary>
+<p>Let <span class="math inline">\(X_1, \dots, X_n, Y_1, \dots, Y_n \overset{iid}{\sim} Cauchy(0, \gamma)\)</span>. Then we can write the likelihood ratio of <span class="math inline">\(f(\textbf{x} \mid \gamma)\)</span> and <span class="math inline">\(f(\textbf{y} \mid \gamma)\)</span> as</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)} &amp; = \frac{\prod_{i = 1}^n \pi \gamma [1 + (y_i/\gamma)^2]}{\prod_{i = 1}^n \pi \gamma [1 + (x_i/\gamma)^2]} \\
+    &amp; = \frac{\prod_{i = 1}^n  (1 + y_i^2/\gamma^2)}{\prod_{i = 1}^n  (1 + x_i^2/ \gamma^2)} \\
+    &amp; = \frac{\prod_{i = 1}^n  \frac{1}{\gamma^2}(\gamma^2 + y_i^2)}{\prod_{i = 1}^n \frac{1}{\gamma^2} (\gamma^2 + x_i^2)} \\
+    &amp; = \frac{\prod_{i = 1}^n  (\gamma^2 + y_i^2)}{\prod_{i = 1}^n  (\gamma^2 + x_i^2)}
+\end{align*}\]</span></p>
+<p>We must now show the following two things:</p>
+<p>First, suppose that the order statistics <span class="math inline">\(X_{(i)} = Y_{(i)}\)</span> are equal for all <span class="math inline">\(i\)</span>. Then we can write</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)} &amp; = \frac{\prod_{i = 1}^n  (\gamma^2 + y_i^2)}{\prod_{i = 1}^n  (\gamma^2 + x_i^2)} \\
+    &amp; = \frac{\prod_{i = 1}^n  (\gamma^2 + y_{(i)}^2)}{\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)} \quad \text{(since we are taking a product over all $i$)} \\
+    &amp; = \frac{\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)}{\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)} \quad \text{(by assumption)} \\
+    &amp; = 1
+\end{align*}\]</span></p>
+<p>and so the likelihood ratio does not depend on <span class="math inline">\(\lambda\)</span> (it is equal to 1 under this assumption!). Fun fact: this is true for the set of all order statistics in <em>every</em> distribution, since it’s literally every observation we have access to!</p>
+<p>Now, assume that <span class="math inline">\(\frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)}\)</span> does not depend on <span class="math inline">\(\gamma\)</span>. Then <span class="math inline">\(f(\textbf{x} \mid \gamma)\)</span> and <span class="math inline">\(f(\textbf{y} \mid \gamma)\)</span> have identical roots, and therefore we can write,</p>
+<p><span class="math display">\[
+f(\textbf{x} \mid \gamma)  = a f(\textbf{y} \mid \gamma)
+\]</span></p>
+<p>for some constant <span class="math inline">\(a\)</span>. This further implies <span class="math inline">\(f(x_i \mid \gamma) = a^{1/n} f(y_i \mid \gamma)\)</span>. Now note that since both <span class="math inline">\(f(x_i \mid \gamma)\)</span> and <span class="math inline">\(f(y_i \mid \gamma)\)</span> are pdfs, they therefore must both integrate to 1, which is the case if and only if <span class="math inline">\(a = 1\)</span>. Finally we can conclude that the polynomials <span class="math inline">\(\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)\)</span> and <span class="math inline">\(\prod_{i = 1}^n  (\gamma^2 + y_{(i)}^2)\)</span> must be equal, and therefore <span class="math inline">\(X_1, \dots, X_n\)</span> must be a permutation of <span class="math inline">\(Y_1, \dots, Y_n\)</span>, which is the case only when the order statistics of <span class="math inline">\(X_1, \dots, X_n\)</span> and <span class="math inline">\(Y_1, \dots, Y_n\)</span> are equal.</p>
 </details>
 
 

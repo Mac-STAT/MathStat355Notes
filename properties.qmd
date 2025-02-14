@@ -40,6 +40,10 @@ By the end of this chapter, you should be able to...
 
 -   Justify why there exists a bias-variance trade-off, and explain what consequences this may have when comparing estimators
 
+-   Be able to determine / show when an estimator is sufficient
+
+-   Use RBLS to be able to find UMVUEs
+
 ## Concept Questions
 
 1.  Intuitively, what is the difference between bias and precision?
@@ -112,6 +116,16 @@ An estimator $\hat{\theta}^*$ is the UMVUE if, for all estimators $\hat{\theta}$
 
 $$
 Var(\hat{\theta}^*) \leq Var(\hat{\theta})
+$$
+
+NOTE: the UMVUE is *not necessarily* efficient (defined below).
+
+**Efficient**
+
+An *unbiased* estimator $\hat{\theta}$ is efficient if it achieves the C-R lower bound, i.e. if
+
+$$
+Var(\hat{\theta}) = \frac{1}{I(\theta)}
 $$
 
 **Score**
@@ -577,5 +591,54 @@ We can write
 \end{align*}
 
 and so $f(x_1, \dots, x_n \mid \alpha, \beta)$ depends on $(\alpha, \beta)$ on $x_i$ only through $(\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)$, and therefore $(\prod_{i = 1}^n x_i, \sum_{i = 1}^n x_i)$ is sufficient for $(\alpha, \beta)$.
+
+</details>
+
+**Problem 9:** The density of a random variable $X \sim Cauchy(x_0, \gamma)$ is given by 
+$$
+f_X(x \mid x_0, \gamma) = \frac{1}{\pi \gamma \left[ 1 + \left( \frac{x - x_0}{\gamma}\right)^2 \right]}.
+$$
+Use the Lehmann-Scheffe theorem to show that the set of all order statistics is minimal sufficient for $\gamma$. (Note: This is sort of wild, since the set of all order statistics is literally every observation we have! Colloquially, this means that in order to get a "complete picture" of what is going on with $\gamma$, we need to know the exact value of every single data point!)
+
+Hint: If a ratio of two polynomials has identical roots, then the denominator and numerator are equal up to a constant of proportionality.
+
+<details>
+
+<summary>Solution:</summary>
+
+Let $X_1, \dots, X_n, Y_1, \dots, Y_n \overset{iid}{\sim} Cauchy(0, \gamma)$. Then we can write the likelihood ratio of $f(\textbf{x} \mid \gamma)$ and $f(\textbf{y} \mid \gamma)$ as
+
+\begin{align*}
+    \frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)} & = \frac{\prod_{i = 1}^n \pi \gamma [1 + (y_i/\gamma)^2]}{\prod_{i = 1}^n \pi \gamma [1 + (x_i/\gamma)^2]} \\
+    & = \frac{\prod_{i = 1}^n  (1 + y_i^2/\gamma^2)}{\prod_{i = 1}^n  (1 + x_i^2/ \gamma^2)} \\
+    & = \frac{\prod_{i = 1}^n  \frac{1}{\gamma^2}(\gamma^2 + y_i^2)}{\prod_{i = 1}^n \frac{1}{\gamma^2} (\gamma^2 + x_i^2)} \\
+    & = \frac{\prod_{i = 1}^n  (\gamma^2 + y_i^2)}{\prod_{i = 1}^n  (\gamma^2 + x_i^2)}
+\end{align*}
+
+We must now show the following two things:
+
+\begin{enumerate}
+    \item If the order statistics of $X_1, \dots, X_n$ are equal to the order statistics of $Y_1, \dots, Y_n$,then $\frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)}$ does not depend on $\gamma$.
+    \item If $\frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)}$ does not depend on $\gamma$, then the order statistics of $X_1, \dots, X_n$ are equal to the order statistics of $Y_1, \dots, Y_n$.
+\end{enumerate}
+
+First, suppose that the order statistics $X_{(i)} = Y_{(i)}$ are equal for all $i$. Then we can write
+
+\begin{align*}
+    \frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)} & = \frac{\prod_{i = 1}^n  (\gamma^2 + y_i^2)}{\prod_{i = 1}^n  (\gamma^2 + x_i^2)} \\
+    & = \frac{\prod_{i = 1}^n  (\gamma^2 + y_{(i)}^2)}{\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)} \quad \text{(since we are taking a product over all $i$)} \\
+    & = \frac{\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)}{\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)} \quad \text{(by assumption)} \\
+    & = 1
+\end{align*}
+
+and so the likelihood ratio does not depend on $\lambda$ (it is equal to 1 under this assumption!). Fun fact: this is true for the set of all order statistics in *every* distribution, since it's literally every observation we have access to!
+
+Now, assume that $\frac{f(\textbf{x} \mid \gamma)}{f(\textbf{y} \mid \gamma)}$ does not depend on $\gamma$. Then $f(\textbf{x} \mid \gamma)$ and $f(\textbf{y} \mid \gamma)$ have identical roots, and therefore we can write,
+
+$$
+f(\textbf{x} \mid \gamma)  = a f(\textbf{y} \mid \gamma)
+$$
+
+for some constant $a$. This further implies $f(x_i \mid \gamma) = a^{1/n} f(y_i \mid \gamma)$. Now note that since both $f(x_i \mid \gamma)$ and $f(y_i \mid \gamma)$ are pdfs, they therefore must both integrate to 1, which is the case if and only if $a = 1$. Finally we can conclude that the polynomials $\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)$ and $\prod_{i = 1}^n  (\gamma^2 + y_{(i)}^2)$ must be equal, and therefore $X_1, \dots, X_n$ must be a permutation of $Y_1, \dots, Y_n$, which is the case only when the order statistics of $X_1, \dots, X_n$ and $Y_1, \dots, Y_n$ are equal.
 
 </details>
