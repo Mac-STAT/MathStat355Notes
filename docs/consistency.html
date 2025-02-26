@@ -305,7 +305,10 @@ window.Quarto = {
 <p><span class="math display">\[
 \Pr(|W - \mu| \geq \epsilon) \leq \frac{\sigma^2}{\epsilon^2}.
 \]</span></p>
-<p><strong>Proof.</strong></p>
+<details>
+<summary>
+Proof.
+</summary>
 <p>Let <span class="math inline">\(\epsilon &gt; 0\)</span>. Then</p>
 <p><span class="math display">\[\begin{align*}
 \sigma^2 &amp; = \text{Var}(W) \\
@@ -323,6 +326,7 @@ window.Quarto = {
 P(|W-\mu| \geq \epsilon) &amp; \leq \frac{\sigma^2}{\epsilon^2}
 \end{align*}\]</span></p>
 <p>as desired.</p>
+</details>
 <p><strong>Corollary 1:</strong> If <span class="math inline">\(\hat{\theta}_n\)</span> is an unbiased estimator for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\underset{n \to \infty}{\text{lim}} Var(\hat{\theta}_n) = 0\)</span>, then <span class="math inline">\(\hat{\theta}_n\)</span> is consistent for <span class="math inline">\(\theta\)</span>. (You’ll prove this corollary on a problem set!)</p>
 <p><strong>Corollary 2:</strong> If <span class="math inline">\(\hat{\theta}_n\)</span> is an asymptotically unbiased estimator for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\underset{n \to \infty}{\text{lim}} Var(\hat{\theta}_n) = 0\)</span>, then <span class="math inline">\(\hat{\theta}_n\)</span> is consistent for <span class="math inline">\(\theta\)</span>.</p>
 <p>Note that the second corollary is a bit stronger than the first one, in that the first corollary actually <em>implies</em> the second. If an estimator is unbiased, then it is certainly asymptotically unbiased as well.</p>

@@ -102,7 +102,9 @@ $$
 \Pr(|W - \mu| \geq \epsilon) \leq \frac{\sigma^2}{\epsilon^2}.
 $$
 
-**Proof.**
+<details>
+
+<summary>Proof.</summary>
 
 Let $\epsilon > 0$. Then
 
@@ -125,6 +127,8 @@ P(|W-\mu| \geq \epsilon) & \leq \frac{\sigma^2}{\epsilon^2}
 \end{align*}
 
 as desired.
+
+</details>
 
 **Corollary 1:** If $\hat{\theta}_n$ is an unbiased estimator for $\theta$ and $\underset{n \to \infty}{\text{lim}} Var(\hat{\theta}_n) = 0$, then $\hat{\theta}_n$ is consistent for $\theta$. (You'll prove this corollary on a problem set!)
 

@@ -292,7 +292,35 @@ window.Quarto = {
 </section>
 <section id="convergence" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="convergence">Convergence</h3>
-<p>If an estimator <span class="math inline">\(\hat{\theta}_n\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>, we also say that <span class="math inline">\(\hat{\theta}_n\)</span> converges in probability to <span class="math inline">\(\theta\)</span> (i.e., <span class="math inline">\(\hat{\theta}_n \overset{p}{\to} \theta\)</span>). There are three different types of convergence: almost sure convergence, convergence in probability, and convergence in distribution (in order from “strongest” to “weakest”). The main two that we’ll care about for this course are convergence in probability and convergence in distribution. Mathematical details about convergence are for a more advanced statistical theory course (or perhaps a more advanced course in analysis). For our purposes, it will suffice to know that (1) convergence in probability <em>implies</em> convergence in distribution, (2) the Central Limit Theorem, delta-method, and Slutsky’s Theorem are tools we can use to determine (and manipulate) asymptotic distributions of random variables, and (3) the Continuous Mapping Theorem (defined below).</p>
+<p>If an estimator <span class="math inline">\(\hat{\theta}_n\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>, we also say that <span class="math inline">\(\hat{\theta}_n\)</span> converges in probability to <span class="math inline">\(\theta\)</span> (i.e., <span class="math inline">\(\hat{\theta}_n \overset{p}{\to} \theta\)</span>). There are three different types of convergence: almost sure convergence, convergence in probability, and convergence in distribution (in order from “strongest” to “weakest”). The main two that we’ll care about for this course are convergence in probability and convergence in distribution. For our purposes, it will <em>mostly</em> suffice to know that (1) convergence in probability <em>implies</em> convergence in distribution, (2) the Central Limit Theorem, delta-method, and Slutsky’s Theorem are tools we can use to determine (and manipulate) asymptotic distributions of random variables, and (3) the Continuous Mapping Theorem (defined below). That being said, an attempt at an intuitive understand of these three types of convergence is provided below, in the context of sequences of random variables.</p>
+<section id="convergence-almost-surely" class="level4" data-number="6.0.0.1">
+<h4 data-number="6.0.0.1" class="anchored" data-anchor-id="convergence-almost-surely"><span class="header-section-number">6.0.0.1</span> Convergence Almost Surely</h4>
+<p>Convergence almost surely is the strongest of the three types of convergence. A sequence of random variables <span class="math inline">\(X_1, \dots, X_n\)</span> convergences almost surely (also called convergence almost everywhere) if</p>
+<p><span class="math display">\[
+\Pr(\lim_{n \to \infty} X_n = X) = 1
+\]</span></p>
+<p>In my opinion, one of the most intuitive explanations for convergence almost surely (and convergence in probability, comparatively) is given in the top answer to <a href="https://stats.stackexchange.com/questions/2230/convergence-in-probability-vs-almost-sure-convergence">this</a> StackExchange post. Convergence almost surely says that <span class="math inline">\(X_n\)</span> <em>will</em> be equal to <span class="math inline">\(X\)</span> at some point, for finite <span class="math inline">\(n\)</span>.</p>
+</section>
+<section id="convergence-in-probability" class="level4" data-number="6.0.0.2">
+<h4 data-number="6.0.0.2" class="anchored" data-anchor-id="convergence-in-probability"><span class="header-section-number">6.0.0.2</span> Convergence in Probability</h4>
+<p>Surprise! You already know this one, if you made it through the Consistency chapter. The concept of convergence in probability applies to sequences of random variables in addition to estimators. A sequence of random variables <span class="math inline">\(X_1, \dots, X_n\)</span> converges in probability towards the random variable <span class="math inline">\(X\)</span> if for all <span class="math inline">\(\epsilon &gt; 0\)</span></p>
+<p><span class="math display">\[
+\lim_{n \to \infty} \Pr(|X_n - X | &gt; \epsilon) = 0
+\]</span></p>
+<p>Note that this equivalent to saying that <span class="math inline">\(\lim_{n \to \infty} \Pr(|X_n - X | \leq \epsilon) = 1\)</span>, which looks a bit more like what we saw last chapter. Convergence in probability says that <span class="math inline">\(X_n\)</span> will equal <span class="math inline">\(X\)</span> <em>with a very high probability</em> as <span class="math inline">\(n\)</span> gets large, though there will always be some small (shrinking with <span class="math inline">\(n\)</span>) chance that they aren’t equal.</p>
+</section>
+<section id="convergence-in-distribution" class="level4" data-number="6.0.0.3">
+<h4 data-number="6.0.0.3" class="anchored" data-anchor-id="convergence-in-distribution"><span class="header-section-number">6.0.0.3</span> Convergence in Distribution</h4>
+<p>A sequence of random variables <span class="math inline">\(X_1, \dots, X_n\)</span> with CDFs <span class="math inline">\(F_1, \dots, F_n\)</span> converges in distribution (also called “weak” convergence, or convergence in “law”) if</p>
+<p><span class="math display">\[
+\lim_{n \to \infty} F_n(x) = F(x)
+\]</span>for every number <span class="math inline">\(x\)</span> at which <span class="math inline">\(F\)</span> is continuous. Note that <em>unlike</em> convergence almost surely and convergence in probability, our sequence of variables isn’t “shrinking” in quite the same way, with this type of convergence. Rather, our sequence is better and better approximating an <em>entire distribution</em>, rather than focusing in on a single point. A visual representation of convergence in distribution is provided below, where <span class="math inline">\(F_n(x)\)</span> is the black sequence of lines, and the red line is <span class="math inline">\(F(x)\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="convergence_in_distribution.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
 </section>
 <section id="asymptotic-properties-of-mles" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="asymptotic-properties-of-mles">Asymptotic Properties of MLEs</h3>
@@ -345,7 +373,10 @@ window.Quarto = {
 \sqrt{n} (\bar{X_n} - \mu) \overset{d}{\to} N(0, \sigma^2)
 \]</span></p>
 <p>where “<span class="math inline">\(\overset{d}{\to}\)</span>” denotes convergence in distribution.</p>
-<p><strong>Proof.</strong></p>
+<details>
+<summary>
+Proof.
+</summary>
 <p>Note that this proof is not completely rigorous, in that we will use the following theorem (without proof) in order to prove the CLT:</p>
 <p>Theorem: Let <span class="math inline">\(W_1, \dots, W_n\)</span> be a sequence of random variables with MGF of the sequence <span class="math inline">\(W_n\)</span> given by <span class="math inline">\(M_{W_n}(t)\)</span>. Also, let <span class="math inline">\(V\)</span> denote another random variable with MGF <span class="math inline">\(M_V(t)\)</span>. Then if <span class="math inline">\(\underset{n \to \infty}{\text{lim}} M_{W_n}(t) = M_V(t)\)</span>, for all values of <span class="math inline">\(t\)</span> in some interval around <span class="math inline">\(t = 0\)</span>, then the sequence <span class="math inline">\(W_1, \dots, W_n\)</span> converges in distribution to <span class="math inline">\(V\)</span>.</p>
 <p>Suppose <span class="math inline">\(X_1, \dots, X_n\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, and let <span class="math inline">\(Y_i = (X_i - \mu)/\sigma\)</span>. Then <span class="math inline">\(E[Y_i] = 0\)</span>, and <span class="math inline">\(Var[Y_i] = 1\)</span> since</p>
@@ -405,18 +436,32 @@ M_{Z_n}(t) = (1 + a_n)^{c_n} \overset{n \to \infty}{\to} e^{t^2/2}
 \sqrt{n}(\bar{X} - \mu) \overset{d}{\to} N(0, \sigma^2)
 \]</span></p>
 <p>as desired.</p>
+</details>
 <p><strong>Continuous Mapping Theorem</strong></p>
 <p>If <span class="math inline">\(X_n \overset{p}{\to} X\)</span>, and <span class="math inline">\(g\)</span> is a continuous function, then <span class="math inline">\(g(X_n) \overset{p}{\to} g(X)\)</span>. Similarly for convergence almost surely and convergence in distribution.</p>
-<p><strong>Proof.</strong> Left to the reader, but also on <a href="https://en.wikipedia.org/wiki/Continuous_mapping_theorem#Proof">Wikipedia</a>.</p>
+<details>
+<summary>
+Proof.
+</summary>
+<p>Left to the reader, but also on <a href="https://en.wikipedia.org/wiki/Continuous_mapping_theorem#Proof">Wikipedia</a>.</p>
+</details>
 <p><strong>Slutsky’s Theorem</strong></p>
 <p>If <span class="math inline">\(g(X, Y)\)</span> is a jointly continuous function at every point <span class="math inline">\((X, a)\)</span> for some fixed <span class="math inline">\(a\)</span>, and if <span class="math inline">\(X_n \overset{d}{\to} X\)</span> and <span class="math inline">\(Y_n \overset{p}{\to} a\)</span>, then <span class="math inline">\(g(X_n, Y_n) \overset{d}{\to} g(X, a)\)</span>.</p>
-<p><strong>Proof.</strong> Beyond the scope of the course, unfortunately, but here’s a <a href="https://en.wikipedia.org/wiki/Slutsky%27s_theorem#Proof">link</a> to the Wikipedia page if you want to go down that rabbit hole in your spare time.</p>
+<details>
+<summary>
+Proof.
+</summary>
+<p>Beyond the scope of the course, unfortunately, but here’s a <a href="https://en.wikipedia.org/wiki/Slutsky%27s_theorem#Proof">link</a> to the Wikipedia page if you want to go down that rabbit hole in your spare time.</p>
+</details>
 <p><strong>Delta-method</strong></p>
 <p>Let <span class="math inline">\(\sqrt{n} (Y - \mu) \overset{d}{\to} N(0, \sigma^2)\)</span>. If <span class="math inline">\(g(Y)\)</span> is differentiable at <span class="math inline">\(\mu\)</span> and <span class="math inline">\(g'(\mu) \neq 0\)</span>, then</p>
 <p><span class="math display">\[
 \sqrt{n} \left( g(Y) - g(\mu)\right) \overset{d}{\to} N(0, [g'(\mu)]^2 \sigma^2)
 \]</span></p>
-<p><strong>Proof.</strong></p>
+<details>
+<summary>
+Proof.
+</summary>
 <p>Since <span class="math inline">\(g\)</span> is differentiable at <span class="math inline">\(\mu\)</span>, it’s first-order Taylor expansion is given by</p>
 <p><span class="math display">\[
 g(Y) = g(\mu) + (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
@@ -441,6 +486,7 @@ g(Y) - g(\mu) =  (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
 <p>and so finally we have shown that <span class="math display">\[
 \sqrt{n}\left( g(Y) - g(\mu) \right) \overset{d}{\to}  N(0, [g'(\mu)]^2\sigma^2)
 \]</span> as desired.</p>
+</details>
 </section>
 <section id="worked-examples" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">6.5</span> Worked Examples</h2>

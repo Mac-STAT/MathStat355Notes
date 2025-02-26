@@ -3044,7 +3044,7 @@ or, equivalently,
 \Pr(|W - \mu| \geq \epsilon) \leq \frac{\sigma^2}{\epsilon^2}.
 \]
 
-\textbf{Proof.}
+Proof.
 
 Let \(\epsilon > 0\). Then
 
@@ -3318,14 +3318,71 @@ are three different types of convergence: almost sure convergence,
 convergence in probability, and convergence in distribution (in order
 from ``strongest'' to ``weakest''). The main two that we'll care about
 for this course are convergence in probability and convergence in
-distribution. Mathematical details about convergence are for a more
-advanced statistical theory course (or perhaps a more advanced course in
-analysis). For our purposes, it will suffice to know that (1)
-convergence in probability \emph{implies} convergence in distribution,
-(2) the Central Limit Theorem, delta-method, and Slutsky's Theorem are
-tools we can use to determine (and manipulate) asymptotic distributions
-of random variables, and (3) the Continuous Mapping Theorem (defined
-below).
+distribution. For our purposes, it will \emph{mostly} suffice to know
+that (1) convergence in probability \emph{implies} convergence in
+distribution, (2) the Central Limit Theorem, delta-method, and Slutsky's
+Theorem are tools we can use to determine (and manipulate) asymptotic
+distributions of random variables, and (3) the Continuous Mapping
+Theorem (defined below). That being said, an attempt at an intuitive
+understand of these three types of convergence is provided below, in the
+context of sequences of random variables.
+
+\subsubsection{Convergence Almost
+Surely}\label{convergence-almost-surely}
+
+Convergence almost surely is the strongest of the three types of
+convergence. A sequence of random variables \(X_1, \dots, X_n\)
+convergences almost surely (also called convergence almost everywhere)
+if
+
+\[
+\Pr(\lim_{n \to \infty} X_n = X) = 1
+\]
+
+In my opinion, one of the most intuitive explanations for convergence
+almost surely (and convergence in probability, comparatively) is given
+in the top answer to
+\href{https://stats.stackexchange.com/questions/2230/convergence-in-probability-vs-almost-sure-convergence}{this}
+StackExchange post. Convergence almost surely says that \(X_n\)
+\emph{will} be equal to \(X\) at some point, for finite \(n\).
+
+\subsubsection{Convergence in
+Probability}\label{convergence-in-probability}
+
+Surprise! You already know this one, if you made it through the
+Consistency chapter. The concept of convergence in probability applies
+to sequences of random variables in addition to estimators. A sequence
+of random variables \(X_1, \dots, X_n\) converges in probability towards
+the random variable \(X\) if for all \(\epsilon > 0\)
+
+\[
+\lim_{n \to \infty} \Pr(|X_n - X | > \epsilon) = 0
+\]
+
+Note that this equivalent to saying that
+\(\lim_{n \to \infty} \Pr(|X_n - X | \leq \epsilon) = 1\), which looks a
+bit more like what we saw last chapter. Convergence in probability says
+that \(X_n\) will equal \(X\) \emph{with a very high probability} as
+\(n\) gets large, though there will always be some small (shrinking with
+\(n\)) chance that they aren't equal.
+
+\subsubsection{Convergence in
+Distribution}\label{convergence-in-distribution}
+
+A sequence of random variables \(X_1, \dots, X_n\) with CDFs
+\(F_1, \dots, F_n\) converges in distribution (also called ``weak''
+convergence, or convergence in ``law'') if
+
+\[
+\lim_{n \to \infty} F_n(x) = F(x)
+\]for every number \(x\) at which \(F\) is continuous. Note that
+\emph{unlike} convergence almost surely and convergence in probability,
+our sequence of variables isn't ``shrinking'' in quite the same way,
+with this type of convergence. Rather, our sequence is better and better
+approximating an \emph{entire distribution}, rather than focusing in on
+a single point. A visual representation of convergence in distribution
+is provided below, where \(F_n(x)\) is the black sequence of lines, and
+the red line is \(F(x)\).
 
 \subsection*{Asymptotic Properties of
 MLEs}\label{asymptotic-properties-of-mles}
@@ -3428,7 +3485,7 @@ variance \(\sigma^2\),
 
 where ``\(\overset{d}{\to}\)'' denotes convergence in distribution.
 
-\textbf{Proof.}
+Proof.
 
 Note that this proof is not completely rigorous, in that we will use the
 following theorem (without proof) in order to prove the CLT:
@@ -3546,7 +3603,9 @@ If \(X_n \overset{p}{\to} X\), and \(g\) is a continuous function, then
 \(g(X_n) \overset{p}{\to} g(X)\). Similarly for convergence almost
 surely and convergence in distribution.
 
-\textbf{Proof.} Left to the reader, but also on
+Proof.
+
+Left to the reader, but also on
 \href{https://en.wikipedia.org/wiki/Continuous_mapping_theorem\#Proof}{Wikipedia}.
 
 \textbf{Slutsky's Theorem}
@@ -3556,8 +3615,9 @@ If \(g(X, Y)\) is a jointly continuous function at every point
 \(Y_n \overset{p}{\to} a\), then
 \(g(X_n, Y_n) \overset{d}{\to} g(X, a)\).
 
-\textbf{Proof.} Beyond the scope of the course, unfortunately, but
-here's a
+Proof.
+
+Beyond the scope of the course, unfortunately, but here's a
 \href{https://en.wikipedia.org/wiki/Slutsky\%27s_theorem\#Proof}{link}
 to the Wikipedia page if you want to go down that rabbit hole in your
 spare time.
@@ -3571,7 +3631,7 @@ is differentiable at \(\mu\) and \(g'(\mu) \neq 0\), then
 \sqrt{n} \left( g(Y) - g(\mu)\right) \overset{d}{\to} N(0, [g'(\mu)]^2 \sigma^2)
 \]
 
-\textbf{Proof.}
+Proof.
 
 Since \(g\) is differentiable at \(\mu\), it's first-order Taylor
 expansion is given by
