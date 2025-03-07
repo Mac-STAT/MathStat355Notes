@@ -487,6 +487,83 @@ g(Y) - g(\mu) =  (Y - \mu)g'(\mu) + O(| Y - \mu |^2)
 \sqrt{n}\left( g(Y) - g(\mu) \right) \overset{d}{\to}  N(0, [g'(\mu)]^2\sigma^2)
 \]</span> as desired.</p>
 </details>
+<p><strong>Asymptotic Normality &amp; Efficiency of MLEs</strong></p>
+<p>Suppose that for iid observations <span class="math inline">\(X_1, \dots, X_n\)</span>, <span class="math inline">\(\hat{\theta}\)</span> is the MLE for <span class="math inline">\(\theta_0\)</span>. Then we have that</p>
+<p><span class="math display">\[
+\sqrt{n} (\hat{\theta} - \theta_0) \overset{d}{\to} N\left(0, \frac{1}{I_1(\theta_0)}\right)
+\]</span></p>
+<p><em>Lemma.</em> Let <span class="math inline">\(\theta_0\)</span> denote the true unknown value of the parameter <span class="math inline">\(\theta\)</span> for a density given by <span class="math inline">\(f(x \mid \theta)\)</span>. Then for any other <span class="math inline">\(\theta\)</span>, we have that <span class="math inline">\(E[\log f(x \mid \theta)] \leq E[\log f(x \mid \theta_0)]\)</span>.</p>
+<details>
+<summary>
+Proof of Lemma:
+</summary>
+<p>To show that <span class="math inline">\(E[\log f(x \mid \theta)] \leq E[\log f(x \mid \theta_0)]\)</span>, we can equivalently show that <span class="math inline">\(E[\log f(x \mid \theta)] - E[\log f(x \mid \theta_0)] \leq 0\)</span>. Note that we can write</p>
+<p><span class="math display">\[\begin{align*}
+    E[\log f(x \mid \theta)] - E[\log f(x \mid \theta_0)] &amp; = E[\log f(x \mid \theta) - \log f(x \mid \theta_0)] \quad \text{(linearity of expectation)} \\
+    &amp; = E\left[ \log \frac{ f(x \mid \theta)}{f(x \mid \theta_0)} \right] \quad \text{(log rules)} \\
+    &amp; \leq E\left[ \frac{ f(x \mid \theta)}{f(x \mid \theta_0)} - 1 \right] \quad \text{(log $t \leq t - 1$)} \\
+    &amp; = \int \left( \frac{ f(x \mid \theta)}{f(x \mid \theta_0)} - 1 \right)  f(x \mid \theta_0) dx \\
+    &amp; = \int \left( \frac{ f(x \mid \theta)}{f(x \mid \theta_0)} - \frac{ f(x \mid \theta_0)}{f(x \mid \theta_0)} \right)  f(x \mid \theta_0) dx \\
+    &amp; = \int f(x \mid \theta) - f(x \mid \theta_0) dx \\
+    &amp; = \int f(x \mid \theta) dx - f(x \mid \theta_0) dx \\
+    &amp; = 1 - 1 \quad \text{(pdfs integrate to 1)} \\
+    &amp; = 0
+\end{align*}\]</span></p>
+<p>as desired.</p>
+</details>
+<details>
+<summary>
+Proof of Theorem:
+</summary>
+<p>Just as in the theorem statement, suppose <span class="math inline">\(\hat{\theta}\)</span> is the MLE for <span class="math inline">\(\theta_0\)</span>, where we have iid observations <span class="math inline">\(X_1, \dots, X_n\)</span> with some density function given by <span class="math inline">\(f(x_i \mid \theta)\)</span>. Let <span class="math inline">\(\log L(\theta)\)</span> denote the of the log likelihood, <span class="math inline">\(E[\log f(\textbf{x} \mid \theta)]\)</span>, and let <span class="math inline">\(L_n(\theta)\)</span> denote the log likelihood divided by the sample size, <span class="math inline">\(L_n(\theta) = \frac{1}{n}\sum_{i = 1}^n \log f(x_i \mid \theta)\)</span>. Note that by definition of an MLE, <span class="math inline">\(L_n'(\hat{\theta}) = 0\)</span> (the first derivative of <span class="math inline">\(L_n(\theta)\)</span> evaluated at <span class="math inline">\(\hat{\theta}\)</span> is equal to zero).</p>
+<p>Recall that the Mean Value Theorem (MVT) states that</p>
+<p><span class="math display">\[
+\frac{f(a) - f(b)}{a - b} = f'(c), \quad c \in [a,b],
+\]</span></p>
+<p>Let <span class="math inline">\(f(\theta) = L_n'(\theta)\)</span>, <span class="math inline">\(a = \hat{\theta}\)</span>, and <span class="math inline">\(b = \theta_0\)</span>. Then the MVT gives us that</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{L_n'(\hat{\theta}) - L_n'(\theta_0)}{\hat{\theta} - \theta_0} &amp;= L_n''(\theta) \\
+    L_n'(\hat{\theta}) - L_n'(\theta_0) &amp; = L_n''(\theta) (\hat{\theta} - \theta_0) \\
+     L_n'(\hat{\theta}) &amp; = L_n'(\theta_0) + L_n''(\theta) (\hat{\theta} - \theta_0) \\
+    0 &amp; = L_n'(\theta_0) + L_n''(\theta) (\hat{\theta} - \theta_0) \quad \text{(by definition of MLE)}
+\end{align*}\]</span></p>
+<p>for some <span class="math inline">\(\theta \in [\hat{\theta}, \theta_0]\)</span>. Rearranging and multiplying both sides by <span class="math inline">\(\sqrt{n}\)</span> yields</p>
+<p><span class="math display">\[\begin{align*}
+    0 &amp; = L_n'(\theta_0) + L_n''(\theta) (\hat{\theta} - \theta_0) \\
+    - L_n'(\theta_0) &amp; = L_n''(\theta) (\hat{\theta} - \theta_0) \\
+    -\frac{L_n'(\theta_0)}{L_n''(\theta)} &amp; = \hat{\theta} - \theta_0 \\
+    -\frac{\sqrt{n}L_n'(\theta_0)}{L_n''(\theta)} &amp; = \sqrt{n}(\hat{\theta} - \theta_0)
+\end{align*}\]</span></p>
+<p>Now note that by the previous lemma, <span class="math inline">\(E[\log f(x \mid \theta)]\)</span> is maximized at <span class="math inline">\(\theta_0\)</span>, and therefore <span class="math inline">\(L'(\theta_0) = 0\)</span>. Then we can write</p>
+<p><span class="math display">\[\begin{align*}
+    \sqrt{n}L_n'(\theta_0) &amp; = \sqrt{n}(L_n'(\theta_0) - 0) \\
+    &amp; = \sqrt{n} \left( L_n'(\theta_0) - L'(\theta_0)\right) \\
+    &amp; = \sqrt{n} \left( \frac{1}{n} \sum_{i = 1}^n \frac{\partial}{\partial \theta_0} \log f(x_i \mid \theta_0) - E\left[ \frac{\partial}{\partial \theta_0} \log f(x_i \mid \theta_0)\right] \right) \\
+    &amp; \overset{d}{\to} N \left( 0, \text{Var}\left( \frac{\partial}{\partial \theta_0} \log f(x_i \mid \theta_0) \right) \right), \quad \text{(Central Limit Theorem!)}
+\end{align*}\]</span></p>
+<p>And by definition of variance, we have that</p>
+<p><span class="math display">\[\begin{align*}
+    \text{Var}\left( \frac{\partial}{\partial \theta_0} \log f(x_i \mid \theta_0) \right) &amp; = E \left[ \left( \frac{\partial}{\partial \theta_0} \log f(x_i \mid \theta_0) \right)^2 \right] - E \left[ \left( \frac{\partial}{\partial \theta_0} \log f(x_i \mid \theta_0) \right)\right]^2 \\
+    &amp; = I_1(\theta_0) - (L'(\theta_0))^2 \quad \text{(definition of information)} \\
+    &amp; = I_1(\theta_0)
+\end{align*}\]</span></p>
+<p>and so we have that</p>
+<p><span class="math display">\[
+\sqrt{n} L_n'(\theta_0) \overset{d}{\to} N(0, I_1(\theta_0))
+\]</span></p>
+<p>Now note that</p>
+<p><span class="math display">\[\begin{align*}
+    L_n''(\theta) = \frac{1}{n} \sum_{i = 1}^n \left( \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \theta) \right)
+\end{align*}\]</span></p>
+<p>and by the WLLN, <span class="math inline">\(-L_n''(\theta) \overset{p}{\to} -E\left[ \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \theta) \right] = I_1(\theta_0)\)</span>, by definition of the information matrix. Then applying Slutsky’s theorem gives us that</p>
+<p><span class="math display">\[\begin{align*}
+    \sqrt{n} (\hat{\theta} - \theta_0) &amp; = - \frac{\sqrt{n} L_n'(\theta_0)}{L_n''(\theta)} \\
+    &amp; \overset{d}{\to} N(0, I_1(\theta_0)) \frac{1}{I_1(\theta_0)} \\
+    &amp; \overset{d}{=} N\left( 0, \frac{I_1(\theta_0)}{I_1(\theta_0)^2}\right) \\
+    &amp; \overset{d}{=} N\left( 0, \frac{1}{I_1(\theta_0)}\right)
+\end{align*}\]</span></p>
+<p>as desired.</p>
+</details>
 </section>
 <section id="worked-examples" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">6.5</span> Worked Examples</h2>
