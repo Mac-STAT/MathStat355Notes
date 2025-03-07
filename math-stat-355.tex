@@ -2506,7 +2506,7 @@ E[\tilde{\tau}(T(X)) - \hat{\tau}(T(X))] = \tau(\theta) - \tau(\theta) = 0 \quad
 \emph{Back to the proof of RBLS}.
 
 We've shown previously that \(\hat{\tau}(T(X))\) is an unbiased
-estimator for \(\tau{\theta}\) (law of iterated expectation). Let
+estimator for \(\tau({\theta})\) (law of iterated expectation). Let
 \(\tau_1(X)\) be any other unbiased estimator for \(\tau(\theta)\), and
 let \(\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]\). Then \(\tau_2(T(X))\) is
 also unbiased for \(\tau(\theta)\) (again, iterated expectation), and by
@@ -2918,6 +2918,46 @@ therefore must both integrate to 1, which is the case if and only if
 is the case only when the order statistics of \(X_1, \dots, X_n\) and
 \(Y_1, \dots, Y_n\) are equal.
 
+\textbf{Problem 10:} Suppose
+\(X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)\). Find a
+sufficient statistic for \(\lambda\), and construct a UMVUE (you may
+assume the sufficient statistic you find is complete).
+
+Solution:
+
+We can write the joint pdf of \(X_1, \dots, X_n\) as
+
+\begin{align*}
+    f(\textbf{x} \mid \lambda) & = \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!} \\
+    & = \frac{\lambda^{\sum_{i = 1}^n x_i} e^{-\lambda n}}{\prod_{i = 1}^n x_i !}
+\end{align*}
+
+and so if we let
+\(g(T(x) \mid \lambda) = \lambda^{T(x)} e^{-\lambda n}\) and
+\(h(x) = 1/\prod_{i = 1}^n x_i!\), by the Factorization criterion,
+\(\sum_{i = 1}^n x_i\) is sufficient for \(\lambda\).
+
+Now we assume from the problem set-up that \(\sum_{i = 1}^n x_i\) is a
+\emph{complete} and sufficient statistic. Then by RBLS, we know that
+\(\sum_{i = 1}^n x_i\) is the UMVUE for it's expectation. We have,
+
+\begin{align*}
+    E\left[\sum_{i = 1}^n X_i\right] & = \sum_{i = 1}^n E[X_i] \\
+    & = \sum_{i = 1}^n \lambda \\
+    & = n \lambda
+\end{align*}
+
+By RBLS, we \textit{also} know that a function of our sufficient
+statistic for it's expectation. Letting our function be
+\(\tau(T(x)) = \frac{1}{n}T(x)\) and noting that
+
+\begin{align*}
+    E\left[\frac{1}{n}T(x)\right] & = \frac{1}{n} \sum_{i = 1}^n E[X_i]\\
+    & = \lambda
+\end{align*}
+
+gives us that the sample mean is the UMVUE for \(\lambda\)!
+
 \bookmarksetup{startatroot}
 
 \chapter{Consistency}\label{consistency}
@@ -3324,8 +3364,8 @@ distribution, (2) the Central Limit Theorem, delta-method, and Slutsky's
 Theorem are tools we can use to determine (and manipulate) asymptotic
 distributions of random variables, and (3) the Continuous Mapping
 Theorem (defined below). That being said, an attempt at an intuitive
-understand of these three types of convergence is provided below, in the
-context of sequences of random variables.
+explanation of these three types of convergence is provided below, in
+the context of sequences of random variables.
 
 \subsubsection{Convergence Almost
 Surely}\label{convergence-almost-surely}

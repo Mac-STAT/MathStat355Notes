@@ -440,7 +440,7 @@ Proof.
 E[\tilde{\tau}(T(X)) - \hat{\tau}(T(X))] = \tau(\theta) - \tau(\theta) = 0 \quad \forall \theta
 \]</span> Let <span class="math inline">\(g(T(X)) = \tilde{\tau}(T(X)) - \hat{\tau}(T(X))\)</span>. Since <span class="math inline">\(T(X)\)</span> is complete, and <span class="math inline">\(E[g(T(X))] = 0\)</span>, this implies <span class="math inline">\(\tilde{\tau}(T(X)) - \hat{\tau}(T(X)) = 0\)</span>, which means <span class="math inline">\(\tilde{\tau}(T(X)) = \hat{\tau}(T(X))\)</span>. Contradiction.</p>
 <p><em>Back to the proof of RBLS</em>.</p>
-<p>We’ve shown previously that <span class="math inline">\(\hat{\tau}(T(X))\)</span> is an unbiased estimator for <span class="math inline">\(\tau{\theta}\)</span> (law of iterated expectation). Let <span class="math inline">\(\tau_1(X)\)</span> be any other unbiased estimator for <span class="math inline">\(\tau(\theta)\)</span>, and let <span class="math inline">\(\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]\)</span>. Then <span class="math inline">\(\tau_2(T(X))\)</span> is also unbiased for <span class="math inline">\(\tau(\theta)\)</span> (again, iterated expectation), and by the Uniqueness Lemma (since <span class="math inline">\(T\)</span> is complete by supposition), <span class="math inline">\(\hat{\tau}(T(X)) = \tau_2(T(X))\)</span>. But,</p>
+<p>We’ve shown previously that <span class="math inline">\(\hat{\tau}(T(X))\)</span> is an unbiased estimator for <span class="math inline">\(\tau({\theta})\)</span> (law of iterated expectation). Let <span class="math inline">\(\tau_1(X)\)</span> be any other unbiased estimator for <span class="math inline">\(\tau(\theta)\)</span>, and let <span class="math inline">\(\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]\)</span>. Then <span class="math inline">\(\tau_2(T(X))\)</span> is also unbiased for <span class="math inline">\(\tau(\theta)\)</span> (again, iterated expectation), and by the Uniqueness Lemma (since <span class="math inline">\(T\)</span> is complete by supposition), <span class="math inline">\(\hat{\tau}(T(X)) = \tau_2(T(X))\)</span>. But,</p>
 <p><span class="math display">\[\begin{align*}
     Var(\hat{\tau}(T(X))) &amp; = Var(\tau_2(T(X))) \quad \quad (\hat{\tau} = \tau_2) \\
     &amp; \leq Var(\tau_1(T(X))) \quad \quad \text{(Improvement Lemma)}
@@ -696,6 +696,30 @@ Solution:
 f(\textbf{x} \mid \gamma)  = a f(\textbf{y} \mid \gamma)
 \]</span></p>
 <p>for some constant <span class="math inline">\(a\)</span>. This further implies <span class="math inline">\(f(x_i \mid \gamma) = a^{1/n} f(y_i \mid \gamma)\)</span>. Now note that since both <span class="math inline">\(f(x_i \mid \gamma)\)</span> and <span class="math inline">\(f(y_i \mid \gamma)\)</span> are pdfs, they therefore must both integrate to 1, which is the case if and only if <span class="math inline">\(a = 1\)</span>. Finally we can conclude that the polynomials <span class="math inline">\(\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)\)</span> and <span class="math inline">\(\prod_{i = 1}^n  (\gamma^2 + y_{(i)}^2)\)</span> must be equal, and therefore <span class="math inline">\(X_1, \dots, X_n\)</span> must be a permutation of <span class="math inline">\(Y_1, \dots, Y_n\)</span>, which is the case only when the order statistics of <span class="math inline">\(X_1, \dots, X_n\)</span> and <span class="math inline">\(Y_1, \dots, Y_n\)</span> are equal.</p>
+</details>
+<p><strong>Problem 10:</strong> Suppose <span class="math inline">\(X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)\)</span>. Find a sufficient statistic for <span class="math inline">\(\lambda\)</span>, and construct a UMVUE (you may assume the sufficient statistic you find is complete).</p>
+<details>
+<summary>
+Solution:
+</summary>
+<p>We can write the joint pdf of <span class="math inline">\(X_1, \dots, X_n\)</span> as</p>
+<p><span class="math display">\[\begin{align*}
+    f(\textbf{x} \mid \lambda) &amp; = \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!} \\
+    &amp; = \frac{\lambda^{\sum_{i = 1}^n x_i} e^{-\lambda n}}{\prod_{i = 1}^n x_i !}
+\end{align*}\]</span></p>
+<p>and so if we let <span class="math inline">\(g(T(x) \mid \lambda) = \lambda^{T(x)} e^{-\lambda n}\)</span> and <span class="math inline">\(h(x) = 1/\prod_{i = 1}^n x_i!\)</span>, by the Factorization criterion, <span class="math inline">\(\sum_{i = 1}^n x_i\)</span> is sufficient for <span class="math inline">\(\lambda\)</span>.</p>
+<p>Now we assume from the problem set-up that <span class="math inline">\(\sum_{i = 1}^n x_i\)</span> is a <em>complete</em> and sufficient statistic. Then by RBLS, we know that <span class="math inline">\(\sum_{i = 1}^n x_i\)</span> is the UMVUE for it’s expectation. We have,</p>
+<p><span class="math display">\[\begin{align*}
+    E\left[\sum_{i = 1}^n X_i\right] &amp; = \sum_{i = 1}^n E[X_i] \\
+    &amp; = \sum_{i = 1}^n \lambda \\
+    &amp; = n \lambda
+\end{align*}\]</span></p>
+<p>By RBLS, we know that a function of our sufficient statistic for it’s expectation. Letting our function be <span class="math inline">\(\tau(T(x)) = \frac{1}{n}T(x)\)</span> and noting that</p>
+<p><span class="math display">\[\begin{align*}
+    E\left[\frac{1}{n}T(x)\right] &amp; = \frac{1}{n} \sum_{i = 1}^n E[X_i]\\
+    &amp; = \lambda
+\end{align*}\]</span></p>
+<p>gives us that the sample mean is the UMVUE for <span class="math inline">\(\lambda\)</span>!</p>
 </details>
 
 

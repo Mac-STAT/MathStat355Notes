@@ -287,7 +287,7 @@ $$ Let $g(T(X)) = \tilde{\tau}(T(X)) - \hat{\tau}(T(X))$. Since $T(X)$ is comple
 
 *Back to the proof of RBLS*.
 
-We've shown previously that $\hat{\tau}(T(X))$ is an unbiased estimator for $\tau{\theta}$ (law of iterated expectation). Let $\tau_1(X)$ be any other unbiased estimator for $\tau(\theta)$, and let $\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]$. Then $\tau_2(T(X))$ is also unbiased for $\tau(\theta)$ (again, iterated expectation), and by the Uniqueness Lemma (since $T$ is complete by supposition), $\hat{\tau}(T(X)) = \tau_2(T(X))$. But,
+We've shown previously that $\hat{\tau}(T(X))$ is an unbiased estimator for $\tau({\theta})$ (law of iterated expectation). Let $\tau_1(X)$ be any other unbiased estimator for $\tau(\theta)$, and let $\tau_2(T(X)) = E[\tau_1(X) \mid T(X)]$. Then $\tau_2(T(X))$ is also unbiased for $\tau(\theta)$ (again, iterated expectation), and by the Uniqueness Lemma (since $T$ is complete by supposition), $\hat{\tau}(T(X)) = \tau_2(T(X))$. But,
 
 \begin{align*}
     Var(\hat{\tau}(T(X))) & = Var(\tau_2(T(X))) \quad \quad (\hat{\tau} = \tau_2) \\
@@ -642,3 +642,41 @@ $$
 for some constant $a$. This further implies $f(x_i \mid \gamma) = a^{1/n} f(y_i \mid \gamma)$. Now note that since both $f(x_i \mid \gamma)$ and $f(y_i \mid \gamma)$ are pdfs, they therefore must both integrate to 1, which is the case if and only if $a = 1$. Finally we can conclude that the polynomials $\prod_{i = 1}^n  (\gamma^2 + x_{(i)}^2)$ and $\prod_{i = 1}^n  (\gamma^2 + y_{(i)}^2)$ must be equal, and therefore $X_1, \dots, X_n$ must be a permutation of $Y_1, \dots, Y_n$, which is the case only when the order statistics of $X_1, \dots, X_n$ and $Y_1, \dots, Y_n$ are equal.
 
 </details>
+
+**Problem 10:** Suppose $X_1, \dots, X_n \overset{iid}{\sim} Poisson(\lambda)$. Find a sufficient statistic for $\lambda$, and construct a UMVUE (you may assume the sufficient statistic you find is complete).
+
+<details>
+
+<summary>Solution:</summary>
+
+We can write the joint pdf of $X_1, \dots, X_n$ as
+
+\begin{align*}
+    f(\textbf{x} \mid \lambda) & = \prod_{i = 1}^n \frac{\lambda^{x_i} e^{-\lambda}}{x_i!} \\
+    & = \frac{\lambda^{\sum_{i = 1}^n x_i} e^{-\lambda n}}{\prod_{i = 1}^n x_i !}
+\end{align*}
+
+and so if we let $g(T(x) \mid \lambda) = \lambda^{T(x)} e^{-\lambda n}$ and $h(x) = 1/\prod_{i = 1}^n x_i!$, by the Factorization criterion, $\sum_{i = 1}^n x_i$ is sufficient for $\lambda$.
+
+Now we assume from the problem set-up that $\sum_{i = 1}^n x_i$ is a *complete* and sufficient statistic. Then by RBLS, we know that $\sum_{i = 1}^n x_i$ is the UMVUE for it's expectation. We have,
+
+\begin{align*}
+    E\left[\sum_{i = 1}^n X_i\right] & = \sum_{i = 1}^n E[X_i] \\
+    & = \sum_{i = 1}^n \lambda \\
+    & = n \lambda
+\end{align*}
+
+By RBLS, we \textit{also} know that a function of our sufficient statistic for it's expectation. Letting our function be $\tau(T(x)) = \frac{1}{n}T(x)$ and noting that
+
+\begin{align*}
+    E\left[\frac{1}{n}T(x)\right] & = \frac{1}{n} \sum_{i = 1}^n E[X_i]\\
+    & = \lambda
+\end{align*}
+
+gives us that the sample mean is the UMVUE for $\lambda$!
+
+
+</details>
+
+
+
