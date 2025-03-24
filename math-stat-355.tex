@@ -3723,9 +3723,28 @@ and so
 
 Then note that \(\sqrt{n}(Y - \mu) \overset{d}{\to} N(0, \sigma^2)\),
 \(g'(\mu) \overset{p}{\to} g'(\mu)\) since it's just a constant, and
-\(O(\sqrt{n} |Y - \mu|^2) \overset{p}{\to} 0\) (due to the \(\sqrt{n}\)
-term). Then using two applications of Slutsky's theorem, we can write
-that
+\(O(\sqrt{n} |Y - \mu|^2) \overset{p}{\to} 0\). To see the latter, note
+that \(1/\sqrt{n} \to 0\), and so by Slutksy's
+
+\begin{align*}
+\frac{1}{\sqrt{n}} \sqrt{n}(Y - \mu) & \overset{d}{\to} N(0, \sigma^2) \times 0 \\
+ Y - \mu & \overset{d}{\to} 0
+\end{align*} and if a random variable (in this case \(Y - \mu\))
+converges in distribution to a constant, that implies that it converges
+in probability to that same constant (see Wikipedia
+\href{https://en.wikipedia.org/wiki/Proofs_of_convergence_of_random_variables\#propB1}{here}).
+Then the CLT actually \emph{implies} consistency of \(Y\) for \(\mu\).
+
+Note that we have just shown that not only is \(Y\) consistent for
+\(\mu\), but that it converges to \(\mu\) at a \(1/\sqrt{n}\) rate, in
+probability. We can write this as
+\(Y - \mu = O_p\left(\frac{1}{\sqrt{n}}\right)\), and therefore
+
+\[
+\sqrt{n} | Y - \mu |^2 = \sqrt{n} \left( O_p\left( \frac{1}{\sqrt{n}}\right) \right)^2 = \sqrt{n} O_p\left( \frac{1}{n} \right) = O_p(1/\sqrt{n}) \overset{p}{\to} 0
+\]
+
+Finally, using two applications of Slutsky's theorem, we can write that
 
 \[
 \sqrt{n}(Y - \mu)g'(\mu) \overset{d}{\to} N(0, \sigma^2)g'(\mu) = \overset{d}{\to} N(0, [g'(\mu)]^2\sigma^2)
@@ -3736,7 +3755,7 @@ that
     & \overset{d}{=} N(0, [g'(\mu)]^2\sigma^2) 
 \end{align*}
 
-and so finally we have shown that \[
+and so we have shown that \[
 \sqrt{n}\left( g(Y) - g(\mu) \right) \overset{d}{\to}  N(0, [g'(\mu)]^2\sigma^2)
 \] as desired.
 
