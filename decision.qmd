@@ -93,7 +93,11 @@ where $R(D, \theta)$ is the risk of a decision $D$ for a paramater $\theta$. If 
 
 **Theorem (Unique Bayes rules are admissible)**. Any unique Bayes rule is admissible.
 
-**Proof.** We'll prove this by contradiction!
+<details>
+
+<summary>Proof.</summary>
+
+We'll prove this by contradiction!
 
 Suppose that $D_\pi$ is a unique Bayes rule with respect to some prior $\pi(\theta)$, and that $D_\pi$ is *inadmissible*. Then there exists some other decision rule $D'$ such that $R(D', \theta) \leq R(D_\pi, \theta)$, for all $\theta$. Then,
 
@@ -105,6 +109,10 @@ Suppose that $D_\pi$ is a unique Bayes rule with respect to some prior $\pi(\the
 and since $R(D', \theta) \leq \inf_D R(D, \pi)$, $D'$ is Bayes. But $D_\pi$ is *unique* Bayes by assumption, so this is a contradiction.
 
 Therefore, $D_\pi$ is admissible.
+
+</details>
+
+
 
 ## Worked Examples
 

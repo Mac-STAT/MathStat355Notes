@@ -201,7 +201,7 @@ where $\Theta_0$ is the set of all values for $\theta$ that align with the null 
 
 **Neyman-Pearson Lemma**
 
-Consider a hypothesis test with $H_0: \theta = \theta_0$ and $H_1: \theta = \theta_1$. Let $\phi$ be a *likelihood ratio test* of level $\alpha$, where $\alpha = E[\phi(X) \mid \theta_0]$. Then $\phi$ is a UMP level $\alpha$ test for thee hypotheses $H_0: \theta = \theta_0$ and $H_1: \theta = \theta_1$.
+Consider a hypothesis test with $H_0: \theta = \theta_0$ and $H_1: \theta = \theta_1$. Let $\phi$ be a *likelihood ratio test* of level $\alpha$, where $\alpha = E[\phi(X) \mid \theta_0]$. Then $\phi$ is a UMP level $\alpha$ test for the hypotheses $H_0: \theta = \theta_0$ and $H_1: \theta = \theta_1$.
 
 <details>
 

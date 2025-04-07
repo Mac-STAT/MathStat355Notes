@@ -321,7 +321,11 @@ R(D', \theta) &amp; &lt; R(D, \theta) \quad \text{ for some } \theta
 <section id="theorems" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="theorems"><span class="header-section-number">9.4</span> Theorems</h2>
 <p><strong>Theorem (Unique Bayes rules are admissible)</strong>. Any unique Bayes rule is admissible.</p>
-<p><strong>Proof.</strong> We’ll prove this by contradiction!</p>
+<details>
+<summary>
+Proof.
+</summary>
+<p>We’ll prove this by contradiction!</p>
 <p>Suppose that <span class="math inline">\(D_\pi\)</span> is a unique Bayes rule with respect to some prior <span class="math inline">\(\pi(\theta)\)</span>, and that <span class="math inline">\(D_\pi\)</span> is <em>inadmissible</em>. Then there exists some other decision rule <span class="math inline">\(D'\)</span> such that <span class="math inline">\(R(D', \theta) \leq R(D_\pi, \theta)\)</span>, for all <span class="math inline">\(\theta\)</span>. Then,</p>
 <p><span class="math display">\[\begin{align*}
     R(D', \theta) &amp; \leq R(D_{\pi}, \theta) \quad \quad \text{(inadmissibility)} \\
@@ -329,6 +333,7 @@ R(D', \theta) &amp; &lt; R(D, \theta) \quad \text{ for some } \theta
 \end{align*}\]</span></p>
 <p>and since <span class="math inline">\(R(D', \theta) \leq \inf_D R(D, \pi)\)</span>, <span class="math inline">\(D'\)</span> is Bayes. But <span class="math inline">\(D_\pi\)</span> is <em>unique</em> Bayes by assumption, so this is a contradiction.</p>
 <p>Therefore, <span class="math inline">\(D_\pi\)</span> is admissible.</p>
+</details>
 </section>
 <section id="worked-examples" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="worked-examples"><span class="header-section-number">9.5</span> Worked Examples</h2>
