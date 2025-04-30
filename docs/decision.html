@@ -358,7 +358,7 @@ Solution:
     &amp; = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
     \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta &amp; = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}\]</span></p>
-<p>(recalling that <span class="math inline">\(\int_{-\infty}^x f(y) dy = f(x)\)</span> and <span class="math inline">\(\int_x^\infty f(y) dy = -f(x)\)</span> and applying chain rule), and note that these two integrals are equal when <span class="math inline">\(\theta_0\)</span> is the posterior median.</p>
+<p>(recalling that <span class="math inline">\(\frac{\partial}{\partial x} \int_{-\infty}^x f(y) dy = f(x)\)</span> and <span class="math inline">\(\frac{\partial}{\partial x} \int_x^\infty f(y) dy = -f(x)\)</span> and applying chain rule), and note that these two integrals are equal when <span class="math inline">\(\theta_0\)</span> is the posterior median.</p>
 </details>
 <p><strong>Problem 2:</strong> Show that the posterior mode is the decision rule that minimizes risk with respect to 0-1 loss,</p>
 <p><span class="math display">\[

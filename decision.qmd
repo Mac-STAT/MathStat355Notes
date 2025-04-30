@@ -142,7 +142,7 @@ Taking the derivative with respect to $\theta_0$, and setting this equal to zero
     \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
 
-(recalling that $\int_{-\infty}^x f(y) dy = f(x)$ and $\int_x^\infty f(y) dy = -f(x)$ and applying chain rule), and note that these two integrals are equal when $\theta_0$ is the posterior median.
+(recalling that $\frac{\partial}{\partial x} \int_{-\infty}^x f(y) dy = f(x)$ and $\frac{\partial}{\partial x} \int_x^\infty f(y) dy = -f(x)$ and applying chain rule), and note that these two integrals are equal when $\theta_0$ is the posterior median.
 
 </details>
 
