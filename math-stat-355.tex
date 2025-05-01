@@ -3360,7 +3360,7 @@ variable that \emph{does not depend} on \(p\). We can then compute the
 Clopper-Pearson interval for \(p\) as
 
 \[
-\Phi_{\frac{\alpha}{2}; \sum x, n - \sum x + 1} < p < \Phi_{1 - \frac{\alpha}{2}; \sum x + 1, n - \sum x}
+\Phi_{\frac{\alpha}{2}; \sum_{i = 1}^n x_i, n - \sum_{i = 1}^n x_i + 1} < p < \Phi_{1 - \frac{\alpha}{2}; \sum_{i = 1}^n x_i + 1, n - \sum_{i = 1}^n x_i}
 \]
 
 where \(\Phi_{a; v, w}\) is the \(a\)th quantile from a Beta
