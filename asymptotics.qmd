@@ -57,7 +57,7 @@ This construction process allows us to determine all possible values of $p$ that
 In more math-y terms, We can show that if $\sum_{i = 1}^n X_i \sim Binomial(n, p)$, then $\Pr(\sum_{i = 1}^n X_i \geq x) = \Pr(Y \leq p)$, where $Y \sim Beta(\sum_{i = 1}^n x_i, n - \sum_{i = 1}^n x_i + 1)$. The point of doing this is that we can rewrite our probability statements (involved in our confidence interval construction) in terms of a random variable that *does not depend* on $p$. We can then compute the Clopper-Pearson interval for $p$ as
 
 $$
-\Phi_{\frac{\alpha}{2}; x, n - x + 1} < p < \Phi_{1 - \frac{\alpha}{2}; x + 1, n - x}
+\Phi_{\frac{\alpha}{2}; \sum x, n - \sum x + 1} < p < \Phi_{1 - \frac{\alpha}{2}; \sum x + 1, n - \sum x}
 $$
 
 where $\Phi_{a; v, w}$ is the $a$th quantile from a Beta distribution with shape parameters $v$ and $w$. Alternatively, you can even write the Clopper-Pearson in terms of quantiles of the $F$-distribution, but the Beta format is enough to emphasize the main point: If we can determine the distribution of some function of our data and unknown parameter, and manipulate that distribution enough so that it depends on neither the data nor unknown parameter, we can use quantiles and probability statements to construct confidence intervals.
@@ -318,8 +318,7 @@ Then note that $\sqrt{n}(Y - \mu) \overset{d}{\to} N(0, \sigma^2)$, $g'(\mu) \ov
 \begin{align*}
 \frac{1}{\sqrt{n}} \sqrt{n}(Y - \mu) & \overset{d}{\to} N(0, \sigma^2) \times 0 \\
  Y - \mu & \overset{d}{\to} 0
-\end{align*}
-and if a random variable (in this case $Y - \mu$) converges in distribution to a constant, that implies that it converges in probability to that same constant (see Wikipedia [here](https://en.wikipedia.org/wiki/Proofs_of_convergence_of_random_variables#propB1)). Then the CLT actually *implies* consistency of $Y$ for $\mu$. 
+\end{align*} and if a random variable (in this case $Y - \mu$) converges in distribution to a constant, that implies that it converges in probability to that same constant (see Wikipedia [here](https://en.wikipedia.org/wiki/Proofs_of_convergence_of_random_variables#propB1)). Then the CLT actually *implies* consistency of $Y$ for $\mu$.
 
 Note that we have just shown that not only is $Y$ consistent for $\mu$, but that it converges to $\mu$ at a $1/\sqrt{n}$ rate, in probability. We can write this as $Y - \mu = O_p\left(\frac{1}{\sqrt{n}}\right)$, and therefore
 
@@ -372,7 +371,7 @@ To show that $E[\log f(x \mid \theta)] \leq E[\log f(x \mid \theta_0)]$, we can 
     & = 0
 \end{align*}
 
-as desired. 
+as desired.
 
 </details>
 
@@ -380,7 +379,7 @@ as desired.
 
 <summary>Proof of Theorem:</summary>
 
-Just as in the theorem statement, suppose $\hat{\theta}$ is the MLE for $\theta_0$, where we have iid observations $X_1, \dots, X_n$ with some density function given by $f(x_i \mid \theta)$. Let $\log L(\theta)$ denote the \textit{expectation} of the log likelihood, $E[\log f(\textbf{x} \mid \theta)]$, and let $L_n(\theta)$ denote the log likelihood divided by the sample size, $L_n(\theta) = \frac{1}{n}\sum_{i = 1}^n \log f(x_i \mid \theta)$. Note that by definition of an MLE, $L_n'(\hat{\theta}) = 0$ (the first derivative of $L_n(\theta)$ evaluated at $\hat{\theta}$ is equal to zero). 
+Just as in the theorem statement, suppose $\hat{\theta}$ is the MLE for $\theta_0$, where we have iid observations $X_1, \dots, X_n$ with some density function given by $f(x_i \mid \theta)$. Let $\log L(\theta)$ denote the \textit{expectation} of the log likelihood, $E[\log f(\textbf{x} \mid \theta)]$, and let $L_n(\theta)$ denote the log likelihood divided by the sample size, $L_n(\theta) = \frac{1}{n}\sum_{i = 1}^n \log f(x_i \mid \theta)$. Note that by definition of an MLE, $L_n'(\hat{\theta}) = 0$ (the first derivative of $L_n(\theta)$ evaluated at $\hat{\theta}$ is equal to zero).
 
 Recall that the Mean Value Theorem (MVT) states that
 
@@ -447,7 +446,6 @@ and by the WLLN, $-L_n''(\theta) \overset{p}{\to} -E\left[ \frac{\partial^2}{\pa
 as desired.
 
 </details>
-
 
 ## Worked Examples
 
