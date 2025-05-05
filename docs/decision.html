@@ -354,8 +354,10 @@ Solution:
 <p><span class="math display">\[\begin{align*}
     0 &amp; \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
     &amp; = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta  \right) \\
-    &amp; =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
-    &amp; = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    &amp; = \frac{\partial}{\partial \theta_0} \left( \theta_0 \int_{-\infty}^{\theta_0}  \pi(\theta \mid \textbf{y}) d\theta - \int_{-\infty}^{\theta_0} \theta \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \theta \pi(\theta \mid \textbf{y}) d\theta - \theta_0 \int_{\theta_0}^\infty  \pi(\theta \mid \textbf{y}) d\theta \right) \\
+    &amp; = \theta_0 \pi(\theta_0 \mid \textbf{y}) + \int_{-\infty}^{\theta_0}  \pi(\theta \mid \textbf{y}) - \theta_0 \pi(\theta_0 \mid \textbf{y}) - \theta_0 \pi(\theta_0 \mid \textbf{y}) - \left[ \theta_0 (-\pi(\theta_0 \mid \textbf{y})) +  \int_{\theta_0}^\infty  \pi(\theta \mid \textbf{y})\right] \\
+    &amp; =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    &amp; = \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
     \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta &amp; = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}\]</span></p>
 <p>(recalling that <span class="math inline">\(\frac{\partial}{\partial x} \int_{-\infty}^x f(y) dy = f(x)\)</span> and <span class="math inline">\(\frac{\partial}{\partial x} \int_x^\infty f(y) dy = -f(x)\)</span> and applying chain rule), and note that these two integrals are equal when <span class="math inline">\(\theta_0\)</span> is the posterior median.</p>

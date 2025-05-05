@@ -5444,8 +5444,10 @@ equal to zero we get
 \begin{align*}
     0 & \equiv \frac{\partial}{\partial \theta_0} R(\theta_0, \theta) \\
     & = \frac{\partial}{\partial \theta_0} \left( \int_{-\infty}^{\theta_0} \left( \theta_0 - \theta \right) \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \left( \theta - \theta_0 \right) \pi(\theta \mid \textbf{y}) d\theta  \right) \\
-    & =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
-    & = - \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \frac{\partial}{\partial \theta_0} \left( \theta_0 \int_{-\infty}^{\theta_0}  \pi(\theta \mid \textbf{y}) d\theta - \int_{-\infty}^{\theta_0} \theta \pi(\theta \mid \textbf{y}) d\theta + \int_{\theta_0}^\infty \theta \pi(\theta \mid \textbf{y}) d\theta - \theta_0 \int_{\theta_0}^\infty  \pi(\theta \mid \textbf{y}) d\theta \right) \\
+    & = \theta_0 \pi(\theta_0 \mid \textbf{y}) + \int_{-\infty}^{\theta_0}  \pi(\theta \mid \textbf{y}) - \theta_0 \pi(\theta_0 \mid \textbf{y}) - \theta_0 \pi(\theta_0 \mid \textbf{y}) - \left[ \theta_0 (-\pi(\theta_0 \mid \textbf{y})) +  \int_{\theta_0}^\infty  \pi(\theta \mid \textbf{y})\right] \\
+    & =  \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) + \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \left( \theta_0 - \theta_0 \right) \pi(\theta_0 \mid \textbf{y}) - \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
+    & = \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta - \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta \\
     \int_{-\infty}^{\theta_0} \pi(\theta \mid \textbf{y}) d\theta & = \int_{\theta_0}^\infty \pi(\theta \mid \textbf{y}) d\theta
 \end{align*}
 
